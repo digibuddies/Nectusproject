@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.digibuddies.nectus.matches"
+    android:id="@+id/container"
+    >
+
+    <com.whygraphics.gifview.gif.GIFView
+        android:id="@+id/main_activity_gif_vie2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        />
+
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:snowflakesNum="50"
+        app:snowflakeAlphaMin="100"
+        app:snowflakeAlphaMax="200"
+        app:snowflakeSpeedMax="2"
+        app:snowflakeSpeedMin="1"
+       />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp"
+        android:id="@+id/sv">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="300px">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentBottom="false"
+                android:clickable="true"
+                android:contextClickable="true"
+                app:cardBackgroundColor="@android:color/white"
+                android:id="@+id/cd3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_height="380dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/imageView"
+                    android:layout_height="70dp" />
+
+
+                <TextView
+                    android:text="user"
+                    android:layout_alignParentTop="false"
+                    android:layout_centerHorizontal="false"
+                    android:id="@+id/tv1"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:textStyle="normal|bold"
+                    android:textSize="24sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="110dp"
+                    android:textAlignment="center" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/q"
+                    android:id="@+id/imageView8"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="60dp" />
+
+
+                <TextView
+                    android:text="match"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:id="@+id/tv2"
+                    android:layout_below="@+id/tv1"
+                    android:layout_alignStart="@+id/tv1"
+                    android:layout_gravity="bottom|left"
+                    android:textStyle="normal|italic"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="serif" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/s1"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_marginTop="5dp" />
+
+                <io.ghyeok.stickyswitch.widget.StickySwitch
+                    android:id="@+id/sticky_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerInParent="false"
+                    app:iconPadding="10dp"
+                    app:iconSize="16dp"
+                    app:leftIcon="@drawable/no"
+                    app:rightIcon="@drawable/ic_check_black_24dp"
+                    app:selectedTextSize="6dp"
+                    app:sliderBackgroundColor="@color/colorSliderBackground"
+                    app:switchColor="@color/colorSwitchColor"
+                    app:textColor="@android:color/black"
+                    app:textSize="6sp"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginRight="34dp" />
+
+                <TextView
+                    android:text="Share Contact Detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="44dp"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="normal|italic"
+                    android:fontFamily="serif" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_centerHorizontal="false"
+                android:layout_centerInParent="false"
+                android:layout_centerVertical="false"
+                android:layout_marginLeft="20dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_alignParentBottom="false"
+                android:id="@+id/cd2"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="350dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/imageView6"
+                    android:layout_height="70dp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/q"
+                    android:id="@+id/imageView7"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="60dp" />
+
+                <TextView
+                    android:text="user"
+                    android:layout_alignParentTop="false"
+                    android:layout_centerHorizontal="false"
+                    android:id="@+id/tv3"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:textStyle="normal|bold"
+                    android:textSize="24sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="110dp"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="match"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:id="@+id/tv4"
+                    android:layout_below="@+id/tv3"
+                    android:layout_alignStart="@+id/tv3"
+                    android:layout_gravity="bottom|left"
+                    android:textStyle="normal|italic"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="serif" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image2"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/s2"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_marginTop="5dp" />
+
+                <io.ghyeok.stickyswitch.widget.StickySwitch
+                    android:id="@+id/sticky_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerInParent="false"
+                    app:iconPadding="10dp"
+                    app:iconSize="16dp"
+                    app:leftIcon="@drawable/no"
+                    app:rightIcon="@drawable/ic_check_black_24dp"
+                    app:selectedTextSize="6dp"
+                    app:sliderBackgroundColor="@color/colorSliderBackground"
+                    app:switchColor="@color/colorSwitchColor"
+                    app:textColor="@android:color/black"
+                    app:textSize="6sp"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginRight="34dp" />
+
+                <TextView
+                    android:text="Share Contact Detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="44dp"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="normal|italic"
+                    android:fontFamily="serif" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_alignParentStart="true"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@android:color/white"
+                android:id="@+id/cd1"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/imageView9"
+                    android:layout_height="70dp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/q"
+                    android:id="@+id/imageView10"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="22dp" />
+                <TextView
+                    android:text="user"
+                    android:layout_alignParentTop="false"
+                    android:layout_centerHorizontal="false"
+                    android:id="@+id/tv5"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:textStyle="normal|bold"
+                    android:textSize="24sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="110dp"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="match"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:id="@+id/tv6"
+                    android:layout_below="@+id/tv5"
+                    android:layout_alignStart="@+id/tv5"
+                    android:layout_gravity="bottom|center"
+                    android:textStyle="normal|italic"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="2dp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image3"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/s3"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_marginTop="5dp" />
+
+                <io.ghyeok.stickyswitch.widget.StickySwitch
+                    android:id="@+id/sticky_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerInParent="false"
+                    app:iconPadding="10dp"
+                    app:iconSize="16dp"
+                    app:leftIcon="@drawable/no"
+                    app:rightIcon="@drawable/ic_check_black_24dp"
+                    app:selectedTextSize="6dp"
+                    app:sliderBackgroundColor="@color/colorSliderBackground"
+                    app:switchColor="@color/colorSwitchColor"
+                    app:textColor="@android:color/black"
+                    app:textSize="6sp"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginRight="34dp" />
+
+                <TextView
+                    android:text="Share Contact Detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="44dp"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="normal|italic"
+                    android:fontFamily="serif" />
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.devs.squaremenu.SquareMenu
+        android:id="@+id/square_menu"
+        app:fabColor="@color/colorAccent"
+        app:fabSize="100"
+        app:menuOpenDirection="top_left"
+        app:iconM1="@drawable/c"
+        app:iconM2="@drawable/dd"
+        app:iconM3="@drawable/aaa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        app:srcCompat="@drawable/matches"
+        android:id="@+id/imageView4"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="false" />
+</RelativeLayout>

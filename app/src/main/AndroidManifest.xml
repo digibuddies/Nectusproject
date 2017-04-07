@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.digibuddies.nectus">
+
+    <uses-permission android:name="android.permission.STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/n"
+        android:label="nectus"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,label">
+        <activity
+            android:name=".splashactivity"
+            android:label="nectus"
+            android:launchMode="standard"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+               <activity
+            android:name=".profile"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".questions" />
+        <activity android:name=".matches" />
+
+        <service
+            android:name=".thebackservice"
+            android:enabled="true"
+            android:exported="true"></service>
+        <receiver
+            android:name=".alarmreceiver"
+            android:process=":remote" >
+        </receiver>
+
+    </application>
+
+</manifest>

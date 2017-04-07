@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="com.digibuddies.nectus.splashactivity"
+    android:background="@drawable/sp"
+    android:fitsSystemWindows="true">
+
+    <com.digibuddies.nectus.kenbview.RobotoTextView
+        android:id="@+id/welcome_text"
+        style="@style/TextViewAppearance.Headline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.0"
+        android:text="Connecting Minds"
+        android:textSize="30sp"
+        android:textColor="@color/global_color_primary_light"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/imagelogo"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center" />
+
+    <ImageView
+        android:id="@+id/imagelogo"
+        android:src="@drawable/nnn"
+        android:layout_marginTop="147dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <io.github.yuweiguocn.lib.squareloading.SquareLoading
+        android:background="@android:color/transparent"
+        app:squareColor="@android:color/white"
+        app:squareSize="12dp"
+        app:squareCorner="2dp"
+        app:dividerSize="2dp"
+        app:xCount="4"
+        app:yCount="3"
+        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_marginTop="68dp"
+        android:layout_below="@+id/welcome_text"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/sq"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>
