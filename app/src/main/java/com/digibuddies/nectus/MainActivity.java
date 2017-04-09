@@ -51,7 +51,7 @@ import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 import static com.nightonke.boommenu.R.layout.bmb;
 import static com.special.ResideMenu.ResideMenu.DIRECTION_LEFT;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ResideMenuItem itemHome;
     ResideMenuItem itemHelp;
     ResideMenuItem itemFeed;
+    Button b;
     ResideMenuItem itemAbout;
 
     @Override
@@ -71,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-       final Button b=(Button) findViewById(R.id.settings_button);
+       b=(Button) findViewById(R.id.settings_button);
 
-       setUpMenu();
+
         GIFView mGifView = (GIFView) findViewById(R.id.main_activity_gif_vie);
         mGifView.setGifResource("asset:bb");
         scheduleAlarm();
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bmb.addBuilder(builder4);
         bmb.setButtonRadius(Util.dp2px(35));
         bmb.setNormalColor(Color.WHITE);
-
+        setUpMenu();
     }
 
     // Setup a recurring alarm every half hour
@@ -202,23 +203,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setUpMenu() {
 
         // attach to current activity;
-        resideMenu = new ResideMenu(this);
-        resideMenu.setBackground(R.drawable.menu_background);
-        resideMenu.attachToActivity(this);
-        resideMenu.setMenuListener(menuListener);
+        resideMenu = new ResideMenu(MainActivity.this);
+        resideMenu.setBackground(R.drawable.sp);
+        resideMenu.attachToActivity(MainActivity.this);
         //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
         resideMenu.setScaleValue(0.6f);
 
         // create menu items;
-        itemHome = new ResideMenuItem(this, R.drawable.icon_home, "Home");
+        itemHome = new ResideMenuItem(this, R.drawable.aa, "Home");
         itemHelp = new ResideMenuItem(this, R.drawable.aaa, "Help");
         itemFeed = new ResideMenuItem(this, R.drawable.b, "Feedback");
         itemAbout=new ResideMenuItem(this, R.drawable.c, "About Us");
 
-        itemHome.setOnClickListener(this);
-        itemHelp.setOnClickListener(this);
-        itemFeed.setOnClickListener(this);
-        itemAbout.setOnClickListener(this);
+        itemHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,matches.class);
+                startActivity(intent);
+            }
+        });
+        itemHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,matches.class);
+                startActivity(intent);
+            }
+        });
+        itemFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,matches.class);
+                startActivity(intent);
+            }
+        });
+        itemAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,matches.class);
+                startActivity(intent);
+            }
+        });
 
         resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
         resideMenu.addMenuItem(itemHelp, ResideMenu.DIRECTION_LEFT);
@@ -227,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // You can disable a direction by setting ->
         // resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
-        findViewById(R.id.settings_button).setOnClickListener(new View.OnClickListener() {
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
@@ -236,42 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-    @Override
-    public void onClick(View view) {
 
-        if (view == itemHome){
-Intent intent=new Intent(this,MainActivity.class);
-        startActivity(intent);
-        }
-        else if (view == itemHelp){
-            Intent intent=new Intent(this,ProfileFragment.class);
-            startActivity(intent);
-
-        }else if (view == itemFeed){
-            Intent intent=new Intent(this,SettingsFragment.class);
-            startActivity(intent);
-        }else if (view == itemAbout){
-            Intent intent=new Intent(this,CalendarFragment.class);
-            startActivity(intent);
-        }
-
-        resideMenu.closeMenu();
-    }
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        return resideMenu.dispatchTouchEvent(ev);
-    }
-    private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
-        @Override
-        public void openMenu() {
-            Toast.makeText(mContext, "Menu is opened!", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void closeMenu() {
-            Toast.makeText(mContext, "Menu is closed!", Toast.LENGTH_SHORT).show();
-        }
-    };
 
         @Override
     public void onStart() {

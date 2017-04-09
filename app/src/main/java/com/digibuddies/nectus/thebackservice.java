@@ -99,7 +99,6 @@ public class thebackservice extends IntentService {
                 ArrayList<Float> matches = new ArrayList<>();
                 ArrayList<String> k = new ArrayList<>();
 
-
                 for (DataSnapshot contact : contactChildren) {
 
                     Post c = contact.getValue(Post.class);
