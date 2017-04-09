@@ -19,4 +19,10 @@
     <color name="colorSliderBackground">#FF181821</color>
     <color name="colorTextColor">#FFFFFFFF</color>
     <color name="colorSwitchColor">#FF2371FA</color>
+
+    <color name="light_green">#3eb74e</color>
+    <color name="light_purple">#8c61b3</color>
+    <color name="light_orange">#ffb500</color>
+    <color name="light_cyan">#00BCD4</color>
+    <color name="black">#000000</color>
 </resources>

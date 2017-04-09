@@ -6,4 +6,18 @@
     <string name="text_ham_button_sub_text_highlighted">Ham Button Sub Text(Highlighted)</string>
     <string name="text_ham_button_sub_text_unable">Ham Button Sub Text(Unable)</string>
 
+
+    <string name="avatar">HELLO!</string>
+    <string name="profile">PROFILE</string>
+    <string name="questions">QUESTIONS</string>
+    <string name="matches">MATCHES</string>
+
+
+    <string name="avatar_hint">Welcome to the family.</string>
+    <string name="profile_hint">As per your approval,your profile will be displayed to those users who share common personality traits with you.</string>
+    <string name="questions_hint">Select an option according to your choice and swipe for the next question.</string>
+    <string name="matches_hint">You will be informed of three users with similar personality.You can decide whether or not to share your contact details.</string>
+    <string name="skip">SKIP</string>
+
+
 </resources>

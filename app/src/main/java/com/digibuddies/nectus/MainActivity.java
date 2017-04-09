@@ -210,22 +210,22 @@ public class MainActivity extends AppCompatActivity {
         resideMenu.setScaleValue(0.6f);
 
         // create menu items;
-        itemHome = new ResideMenuItem(this, R.drawable.aa, "Home");
-        itemHelp = new ResideMenuItem(this, R.drawable.aaa, "Help");
-        itemFeed = new ResideMenuItem(this, R.drawable.b, "Feedback");
-        itemAbout=new ResideMenuItem(this, R.drawable.c, "About Us");
+        itemHome = new ResideMenuItem(this, R.drawable.icon_home, "Home");
+        itemHelp = new ResideMenuItem(this, R.drawable.ic_help_white_48dp, "Help");
+        itemFeed = new ResideMenuItem(this, R.drawable.ic_mode_edit_black_24dp, "Feedback");
+        itemAbout=new ResideMenuItem(this, R.drawable.ic_info_outline_black_24dp, "About Us");
 
         itemHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,matches.class);
+                Intent intent=new Intent(MainActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
         itemHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,matches.class);
+                Intent intent=new Intent(MainActivity.this,Help.class);
                 startActivity(intent);
             }
         });

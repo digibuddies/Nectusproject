@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="landing_bg">
+        <item>@color/light_green</item>
+        <item>@color/light_purple</item>
+        <item>@color/light_orange</item>
+        <item>@color/light_cyan</item>
+
+    </array>
+
+    <array name="icons">
+        <item>@drawable/aaa</item>
+        <item>@drawable/ic_help_white_48dp</item>
+        <item>@drawable/ic_face_white_48dp</item>
+        <item>@drawable/ic_group_add_white_48dp</item>
+
+    </array>
+
+    <string-array name="titles" >
+
+        <item>@string/avatar</item>
+        <item>@string/profile</item>
+        <item>@string/questions</item>
+        <item>@string/matches</item>
+
+    </string-array>
+
+    <string-array name="hints" >
+
+        <item>@string/avatar_hint</item>
+        <item>@string/profile_hint</item>
+        <item>@string/questions_hint</item>
+        <item>@string/matches_hint</item>
+
+    </string-array>
+
+</resources>

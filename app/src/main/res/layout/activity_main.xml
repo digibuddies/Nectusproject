@@ -43,8 +43,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:id="@+id/settings_button"/>
+        android:text="invisible"
+        android:id="@+id/settings_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"/>
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:layout_width="wrap_content"
