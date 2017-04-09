@@ -40,6 +40,11 @@
         android:layout_marginBottom="250dp" >
 
     </com.nightonke.boommenu.BoomMenuButton>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/settings_button"/>
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:layout_width="wrap_content"

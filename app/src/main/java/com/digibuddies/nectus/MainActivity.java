@@ -15,12 +15,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,18 +41,28 @@ import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.nightonke.boommenu.Util;
+import com.special.ResideMenu.ResideMenu;
+import com.special.ResideMenu.ResideMenuItem;
 import com.whygraphics.gifview.gif.GIFView;
 
 
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
 import static com.nightonke.boommenu.R.layout.bmb;
+import static com.special.ResideMenu.ResideMenu.DIRECTION_LEFT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "MainActivity";
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
+    ResideMenu resideMenu;
+    MainActivity mContext;
+    ResideMenuItem itemHome;
+    ResideMenuItem itemHelp;
+    ResideMenuItem itemFeed;
+    ResideMenuItem itemAbout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +70,10 @@ public class MainActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
         }
+       final Button b=(Button) findViewById(R.id.settings_button);
 
-
-
+       setUpMenu();
         GIFView mGifView = (GIFView) findViewById(R.id.main_activity_gif_vie);
         mGifView.setGifResource("asset:bb");
         scheduleAlarm();
@@ -155,8 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        Intent intent = new Intent(MainActivity.this,MainActivity.class);
-                        startActivity(intent);
+                               b.performClick();
                     }
                 });
         bmb.addBuilder(builder1);
@@ -167,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         bmb.setNormalColor(Color.WHITE);
 
     }
+
     // Setup a recurring alarm every half hour
     public void scheduleAlarm() {
         // Construct an intent that will execute the AlarmReceiver
@@ -184,7 +199,81 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void setUpMenu() {
+
+        // attach to current activity;
+        resideMenu = new ResideMenu(this);
+        resideMenu.setBackground(R.drawable.menu_background);
+        resideMenu.attachToActivity(this);
+        resideMenu.setMenuListener(menuListener);
+        //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
+        resideMenu.setScaleValue(0.6f);
+
+        // create menu items;
+        itemHome = new ResideMenuItem(this, R.drawable.icon_home, "Home");
+        itemHelp = new ResideMenuItem(this, R.drawable.aaa, "Help");
+        itemFeed = new ResideMenuItem(this, R.drawable.b, "Feedback");
+        itemAbout=new ResideMenuItem(this, R.drawable.c, "About Us");
+
+        itemHome.setOnClickListener(this);
+        itemHelp.setOnClickListener(this);
+        itemFeed.setOnClickListener(this);
+        itemAbout.setOnClickListener(this);
+
+        resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemHelp, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemFeed, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemAbout, ResideMenu.DIRECTION_LEFT);
+
+        // You can disable a direction by setting ->
+        // resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+        findViewById(R.id.settings_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+            }
+        });
+
+
+    }
     @Override
+    public void onClick(View view) {
+
+        if (view == itemHome){
+Intent intent=new Intent(this,MainActivity.class);
+        startActivity(intent);
+        }
+        else if (view == itemHelp){
+            Intent intent=new Intent(this,ProfileFragment.class);
+            startActivity(intent);
+
+        }else if (view == itemFeed){
+            Intent intent=new Intent(this,SettingsFragment.class);
+            startActivity(intent);
+        }else if (view == itemAbout){
+            Intent intent=new Intent(this,CalendarFragment.class);
+            startActivity(intent);
+        }
+
+        resideMenu.closeMenu();
+    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return resideMenu.dispatchTouchEvent(ev);
+    }
+    private ResideMenu.OnMenuListener menuListener = new ResideMenu.OnMenuListener() {
+        @Override
+        public void openMenu() {
+            Toast.makeText(mContext, "Menu is opened!", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void closeMenu() {
+            Toast.makeText(mContext, "Menu is closed!", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+        @Override
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
