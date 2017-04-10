@@ -259,7 +259,7 @@
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" You can call me "
+                    android:text="You can call me "
                     android:textSize="18sp"
                     android:textColor="@android:color/white" />
 
@@ -295,18 +295,17 @@
 
                 <Spinner
                     android:id="@+id/Spinner2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:entries="@array/list2"
                     android:prompt="@array/list2"
                     android:textAlignment="center" />
 
                 <TextView
-                    android:text=". Currently I"
+                    android:text=" Currently I"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView22"
-                    android:layout_weight="1"
                     android:textSize="18sp"
                     android:textColor="@android:color/white" />
 
@@ -325,7 +324,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="am working towards my "
+                    android:text="am working towards "
                     android:textSize="18sp"
                     android:textColor="@android:color/white" />
 

@@ -40,9 +40,8 @@ public class thebackservice extends IntentService {
     final ArrayList<String> result = new ArrayList<>();
     final ArrayList<String> result2 = new ArrayList<>();
     final ArrayList<String> datadb = new ArrayList<>();
-    String s1 = "";
-    String s2 = "";
-    String s3 = "";
+    String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,mail,uname,u1,u2,u3;
+    int aid=0;
     int p1,p2,p3;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef2 = database.getReference("Ques");
@@ -53,9 +52,11 @@ public class thebackservice extends IntentService {
     private SQLiteDatabase db0;
     private StorageReference mStorageRef;
     //database
-    private static final String SELECT_SQL = "SELECT name FROM persons1";
+    private static final String SELECT_SQL = "SELECT uname FROM matches";
     private SQLiteDatabase db;
+    int co=0;
     private Cursor c,c1;
+    String per="";
     String qsend="";
 
     public thebackservice() {
@@ -68,6 +69,7 @@ public class thebackservice extends IntentService {
         Log.d("service","BAck started");
         createDatabase();
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        s1=s2=s3=s4=s5=s6=s7=s8=s9=s10=s11=s12=uname=mail=u1=u2=u3="";
         final String idd = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference();
@@ -151,8 +153,27 @@ public class thebackservice extends IntentService {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         snap = dataSnapshot.getValue(data.class);
                         if (snap != null) {
+                            mail = snap.getEmail();
+                            uname = snap.getUname();
+                            u1=uname;
+                            aid = snap.getAid();
+                            s1=snap.getOp1();
+                            s2=snap.getOp2();
+                            s3=snap.getOp3();
+                            s4=snap.getOp4();
+                            s5=snap.getOp5();
+                            s6=snap.getOp6();
+                            s7=snap.getOp7();
+                            s8=snap.getOp8();
+                            s9=snap.getOp9();
+                            s10=snap.getOp10();
+                            s11=snap.getOp11();
+                            s12=snap.getOp12();
+                            co=1;
+                            per = String.valueOf(result2.get(p1));
+                            String query1 = "INSERT OR REPLACE INTO matches (id,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
 
-                            s1 = snap.getUsername();
+                            db.execSQL(query1);
 
                         }
                     }
@@ -169,8 +190,27 @@ public class thebackservice extends IntentService {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         snap = dataSnapshot.getValue(data.class);
                         if (snap != null) {
+                            mail = snap.getEmail();
+                            uname = snap.getUname();
+                            u2=uname;
+                            aid = snap.getAid();
+                            s1=snap.getOp1();
+                            s2=snap.getOp2();
+                            s3=snap.getOp3();
+                            s4=snap.getOp4();
+                            s5=snap.getOp5();
+                            s6=snap.getOp6();
+                            s7=snap.getOp7();
+                            s8=snap.getOp8();
+                            s9=snap.getOp9();
+                            s10=snap.getOp10();
+                            s11=snap.getOp11();
+                            s12=snap.getOp12();
+                            co=2;
+                            per = String.valueOf(result2.get(p2));
+                            String query2 = "INSERT OR REPLACE INTO matches (id,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
 
-                            s2 = snap.getUsername();
+                            db.execSQL(query2);
 
                         }
                     }
@@ -187,11 +227,30 @@ public class thebackservice extends IntentService {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         snap = dataSnapshot.getValue(data.class);
                         if (snap != null) {
-                            s3 = snap.getUsername();
-                            insertIntoDB();
+                            mail = snap.getEmail();
+                            uname = snap.getUname();
+                            u3=uname;
+                            aid = snap.getAid();
+                            s1=snap.getOp1();
+                            s2=snap.getOp2();
+                            s3=snap.getOp3();
+                            s4=snap.getOp4();
+                            s5=snap.getOp5();
+                            s6=snap.getOp6();
+                            s7=snap.getOp7();
+                            s8=snap.getOp8();
+                            s9=snap.getOp9();
+                            s10=snap.getOp10();
+                            s11=snap.getOp11();
+                            s12=snap.getOp12();
+                            co=3;
+                            per = String.valueOf(result2.get(p3));
+                            String query3 = "INSERT OR REPLACE INTO matches (id,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
+
+                            db.execSQL(query3);
                             showRecords();
                             if(datadb.size()>0){
-                            if ((!(s1.equals(datadb.get(0)))) || (!(s2.equals(datadb.get(1)))) || (!(s3.equals(datadb.get(2))))) {
+                            if ((!(u1.equals(datadb.get(0)))) || (!(u2.equals(datadb.get(1)))) || (!(u3.equals(datadb.get(2))))) {
                                 notifyUser();
                             }
                             }
@@ -287,27 +346,10 @@ public class thebackservice extends IntentService {
     protected void createDatabase(){
         db=openOrCreateDatabase("PersonDB", Context.MODE_PRIVATE, null);
         db0=openOrCreateDatabase("questions", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS persons1(id INTEGER PRIMARY KEY, user VARCHAR, name VARCHAR);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS matches(id INTEGER PRIMARY KEY,mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
         db0.execSQL("CREATE TABLE IF NOT EXISTS ques(ans integer);");
     }
-    protected void insertIntoDB(){
-        String name1 = String.valueOf(s1);
-        String name2 = String.valueOf(s2);
-        String name3 = String.valueOf(s3);
-        String id1 = String.valueOf(result2.get(p1));
-        String id2 = String.valueOf(result2.get(p2));
-        String id3 = String.valueOf(result2.get(p3));
 
-        String query1 = "INSERT OR REPLACE INTO persons1 (id,user,name) VALUES(1,'"+id1+"','"+name1+"');";
-        String query2 = "INSERT OR REPLACE INTO persons1 (id,user,name) VALUES(2,'"+id2+"','"+name2+"')";
-        String query3 = "INSERT OR REPLACE INTO persons1 (id,user,name) VALUES(3,'"+id3+"','"+name3+"')";
-        db.execSQL(query1);
-        db.execSQL(query2);
-        db.execSQL(query3);
-
-
-
-    }
 public void download(){
 
     File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");

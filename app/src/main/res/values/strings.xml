@@ -50,12 +50,12 @@
     <string name="feedbacktype1101">2002</string>
 
     <string name="feedbacktype111">Select</string>
-    <string name="feedbacktype222">Academics</string>
-    <string name="feedbacktype333">Career</string>
-    <string name="feedbacktype444">Dreams</string>
-    <string name="feedbacktype555">Passion</string>
-    <string name="feedbacktype666">Present</string>
-    <string name="feedbacktype777">Future</string>
+    <string name="feedbacktype222">my Academics</string>
+    <string name="feedbacktype333">my Career</string>
+    <string name="feedbacktype444">my Dreams</string>
+    <string name="feedbacktype555">my Passion</string>
+    <string name="feedbacktype666">a secret project</string>
+    <string name="feedbacktype777">making world a better place</string>
 
     <string name="feedbacktype1111">Select</string>
     <string name="feedbacktype2222">Sleeping</string>
