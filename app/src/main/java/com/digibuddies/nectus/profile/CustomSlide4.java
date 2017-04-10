@@ -47,7 +47,7 @@ public class CustomSlide4 extends SlideFragment {
                 tv3.setText("Adding You To Family !");
                 myRef.child(idd).setValue(profileclass.d);
                 createDatabase();
-                String query = "INSERT OR REPLACE INTO profile (id,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES(1,'"+profileclass.d.getAid()+"','"+profileclass.d.getEmail()+"','"+profileclass.d.getUname()+"','"+profileclass.d.getOp1()+"','"+profileclass.d.getOp2()+"','"+profileclass.d.getOp3()+"','"+profileclass.d.getOp4()+"','"+profileclass.d.getOp5()+"','"+profileclass.d.getOp6()+"','"+profileclass.d.getOp7()+"','"+profileclass.d.getOp8()+"','"+profileclass.d.getOp9()+"','"+profileclass.d.getOp10()+"','"+profileclass.d.getOp11()+"','"+profileclass.d.getOp12()+"');";
+                String query = "INSERT OR REPLACE INTO profile (id,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12) VALUES(1,'"+profileclass.d.getAid()+"','"+profileclass.d.getEmail()+"','"+profileclass.d.getUname()+"','"+profileclass.d.getOp1()+"','"+profileclass.d.getOp2()+"','"+profileclass.d.getOp3()+"','"+profileclass.d.getOp4()+"','"+profileclass.d.getOp5()+"','"+profileclass.d.getOp6()+"','"+profileclass.d.getOp7()+"','"+profileclass.d.getOp8()+"','"+profileclass.d.getOp9()+"','"+profileclass.d.getOp10()+"','"+profileclass.d.getOp11()+"','"+profileclass.d.getOp12()+"','"+profileclass.d.getP1()+"','"+profileclass.d.getP2()+"','"+profileclass.d.getP3()+"','"+profileclass.d.getP4()+"','"+profileclass.d.getP5()+"','"+profileclass.d.getP6()+"','"+profileclass.d.getP7()+"','"+profileclass.d.getP8()+"','"+profileclass.d.getP9()+"','"+profileclass.d.getP10()+"','"+profileclass.d.getP11()+"','"+profileclass.d.getP12()+"');";
             db.execSQL(query);
 
             }
@@ -99,6 +99,6 @@ public class CustomSlide4 extends SlideFragment {
             storagePath.mkdirs();
         }
         db=getActivity().openOrCreateDatabase(storagePath+"/"+"prodb.db", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS profile(id INTEGER PRIMARY KEY, aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(20),op12 VARCHAR(20));");
+        db.execSQL("CREATE TABLE IF NOT EXISTS profile(id INTEGER PRIMARY KEY, aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(20),op12 VARCHAR(20),p1 integer,p2 integer,p3 integer,p4 integer,p5 integer,p6 integer,p7 integer,p8 integer,p9 integer,p10 integer,p11 integer,p12 integer);");
     }
 }

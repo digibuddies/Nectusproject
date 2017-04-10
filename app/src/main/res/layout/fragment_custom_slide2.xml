@@ -251,7 +251,7 @@
                 <Spinner
                     android:layout_width="103dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner00"
+                    android:id="@+id/spinner0"
                     android:entries="@array/list"
                     android:prompt="@array/list" />
 
