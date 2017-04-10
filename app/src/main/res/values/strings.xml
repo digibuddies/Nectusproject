@@ -1,3 +1,158 @@
 <resources>
     <string name="app_name">Nectus</string>
+
+    <string name="check_to_pass">I accept terms and conditions.</string>
+    <string name="error_message">Please fill all the details.</string>
+    <string name="error_message2">Please select both avatar and username.</string>
+    <string name="launch_intro_activity">Launch intro activity</string>
+
+    <string name="feedbacktypee1">Select</string>
+    <string name="feedbacktypee2">You\'re looking for a Friend.</string>
+    <string name="feedbacktypee3">You are from Dit.</string>
+    <string name="feedbacktypee4">You\'re not Creepy.</string>
+    <string name="feedbacktypee5">You\'re Funny.</string>
+    <string name="feedbacktypee6">Contact me anytime you want.</string>
+    <string name="feedbacktypee8">Don\'t bother. Ill contact you if i want to.</string>
+    <string name="feedbacktypee7">You share my interests.</string>
+
+
+    <string name="feedbacktypeee1">Select</string>
+    <string name="feedbacktypeee2">You\'re not my age.</string>
+    <string name="feedbacktypeee3">You\'re anti modi.</string>
+    <string name="feedbacktypeee4">You cant answer what\'s 32*32 in 5sec.</string>
+    <string name="feedbacktypeee5">You ever lied to your mumma.</string>
+    <string name="feedbacktypeee6">You\'re a creep</string>
+    <string name="feedbacktypeee7">Just never contact me !</string>
+
+
+    <string name="feedbacktype1">Select</string>
+    <string name="feedbacktype2">Hi</string>
+    <string name="feedbacktype3">Hello</string>
+    <string name="feedbacktype4">Howdy</string>
+    <string name="feedbacktype5">Hola</string>
+    <string name="feedbacktype6">Sup</string>
+    <string name="feedbacktype7">Ciao</string>
+
+
+
+
+    <string name="feedbacktype11">select</string>
+    <string name="feedbacktype22">1992</string>
+    <string name="feedbacktype33">1993</string>
+    <string name="feedbacktype44">1994</string>
+    <string name="feedbacktype55">1995</string>
+    <string name="feedbacktype66">1996</string>
+    <string name="feedbacktype77">1997</string>
+    <string name="feedbacktype88">1998</string>
+    <string name="feedbacktype99">1999</string>
+    <string name="feedbacktype100">2000</string>
+    <string name="feedbacktype110">2001</string>
+    <string name="feedbacktype1101">2002</string>
+
+    <string name="feedbacktype111">select</string>
+    <string name="feedbacktype222">Academics</string>
+    <string name="feedbacktype333">Career</string>
+    <string name="feedbacktype444">Dreams</string>
+    <string name="feedbacktype555">Passion</string>
+    <string name="feedbacktype666">Present</string>
+    <string name="feedbacktype777">Future</string>
+
+    <string name="feedbacktype1111">select</string>
+    <string name="feedbacktype2222">Sleeping</string>
+    <string name="feedbacktype3333">Eating</string>
+    <string name="feedbacktype4444">Cunning</string>
+    <string name="feedbacktype5555">Dancing</string>
+    <string name="feedbacktype6666">Singing</string>
+    <string name="feedbacktype7777">Dreaming</string>
+    <string name="feedbacktype8888">Talking</string>
+    <string name="feedbacktype9999">XXXXX</string>
+
+
+    <string name="feedbacktype15">select</string>
+    <string name="feedbacktype25">go on a world tour</string>
+    <string name="feedbacktype35">learn new language</string>
+    <string name="feedbacktype45">go scuba diving</string>
+    <string name="feedbacktype455">do horseback riding</string>
+    <string name="feedbacktype505">fall in love</string>
+    <string name="feedbacktype65">be a billionaire</string>
+    <string name="feedbacktype75">be a millionaire</string>
+    <string name="feedbacktype85">live in a cottage</string>
+    <string name="feedbacktype95">drive a ferrari</string>
+    <string name="feedbacktype105">see northern lights</string>
+    <string name="feedbacktype1115">get a pet</string>
+    <string name="feedbacktype125">appear on TV</string>
+    <string name="feedbacktype135">have own business</string>
+
+    <string name="feedbacktype16">select</string>
+    <string name="feedbacktype26">shy</string>
+    <string name="feedbacktype36">extrovert</string>
+    <string name="feedbacktype46">a leader</string>
+    <string name="feedbacktype56">h0t</string>
+    <string name="feedbacktype76">talkative</string>
+    <string name="feedbacktype86">intelligent</string>
+    <string name="feedbacktype96">creative</string>
+    <string name="feedbacktype106">pretty</string>
+    <string name="feedbacktype1116">a panda</string>
+
+    <string name="feedbacktype17">select</string>
+    <string name="feedbacktype27">very much love</string>
+    <string name="feedbacktype37">very much hate</string>
+    <string name="feedbacktype47">dont care about</string>
+    <string name="feedbacktype57">fantasise about</string>
+
+
+    <string name="feedbacktype172">select</string>
+    <string name="feedbacktype272">outer space.</string>
+    <string name="feedbacktype372">camping in woods.</string>
+    <string name="feedbacktype472">small babies.</string>
+    <string name="feedbacktype672">Justin Beiber.</string>
+    <string name="feedbacktype772">large dogs.</string>
+    <string name="feedbacktype872">Rap music.</string>
+    <string name="feedbacktype972">spicy food.</string>
+    <string name="feedbacktype1072">chocolates.</string>
+    <string name="feedbacktype1272">twilight.</string>
+    <string name="feedbacktype1372">heavy metal.</string>
+    <string name="feedbacktype1472">EDM music.</string>
+    <string name="feedbacktype1572">Taylor Swift.</string>
+
+
+    <string name="feedbacktype18">select</string>
+    <string name="feedbacktype28">playing sport</string>
+    <string name="feedbacktype38">watching TV</string>
+    <string name="feedbacktype48">listening to music</string>
+    <string name="feedbacktype58">cooking yummy food</string>
+    <string name="feedbacktype68">eating yummy food</string>
+    <string name="feedbacktype78">sleeping</string>
+    <string name="feedbacktype848">on video games</string>
+    <string name="feedbacktype98">studying for exams</string>
+    <string name="feedbacktype108">with friends</string>
+    <string name="feedbacktype118">playing guitar</string>
+
+    <string name="feedbacktype19">select</string>
+    <string name="feedbacktype29">a</string>
+    <string name="feedbacktype39">b</string>
+    <string name="feedbacktype49">c</string>
+
+    <string name="feedbacktype10">select</string>
+    <string name="feedbacktype20">completely crazy.</string>
+    <string name="feedbacktype30">a miracle.</string>
+    <string name="feedbacktype40">an embarrasment</string>
+    <string name="feedbacktype50">short on attendance</string>
+    <string name="feedbacktype60">the Batman.</string>
+    <string name="feedbacktype70">a very good friend.</string>
+    <string name="feedbacktype80">somone id like to know.</string>
+    <string name="feedbacktype90">someone ill run away from</string>
+    <string name="feedbacktype11100">the smartest person alive</string>
+    <string name="feedbacktype1110">cute ?</string>
+
+    <string name="feedbacktype1a">select</string>
+    <string name="feedbacktype21">a</string>
+    <string name="feedbacktype31">b</string>
+    <string name="feedbacktype41">c</string>
+
+    <string name="feedbacktype112">select</string>
+    <string name="feedbacktype212">a</string>
+    <string name="feedbacktype312">b</string>
+    <string name="feedbacktype412">c</string>
+
 </resources>

@@ -34,8 +34,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 //import com.devs.squaremenu.OnMenuClickListener;
 //import com.devs.squaremenu.SquareMenu;
-import com.devs.squaremenu.OnMenuClickListener;
-import com.devs.squaremenu.SquareMenu;
 import com.digibuddies.nectus.layouts.SwipeFrameLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -183,7 +181,7 @@ public class questions extends AppCompatActivity {
                 return dragCheckbox.isChecked();
             }
         });
-
+/*
         SquareMenu mSquareMenu = (SquareMenu) findViewById(R.id.square_menu);
         mSquareMenu.setOnMenuClickListener(new OnMenuClickListener(){
             @Override
@@ -191,16 +189,16 @@ public class questions extends AppCompatActivity {
             @Override
             public void onMenuClose() { }
             @Override
-            public void onClickMenu1() {Intent intent = new Intent(questions.this,profile.class);
+            public void onClickMenu1() {Intent intent = new Intent(questions.this,profileclass.class);
                 startActivity(intent); }
             @Override
             public void onClickMenu2() {Intent intent = new Intent(questions.this,matches.class);
                 startActivity(intent); }
             @Override
-            public void onClickMenu3() {Intent intent = new Intent(questions.this,profile.class);
+            public void onClickMenu3() {Intent intent = new Intent(questions.this,profileclass.class);
                 startActivity(intent); }
         });
-
+*/
 
 
     }

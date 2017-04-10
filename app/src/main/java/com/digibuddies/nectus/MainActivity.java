@@ -3,10 +3,15 @@ package com.digibuddies.nectus;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -22,12 +27,14 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 
+import com.digibuddies.nectus.profile.profileclass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -46,6 +53,9 @@ import com.special.ResideMenu.ResideMenuItem;
 import com.whygraphics.gifview.gif.GIFView;
 
 
+import java.io.File;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
 import static com.nightonke.boommenu.R.layout.bmb;
@@ -59,24 +69,40 @@ public class MainActivity extends AppCompatActivity {
     ResideMenu resideMenu;
     MainActivity mContext;
     ResideMenuItem itemHome;
+    private SQLiteDatabase dbm;
+    private Cursor c;
+    private static final String SELECT_SQL = "SELECT uname,aid FROM profile";
+    private ProgressDialog working_dialog;
     ResideMenuItem itemHelp;
     ResideMenuItem itemFeed;
     Button b;
     ResideMenuItem itemAbout;
+    TextView tvp;
+    public static int call;
+    String uname;
+    TextView usname;
+    CircleImageView civ;
+    int aid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-       b=(Button) findViewById(R.id.settings_button);
+        b = (Button) findViewById(R.id.settings_button);
+        tvp=(TextView)findViewById(R.id.tvp);
+        usname=(TextView)findViewById(R.id.usname);
+        civ=(CircleImageView)findViewById(R.id.aid);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
 
+        usname.setTypeface(custom_font);
+        tvp.setTypeface(custom_font);
 
         GIFView mGifView = (GIFView) findViewById(R.id.main_activity_gif_vie);
-        mGifView.setGifResource("asset:bb");
+        mGifView.setGifResource("asset:c");
         scheduleAlarm();
        /* mKenBurns = (KenBurnsView) findViewById(R.id.ken_burns_images);
         mKenBurns.setImageResource(R.drawable.city);
@@ -121,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
         bmb.setDimColor(Color.parseColor("#8B000000"));
 
-        FloatingTextButton mb = (FloatingTextButton)findViewById(R.id.mb);
+        FloatingTextButton mb = (FloatingTextButton) findViewById(R.id.mb);
         mb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,7 +162,17 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                        showWorkingDialog();
+
+                        new Handler().postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                removeWorkingDialog();
+                            }
+
+                        }, 2000);
+                        Intent intent = new Intent(MainActivity.this, profileclass.class);
                         startActivity(intent);
                     }
                 });
@@ -148,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        Intent intent = new Intent(MainActivity.this,questions.class);
+                        Intent intent = new Intent(MainActivity.this, questions.class);
                         startActivity(intent);
                     }
                 });
@@ -159,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        Intent intent = new Intent(MainActivity.this,matches.class);
+                        Intent intent = new Intent(MainActivity.this, matches.class);
                         startActivity(intent);
                     }
                 });
@@ -171,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                               b.performClick();
+                        b.performClick();
                     }
                 });
         bmb.addBuilder(builder1);
@@ -204,22 +240,21 @@ public class MainActivity extends AppCompatActivity {
 
         // attach to current activity;
         resideMenu = new ResideMenu(MainActivity.this);
-        resideMenu.setBackground(R.drawable.sp);
+        resideMenu.setBackground(R.drawable.reside);
         resideMenu.attachToActivity(MainActivity.this);
         //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
         resideMenu.setScaleValue(0.6f);
 
         // create menu items;
         itemHome = new ResideMenuItem(this, R.drawable.icon_home, "Home");
-        itemHelp = new ResideMenuItem(this, R.drawable.ic_help_white_48dp, "Help");
-        itemFeed = new ResideMenuItem(this, R.drawable.ic_mode_edit_black_24dp, "Feedback");
-        itemAbout=new ResideMenuItem(this, R.drawable.ic_info_outline_black_24dp, "About Us");
+        itemHelp = new ResideMenuItem(this, R.drawable.help1, "Help");
+        itemFeed = new ResideMenuItem(this, R.drawable.feed, "Feedback");
+        itemAbout=new ResideMenuItem(this, R.drawable.about, "About Us");
 
         itemHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,MainActivity.class);
-                startActivity(intent);
+                resideMenu.closeMenu();
             }
         });
         itemHelp.setOnClickListener(new View.OnClickListener() {
@@ -276,5 +311,51 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showWorkingDialog() {
+        working_dialog = ProgressDialog.show(MainActivity.this, "<3", "Nectus Loves You...", true);
+    }
 
+    private void removeWorkingDialog() {
+        if (working_dialog != null) {
+            working_dialog.dismiss();
+            working_dialog = null;
+        }
+    }
+
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        moveTaskToBack(true);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        if(storagePath.exists()) {
+            dbm = openOrCreateDatabase(storagePath+"/"+"prodb.db", Context.MODE_PRIVATE, null);
+            dbm.execSQL("CREATE TABLE IF NOT EXISTS profile(id INTEGER PRIMARY KEY, aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
+            c = dbm.rawQuery(SELECT_SQL, null);
+            c.moveToFirst();
+            if(c.getCount()>0)
+            {
+                uname=c.getString(0);
+                aid=c.getInt(1);
+                usname.setText("Hello! "+uname);
+                civ.setImageResource(aid);
+                civ.setVisibility(View.VISIBLE);
+            }
+
+        }
+        if(call==11){
+            tvp.setText("Great Now Head onto the Questions Section And Answer Some Questions.");
+            tvp.setVisibility(View.VISIBLE);
+            tvp.postDelayed(new Runnable() {
+                public void run() {
+                    tvp.setVisibility(View.INVISIBLE);
+                    call=0;
+                }
+            }, 12000);}
+
+    }
 }

@@ -18,8 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 //import com.devs.squaremenu.OnMenuClickListener;
 //import com.devs.squaremenu.SquareMenu;
-import com.devs.squaremenu.OnMenuClickListener;
-import com.devs.squaremenu.SquareMenu;
 import com.whygraphics.gifview.gif.GIFView;
 
 import java.util.ArrayList;
@@ -65,6 +63,7 @@ public class matches extends AppCompatActivity {
         tv6 = (TextView) findViewById(R.id.tv6);
 
         callme2();
+        /*
         SquareMenu mSquareMenu = (SquareMenu) findViewById(R.id.square_menu);
         mSquareMenu.setOnMenuClickListener(new OnMenuClickListener(){
             @Override
@@ -72,15 +71,16 @@ public class matches extends AppCompatActivity {
             @Override
             public void onMenuClose() { }
             @Override
-            public void onClickMenu1() {Intent intent = new Intent(matches.this,profile.class);
+            public void onClickMenu1() {Intent intent = new Intent(matches.this,profileclass.class);
                 startActivity(intent); }
             @Override
             public void onClickMenu2() {Intent intent = new Intent(matches.this,questions.class);
                 startActivity(intent); }
             @Override
-            public void onClickMenu3() {Intent intent = new Intent(matches.this,profile.class);
+            public void onClickMenu3() {Intent intent = new Intent(matches.this,profileclass.class);
                 startActivity(intent); }
         });
+        */
     }
 
     public void callme2() {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#410159</color>
+    <color name="colorPrimary">#fded5f</color>
     <color name="colorPrimaryDark">#115993</color>
-    <color name="colorAccent">#000000</color>
+    <color name="colorAccent">#ffffff</color>
     <color name="back">#e33737</color>
     <color name="text">#ffffff</color>
     <color name="global_color_primary_light">#f5f5f5</color>
@@ -20,9 +20,23 @@
     <color name="colorTextColor">#FFFFFFFF</color>
     <color name="colorSwitchColor">#FF2371FA</color>
 
+
+    <color name="first_slide_background">#fa3e73</color>
+    <color name="first_slide_buttons">#272727</color>
+
+    <color name="second_slide_background">#32a8cc</color>
+    <color name="second_slide_buttons">#272727</color>
+
+    <color name="third_slide_background">#42a646</color>
+    <color name="third_slide_buttons">#272727</color>
+
+    <color name="fourth_slide_background">#ffffff</color>
+    <color name="fourth_slide_buttons">#272727</color>
+
     <color name="light_green">#3eb74e</color>
     <color name="light_purple">#8c61b3</color>
     <color name="light_orange">#ffb500</color>
     <color name="light_cyan">#00BCD4</color>
     <color name="black">#000000</color>
+    <color name="bacc">#64000000</color>
 </resources>

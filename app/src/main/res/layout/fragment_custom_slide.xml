@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agency.tango.materialintroscreen.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:id="@+id/container">
+
+        <com.whygraphics.gifview.gif.GIFView
+            android:id="@+id/main_activity_gif_vie2"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:layout_height="220dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            app:srcCompat="@drawable/back"
+            android:id="@+id/imageView5"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            app:srcCompat="@drawable/pro"
+            android:id="@+id/imageView3"
+            android:layout_marginTop="25dp"
+            android:scaleType="fitXY"
+            android:layout_height="150dp" />
+
+        <CheckBox
+            android:id="@+id/checkBox89"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:text="pass"
+            app:layout_parallaxFactor="0.4"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="13dp"
+            android:layout_marginTop="16dp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:text="Create Username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:fontFamily="cursive"
+            android:textSize="30sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="60dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <TextView
+            android:text="Select Avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:textSize="30sp"
+            android:textColor="@android:color/primary_text_dark"
+            android:fontFamily="cursive"
+            android:layout_alignTop="@+id/avatar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="136dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:src="@drawable/select"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@android:color/white"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/checkBox89"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="108dp" />
+
+        <ImageView
+            app:srcCompat="@android:color/white"
+            android:id="@+id/imageView4"
+            android:layout_centerInParent="false"
+            android:layout_below="@+id/textView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_width="250dp"
+            android:layout_height="2dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions"
+            android:ems="10"
+            android:layout_below="@+id/tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27dp"
+            android:id="@+id/editText2"
+            android:hint="eg: heartslicer, killerpanda"
+            android:textAlignment="center"
+            android:fontFamily="casual"
+            android:textColorHint="@android:color/black"
+            android:textColorHighlight="@android:color/white"
+            android:imeOptions="actionNext"
+            android:maxLength="12" />
+
+    </RelativeLayout>
+
+</agency.tango.materialintroscreen.parallax.ParallaxLinearLayout>

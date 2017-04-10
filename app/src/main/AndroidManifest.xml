@@ -38,11 +38,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-               <activity
-            android:name=".profile"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".profile.profileclass" />
         <activity android:name=".questions" />
         <activity android:name=".matches" />
+        <activity android:name=".Help" />
 
         <service
             android:name=".thebackservice"
@@ -52,7 +51,6 @@
             android:name=".alarmreceiver"
             android:process=":remote" >
         </receiver>
-
     </application>
 
 </manifest>

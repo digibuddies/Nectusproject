@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
+import com.digibuddies.nectus.profile.profileclass;
+
 import io.github.yuweiguocn.lib.squareloading.SquareLoading;
 
 public class splashactivity extends Activity {
@@ -44,6 +47,7 @@ public class splashactivity extends Activity {
                 finish();
             }
         }, SPLASH_TIME_OUT);
+
     }
 
     private void setAnimation() {
