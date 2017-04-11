@@ -38,6 +38,10 @@ public class CustomSlide extends SlideFragment {
         mGifView.setGifResource("asset:ban");
         checkBox = (CheckBox) view.findViewById(R.id.checkBox89);
         checkBox.setChecked(false);
+        CircleImageView v1=(CircleImageView)view.findViewById(R.id.avatar);
+        if(profileclass.avid!=0){
+        v1.setImageResource(profileclass.avid);
+        flag=1;}
         ett=(EditText)view.findViewById(R.id.editText2);
         if(!(profileclass.usern.equals(""))){
             ett.setText(profileclass.usern);

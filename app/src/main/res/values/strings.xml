@@ -7,21 +7,21 @@
     <string name="launch_intro_activity">Launch intro activity</string>
 
     <string name="feedbacktypee1">Select</string>
-    <string name="feedbacktypee2">You\'re looking for a Friend.</string>
+    <string name="feedbacktypee2">You are looking for a Friend.</string>
     <string name="feedbacktypee3">You are from Dit.</string>
-    <string name="feedbacktypee4">You\'re not Creepy.</string>
-    <string name="feedbacktypee5">You\'re Funny.</string>
+    <string name="feedbacktypee4">You are not Creepy.</string>
+    <string name="feedbacktypee5">You are Funny.</string>
     <string name="feedbacktypee6">Contact me anytime you want.</string>
-    <string name="feedbacktypee8">Don\'t bother. Ill contact you if i want to.</string>
+    <string name="feedbacktypee8">Dont bother. Ill contact you if i want to.</string>
     <string name="feedbacktypee7">You share my interests.</string>
 
 
     <string name="feedbacktypeee1">Select</string>
-    <string name="feedbacktypeee2">You\'re not my age.</string>
-    <string name="feedbacktypeee3">You\'re anti modi.</string>
-    <string name="feedbacktypeee4">You cant answer what\'s 32*32 in 5sec.</string>
+    <string name="feedbacktypeee2">You are not my age.</string>
+    <string name="feedbacktypeee3">You are anti modi.</string>
+    <string name="feedbacktypeee4">You cant answer what is 32*32 in 5sec.</string>
     <string name="feedbacktypeee5">You ever lied to your mumma.</string>
-    <string name="feedbacktypeee6">You\'re a creep</string>
+    <string name="feedbacktypeee6">You are a creep</string>
     <string name="feedbacktypeee7">Just never contact me !</string>
 
 
@@ -36,7 +36,7 @@
 
 
 
-    <string name="feedbacktype11">select</string>
+    <string name="feedbacktype11">Select</string>
     <string name="feedbacktype22">1992</string>
     <string name="feedbacktype33">1993</string>
     <string name="feedbacktype44">1994</string>
@@ -49,15 +49,15 @@
     <string name="feedbacktype110">2001</string>
     <string name="feedbacktype1101">2002</string>
 
-    <string name="feedbacktype111">select</string>
-    <string name="feedbacktype222">Academics</string>
-    <string name="feedbacktype333">Career</string>
-    <string name="feedbacktype444">Dreams</string>
-    <string name="feedbacktype555">Passion</string>
-    <string name="feedbacktype666">Present</string>
-    <string name="feedbacktype777">Future</string>
+    <string name="feedbacktype111">Select</string>
+    <string name="feedbacktype222">my Academics</string>
+    <string name="feedbacktype333">my Career</string>
+    <string name="feedbacktype444">my Dreams</string>
+    <string name="feedbacktype555">my Passion</string>
+    <string name="feedbacktype666">a secret project</string>
+    <string name="feedbacktype777">making world a better place</string>
 
-    <string name="feedbacktype1111">select</string>
+    <string name="feedbacktype1111">Select</string>
     <string name="feedbacktype2222">Sleeping</string>
     <string name="feedbacktype3333">Eating</string>
     <string name="feedbacktype4444">Cunning</string>
@@ -68,7 +68,7 @@
     <string name="feedbacktype9999">XXXXX</string>
 
 
-    <string name="feedbacktype15">select</string>
+    <string name="feedbacktype15">Select</string>
     <string name="feedbacktype25">go on a world tour</string>
     <string name="feedbacktype35">learn new language</string>
     <string name="feedbacktype45">go scuba diving</string>
@@ -83,7 +83,7 @@
     <string name="feedbacktype125">appear on TV</string>
     <string name="feedbacktype135">have own business</string>
 
-    <string name="feedbacktype16">select</string>
+    <string name="feedbacktype16">Select</string>
     <string name="feedbacktype26">shy</string>
     <string name="feedbacktype36">extrovert</string>
     <string name="feedbacktype46">a leader</string>
@@ -94,14 +94,14 @@
     <string name="feedbacktype106">pretty</string>
     <string name="feedbacktype1116">a panda</string>
 
-    <string name="feedbacktype17">select</string>
+    <string name="feedbacktype17">Select</string>
     <string name="feedbacktype27">very much love</string>
     <string name="feedbacktype37">very much hate</string>
     <string name="feedbacktype47">dont care about</string>
     <string name="feedbacktype57">fantasise about</string>
 
 
-    <string name="feedbacktype172">select</string>
+    <string name="feedbacktype172">Select</string>
     <string name="feedbacktype272">outer space.</string>
     <string name="feedbacktype372">camping in woods.</string>
     <string name="feedbacktype472">small babies.</string>
@@ -116,7 +116,7 @@
     <string name="feedbacktype1572">Taylor Swift.</string>
 
 
-    <string name="feedbacktype18">select</string>
+    <string name="feedbacktype18">Select</string>
     <string name="feedbacktype28">playing sport</string>
     <string name="feedbacktype38">watching TV</string>
     <string name="feedbacktype48">listening to music</string>
@@ -128,12 +128,12 @@
     <string name="feedbacktype108">with friends</string>
     <string name="feedbacktype118">playing guitar</string>
 
-    <string name="feedbacktype19">select</string>
+    <string name="feedbacktype19">Select</string>
     <string name="feedbacktype29">a</string>
     <string name="feedbacktype39">b</string>
     <string name="feedbacktype49">c</string>
 
-    <string name="feedbacktype10">select</string>
+    <string name="feedbacktype10">Select</string>
     <string name="feedbacktype20">completely crazy.</string>
     <string name="feedbacktype30">a miracle.</string>
     <string name="feedbacktype40">an embarrasment</string>
@@ -145,12 +145,12 @@
     <string name="feedbacktype11100">the smartest person alive</string>
     <string name="feedbacktype1110">cute ?</string>
 
-    <string name="feedbacktype1a">select</string>
+    <string name="feedbacktype1a">Select</string>
     <string name="feedbacktype21">a</string>
     <string name="feedbacktype31">b</string>
     <string name="feedbacktype41">c</string>
 
-    <string name="feedbacktype112">select</string>
+    <string name="feedbacktype112">Select</string>
     <string name="feedbacktype212">a</string>
     <string name="feedbacktype312">b</string>
     <string name="feedbacktype412">c</string>
