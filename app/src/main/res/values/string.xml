@@ -7,17 +7,18 @@
     <string name="text_ham_button_sub_text_unable">Ham Button Sub Text(Unable)</string>
 
 
-    <string name="avatar">HELLO!</string>
+    <string name="avatar">WELCOME TO NECTUS!</string>
     <string name="profile">PROFILE</string>
     <string name="questions">QUESTIONS</string>
     <string name="matches">MATCHES</string>
+    <string name="finals">LET\'S GET STARTED!</string>
 
 
-    <string name="avatar_hint">Welcome to the family.</string>
+    <string name="avatar_hint">Connect with your most identical personalities. </string>
     <string name="profile_hint">First! Create your profile and select everything that describes you best.</string>
     <string name="questions_hint">Next! Answer some interesting personality based questions to determine your type.</string>
     <string name="matches_hint">Finally! Find out the people who\'ve got the most similar personality as yours.</string>
-    <string name="skip">SKIP</string>
+    <string name="final_hint">Taking you to our family...</string>
 
 
 </resources>

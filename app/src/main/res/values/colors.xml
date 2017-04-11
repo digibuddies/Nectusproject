@@ -39,4 +39,5 @@
     <color name="light_cyan">#00BCD4</color>
     <color name="black">#000000</color>
     <color name="bacc">#64000000</color>
+    <color name="red">#f44336</color>
 </resources>

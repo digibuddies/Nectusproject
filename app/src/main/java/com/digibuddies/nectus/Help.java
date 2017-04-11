@@ -3,9 +3,11 @@ package com.digibuddies.nectus;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -13,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import io.github.yuweiguocn.lib.squareloading.SquareLoading;
 
 /**
  * Created by Divya Vashisth on 4/9/2017.
@@ -114,6 +118,14 @@ import android.widget.TextView;
                 hintView.setText(hint);
 
                 container.addView(itemView);
+                Handler handler=new Handler();
+                if(position==4){
+                    handler.postDelayed(new Runnable(){
+                        @Override
+                        public void run(){
+                            finish();
+                        }
+                    }, 8000);}
 
                 return itemView;
             }
@@ -121,6 +133,7 @@ import android.widget.TextView;
             @Override
             public void destroyItem(ViewGroup container, int position, Object object) {
                 container.removeView((RelativeLayout) object);
+
 
             }
         }

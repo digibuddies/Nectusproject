@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
         itemFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,matches.class);
+                Intent intent=new Intent(MainActivity.this,Feed.class);
                 startActivity(intent);
             }
         });
