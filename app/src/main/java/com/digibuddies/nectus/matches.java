@@ -17,17 +17,21 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 //import com.devs.squaremenu.OnMenuClickListener;
 //import com.devs.squaremenu.SquareMenu;
+import com.digibuddies.nectus.profile.profileclass;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.special.ResideMenu.ResideMenu;
+import com.special.ResideMenu.ResideMenuItem;
 import com.whygraphics.gifview.gif.GIFView;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +44,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import io.ghyeok.stickyswitch.widget.StickySwitch;
 
 public class matches extends AppCompatActivity {
+
+    ResideMenu resideMenu;
+    ResideMenuItem itemHome;
+    ResideMenuItem itemPro;
+    ResideMenuItem itemQ;
+    ImageButton ibm;
     final ArrayList<String> datadb = new ArrayList<>();
     final ArrayList<String> datadb2 = new ArrayList<>();
     final ArrayList<String> datadb3 = new ArrayList<>();
@@ -178,6 +188,8 @@ public class matches extends AppCompatActivity {
         d3.setTypeface(custom_font);
 
         callme2();
+        ibm=(ImageButton)findViewById(R.id.ButtonMatches);
+
         /*
         SquareMenu mSquareMenu = (SquareMenu) findViewById(R.id.square_menu);
         mSquareMenu.setOnMenuClickListener(new OnMenuClickListener(){
@@ -196,7 +208,64 @@ public class matches extends AppCompatActivity {
                 startActivity(intent); }
         });
         */
+
+        setUpMenu();
     }
+
+
+    private void setUpMenu() {
+
+        // attach to current activity;
+        resideMenu = new ResideMenu(matches.this);
+        resideMenu.setBackground(R.drawable.reside);
+        resideMenu.attachToActivity(matches.this);
+        //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
+        resideMenu.setScaleValue(0.6f);
+
+        // create menu items;
+        itemHome = new ResideMenuItem(this, R.drawable.icon_home, "Home");
+        itemPro = new ResideMenuItem(this, R.drawable.a, "Profile");
+        itemQ = new ResideMenuItem(this, R.drawable.ic_help_white_48dp, "Questions");
+
+
+        itemHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(matches.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        itemPro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(matches.this,profileclass.class);
+                startActivity(intent);
+            }
+        });
+        itemQ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(matches.this,questions.class);
+                startActivity(intent);
+            }
+        });
+
+        resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_RIGHT);
+        resideMenu.addMenuItem(itemPro, ResideMenu.DIRECTION_RIGHT);
+        resideMenu.addMenuItem(itemQ, ResideMenu.DIRECTION_RIGHT);
+
+        // You can disable a direction by setting ->
+        // resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+        ibm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resideMenu.openMenu(ResideMenu.DIRECTION_RIGHT);
+            }
+        });
+
+
+    }
+
 
     public void callme2() {
         if(datadb.size()>0) {

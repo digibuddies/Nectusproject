@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -27,6 +28,7 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -35,8 +37,11 @@ import android.widget.TextView;
 //import com.devs.squaremenu.OnMenuClickListener;
 //import com.devs.squaremenu.SquareMenu;
 import com.digibuddies.nectus.layouts.SwipeFrameLayout;
+import com.digibuddies.nectus.profile.profileclass;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.special.ResideMenu.ResideMenu;
+import com.special.ResideMenu.ResideMenuItem;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -51,11 +56,10 @@ import tyrantgit.explosionfield.ExplosionField;
 import java.util.ArrayList;
 import java.util.List;
 public class questions extends AppCompatActivity {
-
-    private static final String TAG = "MainActivity";
-    private SwipeDeck cardStack;
-    private Context context = this;
-    private SwipeDeckAdapter adapter;
+ResideMenu resideMenu;
+    ResideMenuItem itemHome;
+    ResideMenuItem itemPro;
+    ResideMenuItem itemM;
     private ArrayList<String> testData;
     ArrayList<String> list = new ArrayList<>();
     private CheckBox dragCheckbox;
@@ -65,17 +69,18 @@ public class questions extends AppCompatActivity {
     int count2=0,count3=0;
     AnimationDrawable anim;
     private StorageReference mStorageRef;
-
+private SwipeDeckAdapter adapter;
     CardView cardView;
     RadioGroup radioGroup;
     private SQLiteDatabase db2,db3;
     RadioButton r1;
     RadioButton r2;
+    ImageButton ib;
     RadioButton r3;
     int x,flag=0;
     RadioButton r4;
     TextView h,l;
-
+SwipeDeck cardStack;
     private Cursor c;
     private String idd;
     String query1 = "INSERT OR REPLACE INTO counter1 (id, count) VALUES(1,0);";
@@ -98,7 +103,7 @@ public class questions extends AppCompatActivity {
         dragCheckbox = (CheckBox) findViewById(R.id.checkbox_drag);
         h=(TextView)findViewById(R.id.help);
         l=(TextView)findViewById(R.id.limit);
-
+ib=(ImageButton)findViewById(R.id.imageButton);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         dostuff();
         testData = new ArrayList<>();
@@ -193,6 +198,58 @@ public class questions extends AppCompatActivity {
                 startActivity(intent); }
         });
 */
+setUpMenu();
+
+    }
+    private void setUpMenu() {
+
+        // attach to current activity;
+        resideMenu = new ResideMenu(questions.this);
+        resideMenu.setBackground(R.drawable.reside);
+        resideMenu.attachToActivity(questions.this);
+        //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
+        resideMenu.setScaleValue(0.6f);
+
+        // create menu items;
+        itemHome = new ResideMenuItem(this, R.drawable.icon_home, "Home");
+        itemPro = new ResideMenuItem(this, R.drawable.a, "Profile");
+        itemM = new ResideMenuItem(this, R.drawable.ic_group_add_white_48dp, "Matches");
+
+
+        itemHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(questions.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        itemPro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(questions.this,profileclass.class);
+                startActivity(intent);
+            }
+        });
+        itemM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(questions.this,matches.class);
+                startActivity(intent);
+            }
+        });
+
+        resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_RIGHT);
+        resideMenu.addMenuItem(itemPro, ResideMenu.DIRECTION_RIGHT);
+        resideMenu.addMenuItem(itemM, ResideMenu.DIRECTION_RIGHT);
+
+        // You can disable a direction by setting ->
+        // resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+        ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resideMenu.openMenu(ResideMenu.DIRECTION_RIGHT);
+            }
+        });
 
 
     }

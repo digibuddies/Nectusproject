@@ -23,19 +23,24 @@
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Rate Nectus "
+        android:layout_marginTop="100dp"
+        android:text="Your Message.."
         android:textSize="20sp"
-        android:id="@+id/text"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/view"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"/>
-    <com.hsalf.smilerating.SmileRating
-        android:id="@+id/smile_rating"
-        android:layout_width="368dp"
+        android:id="@+id/textView9" />
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/text"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="8dp"/>
+        android:layout_marginTop="150dp"
+        android:textColor="@color/black"
+        android:hint="submit a bug/ request a feature/ send your ideas"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView9"
+        android:layout_marginBottom="34dp"
+        android:id="@+id/sbtn"
+       />
 </RelativeLayout>

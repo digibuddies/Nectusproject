@@ -40,4 +40,5 @@
     <color name="black">#000000</color>
     <color name="bacc">#64000000</color>
     <color name="red">#f44336</color>
+    <color name="backgraound">#ffffff</color>
 </resources>

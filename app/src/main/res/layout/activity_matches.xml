@@ -441,6 +441,18 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="10dp" />
 -->
+
+    <ImageButton
+        android:id="@+id/ButtonMatches"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_settings_applications_white_48dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
+/>
+
     <ImageView
         android:layout_width="wrap_content"
         app:srcCompat="@drawable/matches"
