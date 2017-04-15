@@ -8,6 +8,11 @@
     tools:context="com.digibuddies.nectus.splashactivity"
     android:background="@drawable/sp"
     android:fitsSystemWindows="true">
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/splash" />
 
     <com.digibuddies.nectus.kenbview.RobotoTextView
         android:id="@+id/welcome_text"

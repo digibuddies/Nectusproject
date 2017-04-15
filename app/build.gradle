@@ -27,6 +27,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.flaviofaria:kenburnsview:1.0.7'
     compile 'com.github.dimorinny:floating-text-button:0.0.2'
     compile 'com.github.GwonHyeok:StickySwitch:0.0.8'
     compile 'tyrantgit:explosionfield:1.0.1'

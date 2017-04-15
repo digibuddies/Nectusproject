@@ -37,7 +37,6 @@ import android.widget.TextView;
 import com.digibuddies.nectus.layouts.SwipeFrameLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.whygraphics.gifview.gif.GIFView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -91,8 +90,7 @@ public class questions extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
         setContentView(R.layout.acticity_questions);
-        GIFView mGifView = (GIFView) findViewById(R.id.main_activity_gif_vie2);
-        mGifView.setGifResource("asset:cd");
+
         SwipeFrameLayout container = (SwipeFrameLayout) findViewById(R.id.swipeLayout);
 
 
@@ -140,11 +138,7 @@ public class questions extends AppCompatActivity {
         }
         if(testData.size()>0){
             h.setText("Select And Swipe!");
-        h.postDelayed(new Runnable() {
-            public void run() {
-                h.setVisibility(View.INVISIBLE);
-            }
-        }, 12000);}
+        }
 
         adapter = new SwipeDeckAdapter(testData, this);
         if(cardStack != null){

@@ -10,11 +10,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +32,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class thebackservice extends IntentService {
 
@@ -58,6 +57,8 @@ public class thebackservice extends IntentService {
     private Cursor c,c1;
     String per="";
     String qsend="";
+    public static String idd;
+    String x,y,z;
 
     public thebackservice() {
         super("thebackservice");
@@ -70,7 +71,7 @@ public class thebackservice extends IntentService {
         createDatabase();
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         s1=s2=s3=s4=s5=s6=s7=s8=s9=s10=s11=s12=uname=mail=u1=u2=u3="";
-        final String idd = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+       idd = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference();
         c = db.rawQuery(SELECT_SQL, null);
@@ -89,11 +90,11 @@ public class thebackservice extends IntentService {
             myRef2.child(idd).child("data").setValue(qsend);
         }
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                DataSnapshot contactSnapshot = dataSnapshot.child("Ques");
-                Iterable<DataSnapshot> contactChildren = contactSnapshot.getChildren();
+                //DataSnapshot contactSnapshot = dataSnapshot.child("Ques");
+                Iterable<DataSnapshot> contactChildren = dataSnapshot.getChildren();
                 ArrayList<Post> contacts = new ArrayList<>();
                 int i = 0, loc = 999, min, match = 0;
                 float matchpercen;
@@ -140,19 +141,24 @@ public class thebackservice extends IntentService {
                 mMap = sortHashMapByValues(mMap);
                 for (String key : mMap.keySet()) {
                     result.add(key);
-                    result2.add(String.valueOf(mMap.get(key)));
+                    String mp = String.format(Locale.US, "%.2f", mMap.get(key));
+                    result2.add(mp);
                 }
 
                 int pointer = result.size() - 1;
                 p1 = pointer;
                 p2 = pointer - 1;
                 p3 = pointer - 2;
+                    x=result.get(p1);
+                    y=result.get(p2);
+                    z=result.get(p3);
 
-                myRef.child("Users").child(result.get(p1)).addListenerForSingleValueEvent(new ValueEventListener() {
+                myRef.child("Users").child(x).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         snap = dataSnapshot.getValue(data.class);
                         if (snap != null) {
+                            Log.d("fb","first match");
                             mail = snap.getEmail();
                             uname = snap.getUname();
                             u1=uname;
@@ -171,7 +177,7 @@ public class thebackservice extends IntentService {
                             s12=snap.getOp12();
                             co=1;
                             per = String.valueOf(result2.get(p1));
-                            String query1 = "INSERT OR REPLACE INTO matches (id,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
+                            String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+x+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
 
                             db.execSQL(query1);
 
@@ -185,7 +191,7 @@ public class thebackservice extends IntentService {
                     }
                 });
 
-                myRef.child("Users").child(result.get(p2)).addListenerForSingleValueEvent(new ValueEventListener() {
+                myRef.child("Users").child(y).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         snap = dataSnapshot.getValue(data.class);
@@ -208,7 +214,7 @@ public class thebackservice extends IntentService {
                             s12=snap.getOp12();
                             co=2;
                             per = String.valueOf(result2.get(p2));
-                            String query2 = "INSERT OR REPLACE INTO matches (id,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
+                            String query2 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+y+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
 
                             db.execSQL(query2);
 
@@ -222,7 +228,7 @@ public class thebackservice extends IntentService {
                 });
 
 
-                myRef.child("Users").child(result.get(p3)).addListenerForSingleValueEvent(new ValueEventListener() {
+                myRef.child("Users").child(z).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         snap = dataSnapshot.getValue(data.class);
@@ -245,7 +251,7 @@ public class thebackservice extends IntentService {
                             s12=snap.getOp12();
                             co=3;
                             per = String.valueOf(result2.get(p3));
-                            String query3 = "INSERT OR REPLACE INTO matches (id,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
+                            String query3 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+z+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
 
                             db.execSQL(query3);
                             showRecords();
@@ -344,9 +350,14 @@ public class thebackservice extends IntentService {
     }
 
     protected void createDatabase(){
-        db=openOrCreateDatabase("PersonDB", Context.MODE_PRIVATE, null);
-        db0=openOrCreateDatabase("questions", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS matches(id INTEGER PRIMARY KEY,mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
+        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        // Create direcorty if not exists
+        if(!storagePath.exists()) {
+            storagePath.mkdirs();
+        }
+        db=openOrCreateDatabase(storagePath+"/"+"PersonDB", Context.MODE_PRIVATE, null);
+        db0=openOrCreateDatabase(storagePath+"/"+"questions", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS matches(id INTEGER PRIMARY KEY,devid VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20),allow varchar(20) default 'LEFT', uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
         db0.execSQL("CREATE TABLE IF NOT EXISTS ques(ans integer);");
     }
 

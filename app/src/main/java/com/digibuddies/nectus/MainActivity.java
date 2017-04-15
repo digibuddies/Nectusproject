@@ -24,6 +24,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,6 +36,8 @@ import android.support.v4.app.FragmentTransaction;
 
 
 import com.digibuddies.nectus.profile.profileclass;
+import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -101,12 +104,9 @@ public class MainActivity extends AppCompatActivity {
         usname.setTypeface(custom_font);
         tvp.setTypeface(custom_font);
 
-        GIFView mGifView = (GIFView) findViewById(R.id.main_activity_gif_vie);
-        mGifView.setGifResource("asset:c");
-        scheduleAlarm();
-       /* mKenBurns = (KenBurnsView) findViewById(R.id.ken_burns_images);
-        mKenBurns.setImageResource(R.drawable.city);
-        */
+       // GIFView mGifView = (GIFView) findViewById(R.id.main_activity_gif_vie);
+        //mGifView.setGifResource("asset:c");
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -219,22 +219,6 @@ public class MainActivity extends AppCompatActivity {
         setUpMenu();
     }
 
-    // Setup a recurring alarm every half hour
-    public void scheduleAlarm() {
-        // Construct an intent that will execute the AlarmReceiver
-        Intent intent = new Intent(getApplicationContext(), alarmreceiver.class);
-        // Create a PendingIntent to be triggered when the alarm goes off
-        final PendingIntent pIntent = PendingIntent.getBroadcast(this, alarmreceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // Setup periodic alarm every 5 seconds
-        long firstMillis = System.currentTimeMillis(); // alarm is set right away
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        // First parameter is the type: ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC_WAKEUP
-        // Interval can be INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_DAY
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
-                AlarmManager.INTERVAL_FIFTEEN_MINUTES, pIntent);
-
-    }
 
     private void setUpMenu() {
 

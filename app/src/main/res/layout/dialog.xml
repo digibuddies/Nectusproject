@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_blue_light">
+
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/color2"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/cy"
+        android:id="@+id/imageView12"
+        android:layout_alignParentStart="true"
+        android:layout_height="60dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView12">
+
+        <TextView
+            android:text="Contact me at :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView16"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18sp" />
+
+        <TextView
+            android:text="Oops! In order view other person's contact deatils both of you should have enabled sharing for each other... "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cont"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_above="@+id/textView14"
+            android:layout_alignStart="@+id/textView15"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center" />
+
+        <TextView
+            android:text="You should only cantact me if"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView14"
+            android:layout_below="@+id/textView15"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cy"
+            android:layout_below="@+id/textView15"
+            android:layout_alignStart="@+id/textView14"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center" />
+
+        <TextView
+            android:text="You should not contact me if"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView15"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/cy"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cn"
+            android:layout_below="@+id/textView14"
+            android:layout_alignStart="@+id/textView14"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="20dp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center" />
+
+        <Button
+            android:text="Got It!"
+            android:layout_height="40dp"
+            android:id="@+id/back"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:textSize="14sp"
+            android:layout_width="70dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/und"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textAllCaps="true" />
+</RelativeLayout>
