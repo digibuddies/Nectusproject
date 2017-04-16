@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.digibuddies.nectus.layouts.SwipeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
+    xmlns:arc="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/swipeLayout"
     android:orientation="vertical"
     android:fitsSystemWindows="false"
-    android:background="@drawable/blue">
-
+    android:background="@drawable/queback">
 
     <!--
     <com.devs.squaremenu.SquareMenu
@@ -71,7 +71,7 @@
         android:id="@+id/help"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="40dp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/backboom"
         android:fontFamily="cursive"
         android:textSize="24sp" />
 
@@ -84,16 +84,19 @@
         android:text="Drag enabled"
         android:visibility="invisible" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_settings_applications_white_48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
-android:layout_gravity="bottom|right"
-        />
+    <com.bvapp.arcmenulibrary.ArcMenu
+        android:id="@+id/arcMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        arc:menuType="normal"
+        arc:menuChildSize="48dp"
+        arc:menuGravity="Bottom_Right"
+        arc:menuClickAnim="true"
+        arc:menuChildAnim="false"
+        arc:menuShadowElevation="true"
+        arc:menuNormalColor="@android:color/white"
+        arc:menuImage="@drawable/ic_fingerprint_black_24dp"
+        android:layout_marginBottom="15dp">
+    </com.bvapp.arcmenulibrary.ArcMenu>
 
 </com.digibuddies.nectus.layouts.SwipeFrameLayout>

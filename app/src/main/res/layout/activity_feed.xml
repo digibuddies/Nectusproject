@@ -4,43 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.digibuddies.nectus.Feed">
+    tools:context="com.digibuddies.nectus.Feed"
+    android:background="@drawable/menu_background">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FEEDBACK"
         android:textSize="30sp"
         android:layout_marginLeft="120dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/textHead"/>
+        android:layout_marginTop="40dp"
+        android:id="@+id/textHead"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true" />
     <View
         android:layout_width="320dp"
-        android:layout_height="5dp"
-        android:background="@color/black"
-        android:layout_marginTop="60dp"
+        android:layout_height="3dp"
+        android:background="@color/colorAscent"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
-        android:id="@+id/view"/>
+        android:id="@+id/view"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textHead" />
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:text="Your Message.."
         android:textSize="20sp"
-        android:id="@+id/textView9" />
+        android:id="@+id/msg"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/view" />
     <EditText
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:textColor="@color/black"
-        android:hint="submit a bug/ request a feature/ send your ideas"/>
+        android:textColor="@android:color/white"
+        android:hint="Submit a bug or Request a feature or Send your ideas"
+        android:textColorHint="@android:color/white"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/msg"
+        android:layout_marginTop="20dp" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SUBMIT"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/textView9"
-        android:layout_marginBottom="34dp"
         android:id="@+id/sbtn"
-       />
+        android:background="@android:color/black"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/edit"
+        android:layout_below="@+id/edit"
+        android:layout_marginTop="30dp" />
 </RelativeLayout>

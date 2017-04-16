@@ -4,13 +4,18 @@ import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -21,8 +26,18 @@ public class Feed extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         Button btn=(Button)findViewById(R.id.sbtn);
         final EditText editText=(EditText)findViewById(R.id.edit);
+        TextView tv1=(TextView)findViewById(R.id.msg);
+        TextView tv2=(TextView)findViewById(R.id.textHead);
+        tv1.setTypeface(custom_font);
+        tv2.setTypeface(custom_font);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override            public void onClick(View v) {
                 final Intent intent = new Intent(android.content.Intent.ACTION_SEND);

@@ -35,7 +35,7 @@ public class CustomSlide extends SlideFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_custom_slide, container, false);
         GIFView mGifView = (GIFView)view.findViewById(R.id.main_activity_gif_vie2);
-        mGifView.setGifResource("asset:ban");
+        mGifView.setGifResource("asset:giphy");
         checkBox = (CheckBox) view.findViewById(R.id.checkBox89);
         checkBox.setChecked(false);
         CircleImageView v1=(CircleImageView)view.findViewById(R.id.avatar);

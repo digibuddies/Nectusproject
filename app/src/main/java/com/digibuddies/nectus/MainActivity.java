@@ -6,15 +6,19 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,6 +62,8 @@ import com.whygraphics.gifview.gif.GIFView;
 
 import java.io.File;
 
+import javax.xml.datatype.Duration;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
@@ -80,8 +86,12 @@ public class MainActivity extends AppCompatActivity {
     ResideMenuItem itemFeed;
     Button b;
     ResideMenuItem itemAbout;
+    ConnectivityManager cm;
     TextView tvp;
     public static int call;
+    SharedPreferences mPrefs;
+    final String welcomeScreenShownPref = "welcomeScreenShown";
+
     String uname;
     TextView usname;
     CircleImageView civ;
@@ -95,11 +105,27 @@ public class MainActivity extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
+        if (!welcomeScreenShown) {
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putBoolean(welcomeScreenShownPref, true);
+            editor.commit();
+            Intent intro = new Intent(this,Help.class);
+            startActivity(intro);
+
+        }
         b = (Button) findViewById(R.id.settings_button);
         tvp=(TextView)findViewById(R.id.tvp);
         usname=(TextView)findViewById(R.id.usname);
         civ=(CircleImageView)findViewById(R.id.aid);
+
+
+
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+        if(!(isDeviceOnline())){
+            Toast.makeText(this,"Nectus needs an Internet Connection, Please Connect your device to internet!",Toast.LENGTH_LONG).show();
+        }
 
         usname.setTypeface(custom_font);
         tvp.setTypeface(custom_font);
@@ -134,8 +160,6 @@ public class MainActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInAnonymously", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -146,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
         bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
         bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
         bmb.setDimColor(Color.parseColor("#8B000000"));
-
         FloatingTextButton mb = (FloatingTextButton) findViewById(R.id.mb);
         mb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,8 +207,12 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
+                        if(usname.getText().equals("Please Head Onto the Profile section to ceate your profile!")){
+                            Toast.makeText(MainActivity.this,"Please create your profile first, then visit this section!", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
                         Intent intent = new Intent(MainActivity.this, questions.class);
-                        startActivity(intent);
+                        startActivity(intent);}
                     }
                 });
         HamButton.Builder builder3 = new HamButton.Builder();
@@ -195,8 +222,12 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
+                        if(usname.getText().equals("Please Head Onto the Profile section to ceate your profile!")){
+                            Toast.makeText(MainActivity.this,"Please create your profile first...", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
                         Intent intent = new Intent(MainActivity.this, matches.class);
-                        startActivity(intent);
+                        startActivity(intent);}
                     }
                 });
 
@@ -258,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
         itemAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,matches.class);
+                Intent intent=new Intent(MainActivity.this,Aboutus.class);
                 startActivity(intent);
             }
         });
@@ -315,6 +346,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
         if(storagePath.exists()) {
             dbm = openOrCreateDatabase(storagePath+"/"+"prodb.db", Context.MODE_PRIVATE, null);
@@ -342,4 +374,12 @@ public class MainActivity extends AppCompatActivity {
             }, 12000);}
 
     }
+    public boolean isDeviceOnline() {
+        Context context = MainActivity.this;
+        // test for connection
+        cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected();
+    }
+
 }

@@ -33,7 +33,7 @@ public class splashactivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
         KenBurnsView kbv = (KenBurnsView) findViewById(R.id.image);
-        RandomTransitionGenerator generator = new RandomTransitionGenerator(4800,new AccelerateDecelerateInterpolator());
+        RandomTransitionGenerator generator = new RandomTransitionGenerator(4900,new AccelerateDecelerateInterpolator());
         kbv.setTransitionGenerator(generator);
         Handler handler=new Handler();
         setAnimation();
@@ -52,7 +52,6 @@ public class splashactivity extends Activity {
             public void run() {
                 Intent i = new Intent(splashactivity.this, MainActivity.class);
                 startActivity(i);
-
                 finish();
             }
         }, SPLASH_TIME_OUT);

@@ -15,10 +15,10 @@
     <color name="colorAscent">#01c91c</color>
     <color name="colorStatus">#002196f3</color>
     <color name="buttoncol">#00b2d7</color>
-    <color name="backboom">#96000000</color>
+    <color name="backboom">#e8262525</color>
     <color name="colorSliderBackground">#FF181821</color>
     <color name="colorTextColor">#FFFFFFFF</color>
-    <color name="colorSwitchColor">#FF2371FA</color>
+    <color name="colorSwitchColor">#2371fa</color>
 
 
     <color name="first_slide_background">#fa3e73</color>
@@ -41,4 +41,5 @@
     <color name="bacc">#64000000</color>
     <color name="red">#f44336</color>
     <color name="backgraound">#ffffff</color>
+    <color name="backabt">#8c000000</color>
 </resources>

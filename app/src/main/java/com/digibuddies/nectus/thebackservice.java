@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -44,6 +45,7 @@ public class thebackservice extends IntentService {
     int p1,p2,p3;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef2 = database.getReference("Ques");
+    DatabaseReference myRefm = database.getReference("contact");
     data snap;
     //notification
     NotificationManager manager;
@@ -178,6 +180,8 @@ public class thebackservice extends IntentService {
                             co=1;
                             per = String.valueOf(result2.get(p1));
                             String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+x+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
+                            myRefm.child(idd).child(x).setValue("LEFT");
+                            myRefm.child(x).child(idd).setValue("LEFT");
 
                             db.execSQL(query1);
 
@@ -215,8 +219,10 @@ public class thebackservice extends IntentService {
                             co=2;
                             per = String.valueOf(result2.get(p2));
                             String query2 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+y+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
-
+                            myRefm.child(idd).child(y).setValue("LEFT");
+                            myRefm.child(y).child(idd).setValue("LEFT");
                             db.execSQL(query2);
+
 
                         }
                     }
@@ -252,9 +258,11 @@ public class thebackservice extends IntentService {
                             co=3;
                             per = String.valueOf(result2.get(p3));
                             String query3 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+co+"','"+z+"','"+per+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
-
+                            myRefm.child(idd).child(z).setValue("LEFT");
+                            myRefm.child(z).child(idd).setValue("LEFT");
                             db.execSQL(query3);
                             showRecords();
+
                             if(datadb.size()>0){
                             if ((!(u1.equals(datadb.get(0)))) || (!(u2.equals(datadb.get(1)))) || (!(u3.equals(datadb.get(2))))) {
                                 notifyUser();

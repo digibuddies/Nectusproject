@@ -11,7 +11,8 @@
 
     <bool name="default_circle_indicator_centered">true</bool>
     <color name="default_circle_indicator_fill_color">#FFFFFFFF</color>  <!--change fill color-->
-    <color name="default_circle_indicator_page_color">#40FFFFFF</color>  <!--change indicator un selected fill color-->
+    <color name="default_circle_indicator_page_color">#40FFFFFF
+    </color>  <!--change indicator un selected fill color-->
     <integer name="default_circle_indicator_orientation">0</integer>
     <dimen name="viewpager_circleindicator_radius">3dp</dimen> <!--change radius of the circle-->
     <bool name="default_circle_indicator_snap">false</bool>

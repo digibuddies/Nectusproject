@@ -125,7 +125,7 @@ import io.github.yuweiguocn.lib.squareloading.SquareLoading;
                         public void run(){
                             finish();
                         }
-                    }, 8000);}
+                    }, 7000);}
 
                 return itemView;
             }

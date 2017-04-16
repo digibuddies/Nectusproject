@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -36,10 +38,20 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 //import com.devs.squaremenu.OnMenuClickListener;
 //import com.devs.squaremenu.SquareMenu;
+import com.bvapp.arcmenulibrary.ArcMenu;
+import com.bvapp.arcmenulibrary.widget.FloatingActionButton;
 import com.digibuddies.nectus.layouts.SwipeFrameLayout;
 import com.digibuddies.nectus.profile.profileclass;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.HamButton;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
+import com.nightonke.boommenu.Util;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
 
@@ -51,6 +63,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 import tyrantgit.explosionfield.ExplosionField;
 
 import java.util.ArrayList;
@@ -59,6 +72,7 @@ public class questions extends AppCompatActivity {
 ResideMenu resideMenu;
     ResideMenuItem itemHome;
     ResideMenuItem itemPro;
+    ResideMenuItem itemQ;
     ResideMenuItem itemM;
     private ArrayList<String> testData;
     ArrayList<String> list = new ArrayList<>();
@@ -79,6 +93,11 @@ private SwipeDeckAdapter adapter;
     RadioButton r3;
     int x,flag=0;
     RadioButton r4;
+    private static final int[] ITEM_DRAWABLES = { R.drawable.icon_home,
+            R.drawable.face, R.drawable.add };
+
+    private static final String[] STR = {"Home","Profile","Matches"};
+
     TextView h,l;
 SwipeDeck cardStack;
     private Cursor c;
@@ -97,13 +116,48 @@ SwipeDeck cardStack;
         setContentView(R.layout.acticity_questions);
 
         SwipeFrameLayout container = (SwipeFrameLayout) findViewById(R.id.swipeLayout);
+        ArcMenu menu = (ArcMenu) findViewById(R.id.arcMenu);
+        menu.setMinRadius(60);
+        menu.showTooltip(false);
+        menu.setAnim(300,300,ArcMenu.ANIM_MIDDLE_TO_RIGHT,ArcMenu.ANIM_MIDDLE_TO_RIGHT,
+                ArcMenu.ANIM_INTERPOLATOR_ACCELERATE_DECLERATE,ArcMenu.ANIM_INTERPOLATOR_ACCELERATE_DECLERATE);
+
+        final int itemCount = ITEM_DRAWABLES.length;
+        for (int i = 0; i < itemCount; i++) {
+            FloatingActionButton item = new FloatingActionButton(this);  //Use internal fab as a child
+            item.setSize(FloatingActionButton.SIZE_MINI);  //set minimum size for fab 42dp
+            item.setShadow(true); //enable to draw shadow
+            item.setIcon(ITEM_DRAWABLES[i]); //add icon for fab
+            item.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.buttoncol));  //set menu button normal color programmatically
+            menu.setChildSize(item.getIntrinsicHeight());
+            final int position = i;
+            menu.addItem(item, STR[i], new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(position==0){
+                        Intent intent=new Intent(questions.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    if(position==1){
+                        Intent intent=new Intent(questions.this,profileclass.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    if(position==2){
+                        Intent intent=new Intent(questions.this,matches.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            });
+        }
 
 
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         dragCheckbox = (CheckBox) findViewById(R.id.checkbox_drag);
         h=(TextView)findViewById(R.id.help);
         l=(TextView)findViewById(R.id.limit);
-ib=(ImageButton)findViewById(R.id.imageButton);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         dostuff();
         testData = new ArrayList<>();
@@ -112,7 +166,7 @@ ib=(ImageButton)findViewById(R.id.imageButton);
         if(c4.getCount()>0)
         {
             c4.moveToFirst();
-            count3 = Integer.parseInt(c4.getString(0));
+            count3 = c4.getInt(0);
             if(count3>15&&count3!=list.size()+15)
             {
 
@@ -198,58 +252,6 @@ ib=(ImageButton)findViewById(R.id.imageButton);
                 startActivity(intent); }
         });
 */
-setUpMenu();
-
-    }
-    private void setUpMenu() {
-
-        // attach to current activity;
-        resideMenu = new ResideMenu(questions.this);
-        resideMenu.setBackground(R.drawable.reside);
-        resideMenu.attachToActivity(questions.this);
-        //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
-        resideMenu.setScaleValue(0.6f);
-
-        // create menu items;
-        itemHome = new ResideMenuItem(this, R.drawable.icon_home, "Home");
-        itemPro = new ResideMenuItem(this, R.drawable.a, "Profile");
-        itemM = new ResideMenuItem(this, R.drawable.ic_group_add_white_48dp, "Matches");
-
-
-        itemHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(questions.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        itemPro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(questions.this,profileclass.class);
-                startActivity(intent);
-            }
-        });
-        itemM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(questions.this,matches.class);
-                startActivity(intent);
-            }
-        });
-
-        resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_RIGHT);
-        resideMenu.addMenuItem(itemPro, ResideMenu.DIRECTION_RIGHT);
-        resideMenu.addMenuItem(itemM, ResideMenu.DIRECTION_RIGHT);
-
-        // You can disable a direction by setting ->
-        // resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
-        ib.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resideMenu.openMenu(ResideMenu.DIRECTION_RIGHT);
-            }
-        });
 
 
     }
@@ -282,6 +284,10 @@ setUpMenu();
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+            if(count==50){
+                Intent intent=new Intent(questions.this,thebackservice.class);
+                startService(intent);
+            }
             Cursor c2 = db2.rawQuery(SELECT_SQL, null);
             c2.moveToFirst();
             count = Integer.parseInt(c2.getString(0));
@@ -386,8 +392,13 @@ setUpMenu();
         }
     }
     protected void createDatabase(){
-        db2=openOrCreateDatabase("counters", Context.MODE_PRIVATE, null);
-        db3=openOrCreateDatabase("questions", Context.MODE_PRIVATE, null);
+        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        // Create direcorty if not exists
+        if(!storagePath.exists()) {
+            storagePath.mkdirs();
+        }
+        db2=openOrCreateDatabase(storagePath+"/"+"counters", Context.MODE_PRIVATE, null);
+        db3=openOrCreateDatabase(storagePath+"/"+"questions", Context.MODE_PRIVATE, null);
         db2.execSQL("CREATE TABLE IF NOT EXISTS counter1(id integer primary key, count INTEGER);");
         db3.execSQL("CREATE TABLE IF NOT EXISTS ques(ans integer);");
         c = db2.rawQuery(SELECT_SQL, null);

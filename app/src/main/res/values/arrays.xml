@@ -18,6 +18,12 @@
 
     </array>
 
+    <string-array name="examples">
+        <item>Create A Profile!</item>
+        <item>Answer Some Questions</item>
+        <item>Find Similar People Like You..</item>
+    </string-array>
+
     <string-array name="titles" >
 
         <item>@string/avatar</item>
