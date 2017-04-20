@@ -83,7 +83,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             @Override
             public void onClick(View view) {
                 kdata.remove(temp);
-                connections.delete(temp.getId());
+                connections.delete(temp.getDevid());
                 Snackbar.make(view, "Connection Removed!",
                         Snackbar.LENGTH_LONG).show();
 

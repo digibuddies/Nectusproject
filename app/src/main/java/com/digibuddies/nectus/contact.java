@@ -62,7 +62,7 @@ public class contact extends AppCompatActivity {
                 if (ssc.getDirection().name().equals("RIGHT")){
                     String currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
                     myRef.child("contact").child(cid).child(dvid).child("request").setValue("ACCEPTED");
-                    String queryx = "INSERT INTO connect (id,dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES(null,'"+dvid+"','"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
+                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+dvid+"','"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
                     db2.execSQL(queryx);
                 }
                 db.execSQL("DELETE FROM matches WHERE id='"+x+"'");
@@ -98,7 +98,7 @@ public class contact extends AppCompatActivity {
         }
         db=openOrCreateDatabase(storagePath+"/"+"PerDB", Context.MODE_PRIVATE, null);
         db2=openOrCreateDatabase(storagePath+"/"+"ContDB", Context.MODE_PRIVATE, null);
-        db2.execSQL("CREATE TABLE IF NOT EXISTS connect(id INTEGER NOT NULL PRIMARY KEY,dvid VARCHAR(20),time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
+        db2.execSQL("CREATE TABLE IF NOT EXISTS connect(dvid VARCHAR(20) PRIMARY KEY,time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
         String SELECT_SQL ="SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,mp,devid FROM matches where id='"+x+"'";
         c = db.rawQuery(SELECT_SQL, null);
         c.moveToFirst();

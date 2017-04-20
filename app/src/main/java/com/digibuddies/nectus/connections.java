@@ -101,11 +101,11 @@ public class connections extends AppCompatActivity {
         }
 
         kdb=openOrCreateDatabase(storagePath+"/"+"ContDB", Context.MODE_PRIVATE, null);
-        String SELECT_SQL ="SELECT aid,time,uname,email,mp,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,id,dvid FROM connect";
-        kdb.execSQL("CREATE TABLE IF NOT EXISTS connect(id INTEGER NOT NULL PRIMARY KEY,dvid VARCHAR(20),time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
+        String SELECT_SQL ="SELECT aid,time,uname,email,mp,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,dvid FROM connect";
+        kdb.execSQL("CREATE TABLE IF NOT EXISTS connect(dvid VARCHAR(20) PRIMARY KEY,time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
         c = kdb.rawQuery(SELECT_SQL, null);
-        c.moveToFirst();
         if(c.getCount()>0){
+            c.moveToLast();
         do {
 
             cdata.add(new data(
@@ -124,11 +124,9 @@ public class connections extends AppCompatActivity {
                     c.getString(12),
                     c.getString(13),
                     c.getString(14),
-                    c.getInt(15),
-                    c.getString(16)
+                    c.getString(15)
             ));
-
-        } while (c.moveToNext());}
+        } while (c.moveToPrevious());}
         ckcon=(TextView)findViewById(R.id.kcon);
         emp=(TextView)findViewById(R.id.kemp);
         custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
@@ -142,9 +140,8 @@ public class connections extends AppCompatActivity {
 
     }
 
-    public static void delete(int x){
-        Log.d("conn", String.valueOf(x));
-        kdb.execSQL("DELETE FROM connect WHERE id='"+x+"'");
+    public static void delete(String x){
+        kdb.execSQL("DELETE FROM connect WHERE dvid='"+x+"'");
         adapter.notifyDataSetChanged();
     }
 

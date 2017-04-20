@@ -188,6 +188,18 @@ public class matches extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(ssw.getDirection().name().equals("RIGHT")){
+                    myRef.child(devid.get(0)).child(id).child("request").setValue("RIGHT");
+                    myRef.child(devid.get(0)).child(id).child("mp").setValue(mp.get(0));
+                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+devid.get(0)+"','"+currentDateTime+"','"+mp.get(0)+"','"+aid.get(0)+"','"+mail.get(0)+"','"+userid.get(0)+"','"+datadb.get(0)+"','"+datadb2.get(0)+"','"+datadb3.get(0)+"','"+datadb4.get(0)+"','"+datadb5.get(0)+"','"+datadb6.get(0)+"','"+datadb7.get(0)+"','"+datadb8.get(0)+"','"+datadb9.get(0)+"','"+datadb10.get(0)+"','"+datadb11.get(0)+"','"+datadb12.get(0)+"');";
+                    dbc.execSQL(queryx);
+
+
+                }
+                else if(ssw.getDirection().name().equals("LEFT")){
+                    myRef.child(devid.get(0)).child(id).child("request").setValue("LEFT");
+                    myRef.child(devid.get(0)).child(id).child("mp").setValue(mp.get(0));
+                }
                 dialog.dismiss();
                 if(ssw.getDirection().name().equals("RIGHT")){
                     Snackbar.make(sv, "Request Sent!",
@@ -196,6 +208,16 @@ public class matches extends AppCompatActivity {
         back2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(ssw2.getDirection().name().equals("RIGHT")){
+                    myRef.child(devid.get(1)).child(id).child("request").setValue("RIGHT");
+                    myRef.child(devid.get(1)).child(id).child("mp").setValue(mp.get(1));
+                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+devid.get(1)+"','"+currentDateTime+"','"+mp.get(1)+"','"+aid.get(1)+"','"+mail.get(1)+"','"+userid.get(1)+"','"+datadb.get(1)+"','"+datadb2.get(1)+"','"+datadb3.get(1)+"','"+datadb4.get(1)+"','"+datadb5.get(1)+"','"+datadb6.get(1)+"','"+datadb7.get(1)+"','"+datadb8.get(1)+"','"+datadb9.get(1)+"','"+datadb10.get(1)+"','"+datadb11.get(1)+"','"+datadb12.get(1)+"');";
+                    dbc.execSQL(queryx);
+                }
+                else if(ssw2.getDirection().name().equals("LEFT")){
+                    myRef.child(devid.get(1)).child(id).child("request").setValue("LEFT");
+                    myRef.child(devid.get(1)).child(id).child("mp").setValue(mp.get(1));  }
+
                 dialog2.dismiss();
                 if(ssw2.getDirection().name().equals("RIGHT")){
                     Snackbar.make(sv, "Request Sent!",
@@ -205,6 +227,16 @@ public class matches extends AppCompatActivity {
         back3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(ssw3.getDirection().name().equals("RIGHT")){
+                    myRef.child(devid.get(2)).child(id).child("request").setValue("RIGHT");
+                    myRef.child(devid.get(2)).child(id).child("mp").setValue(mp.get(2));
+                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+devid.get(2)+"','"+currentDateTime+"','"+mp.get(2)+"','"+aid.get(2)+"','"+mail.get(2)+"','"+userid.get(2)+"','"+datadb.get(2)+"','"+datadb2.get(2)+"','"+datadb3.get(2)+"','"+datadb4.get(2)+"','"+datadb5.get(2)+"','"+datadb6.get(2)+"','"+datadb7.get(2)+"','"+datadb8.get(2)+"','"+datadb9.get(2)+"','"+datadb10.get(2)+"','"+datadb11.get(2)+"','"+datadb12.get(2)+"');";
+                    dbc.execSQL(queryx);
+
+                }
+                else if(ssw3.getDirection().name().equals("LEFT")){
+                    myRef.child(devid.get(2)).child(id).child("request").setValue("LEFT");
+                    myRef.child(devid.get(2)).child(id).child("mp").setValue(mp.get(2)); }
                 dialog3.dismiss();
                 if(ssw3.getDirection().name().equals("RIGHT")){
                 Snackbar.make(sv, "Request Sent!",
@@ -296,22 +328,14 @@ public class matches extends AppCompatActivity {
         ssw.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
             @Override
             public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
-                        if(direction.name().equals("RIGHT")){
-                            String qer = "UPDATE matches SET allow='RIGHT' WHERE id=1;";
-                            db.execSQL(qer);
-                            myRef.child(devid.get(0)).child(id).child("request").setValue("RIGHT");
-                            myRef.child(devid.get(0)).child(id).child("mp").setValue(mp.get(0));
-                            String queryx = "INSERT INTO connect (id,dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES(null,'"+devid.get(0)+"','"+currentDateTime+"','"+mp.get(0)+"','"+aid.get(0)+"','"+mail.get(0)+"','"+datadb.get(0)+"','"+userid.get(0)+"','"+datadb2.get(0)+"','"+datadb3.get(0)+"','"+datadb4.get(0)+"','"+datadb5.get(0)+"','"+datadb6.get(0)+"','"+datadb7.get(0)+"','"+datadb8.get(0)+"','"+datadb9.get(0)+"','"+datadb10.get(0)+"','"+datadb11.get(0)+"','"+datadb12.get(0)+"');";
-                            dbc.execSQL(queryx);
-
-
-                        }
+                if(direction.name().equals("RIGHT")){
+                    String qer = "UPDATE matches SET allow='RIGHT' WHERE id=1;";
+                    db.execSQL(qer);
+                }
                 else if(direction.name().equals("LEFT")){
-                            String qer = "UPDATE matches SET allow='LEFT' WHERE id=1;";
-                            db.execSQL(qer);
-                            myRef.child(devid.get(0)).child(id).child("request").setValue("LEFT");
-                            myRef.child(devid.get(0)).child(id).child("mp").setValue(mp.get(0));
-                        }
+                    String qer = "UPDATE matches SET allow='LEFT' WHERE id=1;";
+                    db.execSQL(qer);
+            }
 
                  }
         });
@@ -321,17 +345,10 @@ public class matches extends AppCompatActivity {
                 if(direction.name().equals("RIGHT")){
                     String qer = "UPDATE matches SET allow='RIGHT' WHERE id=2;";
                     db.execSQL(qer);
-                    myRef.child(devid.get(1)).child(id).child("request").setValue("RIGHT");
-                    myRef.child(devid.get(1)).child(id).child("mp").setValue(mp.get(1));
-                    String queryx = "INSERT INTO connect (id,dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES(null,'"+devid.get(1)+"','"+currentDateTime+"','"+mp.get(1)+"','"+aid.get(1)+"','"+mail.get(1)+"','"+datadb.get(1)+"','"+userid.get(1)+"','"+datadb2.get(1)+"','"+datadb3.get(1)+"','"+datadb4.get(1)+"','"+datadb5.get(1)+"','"+datadb6.get(1)+"','"+datadb7.get(1)+"','"+datadb8.get(1)+"','"+datadb9.get(1)+"','"+datadb10.get(1)+"','"+datadb11.get(1)+"','"+datadb12.get(1)+"');";
-                    dbc.execSQL(queryx);
                 }
                 else if(direction.name().equals("LEFT")){
                     String qer = "UPDATE matches SET allow='LEFT' WHERE id=2;";
-                    db.execSQL(qer);
-                    myRef.child(devid.get(1)).child(id).child("request").setValue("LEFT");
-                    myRef.child(devid.get(1)).child(id).child("mp").setValue(mp.get(1));  }
-
+                    db.execSQL(qer);}
             }
         });
         ssw3.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
@@ -340,18 +357,12 @@ public class matches extends AppCompatActivity {
                 if(direction.name().equals("RIGHT")){
                     String qer = "UPDATE matches SET allow='RIGHT' WHERE id=3;";
                     db.execSQL(qer);
-                    myRef.child(devid.get(2)).child(id).child("request").setValue("RIGHT");
-                    myRef.child(devid.get(2)).child(id).child("mp").setValue(mp.get(2));
-                    String queryx = "INSERT INTO connect (id,dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES(null,'"+devid.get(2)+"','"+currentDateTime+"','"+mp.get(2)+"','"+aid.get(2)+"','"+mail.get(2)+"','"+datadb.get(2)+"','"+userid.get(2)+"','"+datadb2.get(2)+"','"+datadb3.get(2)+"','"+datadb4.get(2)+"','"+datadb5.get(2)+"','"+datadb6.get(2)+"','"+datadb7.get(2)+"','"+datadb8.get(2)+"','"+datadb9.get(2)+"','"+datadb10.get(2)+"','"+datadb11.get(2)+"','"+datadb12.get(2)+"');";
-                    dbc.execSQL(queryx);
 
                 }
-                else if(direction.name().equals("LEFT")){
+                else if(direction.name().equals("LEFT")) {
                     String qer = "UPDATE matches SET allow='LEFT' WHERE id=3;";
                     db.execSQL(qer);
-                    myRef.child(devid.get(2)).child(id).child("request").setValue("LEFT");
-                    myRef.child(devid.get(2)).child(id).child("mp").setValue(mp.get(2)); }
-
+                }
             }
         });
 
@@ -437,7 +448,7 @@ public class matches extends AppCompatActivity {
         if(storagePath.exists()) {
             db = openOrCreateDatabase(storagePath + "/" + "PerDB", Context.MODE_PRIVATE, null);
             dbc=openOrCreateDatabase(storagePath+"/"+"ContDB", Context.MODE_PRIVATE, null);
-            dbc.execSQL("CREATE TABLE IF NOT EXISTS connect(id INTEGER NOT NULL PRIMARY KEY,dvid VARCHAR(20),time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20),uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
+            dbc.execSQL("CREATE TABLE IF NOT EXISTS connect(dvid VARCHAR(20) PRIMARY KEY,time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20),uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
 
         }
     }
