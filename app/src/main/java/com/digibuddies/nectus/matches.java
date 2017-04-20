@@ -380,9 +380,11 @@ public class matches extends AppCompatActivity {
         d3=(TextView)findViewById(R.id.detail3);
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         final TextView hd=(TextView)findViewById(R.id.alike);
+            final TextView detp=(TextView)findViewById(R.id.detp);
         d1.setTypeface(custom_font);
         d2.setTypeface(custom_font);
         d3.setTypeface(custom_font);
+            detp.setTypeface(custom_font);
             kdate.setTypeface(custom_font);
             kdate2.setTypeface(custom_font);
             kdate3.setTypeface(custom_font);

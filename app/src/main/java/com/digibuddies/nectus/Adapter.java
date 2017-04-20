@@ -53,7 +53,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
     public void onBindViewHolder(final cardadapter holder, final int position) {
         final data temp = kdata.get(position);
         holder.tv1.setText(temp.getUname());
-        holder.tv2.setText("Request Pending...");
+        holder.tv2.setText("Checking Status...");
         myRef.child(temp.getDevid()).child(connections.kid).child("request").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -61,6 +61,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
                 if (dataSnapshot.getValue().toString().equals("ACCEPTED")){
                     holder.tv2.setText(temp.getEmail());
                 }
+                else holder.tv2.setText("Request Pending!");
             }
 
             @Override

@@ -106,7 +106,7 @@
                 android:layout_height="match_parent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar"
+                    android:id="@+id/avatarv"
                     android:src="@drawable/vikram"
                     app:civ_border_width="2dp"
                     app:civ_border_color="@android:color/white"
@@ -119,7 +119,7 @@
                     android:textAlignment="center" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar"
+                    android:id="@+id/avatard"
                     android:src="@drawable/div"
                     app:civ_border_width="2dp"
                     app:civ_border_color="@android:color/white"

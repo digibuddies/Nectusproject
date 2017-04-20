@@ -117,7 +117,9 @@ SwipeDeck cardStack;
         setContentView(R.layout.acticity_questions);
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         final TextView hdq=(TextView)findViewById(R.id.questions);
+        final TextView detq=(TextView)findViewById(R.id.detailq);
         hdq.setTypeface(custom_font);
+        detq.setTypeface(custom_font);
 
         SwipeFrameLayout container = (SwipeFrameLayout) findViewById(R.id.swipeLayout);
         ArcMenu menu = (ArcMenu) findViewById(R.id.arcMenu);

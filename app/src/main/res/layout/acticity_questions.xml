@@ -102,6 +102,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="101dp" />
 
+    <TextView
+        android:text="Answer some interesting questions here!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailq"
+        android:layout_gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp" />
+
     <com.bvapp.arcmenulibrary.ArcMenu
         android:id="@+id/arcMenu"
         android:layout_width="wrap_content"

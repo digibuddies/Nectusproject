@@ -129,8 +129,10 @@ public class connections extends AppCompatActivity {
         } while (c.moveToPrevious());}
         ckcon=(TextView)findViewById(R.id.kcon);
         emp=(TextView)findViewById(R.id.kemp);
+        final TextView detc=(TextView)findViewById(R.id.detc);
         custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         ckcon.setTypeface(custom_font);
+        detc.setTypeface(custom_font);
         adapter = new Adapter(cdata);
         rv.setAdapter(adapter);
         if (adapter.getItemCount()>0)

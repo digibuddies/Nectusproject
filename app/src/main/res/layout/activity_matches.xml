@@ -31,7 +31,7 @@
     <com.bvapp.arcmenulibrary.widget.ObservableScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="150dp"
         android:id="@+id/sv"
         android:visibility="visible">
 
@@ -356,6 +356,17 @@
         </LinearLayout>
 
 </com.bvapp.arcmenulibrary.widget.ObservableScrollView>
+
+    <TextView
+        android:text="Your Top 3 matches based on your answers!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:id="@+id/detp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:textSize="17sp" />
 
     <com.bvapp.arcmenulibrary.ArcMenu
         android:id="@+id/arcMenu"
