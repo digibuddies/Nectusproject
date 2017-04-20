@@ -19,7 +19,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
-        android:id="@+id/textView9"
+        android:id="@+id/ccr"
         android:textSize="30sp"
         android:textColor="@android:color/white" />
     <android.support.v7.widget.CardView
@@ -30,11 +30,11 @@
         android:contextClickable="true"
         app:cardBackgroundColor="@android:color/white"
         android:id="@+id/cd3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="50dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView9">
+        android:layout_below="@+id/ccr">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@
 
             <TextView
                 android:text="user"
-                android:id="@+id/userc"
+                android:id="@+id/kuser"
                 android:layout_width="200dp"
                 android:layout_height="30dp"
                 android:textSize="22sp"
@@ -57,11 +57,11 @@
                 android:textStyle="bold|italic"
                 android:textColor="@android:color/black"
                 android:fontFamily="sans-serif-smallcaps"
-                android:layout_below="@+id/avc"
+                android:layout_below="@+id/kav"
                 android:layout_centerHorizontal="true" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avc"
+                android:id="@+id/kav"
                 android:src="@drawable/s1"
                 app:civ_border_width="2dp"
                 app:civ_border_color="@android:color/white"
@@ -74,13 +74,13 @@
             <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
-                android:id="@+id/detailc"
+                android:id="@+id/kdetail"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/userc"
+                android:layout_below="@+id/kuser"
                 android:layout_centerHorizontal="true" />
 
             <ImageView
@@ -89,7 +89,7 @@
                 app:srcCompat="@drawable/q"
                 android:id="@+id/imageView8"
                 android:layout_gravity="bottom"
-                android:layout_below="@+id/detailc"
+                android:layout_below="@+id/kdetail"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -99,12 +99,12 @@
                 android:id="@+id/matchc"
                 android:layout_gravity="bottom|left"
                 android:textStyle="normal|italic"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginLeft="5dp"
                 android:textColor="@android:color/white"
                 android:fontFamily="serif"
-                android:layout_alignTop="@+id/avc"
-                android:layout_alignStart="@+id/detailc"
+                android:layout_alignTop="@+id/kav"
+                android:layout_alignStart="@+id/kdetail"
                 android:visibility="visible" />
 
             <io.ghyeok.stickyswitch.widget.StickySwitch
@@ -122,7 +122,7 @@
                 app:rightText="Accept"
                 app:textSize="10sp"
                 app:selectedTextSize="12dp"
-                android:layout_below="@+id/textView2"
+                android:layout_below="@+id/kdate"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:layout_width="90dp" />
@@ -130,7 +130,7 @@
             <TextView
                 android:text="This user have requested to connect "
                 android:layout_width="wrap_content"
-                android:id="@+id/textView2"
+                android:id="@+id/kdate"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:textStyle="normal|italic"
@@ -138,7 +138,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_gravity="bottom|right"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/detailc"
+                android:layout_below="@+id/kdetail"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp" />
         </RelativeLayout>
@@ -149,7 +149,7 @@
     <ImageView
         android:layout_height="3dp"
         app:srcCompat="@color/back"
-        android:layout_below="@+id/textView9"
+        android:layout_below="@+id/ccr"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:id="@+id/imageView9"

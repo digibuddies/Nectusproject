@@ -341,16 +341,16 @@ public class matches extends AppCompatActivity {
             }
         });
 
-        p1=(CircleImageView)findViewById(R.id.avc);
+        p1=(CircleImageView)findViewById(R.id.kav);
         p2=(CircleImageView)findViewById(R.id.p2);
         p3=(CircleImageView)findViewById(R.id.p3);
-        tv1 = (TextView) findViewById(R.id.userc);
+        tv1 = (TextView) findViewById(R.id.kuser);
         tv2 = (TextView) findViewById(R.id.tv2);
         tv3 = (TextView) findViewById(R.id.tv3);
         tv4 = (TextView) findViewById(R.id.tv11);
         tv5 = (TextView) findViewById(R.id.tv22);
         tv6 = (TextView) findViewById(R.id.tv33);
-        d1=(TextView)findViewById(R.id.detailc);
+        d1=(TextView)findViewById(R.id.kdetail);
         d2=(TextView)findViewById(R.id.detail2);
         d3=(TextView)findViewById(R.id.detail3);
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");

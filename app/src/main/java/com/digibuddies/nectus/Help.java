@@ -119,7 +119,7 @@ import io.github.yuweiguocn.lib.squareloading.SquareLoading;
 
                 container.addView(itemView);
                 Handler handler=new Handler();
-                if(position==4){
+                if(position==5){
                     handler.postDelayed(new Runnable(){
                         @Override
                         public void run(){

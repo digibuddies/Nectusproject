@@ -6,9 +6,9 @@ package com.digibuddies.nectus;
 
 public class data {
     int p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12;
-    String uname;
-
+    String uname,mp;
     int aid;
+    int id;
     String email;
     String op1;
     String op2;
@@ -26,6 +26,7 @@ public class data {
     String op14;
     String op15;
     String op16;
+    String time;
 
     public int getAid() {
         return aid;
@@ -273,6 +274,52 @@ public class data {
 
     public void setP9(int p9) {
         this.p9 = p9;
+    }
+
+    public data() {
+    }
+
+    public data(int aid,String time, String uname, String email, String mp, String op1, String op2, String op3, String op4, String op5, String op6, String op7, String op8, String op9, String op10,int id) {
+        this.aid = aid;
+        this.time=time;
+        this.email = email;
+        this.mp = mp;
+        this.op1 = op1;
+        this.op2 = op2;
+        this.op3 = op3;
+        this.op4 = op4;
+        this.op5 = op5;
+        this.op6 = op6;
+        this.op7 = op7;
+        this.op8 = op8;
+        this.op9 = op9;
+        this.op10 = op10;
+        this.uname = uname;
+        this.id=id;
+    }
+
+    public String getMp() {
+        return mp;
+    }
+
+    public void setMp(String mp) {
+        this.mp = mp;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

@@ -57,7 +57,8 @@
             android:process=":remote" />
 
         <activity android:name=".Aboutus" />
-        <activity android:name=".contact"></activity>
+        <activity android:name=".contact" />
+        <activity android:name=".connections" />
     </application>
 
 </manifest>

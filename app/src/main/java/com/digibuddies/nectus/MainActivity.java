@@ -137,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
                 });
         final BoomMenuButton bmb = (BoomMenuButton) findViewById(R.id.bmb);
         bmb.setButtonEnum(ButtonEnum.Ham);
-        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
-        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_5);
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_5);
         bmb.setDimColor(Color.parseColor("#8B000000"));
         FloatingTextButton mb = (FloatingTextButton) findViewById(R.id.mb);
         mb.setOnClickListener(new View.OnClickListener() {
@@ -215,9 +215,23 @@ public class MainActivity extends AppCompatActivity {
                         b.performClick();
                     }
                 });
+
+        HamButton.Builder builder5 = new HamButton.Builder();
+        builder5.normalImageRes(R.drawable.ic_contact_mail_white_48dp)
+                .normalText("Connections")
+                .normalColorRes(R.color.boom5)
+                .subNormalText("See your connections here!")
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        Intent intent = new Intent(MainActivity.this, connections.class);
+                        startActivity(intent);
+                    }
+                });
         bmb.addBuilder(builder1);
         bmb.addBuilder(builder2);
         bmb.addBuilder(builder3);
+        bmb.addBuilder(builder5);
         bmb.addBuilder(builder4);
         bmb.setButtonRadius(Util.dp2px(35));
         bmb.setNormalColor(Color.WHITE);

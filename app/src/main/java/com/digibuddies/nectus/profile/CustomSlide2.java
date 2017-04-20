@@ -60,7 +60,7 @@ public class CustomSlide2 extends SlideFragment {
 
         TextView txx0=(TextView)view.findViewById(R.id.textView111);
        TextView txx1=(TextView)view.findViewById(R.id.textView1);
-        TextView txx2=(TextView)view.findViewById(R.id.textView2);
+        TextView txx2=(TextView)view.findViewById(R.id.kdate);
         TextView txx3=(TextView)view.findViewById(R.id.textView3);
         TextView txx4=(TextView)view.findViewById(R.id.textView4);
         TextView txx5=(TextView)view.findViewById(R.id.textView5);
