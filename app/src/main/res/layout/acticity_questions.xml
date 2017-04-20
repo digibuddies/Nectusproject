@@ -8,7 +8,7 @@
     android:id="@+id/swipeLayout"
     android:orientation="vertical"
     android:fitsSystemWindows="false"
-    android:background="@drawable/queback">
+    android:background="@drawable/quest">
 
     <!--
     <com.devs.squaremenu.SquareMenu
@@ -30,14 +30,22 @@
         />
 -->
 
+
     <ImageView
-        swipedeck:srcCompat="@drawable/questions"
-        android:id="@+id/imageView"
-        android:layout_height="162dp"
-        android:paddingLeft="0dp"
-        android:layout_width="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        swipedeck:srcCompat="@color/bacc"
+        android:id="@+id/imageView14" />
 
-
+    <TextView
+        android:text="Questions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/questions"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="39dp" />
 
     <com.digibuddies.nectus.SwipeDeck
         android:id="@+id/swipe_deck"
@@ -84,6 +92,16 @@
         android:text="Drag enabled"
         android:visibility="invisible" />
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="3dp"
+        swipedeck:srcCompat="@android:color/black"
+        android:id="@+id/imageView13"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="101dp" />
+
     <com.bvapp.arcmenulibrary.ArcMenu
         android:id="@+id/arcMenu"
         android:layout_width="wrap_content"
@@ -97,6 +115,7 @@
         arc:menuNormalColor="@android:color/white"
         arc:menuImage="@drawable/ic_fingerprint_black_24dp"
         android:layout_marginBottom="15dp">
+
     </com.bvapp.arcmenulibrary.ArcMenu>
 
 </com.digibuddies.nectus.layouts.SwipeFrameLayout>

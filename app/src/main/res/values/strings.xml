@@ -12,7 +12,7 @@
     <string name="feedbacktypee4">You are in school.</string>
     <string name="feedbacktypee5">You are entertaining.</string>
     <string name="feedbacktypee6">You find me interesting.</string>
-    <string name="feedbacktypee8">Dont bother. I\'ll contact you if I want to.</string>
+    <string name="feedbacktypee8">You can help me with studies</string>
     <string name="feedbacktypee7">You share my interests.</string>
 
 
@@ -147,8 +147,8 @@
     <string name="feedbacktype50">short on attendance</string>
     <string name="feedbacktype60">the Batman.</string>
     <string name="feedbacktype70">a very good friend.</string>
-    <string name="feedbacktype80">somone i\'d like to know.</string>
-    <string name="feedbacktype90">someone i\'ll run away from</string>
+    <string name="feedbacktype80">somone id like to know.</string>
+    <string name="feedbacktype90">someone ill run away from</string>
     <string name="feedbacktype11100">the smartest person alive</string>
     <string name="feedbacktype1110">cute ?</string>
 

@@ -6,14 +6,22 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +34,9 @@ import static com.digibuddies.nectus.connections.custom_font;
 public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
 
     List<data> kdata = new ArrayList<data>();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("contact");
+
 
     public Adapter(List<data> kdata) {
         this.kdata = kdata;
@@ -39,11 +50,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
     }
 
     @Override
-    public void onBindViewHolder(cardadapter holder, final int position) {
+    public void onBindViewHolder(final cardadapter holder, final int position) {
         final data temp = kdata.get(position);
         holder.tv1.setText(temp.getUname());
+        myRef.child(temp.getDevid()).child(connections.kid).child("request").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("msm",dataSnapshot.getValue().toString());
+                if (dataSnapshot.getValue().toString().equals("ACCEPTED")){
+                    holder.tv2.setText(temp.getEmail());
+                }
+                else holder.tv2.setText("Request Pending...");
+            }
 
-        holder.tv2.setText(temp.getEmail());
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         holder.tv3.setText(temp.getOp1()+", you can call me "+temp.getUname()+". I am here since "+temp.getOp2()+". Currently I am working towards "+temp.getOp3()+" and i love to practice my "+temp.getOp4()+" skills. I would like to "+temp.getOp5()+" someday. My friends say i'm "+temp.getOp6()+". I just "+temp.getOp7()+" "+temp.getOp8()+" I spend most of my day "+temp.getOp9()+". A person with same mind as mine would be "+temp.getOp10()+".");
 
@@ -58,6 +84,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             public void onClick(View view) {
                 kdata.remove(temp);
                 connections.delete(temp.getId());
+                Snackbar.make(view, "Connection Removed!",
+                        Snackbar.LENGTH_LONG).show();
 
             }
         });

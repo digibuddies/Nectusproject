@@ -10,7 +10,7 @@
     <color name="global_color_green_primary_light">#c8e6c9</color>
     <color name="global_color_green_primary_dark">#388e3c</color>
     <color name="global_color_green_accent">#ffc107</color>
-    <color name="global_color_green_control_activated">#ffc107</color>
+    <color name="global_color_green_control_activated">#fff200</color>
     <color name="colorAscen">#14000000</color>
     <color name="colorAscent">#01c91c</color>
     <color name="colorStatus">#002196f3</color>
@@ -33,21 +33,23 @@
     <color name="fourth_slide_background">#ffffff</color>
     <color name="fourth_slide_buttons">#272727</color>
 <color name="orange">#ff9800</color>
+
     <color name="light_green">#43a047</color>
-    <color name="light_purple">#8c61b3</color>
+    <color name="light_purple">#a56fd5</color>
     <color name="light_teal">#009688</color>
     <color name="light_cyan">#00BCD4</color>
     <color name="black">#000000</color>
-    <color name="bacc">#64000000</color>
+    <color name="bacc">#11000000</color>
     <color name="red">#ef5350</color>
     <color name="backgraound">#ffffff</color>
     <color name="backabt">#8c000000</color>
     <color name="maintrans">#1e000000</color>
 <color name="light_lime">#827717</color>
+    <color name="dark_blue">#173582</color>
 
-    <color name="boom1">#e91e63</color>
+    <color name="boom5">#e91e63</color>
     <color name="boom2">#2196f3</color>
     <color name="boom3">#8046b5</color>
     <color name="boom4">#727272</color>
-    <color name="boom5">#ff8400</color>
+    <color name="boom1">#d32f2f</color>
 </resources>

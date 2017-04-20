@@ -419,13 +419,11 @@ public void download(){
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null){
                     Iterable<DataSnapshot> contactChildrens = dataSnapshot.getChildren();
-                    ArrayList<String> requests = new ArrayList<>();
                     if(contactChildrens!=null){
                     for (DataSnapshot contact : contactChildrens) {
                         if (contact.child("request").getValue().equals("RIGHT")){
                             final String s = contact.getKey();
                             final String mp = contact.child("mp").getValue().toString();
-                            notifyUser2();
                             myRef.child("Users").child(s).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -451,6 +449,7 @@ public void download(){
                                         db.execSQL(query4);
                                         cnt2++;
                                         myReff.child(idd).child(s).child("request").setValue("SENT");
+                                        notifyUser2();
 
 
                                     }}

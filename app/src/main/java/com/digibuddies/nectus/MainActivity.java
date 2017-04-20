@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,10 +97,18 @@ public class MainActivity extends AppCompatActivity {
         civ=(CircleImageView)findViewById(R.id.aid);
 
 
-
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         if(!(isDeviceOnline())){
-            Toast.makeText(this,"Nectus needs an Internet Connection, Please Connect your device to internet!",Toast.LENGTH_LONG).show();
+            final Snackbar snackbar = Snackbar
+                    .make(usname, "Nectus needs an active Internet Connection, Please Connect your device to internet!", Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction("CLOSE", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                           snackbar.dismiss();
+                        }
+                    });
+
+            snackbar.show();
         }
         tvp.setTypeface(custom_font);
         usname.setTypeface(custom_font);

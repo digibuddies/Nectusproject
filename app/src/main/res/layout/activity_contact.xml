@@ -30,8 +30,6 @@
         android:contextClickable="true"
         app:cardBackgroundColor="@android:color/white"
         android:id="@+id/cd3"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="50dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ccr">
@@ -121,7 +119,7 @@
                 app:leftText="Decline"
                 app:rightText="Accept"
                 app:textSize="10sp"
-                app:selectedTextSize="12dp"
+                app:selectedTextSize="13dp"
                 android:layout_below="@+id/kdate"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"

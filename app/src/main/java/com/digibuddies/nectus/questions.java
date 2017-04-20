@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -93,10 +94,10 @@ private SwipeDeckAdapter adapter;
     RadioButton r3;
     int x,flag=0;
     RadioButton r4;
-    private static final int[] ITEM_DRAWABLES = { R.drawable.icon_home,
-            R.drawable.face, R.drawable.add };
+    private static final int[] ITEM_DRAWABLES = { R.drawable.face,
+            R.drawable.add, R.drawable.connect };
 
-    private static final String[] STR = {"Home","Profile","Matches"};
+    private static final String[] STR = {""};
 
     TextView h,l;
 SwipeDeck cardStack;
@@ -114,6 +115,9 @@ SwipeDeck cardStack;
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
         setContentView(R.layout.acticity_questions);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+        final TextView hdq=(TextView)findViewById(R.id.questions);
+        hdq.setTypeface(custom_font);
 
         SwipeFrameLayout container = (SwipeFrameLayout) findViewById(R.id.swipeLayout);
         ArcMenu menu = (ArcMenu) findViewById(R.id.arcMenu);
@@ -131,21 +135,21 @@ SwipeDeck cardStack;
             item.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.buttoncol));  //set menu button normal color programmatically
             menu.setChildSize(item.getIntrinsicHeight());
             final int position = i;
-            menu.addItem(item, STR[i], new View.OnClickListener() {
+            menu.addItem(item, "", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(position==0){
-                        Intent intent=new Intent(questions.this,MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    if(position==1){
                         Intent intent=new Intent(questions.this,profileclass.class);
                         startActivity(intent);
                         finish();
                     }
-                    if(position==2){
+                    if(position==1){
                         Intent intent=new Intent(questions.this,matches.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    if(position==2){
+                        Intent intent=new Intent(questions.this,connections.class);
                         startActivity(intent);
                         finish();
                     }

@@ -100,6 +100,7 @@ public class profileclass extends MaterialIntroActivity {
     @Override
     public void onFinish() {
         super.onFinish();
+
     }
 
     public void addslides(){

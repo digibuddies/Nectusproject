@@ -9,6 +9,7 @@ public class data {
     String uname,mp;
     int aid;
     int id;
+    String devid;
     String email;
     String op1;
     String op2;
@@ -279,7 +280,7 @@ public class data {
     public data() {
     }
 
-    public data(int aid,String time, String uname, String email, String mp, String op1, String op2, String op3, String op4, String op5, String op6, String op7, String op8, String op9, String op10,int id) {
+    public data(int aid,String time, String uname, String email, String mp, String op1, String op2, String op3, String op4, String op5, String op6, String op7, String op8, String op9, String op10,int id,String devid) {
         this.aid = aid;
         this.time=time;
         this.email = email;
@@ -296,6 +297,15 @@ public class data {
         this.op10 = op10;
         this.uname = uname;
         this.id=id;
+        this.devid=devid;
+    }
+
+    public String getDevid() {
+        return devid;
+    }
+
+    public void setDevid(String devid) {
+        this.devid = devid;
     }
 
     public String getMp() {

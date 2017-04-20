@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +35,8 @@ public class contact extends AppCompatActivity {
     CircleImageView av;
     int x=102;
     StickySwitch ssc;
-    String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,mail,uname,u1,u2,u3;
+    String cid;
+    String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,mail,uname,dvid,u2,u3;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     int aid;
@@ -47,6 +49,7 @@ public class contact extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        cid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         createDatabase();
         tv1 = (TextView) findViewById(R.id.matchc);
         tv2=(TextView)findViewById(R.id.kuser);
@@ -58,7 +61,8 @@ public class contact extends AppCompatActivity {
             public void onClick(View view) {
                 if (ssc.getDirection().name().equals("RIGHT")){
                     String currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
-                    String queryx = "INSERT INTO connect (id,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES(null,'"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
+                    myRef.child("contact").child(cid).child(dvid).child("request").setValue("ACCEPTED");
+                    String queryx = "INSERT INTO connect (id,dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES(null,'"+dvid+"','"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
                     db2.execSQL(queryx);
                 }
                 db.execSQL("DELETE FROM matches WHERE id='"+x+"'");
@@ -94,8 +98,8 @@ public class contact extends AppCompatActivity {
         }
         db=openOrCreateDatabase(storagePath+"/"+"PerDB", Context.MODE_PRIVATE, null);
         db2=openOrCreateDatabase(storagePath+"/"+"ContDB", Context.MODE_PRIVATE, null);
-        db2.execSQL("CREATE TABLE IF NOT EXISTS connect(id INTEGER NOT NULL PRIMARY KEY,time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20),allow varchar(20) default 'LEFT', uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
-        String SELECT_SQL ="SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,mp,devid,allow FROM matches where id='"+x+"'";
+        db2.execSQL("CREATE TABLE IF NOT EXISTS connect(id INTEGER NOT NULL PRIMARY KEY,dvid VARCHAR(20),time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
+        String SELECT_SQL ="SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,mp,devid FROM matches where id='"+x+"'";
         c = db.rawQuery(SELECT_SQL, null);
         c.moveToFirst();
         if(c.getCount()>0){
@@ -115,6 +119,7 @@ public class contact extends AppCompatActivity {
             s11=c.getString(13);
             s12=c.getString(14);
             mp=c.getString(15);
+            dvid=c.getString(16);
 
         }
         c.close();
