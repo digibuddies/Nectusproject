@@ -1,8 +1,5 @@
 package com.digibuddies.nectus;
 
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,31 +14,17 @@ import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-
 
 import com.digibuddies.nectus.profile.profileclass;
-import com.flaviofaria.kenburnsview.KenBurnsView;
-import com.flaviofaria.kenburnsview.RandomTransitionGenerator;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -57,18 +40,10 @@ import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.nightonke.boommenu.Util;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
-import com.whygraphics.gifview.gif.GIFView;
-
 
 import java.io.File;
-
-import javax.xml.datatype.Duration;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
-
-import static com.nightonke.boommenu.R.layout.bmb;
-import static com.special.ResideMenu.ResideMenu.DIRECTION_LEFT;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     ResideMenu resideMenu;
-    MainActivity mContext;
     ResideMenuItem itemHome;
     private SQLiteDatabase dbm;
     private Cursor c;
@@ -105,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
         if (!welcomeScreenShown) {
@@ -126,13 +101,8 @@ public class MainActivity extends AppCompatActivity {
         if(!(isDeviceOnline())){
             Toast.makeText(this,"Nectus needs an Internet Connection, Please Connect your device to internet!",Toast.LENGTH_LONG).show();
         }
-
-        usname.setTypeface(custom_font);
         tvp.setTypeface(custom_font);
-
-       // GIFView mGifView = (GIFView) findViewById(R.id.main_activity_gif_vie);
-        //mGifView.setGifResource("asset:c");
-
+        usname.setTypeface(custom_font);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -181,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
         HamButton.Builder builder1 = new HamButton.Builder();
         builder1.normalImageRes(R.drawable.ic_face_white_48dp)
                 .normalText("Profile")
-                .subNormalText("Tell me abt uuuu!")
+                .normalColorRes(R.color.boom1)
+                .subNormalText("Tell the world about yourself!")
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
@@ -203,7 +174,8 @@ public class MainActivity extends AppCompatActivity {
         HamButton.Builder builder2 = new HamButton.Builder();
         builder2.normalImageRes(R.drawable.ic_help_white_48dp)
                 .normalText("Questions")
-                .subNormalText("Answer something here !")
+                .normalColorRes(R.color.boom2)
+                .subNormalText("Lets understand you better!")
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
@@ -217,8 +189,9 @@ public class MainActivity extends AppCompatActivity {
                 });
         HamButton.Builder builder3 = new HamButton.Builder();
         builder3.normalImageRes(R.drawable.ic_group_add_white_48dp)
-                .normalText("Matches")
-                .subNormalText("yayay the ebst part")
+                .normalText("Alike")
+                .normalColorRes(R.color.boom3)
+                .subNormalText("Connect to people with similar personalities!")
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
@@ -233,8 +206,9 @@ public class MainActivity extends AppCompatActivity {
 
         HamButton.Builder builder4 = new HamButton.Builder();
         builder4.normalImageRes(R.drawable.ic_settings_applications_white_48dp)
-                .normalText("Settings")
-                .subNormalText("Play with the app")
+                .normalText("Extras")
+                .normalColorRes(R.color.boom4)
+                .subNormalText("Some other useful stuff!")
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
@@ -255,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
         // attach to current activity;
         resideMenu = new ResideMenu(MainActivity.this);
-        resideMenu.setBackground(R.drawable.reside);
+        resideMenu.setBackground(R.drawable.b3);
         resideMenu.attachToActivity(MainActivity.this);
         //valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
         resideMenu.setScaleValue(0.6f);
@@ -347,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        File storagePath = new File(Environment.getExternalStorageDirectory(), "/android/.data_21");
         if(storagePath.exists()) {
             dbm = openOrCreateDatabase(storagePath+"/"+"prodb.db", Context.MODE_PRIVATE, null);
             dbm.execSQL("CREATE TABLE IF NOT EXISTS profile(id INTEGER PRIMARY KEY, aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(20),op12 VARCHAR(20),p1 integer,p2 integer,p3 integer,p4 integer,p5 integer,p6 integer,p7 integer,p8 integer,p9 integer,p10 integer,p11 integer,p12 integer);");

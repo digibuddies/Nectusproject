@@ -392,13 +392,13 @@ SwipeDeck cardStack;
         }
     }
     protected void createDatabase(){
-        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        File storagePath = new File(Environment.getExternalStorageDirectory(), "/android/.data_21");
         // Create direcorty if not exists
         if(!storagePath.exists()) {
             storagePath.mkdirs();
         }
         db2=openOrCreateDatabase(storagePath+"/"+"counters", Context.MODE_PRIVATE, null);
-        db3=openOrCreateDatabase(storagePath+"/"+"questions", Context.MODE_PRIVATE, null);
+        db3=openOrCreateDatabase(storagePath+"/"+"QueDB", Context.MODE_PRIVATE, null);
         db2.execSQL("CREATE TABLE IF NOT EXISTS counter1(id integer primary key, count INTEGER);");
         db3.execSQL("CREATE TABLE IF NOT EXISTS ques(ans integer);");
         c = db2.rawQuery(SELECT_SQL, null);

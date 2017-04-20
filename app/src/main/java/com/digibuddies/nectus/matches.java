@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
@@ -14,16 +13,11 @@ import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 //import com.devs.squaremenu.OnMenuClickListener;
 //import com.devs.squaremenu.SquareMenu;
@@ -31,20 +25,13 @@ import com.bvapp.arcmenulibrary.ArcMenu;
 import com.bvapp.arcmenulibrary.widget.FloatingActionButton;
 import com.bvapp.arcmenulibrary.widget.ObservableScrollView;
 import com.digibuddies.nectus.profile.profileclass;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.special.ResideMenu.ResideMenu;
-import com.special.ResideMenu.ResideMenuItem;
-import com.whygraphics.gifview.gif.GIFView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.ghyeok.stickyswitch.widget.StickySwitch;
@@ -105,7 +92,7 @@ public class matches extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches);
-        id=thebackservice.idd;
+        id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -121,6 +108,13 @@ public class matches extends AppCompatActivity {
         b1=(Button)findViewById(R.id.b1);
         b2=(Button)findViewById(R.id.b2);
         b3=(Button)findViewById(R.id.b3);
+
+
+        ssw=(StickySwitch)findViewById(R.id.ss);
+        ssw2=(StickySwitch)findViewById(R.id.ss2);
+        ssw3=(StickySwitch)findViewById(R.id.ss3);
+
+
         cy=(TextView)dialog.findViewById(R.id.cy);
         cn=(TextView)dialog.findViewById(R.id.cn);
 
@@ -169,7 +163,12 @@ public class matches extends AppCompatActivity {
             });
         }
         createDatabase00();
-        if(qcount>60){
+
+        createDatabase();
+        c = db.rawQuery(SELECT_SQL, null);
+        c.moveToFirst();
+        showRecords();
+        if(qcount>60&&userid.size()>0){
             sv.setVisibility(View.VISIBLE);
             front.setVisibility(View.INVISIBLE);
 
@@ -229,11 +228,7 @@ public class matches extends AppCompatActivity {
         contmail3=(TextView)dialog3.findViewById(R.id.cont);
 
 
-        createDatabase();
-        c = db.rawQuery(SELECT_SQL, null);
-        c.moveToFirst();
-        showRecords();
-
+/*
         if (devid.size()>0){
         myRef.child(devid.get(0)).child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -282,12 +277,7 @@ public class matches extends AppCompatActivity {
                     }
                 });
             }
-
-
-        ssw=(StickySwitch)findViewById(R.id.ss);
-        ssw2=(StickySwitch)findViewById(R.id.ss2);
-        ssw3=(StickySwitch)findViewById(R.id.ss3);
-
+*/
 
         ssw.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
             @Override
@@ -298,12 +288,14 @@ public class matches extends AppCompatActivity {
                             }
                             String qer = "UPDATE matches SET allow='RIGHT' WHERE id=1;";
                             db.execSQL(qer);
-                            myRef.child(id).child(devid.get(0)).setValue("RIGHT");
+                            myRef.child(devid.get(0)).child(id).child("request").setValue("RIGHT");
+                            myRef.child(devid.get(0)).child(id).child("mp").setValue(mp.get(0));
                         }
                 else if(direction.name().equals("LEFT")){
                             String qer = "UPDATE matches SET allow='LEFT' WHERE id=1;";
                             db.execSQL(qer);
-                            myRef.child(id).child(devid.get(0)).setValue("LEFT");
+                            myRef.child(devid.get(0)).child(id).child("request").setValue("LEFT");
+                            myRef.child(devid.get(0)).child(id).child("mp").setValue(mp.get(0));
                         }
 
                  }
@@ -317,13 +309,14 @@ public class matches extends AppCompatActivity {
                     }
                     String qer = "UPDATE matches SET allow='RIGHT' WHERE id=2;";
                     db.execSQL(qer);
-                    myRef.child(id).child(devid.get(1)).setValue("RIGHT");
+                    myRef.child(devid.get(1)).child(id).child("request").setValue("RIGHT");
+                    myRef.child(devid.get(1)).child(id).child("mp").setValue(mp.get(1));
                 }
                 else if(direction.name().equals("LEFT")){
                     String qer = "UPDATE matches SET allow='LEFT' WHERE id=2;";
                     db.execSQL(qer);
-                    myRef.child(id).child(devid.get(1)).setValue("LEFT");
-                }
+                    myRef.child(devid.get(1)).child(id).child("request").setValue("LEFT");
+                    myRef.child(devid.get(1)).child(id).child("mp").setValue(mp.get(1));  }
 
             }
         });
@@ -336,27 +329,28 @@ public class matches extends AppCompatActivity {
                     }
                     String qer = "UPDATE matches SET allow='RIGHT' WHERE id=3;";
                     db.execSQL(qer);
-                    myRef.child(id).child(devid.get(2)).setValue("RIGHT");
+                    myRef.child(devid.get(2)).child(id).child("request").setValue("RIGHT");
+                    myRef.child(devid.get(2)).child(id).child("mp").setValue(mp.get(2));
                 }
                 else if(direction.name().equals("LEFT")){
                     String qer = "UPDATE matches SET allow='LEFT' WHERE id=3;";
                     db.execSQL(qer);
-                    myRef.child(id).child(devid.get(0)).setValue("LEFT");
-                }
+                    myRef.child(devid.get(2)).child(id).child("request").setValue("LEFT");
+                    myRef.child(devid.get(2)).child(id).child("mp").setValue(mp.get(2)); }
 
             }
         });
 
-        p1=(CircleImageView)findViewById(R.id.p1);
+        p1=(CircleImageView)findViewById(R.id.avc);
         p2=(CircleImageView)findViewById(R.id.p2);
         p3=(CircleImageView)findViewById(R.id.p3);
-        tv1 = (TextView) findViewById(R.id.tv1);
+        tv1 = (TextView) findViewById(R.id.userc);
         tv2 = (TextView) findViewById(R.id.tv2);
         tv3 = (TextView) findViewById(R.id.tv3);
         tv4 = (TextView) findViewById(R.id.tv11);
         tv5 = (TextView) findViewById(R.id.tv22);
         tv6 = (TextView) findViewById(R.id.tv33);
-        d1=(TextView)findViewById(R.id.detail1);
+        d1=(TextView)findViewById(R.id.detailc);
         d2=(TextView)findViewById(R.id.detail2);
         d3=(TextView)findViewById(R.id.detail3);
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
@@ -420,9 +414,9 @@ public class matches extends AppCompatActivity {
 
 
     protected void createDatabase() {
-        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        File storagePath = new File(Environment.getExternalStorageDirectory(), "/android/.data_21");
         if(storagePath.exists()) {
-            db = openOrCreateDatabase(storagePath + "/" + "PersonDB", Context.MODE_PRIVATE, null);
+            db = openOrCreateDatabase(storagePath + "/" + "PerDB", Context.MODE_PRIVATE, null);
         }
     }
 
@@ -466,7 +460,7 @@ public class matches extends AppCompatActivity {
     }
 
     public void createDatabase00(){
-        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        File storagePath = new File(Environment.getExternalStorageDirectory(), "/android/.data_21");
         // Create direcorty if not exists
         if(!storagePath.exists()) {
             storagePath.mkdirs();

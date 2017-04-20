@@ -58,7 +58,7 @@
 
                     <TextView
                         android:text="user"
-                        android:id="@+id/tv1"
+                        android:id="@+id/userc"
                         android:layout_width="200dp"
                         android:layout_height="30dp"
                         android:textSize="22sp"
@@ -67,11 +67,11 @@
                         android:textStyle="bold|italic"
                         android:textColor="@android:color/black"
                         android:fontFamily="sans-serif-smallcaps"
-                        android:layout_below="@+id/p1"
+                        android:layout_below="@+id/avc"
                         android:layout_centerHorizontal="true" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/p1"
+                        android:id="@+id/avc"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
                         android:src="@drawable/s1"
@@ -84,13 +84,13 @@
                     <TextView
                         android:text="TextView"
                         android:layout_width="match_parent"
-                        android:id="@+id/detail1"
+                        android:id="@+id/detailc"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv1"
+                        android:layout_below="@+id/userc"
                         android:layout_centerHorizontal="true" />
 
                     <ImageView
@@ -99,7 +99,7 @@
                         app:srcCompat="@drawable/q"
                         android:id="@+id/imageView8"
                         android:layout_gravity="bottom"
-                        android:layout_below="@+id/detail1"
+                        android:layout_below="@+id/detailc"
                         android:layout_alignParentStart="true" />
 
                     <TextView
@@ -112,7 +112,7 @@
                         android:fontFamily="serif"
                         android:layout_marginRight="5dp"
                         android:layout_gravity="bottom|right"
-                        android:layout_alignEnd="@+id/detail1"
+                        android:layout_alignEnd="@+id/detailc"
                         android:layout_below="@+id/imageView8"
                         android:layout_height="wrap_content" />
 
@@ -128,7 +128,7 @@
                         android:textColor="@android:color/black"
                         android:fontFamily="serif"
                         android:layout_below="@+id/imageView8"
-                        android:layout_alignStart="@+id/detail1"
+                        android:layout_alignStart="@+id/detailc"
                         android:layout_marginStart="5dp" />
 
                     <io.ghyeok.stickyswitch.widget.StickySwitch

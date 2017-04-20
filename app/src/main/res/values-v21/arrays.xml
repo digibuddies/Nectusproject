@@ -54,6 +54,11 @@
         <item>@string/feedbacktype555</item>
         <item>@string/feedbacktype666</item>
         <item>@string/feedbacktype777</item>
+        <item>@string/feedbacktype888</item>
+        <item>@string/feedbacktype999</item>
+        <item>@string/feedbacktype101010</item>
+        <item>@string/feedbacktype111111</item>
+        <item>@string/feedbacktype121212</item>
     </string-array>
     <string-array name="list4">
         <item>@string/feedbacktype1111</item>
@@ -127,10 +132,11 @@
         <item>@string/feedbacktype58</item>
         <item>@string/feedbacktype68</item>
         <item>@string/feedbacktype78</item>
-        <item>@string/feedbacktype88</item>
+        <item>@string/feedbacktype848</item>
         <item>@string/feedbacktype98</item>
         <item>@string/feedbacktype108</item>
         <item>@string/feedbacktype118</item>
+        <item>@string/feedbacktype119</item>
     </string-array>
     <string-array name="list9">
         <item>@string/feedbacktype19</item>
@@ -156,6 +162,10 @@
         <item>@string/feedbacktype21</item>
         <item>@string/feedbacktype31</item>
         <item>@string/feedbacktype41</item>
+        <item>@string/feedbacktype51</item>
+        <item>@string/feedbacktype61</item>
+        <item>@string/feedbacktype71</item>
+        <item>@string/feedbacktype81</item>
     </string-array>
     <string-array name="list12">
         <item>@string/feedbacktype112</item>

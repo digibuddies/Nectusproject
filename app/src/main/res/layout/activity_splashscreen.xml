@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context="com.digibuddies.nectus.splashactivity"
-    android:background="@drawable/sp"
     android:fitsSystemWindows="true">
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"

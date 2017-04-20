@@ -48,12 +48,17 @@
     <string name="feedbacktype1101">2002</string>
 
     <string name="feedbacktype111">Select</string>
-    <string name="feedbacktype222">my Academics</string>
-    <string name="feedbacktype333">my Career</string>
-    <string name="feedbacktype444">my Dreams</string>
-    <string name="feedbacktype555">my Passion</string>
-    <string name="feedbacktype666">a secret project</string>
-    <string name="feedbacktype777">making world a better place</string>
+    <string name="feedbacktype222">DIT University</string>
+    <string name="feedbacktype333">Graphic Era</string>
+    <string name="feedbacktype444">UPES</string>
+    <string name="feedbacktype555">IMS</string>
+    <string name="feedbacktype666">Brightlands</string>
+    <string name="feedbacktype777">CJM</string>
+    <string name="feedbacktype888">St Thomas</string>
+    <string name="feedbacktype999">St Josephs</string>
+    <string name="feedbacktype101010">God</string>
+    <string name="feedbacktype111111">Karma</string>
+    <string name="feedbacktype121212">Other</string>
 
     <string name="feedbacktype1111">Select</string>
     <string name="feedbacktype2222">Sleeping</string>
@@ -115,7 +120,7 @@
 
 
     <string name="feedbacktype18">Select</string>
-    <string name="feedbacktype28">playing sport</string>
+    <string name="feedbacktype28">playing sports</string>
     <string name="feedbacktype38">watching TV</string>
     <string name="feedbacktype48">listening to music</string>
     <string name="feedbacktype58">cooking yummy food</string>
@@ -125,6 +130,7 @@
     <string name="feedbacktype98">studying for exams</string>
     <string name="feedbacktype108">with friends</string>
     <string name="feedbacktype118">playing guitar</string>
+    <string name="feedbacktype119">reading books</string>
 
     <string name="feedbacktype19">Select</string>
     <string name="feedbacktype29">a</string>
@@ -134,7 +140,7 @@
     <string name="feedbacktype10">Select</string>
     <string name="feedbacktype20">completely crazy.</string>
     <string name="feedbacktype30">a miracle.</string>
-    <string name="feedbacktype40">an embarrasment</string>
+    <string name="feedbacktype40">an embarrassment</string>
     <string name="feedbacktype50">short on attendance</string>
     <string name="feedbacktype60">the Batman.</string>
     <string name="feedbacktype70">a very good friend.</string>
@@ -144,9 +150,13 @@
     <string name="feedbacktype1110">cute ?</string>
 
     <string name="feedbacktype1a">Select</string>
-    <string name="feedbacktype21">a</string>
-    <string name="feedbacktype31">b</string>
-    <string name="feedbacktype41">c</string>
+    <string name="feedbacktype21">magical</string>
+    <string name="feedbacktype31">hope..</string>
+    <string name="feedbacktype41">a place to find better friends</string>
+    <string name="feedbacktype51">a great idea to connect people</string>
+    <string name="feedbacktype61">a way to know more people</string>
+    <string name="feedbacktype71">a place to find retards like me</string>
+    <string name="feedbacktype81">to find people with same interests</string>
 
     <string name="feedbacktype112">Select</string>
     <string name="feedbacktype212">a</string>

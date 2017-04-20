@@ -93,7 +93,7 @@ public class CustomSlide4 extends SlideFragment {
     }
 
     protected void createDatabase(){
-        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        File storagePath = new File(Environment.getExternalStorageDirectory(), "/android/.data_21");
         // Create direcorty if not exists
         if(!storagePath.exists()) {
             storagePath.mkdirs();

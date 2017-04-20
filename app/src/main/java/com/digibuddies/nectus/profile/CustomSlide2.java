@@ -21,7 +21,7 @@ public class CustomSlide2 extends SlideFragment {
     private CheckBox checkBox;
     data d2;
     static public TextView tvun;
-    public Spinner s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+    public Spinner s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,7 +43,8 @@ public class CustomSlide2 extends SlideFragment {
          s8=(Spinner) view.findViewById(R.id.spinner72);
          s9=(Spinner) view.findViewById(R.id.spinner8);
          s10=(Spinner) view.findViewById(R.id.spinner10);
-        s1.setBackgroundColor(Color.DKGRAY);s2.setBackgroundColor(Color.DKGRAY);s3.setBackgroundColor(Color.DKGRAY);s4.setBackgroundColor(Color.DKGRAY);s5.setBackgroundColor(Color.DKGRAY);s6.setBackgroundColor(Color.DKGRAY);s7.setBackgroundColor(Color.DKGRAY);s8.setBackgroundColor(Color.DKGRAY);s9.setBackgroundColor(Color.DKGRAY);s10.setBackgroundColor(Color.DKGRAY);
+        s11=(Spinner) view.findViewById(R.id.spinner11);
+        s1.setBackgroundColor(Color.DKGRAY);s2.setBackgroundColor(Color.DKGRAY);s3.setBackgroundColor(Color.DKGRAY);s4.setBackgroundColor(Color.DKGRAY);s5.setBackgroundColor(Color.DKGRAY);s6.setBackgroundColor(Color.DKGRAY);s7.setBackgroundColor(Color.DKGRAY);s8.setBackgroundColor(Color.DKGRAY);s9.setBackgroundColor(Color.DKGRAY);s10.setBackgroundColor(Color.DKGRAY);s11.setBackgroundColor(Color.DKGRAY);
         if(profileclass.avid!=0){
             v2.setImageResource(profileclass.avid);
             s1.setSelection(profileclass.p1);
@@ -70,6 +71,7 @@ public class CustomSlide2 extends SlideFragment {
         TextView txx10=(TextView)view.findViewById(R.id.textView11);
         TextView txx11=(TextView)view.findViewById(R.id.textView12);
         TextView txx12=(TextView)view.findViewById(R.id.textView13);
+        TextView txx13=(TextView)view.findViewById(R.id.textView1101);
         if(!(profileclass.usern.equals(""))){
             tvun.setText(profileclass.usern);
         }
@@ -81,7 +83,7 @@ public class CustomSlide2 extends SlideFragment {
         txx2.setTypeface(custom_font);
        txx3.setTypeface(custom_font);
         txx4.setTypeface(custom_font);
-        txx5.setTypeface(custom_font);txx6.setTypeface(custom_font);txx7.setTypeface(custom_font);txx8.setTypeface(custom_font);txx9.setTypeface(custom_font);txx10.setTypeface(custom_font);txx11.setTypeface(custom_font);txx12.setTypeface(custom_font);
+        txx5.setTypeface(custom_font);txx6.setTypeface(custom_font);txx7.setTypeface(custom_font);txx8.setTypeface(custom_font);txx9.setTypeface(custom_font);txx10.setTypeface(custom_font);txx11.setTypeface(custom_font);txx12.setTypeface(custom_font);txx13.setTypeface(custom_font);
         checkBox.setChecked(false);
 
         return view;

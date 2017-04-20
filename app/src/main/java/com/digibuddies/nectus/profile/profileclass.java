@@ -20,6 +20,7 @@ import com.digibuddies.nectus.R;
 import java.io.File;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
+import agency.tango.materialintroscreen.MessageButtonBehaviour;
 import agency.tango.materialintroscreen.animations.IViewTranslation;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,7 +46,7 @@ public class profileclass extends MaterialIntroActivity {
         o1=o2=o3=o4=o5=o6=o7=o8=o9=o10=mail=usern="";
         d=new data();
 
-        File storagePath = new File(Environment.getExternalStorageDirectory(), ".data_21");
+        File storagePath = new File(Environment.getExternalStorageDirectory(), "/android/.data_21");
         if(storagePath.exists()) {
             db = openOrCreateDatabase(storagePath + "/" + "prodb.db", Context.MODE_PRIVATE, null);
             db.execSQL("CREATE TABLE IF NOT EXISTS profile(id INTEGER PRIMARY KEY, aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30),p1 integer,p2 integer,p3 integer,p4 integer,p5 integer,p6 integer,p7 integer,p8 integer,p9 integer,p10 integer,p11 integer,p12 integer);");

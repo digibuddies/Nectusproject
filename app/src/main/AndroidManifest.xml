@@ -38,7 +38,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".profile.profileclass" />
+        <activity
+            android:name=".profile.profileclass"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".questions" />
         <activity android:name=".matches" />
         <activity android:name=".Help" />
@@ -51,9 +54,10 @@
 
         <receiver
             android:name=".alarmreceiver"
-            android:process=":remote"></receiver>
+            android:process=":remote" />
 
-        <activity android:name=".Aboutus"></activity>
+        <activity android:name=".Aboutus" />
+        <activity android:name=".contact"></activity>
     </application>
 
 </manifest>

@@ -46,10 +46,10 @@
         swipedeck:card_spacing="15dp"
         swipedeck:preview_layout="@layout/test_card2"
         android:layout_marginTop="160dp"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:paddingRight="20dp"
+        android:layout_height="wrap_content">
 
     </com.digibuddies.nectus.SwipeDeck>
 
@@ -58,9 +58,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/limit"
         android:layout_gravity="center"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-smallcaps"
         android:textSize="22sp"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:visibility="invisible"
         android:textAlignment="center"
         android:layout_width="250dp" />

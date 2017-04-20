@@ -42,7 +42,7 @@ public class Feed extends AppCompatActivity{
             @Override            public void onClick(View v) {
                 final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"divyavashishtha23@gmail.com"});
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"nectusapp@gmail.com"});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from App");
                 intent.putExtra(Intent.EXTRA_TEXT, "\nMessage : "+editText.getText());
 
