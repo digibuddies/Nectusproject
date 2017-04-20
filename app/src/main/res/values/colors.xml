@@ -32,18 +32,18 @@
 
     <color name="fourth_slide_background">#ffffff</color>
     <color name="fourth_slide_buttons">#272727</color>
-
+<color name="orange">#ff9800</color>
     <color name="light_green">#43a047</color>
     <color name="light_purple">#8c61b3</color>
-    <color name="light_orange">#ffb500</color>
+    <color name="light_teal">#009688</color>
     <color name="light_cyan">#00BCD4</color>
     <color name="black">#000000</color>
     <color name="bacc">#64000000</color>
-    <color name="red">#f44336</color>
+    <color name="red">#ef5350</color>
     <color name="backgraound">#ffffff</color>
     <color name="backabt">#8c000000</color>
     <color name="maintrans">#1e000000</color>
-
+<color name="light_lime">#827717</color>
 
     <color name="boom1">#e91e63</color>
     <color name="boom2">#2196f3</color>

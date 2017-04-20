@@ -11,6 +11,7 @@
     <string name="profile">PROFILE</string>
     <string name="questions">QUESTIONS</string>
     <string name="matches">MATCHES</string>
+    <string name="connections">CONNECTIONS</string>
     <string name="finals">LET\'S GET STARTED!</string>
 
 
@@ -18,6 +19,7 @@
     <string name="profile_hint">First! Create your profile and select everything that describes you best.</string>
     <string name="questions_hint">Next! Answer some interesting personality based questions to determine your type.</string>
     <string name="matches_hint">Finally! Find out the people who\'ve got the most similar personality as yours.</string>
+    <string name="connections_hint">Stay in touch with the people who have connected with in the past.</string>
     <string name="final_hint">Taking you to our family...</string>
 
 

@@ -56,9 +56,7 @@
         <item>@string/feedbacktype777</item>
         <item>@string/feedbacktype888</item>
         <item>@string/feedbacktype999</item>
-        <item>@string/feedbacktype101010</item>
         <item>@string/feedbacktype111111</item>
-        <item>@string/feedbacktype121212</item>
     </string-array>
     <string-array name="list4">
         <item>@string/feedbacktype1111</item>
@@ -100,6 +98,8 @@
         <item>@string/feedbacktype96</item>
         <item>@string/feedbacktype106</item>
         <item>@string/feedbacktype1116</item>
+        <item>@string/feedbacktype1117</item>
+        <item>@string/feedbacktype1118</item>
     </string-array>
     <string-array name="list7">
         <item>@string/feedbacktype17</item>
@@ -122,6 +122,13 @@
         <item>@string/feedbacktype1272</item>
         <item>@string/feedbacktype1372</item>
         <item>@string/feedbacktype1572</item>
+        <item>@string/feedbacktype1574</item>
+        <item>@string/feedbacktype1575</item>
+        <item>@string/feedbacktype1573</item>
+        <item>@string/feedbacktype1577</item>
+        <item>@string/feedbacktype1578</item>
+        <item>@string/feedbacktype1576</item>
+
     </string-array>
 
     <string-array name="list8">
@@ -138,12 +145,7 @@
         <item>@string/feedbacktype118</item>
         <item>@string/feedbacktype119</item>
     </string-array>
-    <string-array name="list9">
-        <item>@string/feedbacktype19</item>
-        <item>@string/feedbacktype29</item>
-        <item>@string/feedbacktype39</item>
-        <item>@string/feedbacktype49</item>
-    </string-array>
+
     <string-array name="list10">
         <item>@string/feedbacktype10</item>
         <item>@string/feedbacktype20</item>
@@ -167,11 +169,6 @@
         <item>@string/feedbacktype71</item>
         <item>@string/feedbacktype81</item>
     </string-array>
-    <string-array name="list12">
-        <item>@string/feedbacktype112</item>
-        <item>@string/feedbacktype212</item>
-        <item>@string/feedbacktype312</item>
-        <item>@string/feedbacktype412</item>
-    </string-array>
+
 
 </resources>

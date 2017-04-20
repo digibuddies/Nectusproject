@@ -131,10 +131,10 @@
                 android:layout_marginTop="2dp">
 
                 <TextView
-                    android:text="i spend most of my day "
+                    android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView11"
+                    android:text="I spend most of my day "
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
 
@@ -281,7 +281,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="I am here since "
+                    android:text="I was born in   "
                     android:textSize="16sp"
                     android:textColor="@android:color/white" />
 
@@ -316,7 +316,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="a student of "
+                    android:text="working towards my  "
                     android:textSize="16sp"
                     android:textColor="@android:color/white" />
 
