@@ -84,7 +84,7 @@ public class contact extends AppCompatActivity {
         ccr.setTypeface(custom_font);
 
 
-        tv3.setText(s1+", you can call me "+uname+". I am here since "+s2+". Currently I am a student of "+s3+" and I love to practice my "+s4+" skills. I would like to "+s5+" someday. My friends say I'm "+s6+". I just "+s7+" "+s8+" I spend most of my day "+s9+". A person with same mind as mine would be "+s10+".");
+        tv3.setText(s1+", you can call me "+uname+". I was born in "+s2+". Currently I am a student of "+s3+" and I love to practice my "+s4+" skills. I would like to "+s5+" someday. My friends say I'm "+s6+". I just "+s7+" "+s8+" I spend most of my day "+s9+". A person with same mind as mine would be "+s10+".");
 
 
 

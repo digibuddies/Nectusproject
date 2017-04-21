@@ -72,7 +72,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
 
 
 
-        holder.tv3.setText(temp.getOp1()+", you can call me "+temp.getUname()+". I am here since "+temp.getOp2()+". Currently I am a student of "+temp.getOp3()+" and I love to practice my "+temp.getOp4()+" skills. I would like to "+temp.getOp5()+" someday. My friends say I'm "+temp.getOp6()+". I just "+temp.getOp7()+" "+temp.getOp8()+" I spend most of my day "+temp.getOp9()+". A person with same mind as mine would be "+temp.getOp10()+".");
+        holder.tv3.setText(temp.getOp1()+", you can call me "+temp.getUname()+". I was born in "+temp.getOp2()+". Currently I am a student of "+temp.getOp3()+" and I love to practice my "+temp.getOp4()+" skills. I would like to "+temp.getOp5()+" someday. My friends say I'm "+temp.getOp6()+". I just "+temp.getOp7()+" "+temp.getOp8()+" I spend most of my day "+temp.getOp9()+". A person with same mind as mine would be "+temp.getOp10()+".");
 
         holder.tv4.setText(temp.getMp()+"% similar");
 
