@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.digibuddies.nectus.Aboutus"
+    tools:context="com.digibuddies.cnectus.Aboutus"
     android:background="@drawable/menu_background">
 
     <ImageView
@@ -51,7 +51,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:text="About Nectus!"
+                android:text="About Cnectus!"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/abtnec"
@@ -81,7 +81,7 @@
                 android:layout_marginTop="10dp" />
 
             <TextView
-                android:text="nectusteam@gmail.com"
+                android:text="cnectusteam@gmail.com"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/mail"
@@ -91,7 +91,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:text="Nectus is developed by -"
+                android:text="Cnectus is developed by -"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/made"
@@ -120,7 +120,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatard"
-                    android:src="@drawable/div"
+                    android:src="@drawable/divya3"
                     app:civ_border_width="2dp"
                     app:civ_border_color="@android:color/white"
                     android:layout_centerHorizontal="false"

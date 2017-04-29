@@ -11,12 +11,6 @@
         android:layout_height="match_parent"
         android:id="@+id/rl">
 
-        <com.whygraphics.gifview.gif.GIFView
-            android:id="@+id/main_activity_gif_vie2"
-            android:layout_width="match_parent"
-            android:scaleType="fitXY"
-            android:layout_height="170dp" />
-
         <ImageView
             android:layout_width="match_parent"
             app:srcCompat="@drawable/back"

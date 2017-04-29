@@ -1,35 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.digibuddies.nectus.layouts.SwipeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.digibuddies.cnectus.layouts.SwipeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
     xmlns:arc="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/swipeLayout"
-    android:orientation="vertical"
-    android:fitsSystemWindows="false"
     android:background="@drawable/quest">
-
-    <!--
-    <com.devs.squaremenu.SquareMenu
-        android:id="@+id/square_menu"
-        swipedeck:fabSize="100"
-        swipedeck:fabColor="@android:color/black"
-        swipedeck:menuOpenDirection="top_left"
-        swipedeck:iconM1="@drawable/c"
-        swipedeck:iconM2="@drawable/b"
-        swipedeck:iconM3="@drawable/aaa"
-
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
-        />
--->
-
 
     <ImageView
         android:layout_width="match_parent"
@@ -38,7 +14,7 @@
         android:id="@+id/imageView14" />
 
     <TextView
-        android:text="Questions"
+        android:text="QUESTIONS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/questions"
@@ -47,7 +23,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="39dp" />
 
-    <com.digibuddies.nectus.SwipeDeck
+    <com.digibuddies.cnectus.SwipeDeck
         android:id="@+id/swipe_deck"
         swipedeck:max_visible="3"
         swipedeck:render_above="false"
@@ -59,7 +35,7 @@
         android:paddingRight="20dp"
         android:layout_height="wrap_content">
 
-    </com.digibuddies.nectus.SwipeDeck>
+    </com.digibuddies.cnectus.SwipeDeck>
 
     <TextView
         android:text="That's All For Now ! \n You have answered all the questions, we'll notify you when more are added :)"
@@ -78,7 +54,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/help"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="60dp"
         android:textColor="@color/backboom"
         android:fontFamily="cursive"
         android:textSize="24sp" />
@@ -109,7 +85,7 @@
         android:id="@+id/detailq"
         android:layout_gravity="center_horizontal"
         android:textSize="18sp"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="110dp" />
@@ -119,15 +95,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         arc:menuType="normal"
-        arc:menuChildSize="48dp"
+        arc:menuChildSize="30dp"
         arc:menuGravity="Bottom_Right"
         arc:menuClickAnim="true"
-        arc:menuChildAnim="false"
         arc:menuShadowElevation="true"
         arc:menuNormalColor="@android:color/white"
         arc:menuImage="@drawable/ic_fingerprint_black_24dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="0dp"
+        >
 
     </com.bvapp.arcmenulibrary.ArcMenu>
 
-</com.digibuddies.nectus.layouts.SwipeFrameLayout>
+</com.digibuddies.cnectus.layouts.SwipeFrameLayout>

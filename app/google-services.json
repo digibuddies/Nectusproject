@@ -8,58 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:731407358435:android:a4191a573a15c6e3",
-        "android_client_info": {
-          "package_name": "com.digibuddies.myapplication"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "731407358435-uu4cvt1ohdmpm0lvm002rmv3fubouf0v.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.digibuddies.myapplication",
-            "certificate_hash": "4a2d1817a5c8227f7af56176c41db8c306332be2"
-          }
-        },
-        {
-          "client_id": "731407358435-hvet3et3v39draabjn9d8s29ri8f9qru.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.digibuddies.myapplication",
-            "certificate_hash": "bf7b0ddbfa88fc9558635e415ceebcd49f56e3a8"
-          }
-        },
-        {
-          "client_id": "731407358435-s7ako2n5n8umd5lqov4j1dec0ken4a6l.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD7yfqkxHmQX-gu73GiJE5HdXWpjQLT2hE"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "731407358435-s7ako2n5n8umd5lqov4j1dec0ken4a6l.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:731407358435:android:77270bd9308ef72d",
         "android_client_info": {
           "package_name": "com.digibuddies.nectus"

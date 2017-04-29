@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.digibuddies.nectus.Feed"
+    tools:context="com.digibuddies.cnectus.Feed"
     android:background="@drawable/menu_background">
     <TextView
         android:layout_width="wrap_content"

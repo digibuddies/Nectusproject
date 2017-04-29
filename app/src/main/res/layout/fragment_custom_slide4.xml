@@ -24,20 +24,21 @@
             android:layout_centerInParent="true"
             android:clickable="true" />
 
-        <TextView
-            android:text="Tap Here To Save"
-            android:layout_width="match_parent"
-            android:id="@+id/textView3"
-            android:textSize="30sp"
-            android:layout_alignParentBottom="false"
-            android:layout_centerHorizontal="false"
-            android:textStyle="normal|italic"
-            android:fontFamily="cursive"
-            android:textColor="@android:color/black"
-            android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:gravity="bottom|center"
-            android:paddingBottom="150dp" />
+        <Button
+            android:text="Click To Save Profile!"
+            android:layout_width="300dp"
+            android:id="@+id/save"
+            android:layout_marginBottom="155dp"
+            android:fontFamily="serif-monospace"
+            android:textStyle="normal|bold"
+            android:textSize="18sp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="60dp"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_light"
+            android:elevation="10dp"
+            android:elegantTextHeight="false" />
 
 
     </RelativeLayout>

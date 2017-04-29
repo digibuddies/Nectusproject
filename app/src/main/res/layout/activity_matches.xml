@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.digibuddies.nectus.matches"
+    tools:context="com.digibuddies.cnectus.matches"
     android:id="@+id/container"
     android:background="@drawable/proback">
 
@@ -14,10 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/alike"
-        android:textSize="40sp"
-        android:textColor="@android:color/white"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
+        android:layout_marginTop="39dp"
+        android:textSize="40sp"
+        android:textColor="@android:color/white" />
 
     <ImageView
         android:layout_width="300dp"
@@ -31,9 +31,9 @@
     <com.bvapp.arcmenulibrary.widget.ObservableScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="155dp"
         android:id="@+id/sv"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                         android:id="@+id/kav"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
-                        android:src="@drawable/s1"
+                        android:src="@drawable/select"
                         app:civ_border_width="2dp"
                         app:civ_border_color="@android:color/white"
                         android:layout_marginTop="13dp"
@@ -207,7 +207,7 @@
                         android:id="@+id/p2"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
-                        android:src="@drawable/s1"
+                        android:src="@drawable/select"
                         app:civ_border_width="2dp"
                         app:civ_border_color="@android:color/white"
                         android:layout_marginTop="13dp"
@@ -308,7 +308,7 @@
                         android:id="@+id/p3"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
-                        android:src="@drawable/s1"
+                        android:src="@drawable/select"
                         app:civ_border_width="2dp"
                         app:civ_border_color="@android:color/white"
                         android:layout_marginTop="13dp"
@@ -358,14 +358,14 @@
 </com.bvapp.arcmenulibrary.widget.ObservableScrollView>
 
     <TextView
-        android:text="Your Top 3 matches based on your answers!"
+        android:text="Top 3 matches based on your answers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
         android:id="@+id/detp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="17sp" />
 
     <com.bvapp.arcmenulibrary.ArcMenu

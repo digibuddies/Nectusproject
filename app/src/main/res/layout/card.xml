@@ -54,13 +54,14 @@
             android:fontFamily="sans-serif"
             android:layout_below="@+id/kuser"
             android:layout_centerHorizontal="true"
-            android:textStyle="normal|italic" />
+            android:textStyle="normal|italic"
+            android:layout_marginTop="5dp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/kav"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:src="@drawable/s1"
+            android:src="@drawable/select"
             app:civ_border_width="2dp"
             app:civ_border_color="@android:color/white"
             android:layout_marginTop="13dp"
@@ -76,8 +77,9 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/kmail"
-            android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/cht"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -113,7 +115,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="0dp"
             android:background="@android:color/holo_red_dark"
-            android:layout_height="25dp" />
+            android:layout_height="25dp"
+            android:layout_marginTop="45dp" />
 
         <TextView
             android:text="0.00% similar"
@@ -128,6 +131,21 @@
             android:fontFamily="serif"
             android:layout_alignTop="@+id/kav"
             android:layout_alignStart="@+id/kdetail" />
+
+        <Button
+            android:text="Chat!"
+            android:layout_height="30dp"
+            android:id="@+id/cht"
+            android:background="@color/global_color_green_primary"
+            android:layout_marginLeft="0dp"
+            android:visibility="invisible"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentStart="false"
+            android:layout_below="@+id/kuser"
+            android:layout_centerHorizontal="true"
+            android:layout_width="100dp"
+            android:layout_marginTop="5dp" />
 
     </RelativeLayout>
 

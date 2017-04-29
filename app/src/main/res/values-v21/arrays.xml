@@ -57,6 +57,7 @@
         <item>@string/feedbacktype888</item>
         <item>@string/feedbacktype999</item>
         <item>@string/feedbacktype111111</item>
+        <item>@string/feedbacktype111112</item>
     </string-array>
     <string-array name="list4">
         <item>@string/feedbacktype1111</item>
@@ -68,6 +69,10 @@
         <item>@string/feedbacktype7777</item>
         <item>@string/feedbacktype8888</item>
         <item>@string/feedbacktype9999</item>
+        <item>@string/feedbacktype410</item>
+        <item>@string/feedbacktype411</item>
+        <item>@string/feedbacktype412</item>
+        <item>@string/feedbacktype413</item>
     </string-array>
     <string-array name="list5">
         <item>@string/feedbacktype15</item>

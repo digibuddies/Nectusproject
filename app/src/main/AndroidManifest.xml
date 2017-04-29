@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.digibuddies.nectus">
+    package="com.digibuddies.cnectus">
 
     <uses-permission android:name="android.permission.STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -10,14 +10,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/n"
-        android:label="nectus"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Cnectus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,label">
         <activity
-            android:name=".splashactivity"
-            android:label="nectus"
+            android:name="com.digibuddies.cnectus.splashactivity"
+            android:label="Cnectus"
             android:launchMode="standard"
             android:noHistory="true"
             android:screenOrientation="portrait"
@@ -30,8 +30,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name="com.digibuddies.cnectus.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,26 +40,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".profile.profileclass"
+            android:name="com.digibuddies.cnectus.profile.profileclass"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".questions" />
-        <activity android:name=".matches" />
-        <activity android:name=".Help" />
-        <activity android:name=".Feed" />
+
+        <activity android:name="com.digibuddies.cnectus.questions" />
+        <activity android:name="com.digibuddies.cnectus.matches" />
+        <activity android:name="com.digibuddies.cnectus.Help" />
+        <activity android:name="com.digibuddies.cnectus.Feed" />
 
         <service
-            android:name=".thebackservice"
+            android:name="com.digibuddies.cnectus.thebackservice"
             android:enabled="true"
             android:exported="true" />
 
         <receiver
-            android:name=".alarmreceiver"
+            android:name="com.digibuddies.cnectus.alarmreceiver"
             android:process=":remote" />
 
-        <activity android:name=".Aboutus" />
-        <activity android:name=".contact" />
-        <activity android:name=".connections" />
+        <activity android:name="com.digibuddies.cnectus.Aboutus" />
+        <activity android:name="com.digibuddies.cnectus.contact" />
+        <activity android:name="com.digibuddies.cnectus.connections" />
     </application>
 
 </manifest>

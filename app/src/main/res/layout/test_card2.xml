@@ -13,20 +13,20 @@
     android:padding="25dp"
     android:layout_width="match_parent"
     card_view:cardBackgroundColor="@android:color/white"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView"
@@ -40,13 +40,14 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:lines="2" />
 
             <ImageView
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/q"
                 android:id="@+id/imageView2"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="14dp"
                 android:layout_below="@+id/textView"
                 android:layout_centerHorizontal="true"
                 android:layout_width="250dp" />
@@ -58,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/grp"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="40dp">
 
             <RadioButton
                 android:text="RadioButton"
@@ -69,7 +70,8 @@
                 android:textAlignment="textStart"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:padding="0dp" />
 
             <RadioButton
                 android:text="RadioButton"
@@ -78,7 +80,9 @@
                 android:id="@+id/radioButton6"
                 android:layout_weight="1"
                 android:textColor="@android:color/black"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:padding="0dp"
+                android:layout_marginTop="2dp" />
 
             <RadioButton
                 android:text="RadioButton"
@@ -87,7 +91,9 @@
                 android:id="@+id/radioButton7"
                 android:layout_weight="1"
                 android:textColor="@android:color/black"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:padding="0dp"
+                android:layout_marginTop="2dp" />
 
             <RadioButton
                 android:text="RadioButton"
@@ -98,7 +104,9 @@
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
                 android:textColorLink="@android:color/holo_green_light"
-                android:textColorHighlight="@color/global_color_green_accent" />
+                android:textColorHighlight="@color/global_color_green_accent"
+                android:padding="0dp"
+                android:layout_marginTop="2dp" />
 
         </RadioGroup>
 
