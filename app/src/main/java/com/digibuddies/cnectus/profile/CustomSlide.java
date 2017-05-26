@@ -43,7 +43,7 @@ public class CustomSlide extends SlideFragment {
         if(!(profileclass.usern.equals(""))){
             ett.setText(profileclass.usern);
         }
-        RelativeLayout cont = (RelativeLayout)view.findViewById(R.id.container);
+        RelativeLayout cont = (RelativeLayout)view.findViewById(R.id.container1);
         cont.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

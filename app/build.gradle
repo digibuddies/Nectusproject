@@ -7,8 +7,8 @@ android {
         applicationId "com.digibuddies.nectus"
         minSdkVersion 18
         targetSdkVersion 25
-        versionCode 8
-        versionName "1.1.2"
+        versionCode 12
+        versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 
@@ -27,6 +27,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.zjywill:OverwatchProgress:1.4'
     compile 'com.flaviofaria:kenburnsview:1.0.7'
     compile 'com.github.dimorinny:floating-text-button:0.0.2'
     compile 'com.github.GwonHyeok:StickySwitch:0.0.8'

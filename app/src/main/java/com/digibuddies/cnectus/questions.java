@@ -1,27 +1,35 @@
 package com.digibuddies.cnectus;
 
 
+import android.app.Dialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -50,20 +58,27 @@ public class questions extends AppCompatActivity {
     AnimationDrawable anim;
 private SwipeDeckAdapter adapter;
     CardView cardView;
+    Dialog dnew2;
     RadioGroup radioGroup;
     private SQLiteDatabase db2,db3;
     RadioButton r1;
     RadioButton r2;
+    Context context;
     ImageButton ib;
     RadioButton r3;
-    int x,flag=0;
+    SharedPreferences.Editor editor;
+    SharedPreferences mPrefs;
+    final String firsttime ="firsttime";
+    int firstt;
+    Button imb,imb2;
+    int x,flag=0,flag2=0;
     RadioButton r4;
     private static final int[] ITEM_DRAWABLES = { R.drawable.face,
-            R.drawable.add, R.drawable.connect,R.drawable.home };
+            R.drawable.add, R.drawable.connect, R.drawable.home};
 
     private static final String[] STR = {""};
 
-    TextView h,l;
+    TextView h,l,dt,dd,ex;
 SwipeDeck cardStack;
     private Cursor c;
     private String idd;
@@ -82,13 +97,69 @@ SwipeDeck cardStack;
             decorView.setSystemUiVisibility(uiOptions);
                  }
         setContentView(R.layout.acticity_questions);
+        context=this;
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        firstt = mPrefs.getInt(firsttime, 0);
+        if (firstt==1){
+            flag=1;
+            editor = mPrefs.edit();
+            editor.putInt(firsttime, 2);
+            editor.commit();
+        }
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        final int height = size.y;
+
+        final Dialog dnew=new Dialog(this);
+        dnew.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dnew.setContentView(R.layout.dialogque);
+        imb = (Button)dnew.findViewById(R.id.close);
+        imb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dnew.dismiss();
+            }
+        });
+        if (flag==1){
+            dnew.show();
+            flag2=1;
+        }
+
+        dnew2=new Dialog(this);
+        dnew2.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dnew2.setContentView(R.layout.dialogque);
+        imb2 = (Button)dnew2.findViewById(R.id.close);
+        dt=(TextView)dnew2.findViewById(R.id.dtitle);
+        dd=(TextView)dnew2.findViewById(R.id.ddet);
+        ex=(TextView)dnew2.findViewById(R.id.ex);
+        ImageView dback = (ImageView) dnew2.findViewById(R.id.dback);
+        dback.setImageResource(R.drawable.zz);
+        dt.setText("Superb!!!");
+        dd.setText("Now Based On the Answers You Just Gave, Let's See Your Top 3 Matches...");
+        imb2.setText("Oky Doky!");
+        imb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dnew2.dismiss();
+                Intent intent=new Intent(questions.this,matches.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+
+
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Roboto-Light.ttf");
         final TextView hdq=(TextView)findViewById(R.id.questions);
         final TextView detq=(TextView)findViewById(R.id.detailq);
         hdq.setTypeface(custom_font);
         detq.setTypeface(custom_font);
 
-        SwipeFrameLayout container = (SwipeFrameLayout) findViewById(R.id.swipeLayout);
+
+        final SwipeFrameLayout container = (SwipeFrameLayout) findViewById(R.id.swipeLayout);
         ArcMenu menu = (ArcMenu) findViewById(R.id.arcMenu);
         menu.setMinRadius(20);
         menu.showTooltip(false);
@@ -108,34 +179,42 @@ SwipeDeck cardStack;
                 @Override
                 public void onClick(View v) {
                     if(position==0){
-                        Intent intent=new Intent(questions.this,profileclass.class);
+                        Intent intent=new Intent(context,profileclass.class);
                         startActivity(intent);
                         finish();
+
+
                     }
                     if(position==1){
-                        Intent intent=new Intent(questions.this,matches.class);
+                        Intent intent=new Intent(context,matches.class);
                         startActivity(intent);
                         finish();
+
+
                     }
                     if(position==2){
-                        Intent intent=new Intent(questions.this,connections.class);
+                        Intent intent=new Intent(context,connections.class);
                         startActivity(intent);
                         finish();
                     }
 
                     if(position==3){
-                        Intent intent=new Intent(questions.this,MainActivity.class);
+                        Intent intent=new Intent(context,MainActivity.class);
                         startActivity(intent);
                         finish();
+
                     }
                 }
             });
         }
-
+        if(height<900){
+            menu.setVisibility(View.INVISIBLE);
+        }
 
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         dragCheckbox = (CheckBox) findViewById(R.id.checkbox_drag);
         h=(TextView)findViewById(R.id.help);
+        h.setTypeface(custom_font);
         l=(TextView)findViewById(R.id.limit);
              dostuff();
         testData = new ArrayList<>();
@@ -242,9 +321,18 @@ SwipeDeck cardStack;
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            if(count==70){
+            if(count==70&&flag2==1){
                 Intent intent=new Intent(questions.this,thebackservice.class);
                 startService(intent);
+                h.postDelayed(new Runnable() {
+                    public void run() {
+                        ex.setVisibility(View.VISIBLE);
+                        dnew2.show();
+                        NotificationManager notificationManager =
+                                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                        notificationManager.cancel(109);
+                    }
+                }, 4000);
             }
             Cursor c2 = db2.rawQuery(SELECT_SQL, null);
             c2.moveToFirst();
@@ -419,4 +507,17 @@ SwipeDeck cardStack;
         if (anim != null && anim.isRunning())
             anim.stop();
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public void finish() {
+        Intent i=new Intent(this,thebackservice.class);
+        startService(i);
+        super.finish();
+    }
 }
+

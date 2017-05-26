@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -79,22 +80,32 @@ public class thebackservice extends IntentService {
         myRef.child("chat").child(idd).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                myRef.child("chat").child(idd).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dsp : dataSnapshot.getChildren()){
-                    {   for (DataSnapshot dsp2 : dsp.getChildren()){
-                        Log.d("child",dsp2.getValue().toString());
-                        if (dsp2.child("read").getValue().equals("UNREAD")){
-                        Log.d("unread",dsp2.child("user").getValue().toString());
-                            notifyUser3(dsp2.child("user").getValue().toString());
-                        }
+                    {   for (final DataSnapshot dsp2 : dsp.getChildren()){
+                                if (dsp2.child("read").getValue().equals("UNREAD")){
+                                    notifyUser3(dsp2.child("user").getValue().toString());
+                            }
+
+
                          }
                 }}
             }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }});}}, 5000);}
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+            }});
         c = db.rawQuery(SELECT_SQL, null);
         c.moveToFirst();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -180,7 +191,6 @@ public class thebackservice extends IntentService {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         snap = dataSnapshot.getValue(data.class);
                         if (snap != null) {
-                            Log.d("fb","first match");
                             mail = snap.getEmail();
                             uname = snap.getUname();
                             u1=uname;
@@ -338,38 +348,39 @@ public class thebackservice extends IntentService {
 
     public void notifyUser() {
         Intent intent = new Intent(thebackservice.this, matches.class);
+        intent.putExtra("target","matches");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(thebackservice.this, 1, intent, 0);
-
+        PendingIntent pendingIntent = PendingIntent.getActivity(thebackservice.this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         Notification.Builder builder = new Notification.Builder(thebackservice.this);
-
         builder.setAutoCancel(true);
         builder.setTicker("New Match on Cnectus...");
-        builder.setDefaults(Notification.DEFAULT_ALL);
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);
         builder.setContentTitle("Match Notification!");
         builder.setContentText("You have a new match");
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.zaa));
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.two));
         builder.setSmallIcon(R.mipmap.two);
         builder.setContentIntent(pendingIntent);
-        builder.setSubText("Click to see...");   //API level 16
-
+        builder.setSubText("Click to see...");
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(11, builder.build());
+        notificationManager.notify(109, builder.build());
 
     }
     public void notifyUser2() {
         Intent intent = new Intent(thebackservice.this, contact.class);
+        intent.putExtra("target","contact");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(thebackservice.this, 1, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(thebackservice.this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         Notification.Builder builder = new Notification.Builder(thebackservice.this);
 
         builder.setAutoCancel(true);
         builder.setTicker("New Request to Connect...");
-        builder.setDefaults(Notification.DEFAULT_ALL);
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);
         builder.setContentTitle("Connect notification!");
-        builder.setContentText("You have a new request to connect on Cnectus");
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.zaa));
+        builder.setContentText("You have a new request to connect");
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.two));
         builder.setSmallIcon(R.mipmap.two);
         builder.setContentIntent(pendingIntent);
         builder.setSubText("Click to see...");   //API level 16
@@ -382,22 +393,25 @@ public class thebackservice extends IntentService {
 
     public void notifyUser3(String s) {
         Intent intent = new Intent(thebackservice.this, connections.class);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(thebackservice.this, 1, intent, 0);
+        intent.putExtra("target","connections");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(thebackservice.this,0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         Notification.Builder builder = new Notification.Builder(thebackservice.this);
 
         builder.setAutoCancel(true);
-        builder.setTicker("New Message...");
-        builder.setDefaults(Notification.DEFAULT_ALL);
+        builder.setTicker("New Message From "+s);
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);
         builder.setContentTitle("Message Notification!");
         builder.setContentText("You have a new message from "+s);
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.zaa));
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.two));
         builder.setSmallIcon(R.mipmap.two);
         builder.setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(92, builder.build());
+
+
 
     }
 

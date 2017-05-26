@@ -1,14 +1,18 @@
 package com.digibuddies.cnectus;
 
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -19,6 +23,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 //import com.devs.squaremenu.OnMenuClickListener;
 //import com.devs.squaremenu.SquareMenu;
@@ -61,22 +66,29 @@ public class matches extends AppCompatActivity {
     final ArrayList<String> allow = new ArrayList<>();
     StickySwitch ssw,ssw2,ssw3;
     int qcount;
+    SharedPreferences.Editor editor;
+    SharedPreferences mPrefs;
+    final String firsttime ="firsttime";
+    int firstt;
     SQLiteDatabase dbc;
     TextView tv1;
+    Context con;
     TextView tv2;
+    Dialog dnew2;
+    Button imb2;
     TextView tv3;
     TextView tv4;
     TextView tv5;
     TextView und,und2,und3;
-    int flaga=0,flagb=0,flagc=0;
+    int flag=0;
     TextView tv6,contmail,contmail2,contmail3,front;
     TextView tv,d1,d2,d3,cy,cn,cy2,cn2,cy3,cn3;
     ObservableScrollView sv;
     AnimationDrawable anim;
-    private static final int[] ITEM_DRAWABLES = { R.drawable.face,
-            R.drawable.help, R.drawable.connect,R.drawable.home };
+    private static final int[] ITEM_DRAWABLES = {R.drawable.ref2, R.drawable.face,
+            R.drawable.help, R.drawable.connect };
 
-    private static final String[] STR = {"Home","Profile","Questions"};
+    private static final String[] STR = {"Home","Profile","Questions","Refresh"};
 
     CircleImageView p1,p2,p3;
     Button b1,b2,b3;
@@ -100,7 +112,19 @@ public class matches extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches);
         id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        firstt = mPrefs.getInt(firsttime, 0);
+        if (firstt==2){
+            flag=1;
+            editor = mPrefs.edit();
+            editor.putInt(firsttime, 3);
+            editor.commit();
+        }
 
+        final Dialog dialogref = new Dialog(this);
+        dialogref.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogref.setContentView(R.layout.refresh);
+        con = this;
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog);
@@ -114,6 +138,31 @@ public class matches extends AppCompatActivity {
         final TextView kdate2=(TextView)dialog2.findViewById(R.id.kdate);
         final TextView kdate3=(TextView)dialog3.findViewById(R.id.kdate);
 
+        dnew2=new Dialog(this);
+        dnew2.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dnew2.setContentView(R.layout.dialogque);
+        imb2 = (Button)dnew2.findViewById(R.id.close);
+        TextView dt = (TextView) dnew2.findViewById(R.id.dtitle);
+        TextView dd=(TextView)dnew2.findViewById(R.id.ddet);
+        TextView ex=(TextView)dnew2.findViewById(R.id.ex);
+        ImageView dback = (ImageView) dnew2.findViewById(R.id.dback);
+        dback.setImageResource(R.drawable.zzz);
+        ex.setVisibility(View.VISIBLE);
+        ex.setText("(Do come back again and connect with more people :)");
+        dt.setText("Amazing!!!");
+        dd.setText("Let's Now Check The Status Of Your Request...");
+        imb2.setText("Let's Go!");
+        imb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dnew2.dismiss();
+                Intent intent=new Intent(matches.this,connections.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
 
         b1=(Button)findViewById(R.id.b1);
         b2=(Button)findViewById(R.id.b2);
@@ -157,25 +206,48 @@ public class matches extends AppCompatActivity {
             menu.addItem(item, "", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(position==0){
-                        Intent intent=new Intent(matches.this,profileclass.class);
-                        startActivity(intent);
-                        finish();
-                    }
                     if(position==1){
-                        Intent intent=new Intent(matches.this,questions.class);
+                        Intent intent=new Intent(con,profileclass.class);
                         startActivity(intent);
                         finish();
+
+
                     }
                     if(position==2){
-                        Intent intent=new Intent(matches.this,connections.class);
+                        Intent intent=new Intent(con,questions.class);
                         startActivity(intent);
                         finish();
+
+
                     }
                     if(position==3){
-                        Intent intent=new Intent(matches.this,MainActivity.class);
+                        Intent intent=new Intent(con,connections.class);
                         startActivity(intent);
                         finish();
+
+
+                    }
+                    if(position==0){
+                        Intent intent=new Intent(con,thebackservice.class);
+                        dialogref.show();
+                        startService(intent);
+                        new Handler().postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                Intent intent=new Intent(matches.this,matches.class);
+                                NotificationManager notificationManager =
+                                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                notificationManager.cancel(109);
+                                dialogref.hide();
+                                startActivity(intent);
+                                finish();
+
+                            }
+
+                        },8000);
+
+
                     }
                 }
             });
@@ -218,7 +290,9 @@ public class matches extends AppCompatActivity {
                 dialog.dismiss();
                 if(ssw.getDirection().name().equals("RIGHT")){
                     Snackbar.make(sv, "Request Sent!",
-                            Snackbar.LENGTH_SHORT).show();} }
+                            Snackbar.LENGTH_SHORT).show();
+                        showd();
+                } }
         });
         back2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,7 +310,8 @@ public class matches extends AppCompatActivity {
                 dialog2.dismiss();
                 if(ssw2.getDirection().name().equals("RIGHT")){
                     Snackbar.make(sv, "Request Sent!",
-                            Snackbar.LENGTH_SHORT).show();}
+                            Snackbar.LENGTH_SHORT).show();
+                    showd();}
             }
         });
         back3.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +330,8 @@ public class matches extends AppCompatActivity {
                 dialog3.dismiss();
                 if(ssw3.getDirection().name().equals("RIGHT")){
                 Snackbar.make(sv, "Request Sent!",
-                        Snackbar.LENGTH_SHORT).show();}
+                        Snackbar.LENGTH_SHORT).show();
+                    showd();}
             }
         });
 
@@ -473,6 +549,16 @@ public class matches extends AppCompatActivity {
         }
         c.close();
         db2.close();
+    }
+
+    public void showd(){
+        if(flag==1){
+            dnew2.show();
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
 }

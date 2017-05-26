@@ -63,6 +63,14 @@ import android.widget.TextView;
                 }
 
                 public void onPageSelected(int position) {
+                    Handler handler=new Handler();
+                    if(position==5){
+                        handler.postDelayed(new Runnable(){
+                            @Override
+                            public void run(){
+                                finish();
+                            }
+                        }, 2500);}
 
                 }
 
@@ -115,15 +123,6 @@ import android.widget.TextView;
                 hintView.setText(hint);
 
                 container.addView(itemView);
-                Handler handler=new Handler();
-                if(position==5){
-                    handler.postDelayed(new Runnable(){
-                        @Override
-                        public void run(){
-                            finish();
-                        }
-                    }, 5500);}
-
                 return itemView;
             }
 

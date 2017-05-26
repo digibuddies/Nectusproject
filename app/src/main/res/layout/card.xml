@@ -119,18 +119,19 @@
             android:layout_marginTop="45dp" />
 
         <TextView
-            android:text="0.00% similar"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
             android:id="@+id/kmatch"
-            android:layout_gravity="bottom|left"
-            android:textStyle="normal|italic"
-            android:textSize="16sp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@android:color/white"
-            android:fontFamily="serif"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/kdetail"
             android:layout_alignTop="@+id/kav"
-            android:layout_alignStart="@+id/kdetail" />
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="serif"
+            android:lines="2"
+            android:text="0.00% \nsimilar"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="normal|italic" />
 
         <Button
             android:text="Chat!"

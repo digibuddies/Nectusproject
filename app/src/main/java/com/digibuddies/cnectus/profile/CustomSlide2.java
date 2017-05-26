@@ -71,13 +71,14 @@ public class CustomSlide2 extends SlideFragment {
         }
 
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/abc.ttf");
-
+/*
         txx0.setTypeface(custom_font);
        txx1.setTypeface(custom_font);
         txx2.setTypeface(custom_font);
        txx3.setTypeface(custom_font);
         txx4.setTypeface(custom_font);
         txx5.setTypeface(custom_font);txx6.setTypeface(custom_font);txx7.setTypeface(custom_font);txx8.setTypeface(custom_font);txx9.setTypeface(custom_font);txx10.setTypeface(custom_font);txx11.setTypeface(custom_font);txx12.setTypeface(custom_font);
+        */
         checkBox.setChecked(false);
 
         return view;

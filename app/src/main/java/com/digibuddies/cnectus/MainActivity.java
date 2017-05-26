@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -46,8 +47,11 @@ import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.nightonke.boommenu.Util;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
+import com.tomer.fadingtextview.FadingTextView;
 
 import java.io.File;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     ResideMenu resideMenu;
-    ResideMenuItem itemHome;
+    ResideMenuItem itemHome,itemShare;
     private SQLiteDatabase dbm;
     private Cursor c;
     private static final String SELECT_SQL = "SELECT uname,aid FROM profile";
@@ -69,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
     ResideMenuItem itemAbout;
     ConnectivityManager cm;
     TextView tvp;
-    public static int call;
     SharedPreferences mPrefs;
     final String welcomeScreenShownPref = "welcomeScreenShown";
     String username = "usname";
     int ff=0;
     public static String uname="";
     TextView usname;
+    String tar;
     Intent intent;
     CircleImageView civ;
     int aid;
@@ -85,17 +89,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        scheduleAlarm();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             }
         intent = new Intent(this, thebackservice.class);
-
-
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
         if (!welcomeScreenShown) {
-            ff=1;
             editor = mPrefs.edit();
             editor.putBoolean(welcomeScreenShownPref, true);
             editor.commit();
@@ -247,8 +249,12 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        Intent intent = new Intent(MainActivity.this, connections.class);
-                        startActivity(intent);
+                        if(usname.getText().equals("Please Head Onto the Profile section to ceate your profile!")){
+                            Toast.makeText(MainActivity.this,"Oops.. You need to create a profile first!", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Intent intent = new Intent(MainActivity.this, connections.class);
+                            startActivity(intent);}
                     }
                 });
         bmb.addBuilder(builder1);
@@ -276,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
         itemHelp = new ResideMenuItem(this, R.drawable.help1, "Help");
         itemFeed = new ResideMenuItem(this, R.drawable.feed, "Feedback");
         itemAbout=new ResideMenuItem(this, R.drawable.about, "About Us");
+        itemShare=new ResideMenuItem(this, R.drawable.share,"Share Cnectus");
 
         itemHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,14 +311,38 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        itemShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {   final Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Cnectus");
+                    String sAux = "\nHey, try this new social networking app made by dit students\n\n";
+                    sAux = sAux + "https://play.google.com/store/apps/details?id=com.digibuddies.nectus \n\n";
+                    intent.putExtra(Intent.EXTRA_TEXT, sAux);
+                    final PackageManager pm = getPackageManager();
+                    final List<ResolveInfo> matches = pm.queryIntentActivities(intent, 0);
+                    ResolveInfo best = null;
+                    for (final ResolveInfo info : matches)
+                        if (info.activityInfo.packageName.endsWith(".whatsapp") ||
+                                info.activityInfo.name.toLowerCase().contains("whatsapp")) best = info;
+                    if (best != null)
+                        intent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+                    startActivity(intent);
+                } catch(Exception e) {
+                    //e.toString();
+                }
+            }
+        });
 
         resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
         resideMenu.addMenuItem(itemHelp, ResideMenu.DIRECTION_LEFT);
         resideMenu.addMenuItem(itemFeed, ResideMenu.DIRECTION_LEFT);
         resideMenu.addMenuItem(itemAbout, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemShare, ResideMenu.DIRECTION_LEFT);
 
         // You can disable a direction by setting ->
-        // resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -349,14 +380,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-         super.onBackPressed();
-
+      this.moveTaskToBack(true);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        Intent disp=getIntent();
+        tar=disp.getStringExtra("target");
+        if(tar.equals("matches")){
+            Intent i2=new Intent(MainActivity.this,matches.class);
+            startActivity(i2);
+        }
+        else if(tar.equals("contact")){
+            Intent i2=new Intent(MainActivity.this,contact.class);
+            startActivity(i2);
+        }
+        else if(tar.equals("connections")){
+            Intent i2=new Intent(MainActivity.this,connections.class);
+            startActivity(i2);
+        }
+
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this,
@@ -366,6 +412,9 @@ public class MainActivity extends AppCompatActivity {
             }
         else {
         dowork();}
+
+
+
 
     }
     @Override
@@ -415,13 +464,12 @@ public class MainActivity extends AppCompatActivity {
         // First parameter is the type: ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC_WAKEUP
         // Interval can be INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_DAY
         alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
-                AlarmManager.INTERVAL_HOUR, pIntent);
+                AlarmManager.INTERVAL_HALF_HOUR, pIntent);
 
     }
 
     public  void dowork(){
         if(flag==0){
-        scheduleAlarm();
         File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
         // Create direcorty if not exists
         if(!storagePath.exists()) {
@@ -440,22 +488,6 @@ public class MainActivity extends AppCompatActivity {
             civ.setImageResource(aid);
             civ.setVisibility(View.VISIBLE);
         }
-            if(ff==1) {
-                if (!(uname.equals(""))) {
-                    editor.putString(username, uname);
-                }
-                Log.d("namep", uname);
-                editor.commit();
-            }
-        if(call==11){
-            tvp.setText("Great Now Head onto the Questions Section And Answer Some Questions.");
-            tvp.setVisibility(View.VISIBLE);
-            tvp.postDelayed(new Runnable() {
-                public void run() {
-                    tvp.setVisibility(View.INVISIBLE);
-                    call=0;
-                }
-            }, 12000);}
 
 
     }}

@@ -54,7 +54,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/white"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        android:textAlignment="center" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

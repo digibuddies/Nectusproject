@@ -366,7 +366,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/black"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        android:textAlignment="center" />
 
     <com.bvapp.arcmenulibrary.ArcMenu
         android:id="@+id/arcMenu"

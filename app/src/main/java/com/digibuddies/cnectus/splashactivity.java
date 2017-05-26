@@ -48,6 +48,7 @@ public class splashactivity extends Activity {
             public void run() {
 
                 Intent i = new Intent(splashactivity.this, MainActivity.class);
+                i.putExtra("target","none");
                 startActivity(i);
                 finish();
             }

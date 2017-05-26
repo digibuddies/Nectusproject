@@ -33,21 +33,20 @@
             android:name="com.digibuddies.cnectus.MainActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.digibuddies.cnectus.profile.profileclass"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name="com.digibuddies.cnectus.questions" />
-        <activity android:name="com.digibuddies.cnectus.matches" />
-        <activity android:name="com.digibuddies.cnectus.Help" />
-        <activity android:name="com.digibuddies.cnectus.Feed" />
+        <activity android:name="com.digibuddies.cnectus.questions"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.digibuddies.cnectus.matches"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.digibuddies.cnectus.Help"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.digibuddies.cnectus.Feed"
+            android:configChanges="orientation|screenSize"/>
 
         <service
             android:name="com.digibuddies.cnectus.thebackservice"
@@ -58,9 +57,12 @@
             android:name="com.digibuddies.cnectus.alarmreceiver"
             android:process=":remote" />
 
-        <activity android:name="com.digibuddies.cnectus.Aboutus" />
-        <activity android:name="com.digibuddies.cnectus.contact" />
-        <activity android:name="com.digibuddies.cnectus.connections" />
+        <activity android:name="com.digibuddies.cnectus.Aboutus"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.digibuddies.cnectus.contact"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.digibuddies.cnectus.connections"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>

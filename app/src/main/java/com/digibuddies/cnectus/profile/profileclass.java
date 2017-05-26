@@ -2,6 +2,7 @@ package com.digibuddies.cnectus.profile;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
@@ -35,42 +36,7 @@ public class profileclass extends MaterialIntroActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
-
-
-    public void OnSelected(Class<?> clazz, int i) {
-        v1=(CircleImageView)findViewById(R.id.avatar);
-        v2=(CircleImageView)findViewById(R.id.avatar2);
-        v3=(CircleImageView)findViewById(R.id.avatar3);
-
-        v1.setImageResource(i);
-
-        v2.setImageResource(i);
-
-        v3.setImageResource(i);
-        d.setAid(i);
-    }
-    @Override
-    public void onFinish() {
-        super.onFinish();
-
-    }
-
-    public void addslides(){
-
-        addSlide(new CustomSlide());
-        addSlide(new CustomSlide2());
-        addSlide(new CustomSlide3());
-        addSlide(new CustomSlide4());
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         p1=p2=p3=p4=p5=p6=p7=p8=p9=p10=p11=p12=0;
-        enableLastSlideAlphaExitTransition(true);
         o1=o2=o3=o4=o5=o6=o7=o8=o9=o10=mail=usern="";
         d=new data();
 
@@ -109,7 +75,44 @@ public class profileclass extends MaterialIntroActivity {
                         view.setAlpha(percentage);
                     }
                 });
+
+
         addslides();
+
+    }
+
+
+    public void OnSelected(Class<?> clazz, int i) {
+        v1=(CircleImageView)findViewById(R.id.avatar);
+        v2=(CircleImageView)findViewById(R.id.avatar2);
+        v3=(CircleImageView)findViewById(R.id.avatar3);
+
+        v1.setImageResource(i);
+
+        v2.setImageResource(i);
+
+        v3.setImageResource(i);
+        d.setAid(i);
+    }
+    @Override
+    public void onFinish() {
+        super.onFinish();
+
+    }
+
+
+    public void addslides(){
+
+        addSlide(new CustomSlide());
+        addSlide(new CustomSlide2());
+        addSlide(new CustomSlide3());
+        addSlide(new CustomSlide4());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 }

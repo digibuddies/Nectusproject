@@ -18,12 +18,182 @@
     <string name="avatar_hint">Connect with your most identical personalities. </string>
     <string name="profile_hint">First! Create your profile and select everything that describes you best.</string>
     <string name="questions_hint">Next! Answer some interesting questions to determine your personality type.</string>
-    <string name="matches_hint">Finally! Connect to the people who\'ve got the most similar personality as yours.</string>
+    <string name="matches_hint">Finally! Connect to people who\'ve got the most similar personality as yours.</string>
     <string name="connections_hint">Stay in touch with the people you\'ve connected to in the past.</string>
     <string name="final_hint">Taking you to our family...</string>
 
 
     <string name="about_nectus">Cnectus is an idea to connect people better. It aims to bring together people who share similar personalities through its intensive match algorithm. Our vision is to have a society where it is easier for people to connect to people they share a healthy bond with and thus promoting better friendships and relationships.</string>
+
+    <string-array name="list11">
+        <item>Select</item>
+        <item>You are looking for a friend</item>
+        <item>You are in college</item>
+        <item>You are in school</item>
+        <item>You are interesting</item>
+        <item>You can crack good jokes</item>
+        <item>You love music</item>
+        <item>You share my interests</item>
+        <item>Our match is more than 90%</item>
+        <item>Our match is more than 80%</item>
+    </string-array>
+    <string-array name="list12">
+        <item>Select</item>
+        <item>You are not my age</item>
+        <item>You are a negative person</item>
+        <item>You are weird</item>
+        <item>You are a lazy person</item>
+        <item>You dont like dogs</item>
+        <item>You talk too much</item>
+        <item>Our match is below 30%</item>
+        <item>Our match is below 50%</item>
+
+    </string-array>
+
+    <string-array name="list1">
+        <item>Select</item>
+        <item>Hi</item>
+        <item>Hello</item>
+        <item>Howdy</item>
+        <item>Hola</item>
+        <item>Sup</item>
+        <item>Ciao</item>
+    </string-array>
+
+    <string-array name="list2">
+        <item>Select</item>
+        <item>1992</item>
+        <item>1993</item>
+        <item>1994</item>
+        <item>1995</item>
+        <item>1996</item>
+        <item>1997</item>
+        <item>1998</item>
+        <item>1999</item>
+        <item>2000</item>
+        <item>2001</item>
+        <item>2002</item>
+    </string-array>
+
+    <string-array name="list3">
+        <item>Select</item>
+        <item>Dehradun</item>
+        <item>New Delhi</item>
+        <item>Roorkee</item>
+        <item>Pune</item>
+        <item>Noida</item>
+        <item>Bangalore</item>
+        <item>Punjab</item>
+        <item>South India</item>
+        <item>India</item>
+        <item>some place outside india</item>
+    </string-array>
+    <string-array name="list4">
+        <item>Select</item>
+        <item>Sleeping</item>
+        <item>Eating</item>
+        <item>Gaming</item>
+        <item>Dancing</item>
+        <item>Singing</item>
+        <item>Scientific</item>
+        <item>Communication</item>
+        <item>Artistic</item>
+        <item>Business</item>
+        <item>Coding</item>
+        <item>Problem Solving</item>
+        <item>Reading</item>
+    </string-array>
+    <string-array name="list5">
+        <item>Select</item>
+        <item>go on a world tour</item>
+        <item>learn new language</item>
+        <item>go scuba diving</item>
+        <item>do horseback riding</item>
+        <item>fall in love</item>
+        <item>be a billionaire</item>
+        <item>have my own NGO</item>
+        <item>live in Los Angeles</item>
+        <item>drive a lamborghini</item>
+        <item>see northern lights</item>
+        <item>get a pet</item>
+        <item>become a celebrity</item>
+        <item>have my own business</item>
+
+
+
+    </string-array>
+    <string-array name="list6">
+        <item>Select</item>
+        <item>shy</item>
+        <item>extrovert</item>
+        <item>a leader</item>
+        <item>hot</item>
+        <item>talkative</item>
+        <item>intelligent</item>
+        <item>creative</item>
+        <item>pretty</item>
+        <item>moody</item>
+        <item>short tempered</item>
+        <item>helpful</item>
+    </string-array>
+    <string-array name="list7">
+        <item>Select</item>
+        <item>love</item>
+        <item>hate</item>
+        <item>dont care about</item>
+        <item>fantasise about</item>
+    </string-array>
+
+    <string-array name="list72">
+        <item>Select</item>
+        <item>outer space.</item>
+        <item>camping in woods.</item>
+        <item>babies.</item>
+        <item>spiders.</item>
+        <item>large dogs.</item>
+        <item>football.</item>
+        <item>spicy food.</item>
+        <item>chocolates.</item>
+        <item>money.</item>
+        <item>pop music.</item>
+        <item>EDM.</item>
+        <item>Megan Fox.</item>
+        <item>action movies.</item>
+        <item>horror movies.</item>
+        <item>exams.</item>
+        <item>sunrise.</item>
+        <item>monotonous life.</item>
+        <item>fame.</item>
+    </string-array>
+
+    <string-array name="list8">
+        <item>Select</item>
+        <item>playing sports</item>
+        <item>watching TV</item>
+        <item>listening to music</item>
+        <item>cooking yummy food</item>
+        <item>eating yummy food</item>
+        <item>sleeping</item>
+        <item>on video games</item>
+        <item>studying for exams</item>
+        <item>with friends</item>
+        <item>playing guitar</item>
+        <item>reading books</item>
+    </string-array>
+
+    <string-array name="list9">
+        <item>Select</item>
+        <item>completely crazy.</item>
+        <item>a miracle.</item>
+        <item>an embarrassment.</item>
+        <item>short on attendance.</item>
+        <item>the Batman.</item>
+        <item>a very good friend.</item>
+        <item>somone id like to know.</item>
+        <item>someone ill run away from.</item>
+        <item>the smartest person alive.</item>
+        <item>cute ?</item>
+    </string-array>
 
 
 </resources>

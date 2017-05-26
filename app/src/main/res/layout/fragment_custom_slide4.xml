@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/container4">
 
         <CheckBox
             android:text="CheckBox"
@@ -25,20 +26,22 @@
             android:clickable="true" />
 
         <Button
-            android:text="Click To Save Profile!"
-            android:layout_width="300dp"
             android:id="@+id/save"
-            android:layout_marginBottom="155dp"
-            android:fontFamily="serif-monospace"
-            android:textStyle="normal|bold"
-            android:textSize="18sp"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_height="60dp"
-            android:textColor="@android:color/white"
+            android:layout_marginBottom="120dp"
             android:background="@android:color/holo_blue_light"
-            android:elevation="10dp"
-            android:elegantTextHeight="false" />
+            android:elegantTextHeight="false"
+            android:elevation="24dp"
+            android:fontFamily="serif-monospace"
+            android:gravity="center"
+            android:text="Click Here To Save Profile!"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
 
 
     </RelativeLayout>

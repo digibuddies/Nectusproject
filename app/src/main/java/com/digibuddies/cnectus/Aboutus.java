@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 public class Aboutus extends AppCompatActivity {
-    TextView tv1,tv2,tv3,tv4,tv5,tv6,tv7,tv8;
+    TextView tv1,tv2,tv3,tv4,tv5,tv6,tv7,tv8,tv9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class Aboutus extends AppCompatActivity {
         tv6=(TextView)findViewById(R.id.nec);
         tv7=(TextView)findViewById(R.id.cont);
         tv8=(TextView)findViewById(R.id.mail);
+        tv9=(TextView)findViewById(R.id.ver);
         tv1.setTypeface(custom_font);
         tv2.setTypeface(custom_font);
         tv3.setTypeface(custom_font);
@@ -36,6 +37,11 @@ public class Aboutus extends AppCompatActivity {
         tv6.setTypeface(custom_font);
         tv7.setTypeface(custom_font);
         tv8.setTypeface(custom_font);
+        tv9.setTypeface(custom_font);
 
     }
+    public void onBackPressed() {
+        finish();
+    }
+
 }

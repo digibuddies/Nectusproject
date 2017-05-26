@@ -3,54 +3,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.digibuddies.cnectus.connections"
-    android:layout_marginBottom="20dp"
-    android:layout_height="330dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.digibuddies.cnectus.connections">
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:src="@drawable/ic_send_white_24dp"
-        android:id="@+id/fab"
-        app:fabSize="mini"
-        android:scaleType="centerInside"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="2dp" />
-
-    <ListView
+    <ImageView
+        android:id="@+id/imageV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
-        android:layout_above="@id/fab"
-        android:dividerHeight="16dp"
-        android:divider="@android:color/transparent"
-        android:id="@+id/list_of_messages"
-        android:layout_marginBottom="16dp"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll"
-        android:textAlignment="center" />
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/color2" />
 
-    <android.support.design.widget.TextInputLayout
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Cnectus Chat"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/fab"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_height="330dp"
+        android:layout_below="@+id/imageV"
+        android:layout_marginBottom="20dp"
+        android:background="@color/chat"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-        <EditText
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/input"
-            android:lines="2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="2dp"
+            android:clickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_send_white_24dp"
+            app:fabSize="mini" />
+
+        <ListView
+            android:id="@+id/list_of_messages"
             android:layout_width="match_parent"
-            android:hint="Enter Text..."
-            android:inputType="textLongMessage" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_height="match_parent"
+            android:layout_above="@id/fab"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="16dp"
+            android:stackFromBottom="true"
+            android:textAlignment="center"
+            android:transcriptMode="alwaysScroll" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@id/fab"
+            android:background="@color/chat">
+
+            <EditText
+                android:id="@+id/input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Text..."
+                android:inputType="textMultiLine"
+                android:textColor="@color/black" />
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+
 </RelativeLayout>

@@ -50,13 +50,14 @@
         android:layout_width="250dp" />
 
     <TextView
+        android:id="@+id/help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/help"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="60dp"
-        android:textColor="@color/backboom"
+        android:layout_marginBottom="55dp"
         android:fontFamily="cursive"
+        android:textAlignment="center"
+        android:textColor="@color/backboom"
         android:textSize="24sp" />
 
     <CheckBox
@@ -78,18 +79,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="101dp" />
 
-    <TextView
-        android:text="Answer some interesting questions here!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detailq"
-        android:layout_gravity="center_horizontal"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp" />
-
     <com.bvapp.arcmenulibrary.ArcMenu
         android:id="@+id/arcMenu"
         android:layout_width="wrap_content"
@@ -105,5 +94,18 @@
         >
 
     </com.bvapp.arcmenulibrary.ArcMenu>
+
+    <TextView
+        android:text="Answer some interesting questions here!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailq"
+        android:layout_gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:textAlignment="center" />
 
 </com.digibuddies.cnectus.layouts.SwipeFrameLayout>

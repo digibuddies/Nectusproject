@@ -1,12 +1,16 @@
 package com.digibuddies.cnectus;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +21,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.bvapp.arcmenulibrary.ArcMenu;
 import com.bvapp.arcmenulibrary.widget.FloatingActionButton;
@@ -27,13 +33,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class connections extends AppCompatActivity {
-    static SQLiteDatabase kdb;
+    static SQLiteDatabase kdb,kdm;
     RecyclerView rv;
+    Dialog dnew2;
+    Button imb2;
     List<data> cdata = new ArrayList<data>();
     static Adapter adapter;
     TextView ckcon,emp;
+    Context context;
+    SharedPreferences.Editor editor;
+    SharedPreferences mPrefs;
+    final String firsttime ="firsttime";
+    int firstt;
+    int flag=0;
     static Typeface custom_font;
-    static String kid;
+    static String kid,usn;
     private static final int[] ITEM_DRAWABLES = { R.drawable.face,
             R.drawable.help, R.drawable.add, R.drawable.home };
 
@@ -51,7 +65,52 @@ public class connections extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
         kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        firstt = mPrefs.getInt(firsttime, 0);
+        if (firstt==3){
+            flag=1;
+            editor = mPrefs.edit();
+            editor.putInt(firsttime,4);
+            editor.commit();
+        }
+        context = this;
+        dnew2=new Dialog(this);
+        dnew2.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dnew2.setContentView(R.layout.dialogque);
+        imb2 = (Button)dnew2.findViewById(R.id.close);
+        TextView dt = (TextView) dnew2.findViewById(R.id.dtitle);
+        TextView ex=(TextView)dnew2.findViewById(R.id.ex);
+        TextView dd=(TextView)dnew2.findViewById(R.id.ddet);
+        ImageView dback = (ImageView) dnew2.findViewById(R.id.dback);
+        dback.setImageResource(R.drawable.zzzz);
+        dt.setText("All Set!!!");
+        ex.setText("(That's all you need to get started :)");
+        ex.setVisibility(View.VISIBLE);
+        dd.setText("Once Your Request Is Accepted, You'll Be Able To Chat With The Other Person!");
+        imb2.setText("Let's Explore!!");
+        imb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dnew2.dismiss();
+                Intent intent=new Intent(connections.this,MainActivity.class);
+                intent.putExtra("target","none");
+                startActivity(intent);
+                finish();
 
+
+            }
+        });
+        if(flag==1){
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    dnew2.show();
+                }
+
+            }, 7000);
+
+        }
         Cursor c;
         rv=(RecyclerView)findViewById(R.id.krv);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -76,28 +135,40 @@ public class connections extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(position==0){
-                        Intent intent=new Intent(connections.this,profileclass.class);
+                        Intent intent=new Intent(context,profileclass.class);
                         startActivity(intent);
                         finish();
+
+
                     }
                     if(position==1){
-                        Intent intent=new Intent(connections.this,questions.class);
+                        Intent intent=new Intent(context,questions.class);
                         startActivity(intent);
                         finish();
+
+
                     }
                     if(position==2){
-                        Intent intent=new Intent(connections.this,matches.class);
+                        Intent intent=new Intent(context,matches.class);
                         startActivity(intent);
                         finish();
+
+
                     }
                     if(position==3){
-                        Intent intent=new Intent(connections.this,MainActivity.class);
+                        Intent intent=new Intent(context,MainActivity.class);
                         startActivity(intent);
                         finish();
+
                     }
                 }
             });
+
+
         }
+
+
+
         File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
         // Create direcorty if not exists
         if(!storagePath.exists()) {
@@ -130,7 +201,14 @@ public class connections extends AppCompatActivity {
                     c.getString(14),
                     c.getString(15)
             ));
-        } while (c.moveToPrevious());}
+        } while (c.moveToPrevious());
+        c.close();
+        }
+        kdm = openOrCreateDatabase(storagePath+"/"+"prodb.db", Context.MODE_PRIVATE, null);
+        c = kdm.rawQuery("SELECT uname FROM profile", null);
+        c.moveToFirst();
+        usn=c.getString(0);
+        c.close();
         ckcon=(TextView)findViewById(R.id.kcon);
         emp=(TextView)findViewById(R.id.kemp);
         final TextView detc=(TextView)findViewById(R.id.detc);
@@ -152,10 +230,9 @@ public class connections extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        //  super.onBackPressed();
         finish();
-
     }
+
 
 
 

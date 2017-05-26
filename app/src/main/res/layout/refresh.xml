@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <com.comix.overwatch.HiveProgressView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:layout_gravity="center"
+        app:hive_animDuration="5000"
+        app:hive_color="@color/first_slide_background"
+        app:hive_cornerRadius="0"
+        app:hive_maxAlpha="255"
+        app:hive_rainbow="false"
+        app:hive_shrink="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:fontFamily="monospace"
+        android:text="Updating!"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="italic" />
+</LinearLayout>

@@ -52,20 +52,6 @@ public class Feed extends AppCompatActivity{
                     intent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
                 startActivity(intent);
 
-
-
-
-
-                /* i.setType("text/plain");
-                i.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"divyavashishtha23@gmail.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT, "Feedback from App");
-                i.putExtra(Intent.EXTRA_TEXT, "\nMessage : "+editText.getText());
-                try {
-                    startActivity(Intent.createChooser(i, "Send feedback..."));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(getApplicationContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-                }*/
             }
         });
 
