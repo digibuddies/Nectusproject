@@ -47,8 +47,6 @@ import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.nightonke.boommenu.Util;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
-import com.tomer.fadingtextview.FadingTextView;
-
 import java.io.File;
 import java.util.List;
 
@@ -64,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     ResideMenuItem itemHome,itemShare;
     private SQLiteDatabase dbm;
     private Cursor c;
-    private static final String SELECT_SQL = "SELECT uname,aid FROM profile";
+    private String SELECT_SQL = "SELECT uname,aid FROM profile";
     private ProgressDialog working_dialog;
     ResideMenuItem itemHelp;
     ResideMenuItem itemFeed;
@@ -72,16 +70,15 @@ public class MainActivity extends AppCompatActivity {
     int flag=0;
     ResideMenuItem itemAbout;
     ConnectivityManager cm;
-    TextView tvp;
     SharedPreferences mPrefs;
     final String welcomeScreenShownPref = "welcomeScreenShown";
     String username = "usname";
-    int ff=0;
-    public static String uname="";
+    public String uname="";
     TextView usname;
     String tar;
-    Intent intent;
+    Intent intentb;
     CircleImageView civ;
+    Intent bck;
     int aid;
     SharedPreferences.Editor editor;
 
@@ -89,24 +86,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        scheduleAlarm();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             }
-        intent = new Intent(this, thebackservice.class);
+        intentb = new Intent(this, thebackservice.class);
+        startService(intentb);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
         if (!welcomeScreenShown) {
             editor = mPrefs.edit();
             editor.putBoolean(welcomeScreenShownPref, true);
-            editor.commit();
+            editor.apply();
             Intent intro = new Intent(this,Help.class);
             startActivity(intro);
 
         }
         b = (Button) findViewById(R.id.settings_button);
-        tvp=(TextView)findViewById(R.id.tvp);
         usname=(TextView)findViewById(R.id.usname);
         civ=(CircleImageView)findViewById(R.id.aid);
 
@@ -114,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         if(!(isDeviceOnline())){
             final Snackbar snackbar = Snackbar
-                    .make(usname, "Cnectus needs an active Internet Connection, Please Connect your device to internet!", Snackbar.LENGTH_INDEFINITE);
+                    .make(usname, getString(R.string.ma1), Snackbar.LENGTH_INDEFINITE);
             snackbar.setAction("CLOSE", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -126,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
             textView.setMaxLines(5);
             snackbar.show();
         }
-        tvp.setTypeface(custom_font);
         usname.setTypeface(custom_font);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -181,6 +176,10 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
+                        if(!(isDeviceOnline())){
+                            Toast.makeText(MainActivity.this,"No Internet Connection Available!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
                         showWorkingDialog();
 
                         new Handler().postDelayed(new Runnable() {
@@ -192,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }, 2000);
                         Intent intent = new Intent(MainActivity.this, profileclass.class);
-                        startActivity(intent);
+                        startActivity(intent);}
                     }
                 });
 
@@ -204,8 +203,8 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        if(usname.getText().equals("Please Head Onto the Profile section to ceate your profile!")){
-                            Toast.makeText(MainActivity.this,"Please create your profile first, then visit this section!", Toast.LENGTH_SHORT).show();
+                        if(usname.getText().equals(getString(R.string.ma3))){
+                            Toast.makeText(MainActivity.this,getString(R.string.ma2), Toast.LENGTH_SHORT).show();
                         }
                         else {
                         Intent intent = new Intent(MainActivity.this, questions.class);
@@ -220,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        if(usname.getText().equals("Please Head Onto the Profile section to ceate your profile!")){
+                        if(usname.getText().equals(getString(R.string.ma3))){
                             Toast.makeText(MainActivity.this,"Please create your profile first...", Toast.LENGTH_SHORT).show();
                         }
                         else {
@@ -249,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        if(usname.getText().equals("Please Head Onto the Profile section to ceate your profile!")){
+                        if(usname.getText().equals(getString(R.string.ma3))){
                             Toast.makeText(MainActivity.this,"Oops.. You need to create a profile first!", Toast.LENGTH_SHORT).show();
                         }
                         else {
@@ -280,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
         // create menu items;
         itemHome = new ResideMenuItem(this, R.drawable.home, "Home");
         itemHelp = new ResideMenuItem(this, R.drawable.help1, "Help");
-        itemFeed = new ResideMenuItem(this, R.drawable.feed, "Feedback");
+        itemFeed = new ResideMenuItem(this, R.drawable.feed, "Feed Back");
         itemAbout=new ResideMenuItem(this, R.drawable.about, "About Us");
         itemShare=new ResideMenuItem(this, R.drawable.share,"Share Cnectus");
 
@@ -430,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
                      } else {
                     flag=1;
                     final Snackbar snackbar = Snackbar
-                            .make(usname, "Cnectus requires the R/W permissions to work! Please restart the app and grant the requested permissions...", Snackbar.LENGTH_INDEFINITE);
+                            .make(usname, getString(R.string.ma4), Snackbar.LENGTH_INDEFINITE);
                     View snackbarView = snackbar.getView();
                     TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setMaxLines(5);
@@ -452,21 +451,6 @@ public class MainActivity extends AppCompatActivity {
                 && cm.getActiveNetworkInfo().isConnected();
     }
 
-    public void scheduleAlarm() {
-        // Construct an intent that will execute the AlarmReceiver
-        Intent intent = new Intent(getApplicationContext(), alarmreceiver.class);
-        // Create a PendingIntent to be triggered when the alarm goes off
-        final PendingIntent pIntent = PendingIntent.getBroadcast(this, alarmreceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // Setup periodic alarm every 5 seconds
-        long firstMillis = System.currentTimeMillis(); // alarm is set right away
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        // First parameter is the type: ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC_WAKEUP
-        // Interval can be INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_DAY
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
-                AlarmManager.INTERVAL_HALF_HOUR, pIntent);
-
-    }
 
     public  void dowork(){
         if(flag==0){
@@ -477,7 +461,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         dbm = openOrCreateDatabase(storagePath+"/"+"prodb.db", Context.MODE_PRIVATE, null);
-        dbm.execSQL("CREATE TABLE IF NOT EXISTS profile(id INTEGER PRIMARY KEY, aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(20),op12 VARCHAR(20),p1 integer,p2 integer,p3 integer,p4 integer,p5 integer,p6 integer,p7 integer,p8 integer,p9 integer,p10 integer,p11 integer,p12 integer);");
+        dbm.execSQL(getString(R.string.ma5));
         c = dbm.rawQuery(SELECT_SQL, null);
         c.moveToFirst();
         if(c.getCount()>0)
@@ -488,6 +472,8 @@ public class MainActivity extends AppCompatActivity {
             civ.setImageResource(aid);
             civ.setVisibility(View.VISIBLE);
         }
+        c.close();
+            dbm.close();
 
 
     }}

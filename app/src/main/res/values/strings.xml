@@ -5,6 +5,23 @@
     <string name="error_message">Please fill all the details.</string>
     <string name="error_message2">Please select both avatar and username.</string>
     <string name="launch_intro_activity">Launch intro activity</string>
-
-
+    <string name="querymat1">INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12)</string>
+    <string name="md1">(Do come back again and connect with more people :)</string>
+    <string name="md2">Amazing!!!</string>
+    <string name="md3">Let\'s Now Check The Status Of Your Request&#8230;</string>
+    <string name="md4">Let\'s Go!</string>
+    <string name="mselectsql">SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,mp,devid,allow FROM matches</string>
+    <string name="qd1">That\'s All For Now ! \n You have answered all the questions, we\'ll notify you when more are added :)</string>
+    <string name="qd2">Superb!!!</string>
+    <string name="qd3">"Now Based On the Answers You Just Gave, Let\'s See Your Top 3 Matches&#8230;"</string>
+    <string name="qd4">Okay!</string>
+    <string name="cd1">All Set!!!</string>
+    <string name="cd2">(That\'s all you need to get started :)</string>
+    <string name="cd3">Once Your Request Is Accepted, You\'ll Be Able To Chat With The Other Person!</string>
+    <string name="cd4">Let\'s Explore!!</string>
+    <string name="ma1">Cnectus needs an active Internet Connection, Connect your device to Internet and Restart the app!</string>
+    <string name="ma2">Please create your profile first, then visit this section!</string>
+    <string name="ma3">Please Head Onto the Profile section to create your profile!</string>
+    <string name="ma4">Cnectus requires the R/W permissions to work! Please restart the app and grant the requested permissions&#8230;</string>
+    <string name="ma5">CREATE TABLE IF NOT EXISTS profile(id INTEGER PRIMARY KEY, aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(20),op12 VARCHAR(20),p1 integer,p2 integer,p3 integer,p4 integer,p5 integer,p6 integer,p7 integer,p8 integer,p9 integer,p10 integer,p11 integer,p12 integer);</string>
 </resources>

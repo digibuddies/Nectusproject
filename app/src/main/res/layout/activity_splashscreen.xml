@@ -7,50 +7,53 @@
     android:orientation="vertical"
     tools:context="com.digibuddies.cnectus.splashactivity"
     android:fitsSystemWindows="true">
+
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/splash" />
 
+    <io.github.yuweiguocn.lib.squareloading.SquareLoading
+        android:id="@+id/sq"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/welcome_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:background="@android:color/transparent"
+        android:visibility="invisible"
+        app:dividerSize="2dp"
+        app:squareColor="@android:color/white"
+        app:squareCorner="2dp"
+        app:squareSize="12dp"
+        app:xCount="4"
+        app:yCount="3" />
+
     <com.digibuddies.cnectus.kenbview.RobotoTextView
         android:id="@+id/welcome_text"
         style="@style/TextViewAppearance.Headline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:alpha="0.0"
         android:text="Connecting Minds"
-        android:textSize="30sp"
+        android:textAlignment="center"
         android:textColor="@color/global_color_primary_light"
-        android:textStyle="normal|bold"
-        android:layout_below="@+id/imagelogo"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center" />
+        android:textSize="30sp"
+        android:textStyle="normal|bold" />
 
     <ImageView
         android:id="@+id/imagelogo"
-        android:src="@drawable/nnn"
-        android:layout_marginTop="147dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <io.github.yuweiguocn.lib.squareloading.SquareLoading
-        android:background="@android:color/transparent"
-        app:squareColor="@android:color/white"
-        app:squareSize="12dp"
-        app:squareCorner="2dp"
-        app:dividerSize="2dp"
-        app:xCount="4"
-        app:yCount="3"
-        android:layout_height="100dp"
-        android:layout_width="200dp"
-        android:layout_marginTop="68dp"
-        android:layout_below="@+id/welcome_text"
+        android:layout_above="@+id/welcome_text"
+        android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
-        android:id="@+id/sq"
-        android:visibility="invisible" />
+        android:layout_centerVertical="false"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/nnn" />
 
 
 </RelativeLayout>

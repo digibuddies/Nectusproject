@@ -52,33 +52,9 @@ public class CustomSlide2 extends SlideFragment {
             s8.setSelection(profileclass.p8);
             s9.setSelection(profileclass.p9);
             s10.setSelection(profileclass.p10);}
-
-        TextView txx0=(TextView)view.findViewById(R.id.textView111);
-       TextView txx1=(TextView)view.findViewById(R.id.textView1);
-        TextView txx2=(TextView)view.findViewById(R.id.kdate);
-        TextView txx3=(TextView)view.findViewById(R.id.textView3);
-        TextView txx4=(TextView)view.findViewById(R.id.textView4);
-        TextView txx5=(TextView)view.findViewById(R.id.textView5);
-        TextView txx6=(TextView)view.findViewById(R.id.textView6);
-        TextView txx7=(TextView)view.findViewById(R.id.textView7);
-        TextView txx8=(TextView)view.findViewById(R.id.textView8);
-        TextView txx9=(TextView)view.findViewById(R.id.textView22);
-        TextView txx10=(TextView)view.findViewById(R.id.textView11);
-        TextView txx11=(TextView)view.findViewById(R.id.textView12);
-        TextView txx12=(TextView)view.findViewById(R.id.textView13);
         if(!(profileclass.usern.equals(""))){
             tvun.setText(profileclass.usern);
         }
-
-        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/abc.ttf");
-/*
-        txx0.setTypeface(custom_font);
-       txx1.setTypeface(custom_font);
-        txx2.setTypeface(custom_font);
-       txx3.setTypeface(custom_font);
-        txx4.setTypeface(custom_font);
-        txx5.setTypeface(custom_font);txx6.setTypeface(custom_font);txx7.setTypeface(custom_font);txx8.setTypeface(custom_font);txx9.setTypeface(custom_font);txx10.setTypeface(custom_font);txx11.setTypeface(custom_font);txx12.setTypeface(custom_font);
-        */
         checkBox.setChecked(false);
 
         return view;

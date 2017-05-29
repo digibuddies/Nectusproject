@@ -53,19 +53,16 @@ public class questions extends AppCompatActivity {
     private CheckBox dragCheckbox;
     private ExplosionField explosionField;
     static int count=0;
-    int countr=0;
     int count2=0,count3=0;
     AnimationDrawable anim;
 private SwipeDeckAdapter adapter;
-    CardView cardView;
     Dialog dnew2;
     RadioGroup radioGroup;
     private SQLiteDatabase db2,db3;
     RadioButton r1;
     RadioButton r2;
-    Context context;
-    ImageButton ib;
     RadioButton r3;
+    Intent intent0;
     SharedPreferences.Editor editor;
     SharedPreferences mPrefs;
     final String firsttime ="firsttime";
@@ -73,21 +70,16 @@ private SwipeDeckAdapter adapter;
     Button imb,imb2;
     int x,flag=0,flag2=0;
     RadioButton r4;
-    private static final int[] ITEM_DRAWABLES = { R.drawable.face,
-            R.drawable.add, R.drawable.connect, R.drawable.home};
-
-    private static final String[] STR = {""};
-
+    private int[] ITEM_DRAWABLES = { R.drawable.face,
+            R.drawable.add, R.drawable.connect,R.drawable.home};
     TextView h,l,dt,dd,ex;
 SwipeDeck cardStack;
     private Cursor c;
-    private String idd;
     String query1 = "INSERT OR REPLACE INTO counter1 (id, count) VALUES(1,0);";
-    private static final String SELECT_SQL = "SELECT count FROM counter1";
+    private String SELECT_SQL = "SELECT count FROM counter1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        createDatabase();
         super.onCreate(savedInstanceState);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
             Window w = getWindow();
@@ -97,7 +89,8 @@ SwipeDeck cardStack;
             decorView.setSystemUiVisibility(uiOptions);
                  }
         setContentView(R.layout.acticity_questions);
-        context=this;
+        createDatabase();
+        dostuff();
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstt = mPrefs.getInt(firsttime, 0);
         if (firstt==1){
@@ -109,7 +102,6 @@ SwipeDeck cardStack;
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x;
         final int height = size.y;
 
         final Dialog dnew=new Dialog(this);
@@ -123,6 +115,7 @@ SwipeDeck cardStack;
             }
         });
         if (flag==1){
+            dnew.show();
             dnew.show();
             flag2=1;
         }
@@ -144,8 +137,8 @@ SwipeDeck cardStack;
             public void onClick(View view) {
                 dnew2.dismiss();
                 Intent intent=new Intent(questions.this,matches.class);
-                startActivity(intent);
                 finish();
+                startActivity(intent);
 
             }
         });
@@ -157,66 +150,11 @@ SwipeDeck cardStack;
         final TextView detq=(TextView)findViewById(R.id.detailq);
         hdq.setTypeface(custom_font);
         detq.setTypeface(custom_font);
-
-
-        final SwipeFrameLayout container = (SwipeFrameLayout) findViewById(R.id.swipeLayout);
-        ArcMenu menu = (ArcMenu) findViewById(R.id.arcMenu);
-        menu.setMinRadius(20);
-        menu.showTooltip(false);
-        menu.setAnim(300,300,ArcMenu.ANIM_MIDDLE_TO_RIGHT,ArcMenu.ANIM_MIDDLE_TO_RIGHT,
-                ArcMenu.ANIM_INTERPOLATOR_ACCELERATE_DECLERATE,ArcMenu.ANIM_INTERPOLATOR_ACCELERATE_DECLERATE);
-
-        final int itemCount = ITEM_DRAWABLES.length;
-        for (int i = 0; i < itemCount; i++) {
-            FloatingActionButton item = new FloatingActionButton(this);  //Use internal fab as a child
-            item.setSize(FloatingActionButton.SIZE_MINI);  //set minimum size for fab 42dp
-            item.setShadow(true); //enable to draw shadow
-            item.setIcon(ITEM_DRAWABLES[i]); //add icon for fab
-            item.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.buttoncol));  //set menu button normal color programmatically
-            menu.setChildSize(item.getIntrinsicHeight());
-            final int position = i;
-            menu.addItem(item, "", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(position==0){
-                        Intent intent=new Intent(context,profileclass.class);
-                        startActivity(intent);
-                        finish();
-
-
-                    }
-                    if(position==1){
-                        Intent intent=new Intent(context,matches.class);
-                        startActivity(intent);
-                        finish();
-
-
-                    }
-                    if(position==2){
-                        Intent intent=new Intent(context,connections.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    if(position==3){
-                        Intent intent=new Intent(context,MainActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                    }
-                }
-            });
-        }
-        if(height<900){
-            menu.setVisibility(View.INVISIBLE);
-        }
-
         cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
         dragCheckbox = (CheckBox) findViewById(R.id.checkbox_drag);
         h=(TextView)findViewById(R.id.help);
         h.setTypeface(custom_font);
         l=(TextView)findViewById(R.id.limit);
-             dostuff();
         testData = new ArrayList<>();
         explosionField = ExplosionField.attach2Window(this);
         Cursor c4 = db2.rawQuery(SELECT_SQL, null);
@@ -272,6 +210,9 @@ SwipeDeck cardStack;
                     db2.execSQL(query2);
                 }
 
+
+
+
             }
 
             @Override
@@ -291,6 +232,62 @@ SwipeDeck cardStack;
                 return dragCheckbox.isChecked();
             }
         });
+
+
+        ArcMenu menu = (ArcMenu) findViewById(R.id.arcMenu);
+        if(height<900){
+            menu.setVisibility(View.INVISIBLE);
+        }
+        if(height>=900){
+        menu.setMinRadius(20);
+        menu.showTooltip(false);
+        menu.setAnim(300,300,ArcMenu.ANIM_MIDDLE_TO_RIGHT,ArcMenu.ANIM_MIDDLE_TO_RIGHT,
+                ArcMenu.ANIM_INTERPOLATOR_ACCELERATE_DECLERATE,ArcMenu.ANIM_INTERPOLATOR_ACCELERATE_DECLERATE);
+
+        final int itemCount = ITEM_DRAWABLES.length;
+        for (int i = 0; i < itemCount; i++) {
+            FloatingActionButton item = new FloatingActionButton(this);  //Use internal fab as a child
+            item.setSize(FloatingActionButton.SIZE_MINI);  //set minimum size for fab 42dp
+            item.setShadow(true); //enable to draw shadow
+            item.setIcon(ITEM_DRAWABLES[i]); //add icon for fab
+            item.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.buttoncol));  //set menu button normal color programmatically
+            menu.setChildSize(item.getIntrinsicHeight());
+            final int position = i;
+            menu.addItem(item, "", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(position==0){
+                        intent0=new Intent(questions.this,profileclass.class);
+                        finish();
+                        startActivity(intent0);
+
+
+                    }
+                    if(position==1){
+                        intent0=new Intent(questions.this,matches.class);
+                        finish();
+                        startActivity(intent0);
+
+
+                    }
+                    if(position==2){
+                        intent0=new Intent(questions.this,connections.class);
+                        finish();
+                        startActivity(intent0);
+                    }
+
+                    if(position==3){
+                        intent0=new Intent(questions.this,MainActivity.class);
+                        intent0.putExtra("target","none");
+                        finish();
+                        startActivity(intent0);
+
+                    }
+
+                }
+            });}
+        }
+
     }
 
     public class SwipeDeckAdapter extends BaseAdapter {
@@ -442,8 +439,6 @@ SwipeDeck cardStack;
                 public void onClick(View v) {
                     Log.i("Layer type: ", Integer.toString(v.getLayerType()));
                     Log.i("Hardware Accel type:", Integer.toString(View.LAYER_TYPE_HARDWARE));
-                    /*Intent i = new Intent(v.getContext(), BlankActivity.class);
-                    v.getContext().startActivity(i);*/
                 }
             });
             return v;
@@ -464,14 +459,13 @@ SwipeDeck cardStack;
         if(c.getCount()<=0){
             db2.execSQL(query1);
         }
-        c.close();
     }
 
     public void dostuff(){
         try {
             String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/android/.data_21";
             File f = new File(baseDir+"/"+"fiel.txt");
-            FileInputStream is = new FileInputStream(f);
+            FileInputStream is;
             is = new FileInputStream(f);
             BufferedReader reader;
             reader = new BufferedReader(new InputStreamReader(is));
@@ -517,7 +511,14 @@ SwipeDeck cardStack;
     public void finish() {
         Intent i=new Intent(this,thebackservice.class);
         startService(i);
+        c.close();
+        db2.close();
+        db3.close();
         super.finish();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
 

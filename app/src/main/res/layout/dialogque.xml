@@ -72,7 +72,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:background="@color/black"
-            android:text="Okay!"
+            android:padding="3dp"
+            android:text="Okay !"
             android:textColor="@android:color/white" />
 
         <RelativeLayout

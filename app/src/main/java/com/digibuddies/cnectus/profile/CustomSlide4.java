@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
-
-import com.digibuddies.cnectus.MainActivity;
 import com.digibuddies.cnectus.R;
 import com.digibuddies.cnectus.questions;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +34,7 @@ public class CustomSlide4 extends SlideFragment {
     final String firsttime ="firsttime";
     int firstt;
     public LiquidButton liquidButton;
+    Intent i;
     private SQLiteDatabase db;
     Button sv;
     int flag=1;
@@ -76,9 +75,9 @@ public class CustomSlide4 extends SlideFragment {
             @Override
             public void onPourFinish() {
                 if (flag == 0) {
-                    Intent i = new Intent(getActivity(), questions.class);
-                    startActivity(i);
+                    i = new Intent(getActivity(), questions.class);
                     getActivity().finish();
+                    startActivity(i);
 
                 } else {
                     getActivity().finish();

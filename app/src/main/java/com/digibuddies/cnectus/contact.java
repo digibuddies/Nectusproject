@@ -66,6 +66,9 @@ public class contact extends AppCompatActivity {
                     String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+dvid+"','"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
                     db2.execSQL(queryx);
                 }
+                else if(ssc.getDirection().name().equals("LEFT")){
+                    myRef.child("contact").child(cid).child(dvid).child("request").setValue("DECLINED");
+                }
                 db.execSQL("DELETE FROM matches WHERE id='"+x+"'");
                 db.execSQL("UPDATE matches set id='"+(x)+"' WHERE id='"+(x+1)+"'");
                 db.close();

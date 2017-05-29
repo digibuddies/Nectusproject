@@ -32,7 +32,7 @@ public class profileclass extends MaterialIntroActivity {
     public static int p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12;
     public static int avid=0;
     static public data d;
-    private static final String SELECT_SQL = "SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12 FROM profile";
+    private String SELECT_SQL = "SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12 FROM profile";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +64,7 @@ public class profileclass extends MaterialIntroActivity {
                 o12 = c.getString(14);p12=c.getInt(26);
                 c.close();
             }
-
+                db.close();
         }
 
 
@@ -96,6 +96,7 @@ public class profileclass extends MaterialIntroActivity {
     }
     @Override
     public void onFinish() {
+
         super.onFinish();
 
     }

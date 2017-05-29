@@ -98,6 +98,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
                 else if (dataSnapshot.getValue().toString().equals("REMOVED")){
                     holder.tv2.setText("Connection no longer exists!");
                 }
+                else if (dataSnapshot.getValue().toString().equals("DECLINED")){
+                    holder.tv2.setText("Request Declined!");
+                }
                 else holder.tv2.setText("Request Pending!");
             }
 
@@ -119,7 +122,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             @Override
             public void onClick(View view) {
                 kdata.remove(temp);
-                myRef.child(temp.getDevid()).child(connections.kid).child("request").setValue("REMOVED");
+                myRef.child(temp.getDevid()).child(connections.kid).removeValue();
                 myRef.child(connections.kid).child(temp.getDevid()).child("request").setValue("REMOVED");
                 connections.delete(temp.getDevid());
                 myRefcht.child(connections.kid).child(temp.getDevid()).removeValue();

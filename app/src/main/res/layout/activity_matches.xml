@@ -373,14 +373,14 @@
         android:id="@+id/arcMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        arc:menuType="normal"
+        app:menuChildAnim="true"
         arc:menuChildSize="48dp"
-        arc:menuGravity="Bottom_Right"
         arc:menuClickAnim="true"
-        arc:menuChildAnim="false"
-        arc:menuShadowElevation="true"
+        arc:menuGravity="Bottom_Right"
+        arc:menuImage="@drawable/ic_fingerprint_black_24dp"
         arc:menuNormalColor="@android:color/white"
-        arc:menuImage="@drawable/ic_fingerprint_black_24dp">
+        arc:menuShadowElevation="true"
+        arc:menuType="normal">
 
     </com.bvapp.arcmenulibrary.ArcMenu>
 

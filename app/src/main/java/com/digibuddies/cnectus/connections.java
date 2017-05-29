@@ -40,15 +40,15 @@ public class connections extends AppCompatActivity {
     List<data> cdata = new ArrayList<data>();
     static Adapter adapter;
     TextView ckcon,emp;
-    Context context;
     SharedPreferences.Editor editor;
     SharedPreferences mPrefs;
     final String firsttime ="firsttime";
     int firstt;
+    Intent intent0;
     int flag=0;
     static Typeface custom_font;
     static String kid,usn;
-    private static final int[] ITEM_DRAWABLES = { R.drawable.face,
+    private int[] ITEM_DRAWABLES = { R.drawable.face,
             R.drawable.help, R.drawable.add, R.drawable.home };
 
 
@@ -71,9 +71,8 @@ public class connections extends AppCompatActivity {
             flag=1;
             editor = mPrefs.edit();
             editor.putInt(firsttime,4);
-            editor.commit();
+            editor.apply();
         }
-        context = this;
         dnew2=new Dialog(this);
         dnew2.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dnew2.setContentView(R.layout.dialogque);
@@ -83,19 +82,19 @@ public class connections extends AppCompatActivity {
         TextView dd=(TextView)dnew2.findViewById(R.id.ddet);
         ImageView dback = (ImageView) dnew2.findViewById(R.id.dback);
         dback.setImageResource(R.drawable.zzzz);
-        dt.setText("All Set!!!");
-        ex.setText("(That's all you need to get started :)");
+        dt.setText(getString(R.string.cd1));
+        ex.setText(getString(R.string.cd2));
         ex.setVisibility(View.VISIBLE);
-        dd.setText("Once Your Request Is Accepted, You'll Be Able To Chat With The Other Person!");
-        imb2.setText("Let's Explore!!");
+        dd.setText(getString(R.string.cd3));
+        imb2.setText(getString(R.string.cd4));
         imb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dnew2.dismiss();
                 Intent intent=new Intent(connections.this,MainActivity.class);
                 intent.putExtra("target","none");
-                startActivity(intent);
                 finish();
+                startActivity(intent);
 
 
             }
@@ -108,7 +107,7 @@ public class connections extends AppCompatActivity {
                     dnew2.show();
                 }
 
-            }, 7000);
+            }, 4000);
 
         }
         Cursor c;
@@ -135,30 +134,33 @@ public class connections extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(position==0){
-                        Intent intent=new Intent(context,profileclass.class);
-                        startActivity(intent);
+                        intent0=new Intent(connections.this,profileclass.class);
+                        startActivity(intent0);
                         finish();
 
 
                     }
                     if(position==1){
-                        Intent intent=new Intent(context,questions.class);
-                        startActivity(intent);
+                        intent0=new Intent(connections.this,questions.class);
                         finish();
+                        startActivity(intent0);
 
 
                     }
                     if(position==2){
-                        Intent intent=new Intent(context,matches.class);
-                        startActivity(intent);
+                       intent0=new Intent(connections.this,matches.class);
                         finish();
+                        startActivity(intent0);
+
 
 
                     }
                     if(position==3){
-                        Intent intent=new Intent(context,MainActivity.class);
-                        startActivity(intent);
+                        intent0=new Intent(connections.this,MainActivity.class);
+                        intent0.putExtra("target","none");
                         finish();
+                        startActivity(intent0);
+
 
                     }
                 }
@@ -209,6 +211,7 @@ public class connections extends AppCompatActivity {
         c.moveToFirst();
         usn=c.getString(0);
         c.close();
+        kdm.close();
         ckcon=(TextView)findViewById(R.id.kcon);
         emp=(TextView)findViewById(R.id.kemp);
         final TextView detc=(TextView)findViewById(R.id.detc);
@@ -233,7 +236,11 @@ public class connections extends AppCompatActivity {
         finish();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Runtime.getRuntime().gc();
+    }
 
 
 }

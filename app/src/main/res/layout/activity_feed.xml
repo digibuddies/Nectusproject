@@ -36,17 +36,18 @@
         android:layout_centerHorizontal="true"
         android:textStyle="normal|bold"
         android:layout_below="@+id/view" />
+
     <EditText
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:hint="Submit a bug or Request a feature or Send your ideas"
-        android:textColorHint="@android:color/white"
+        android:layout_below="@+id/msg"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_below="@+id/msg"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:hint="Submit a Bug or Request a Feature or Send your Ideas..."
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
 
     <Button
         android:layout_width="wrap_content"

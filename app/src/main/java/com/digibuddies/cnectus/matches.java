@@ -67,34 +67,31 @@ public class matches extends AppCompatActivity {
     StickySwitch ssw,ssw2,ssw3;
     int qcount;
     SharedPreferences.Editor editor;
+    Intent intent0;
     SharedPreferences mPrefs;
     final String firsttime ="firsttime";
     int firstt;
     SQLiteDatabase dbc;
     TextView tv1;
-    Context con;
     TextView tv2;
     Dialog dnew2;
     Button imb2;
     TextView tv3;
-    TextView tv4;
+    TextView tv4,tvd,tvd2,tvd3;
     TextView tv5;
     TextView und,und2,und3;
     int flag=0;
-    TextView tv6,contmail,contmail2,contmail3,front;
-    TextView tv,d1,d2,d3,cy,cn,cy2,cn2,cy3,cn3;
+    TextView tv6;
+    TextView d1,d2,d3,cy,cn,cy2,cn2,cy3,cn3;
     ObservableScrollView sv;
     AnimationDrawable anim;
-    private static final int[] ITEM_DRAWABLES = {R.drawable.ref2, R.drawable.face,
-            R.drawable.help, R.drawable.connect };
-
-    private static final String[] STR = {"Home","Profile","Questions","Refresh"};
-
+    private int[] ITEM_DRAWABLES = {R.drawable.ref2, R.drawable.face,
+            R.drawable.help, R.drawable.connect, R.drawable.home };
     CircleImageView p1,p2,p3;
     Button b1,b2,b3;
-    private static final String SELECT_SQL ="SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,mp,devid,allow FROM matches";
+    private String SELECT_SQL;
     private SQLiteDatabase db;
-    private Cursor c,d;
+    private Cursor c;
     String id;
     String currentDateTime;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -108,7 +105,7 @@ public class matches extends AppCompatActivity {
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
-
+            SELECT_SQL=getString(R.string.mselectsql);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches);
         id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -118,13 +115,12 @@ public class matches extends AppCompatActivity {
             flag=1;
             editor = mPrefs.edit();
             editor.putInt(firsttime, 3);
-            editor.commit();
+            editor.apply();
         }
 
         final Dialog dialogref = new Dialog(this);
         dialogref.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogref.setContentView(R.layout.refresh);
-        con = this;
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog);
@@ -148,17 +144,17 @@ public class matches extends AppCompatActivity {
         ImageView dback = (ImageView) dnew2.findViewById(R.id.dback);
         dback.setImageResource(R.drawable.zzz);
         ex.setVisibility(View.VISIBLE);
-        ex.setText("(Do come back again and connect with more people :)");
-        dt.setText("Amazing!!!");
-        dd.setText("Let's Now Check The Status Of Your Request...");
-        imb2.setText("Let's Go!");
+        ex.setText(getString(R.string.md1));
+        dt.setText(getString(R.string.md2));
+        dd.setText(getString(R.string.md3));
+        imb2.setText(getString(R.string.md4));
         imb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dnew2.dismiss();
                 Intent intent=new Intent(matches.this,connections.class);
-                startActivity(intent);
                 finish();
+                startActivity(intent);
 
 
             }
@@ -175,7 +171,9 @@ public class matches extends AppCompatActivity {
         ssw=(StickySwitch)dialog.findViewById(R.id.dss);
         ssw2=(StickySwitch)dialog2.findViewById(R.id.dss);
         ssw3=(StickySwitch)dialog3.findViewById(R.id.dss);
-
+        tvd=(TextView)dialog.findViewById(R.id.dst);
+        tvd2=(TextView)dialog2.findViewById(R.id.dst);
+        tvd3=(TextView)dialog3.findViewById(R.id.dst);
 
         cy=(TextView)dialog.findViewById(R.id.cy);
         cn=(TextView)dialog.findViewById(R.id.cn);
@@ -207,30 +205,40 @@ public class matches extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(position==1){
-                        Intent intent=new Intent(con,profileclass.class);
-                        startActivity(intent);
+                        intent0= new Intent(matches.this,profileclass.class);
                         finish();
+                        startActivity(intent0);
 
 
                     }
                     if(position==2){
-                        Intent intent=new Intent(con,questions.class);
-                        startActivity(intent);
+                        intent0=new Intent(matches.this,questions.class);
                         finish();
+                        startActivity(intent0);
 
 
                     }
                     if(position==3){
-                        Intent intent=new Intent(con,connections.class);
-                        startActivity(intent);
+                        intent0=new Intent(matches.this,connections.class);
                         finish();
+                        startActivity(intent0);
 
 
                     }
+
+                    if(position==4){
+                        intent0=new Intent(matches.this,MainActivity.class);
+                        intent0.putExtra("target","none");
+                        finish();
+                        startActivity(intent0);
+
+
+                    }
+
                     if(position==0){
-                        Intent intent=new Intent(con,thebackservice.class);
+                        intent0=new Intent(matches.this,thebackservice.class);
                         dialogref.show();
-                        startService(intent);
+                        startService(intent0);
                         new Handler().postDelayed(new Runnable() {
 
                             @Override
@@ -240,8 +248,8 @@ public class matches extends AppCompatActivity {
                                         (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                                 notificationManager.cancel(109);
                                 dialogref.hide();
-                                startActivity(intent);
                                 finish();
+                                startActivity(intent);
 
                             }
 
@@ -278,8 +286,10 @@ public class matches extends AppCompatActivity {
                 if(ssw.getDirection().name().equals("RIGHT")){
                     myRef.child(devid.get(0)).child(id).child("request").setValue("RIGHT");
                     myRef.child(devid.get(0)).child(id).child("mp").setValue(mp.get(0));
-                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+devid.get(0)+"','"+currentDateTime+"','"+mp.get(0)+"','"+aid.get(0)+"','"+mail.get(0)+"','"+userid.get(0)+"','"+datadb.get(0)+"','"+datadb2.get(0)+"','"+datadb3.get(0)+"','"+datadb4.get(0)+"','"+datadb5.get(0)+"','"+datadb6.get(0)+"','"+datadb7.get(0)+"','"+datadb8.get(0)+"','"+datadb9.get(0)+"','"+datadb10.get(0)+"','"+datadb11.get(0)+"','"+datadb12.get(0)+"');";
+                    String queryx = getString(R.string.querymat1)+" VALUES('"+devid.get(0)+"','"+currentDateTime+"','"+mp.get(0)+"','"+aid.get(0)+"','"+mail.get(0)+"','"+userid.get(0)+"','"+datadb.get(0)+"','"+datadb2.get(0)+"','"+datadb3.get(0)+"','"+datadb4.get(0)+"','"+datadb5.get(0)+"','"+datadb6.get(0)+"','"+datadb7.get(0)+"','"+datadb8.get(0)+"','"+datadb9.get(0)+"','"+datadb10.get(0)+"','"+datadb11.get(0)+"','"+datadb12.get(0)+"');";
                     dbc.execSQL(queryx);
+                    String qer = "UPDATE matches SET allow='RIGHT' WHERE id=1;";
+                    db.execSQL(qer);
 
 
                 }
@@ -300,8 +310,10 @@ public class matches extends AppCompatActivity {
                 if(ssw2.getDirection().name().equals("RIGHT")){
                     myRef.child(devid.get(1)).child(id).child("request").setValue("RIGHT");
                     myRef.child(devid.get(1)).child(id).child("mp").setValue(mp.get(1));
-                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+devid.get(1)+"','"+currentDateTime+"','"+mp.get(1)+"','"+aid.get(1)+"','"+mail.get(1)+"','"+userid.get(1)+"','"+datadb.get(1)+"','"+datadb2.get(1)+"','"+datadb3.get(1)+"','"+datadb4.get(1)+"','"+datadb5.get(1)+"','"+datadb6.get(1)+"','"+datadb7.get(1)+"','"+datadb8.get(1)+"','"+datadb9.get(1)+"','"+datadb10.get(1)+"','"+datadb11.get(1)+"','"+datadb12.get(1)+"');";
+                    String queryx = getString(R.string.querymat1)+" VALUES('"+devid.get(1)+"','"+currentDateTime+"','"+mp.get(1)+"','"+aid.get(1)+"','"+mail.get(1)+"','"+userid.get(1)+"','"+datadb.get(1)+"','"+datadb2.get(1)+"','"+datadb3.get(1)+"','"+datadb4.get(1)+"','"+datadb5.get(1)+"','"+datadb6.get(1)+"','"+datadb7.get(1)+"','"+datadb8.get(1)+"','"+datadb9.get(1)+"','"+datadb10.get(1)+"','"+datadb11.get(1)+"','"+datadb12.get(1)+"');";
                     dbc.execSQL(queryx);
+                    String qer = "UPDATE matches SET allow='RIGHT' WHERE id=2;";
+                    db.execSQL(qer);
                 }
                 else if(ssw2.getDirection().name().equals("LEFT")){
                     myRef.child(devid.get(1)).child(id).child("request").setValue("LEFT");
@@ -320,8 +332,10 @@ public class matches extends AppCompatActivity {
                 if(ssw3.getDirection().name().equals("RIGHT")){
                     myRef.child(devid.get(2)).child(id).child("request").setValue("RIGHT");
                     myRef.child(devid.get(2)).child(id).child("mp").setValue(mp.get(2));
-                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+devid.get(2)+"','"+currentDateTime+"','"+mp.get(2)+"','"+aid.get(2)+"','"+mail.get(2)+"','"+userid.get(2)+"','"+datadb.get(2)+"','"+datadb2.get(2)+"','"+datadb3.get(2)+"','"+datadb4.get(2)+"','"+datadb5.get(2)+"','"+datadb6.get(2)+"','"+datadb7.get(2)+"','"+datadb8.get(2)+"','"+datadb9.get(2)+"','"+datadb10.get(2)+"','"+datadb11.get(2)+"','"+datadb12.get(2)+"');";
+                    String queryx = getString(R.string.querymat1)+" VALUES('"+devid.get(2)+"','"+currentDateTime+"','"+mp.get(2)+"','"+aid.get(2)+"','"+mail.get(2)+"','"+userid.get(2)+"','"+datadb.get(2)+"','"+datadb2.get(2)+"','"+datadb3.get(2)+"','"+datadb4.get(2)+"','"+datadb5.get(2)+"','"+datadb6.get(2)+"','"+datadb7.get(2)+"','"+datadb8.get(2)+"','"+datadb9.get(2)+"','"+datadb10.get(2)+"','"+datadb11.get(2)+"','"+datadb12.get(2)+"');";
                     dbc.execSQL(queryx);
+                    String qer = "UPDATE matches SET allow='RIGHT' WHERE id=3;";
+                    db.execSQL(qer);
 
                 }
                 else if(ssw3.getDirection().name().equals("LEFT")){
@@ -364,46 +378,6 @@ public class matches extends AppCompatActivity {
             }
         });
 
-        ssw.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
-            @Override
-            public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
-                if(direction.name().equals("RIGHT")){
-                    String qer = "UPDATE matches SET allow='RIGHT' WHERE id=1;";
-                    db.execSQL(qer);
-                }
-                else if(direction.name().equals("LEFT")){
-                    String qer = "UPDATE matches SET allow='LEFT' WHERE id=1;";
-                    db.execSQL(qer);
-            }
-
-                 }
-        });
-        ssw2.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
-            @Override
-            public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
-                if(direction.name().equals("RIGHT")){
-                    String qer = "UPDATE matches SET allow='RIGHT' WHERE id=2;";
-                    db.execSQL(qer);
-                }
-                else if(direction.name().equals("LEFT")){
-                    String qer = "UPDATE matches SET allow='LEFT' WHERE id=2;";
-                    db.execSQL(qer);}
-            }
-        });
-        ssw3.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
-            @Override
-            public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
-                if(direction.name().equals("RIGHT")){
-                    String qer = "UPDATE matches SET allow='RIGHT' WHERE id=3;";
-                    db.execSQL(qer);
-
-                }
-                else if(direction.name().equals("LEFT")) {
-                    String qer = "UPDATE matches SET allow='LEFT' WHERE id=3;";
-                    db.execSQL(qer);
-                }
-            }
-        });
 
         p1=(CircleImageView)findViewById(R.id.kav);
         p2=(CircleImageView)findViewById(R.id.p2);
@@ -496,8 +470,26 @@ public class matches extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         if (anim != null && !anim.isRunning())
             anim.start();
+
+        if (allow.size()>0){
+            if(allow.get(0).equals("RIGHT")){
+                ssw.setVisibility(View.INVISIBLE);
+                tvd.setVisibility(View.VISIBLE);}
+
+            if(allow.get(1).equals("RIGHT")){
+                ssw2.setVisibility(View.INVISIBLE);
+                tvd2.setVisibility(View.VISIBLE);
+            }
+
+            if(allow.get(2).equals("RIGHT")){
+                ssw3.setVisibility(View.INVISIBLE);
+                tvd3.setVisibility(View.VISIBLE);
+            }
+            }
+        createDatabase00();
     }
 
     // Stopping animation:- stop the animation on onPause.
@@ -506,28 +498,7 @@ public class matches extends AppCompatActivity {
         super.onPause();
         if (anim != null && anim.isRunning())
             anim.stop();
-    }
 
-    @Override
-    protected void onResumeFragments() {
-        if (allow.size()>0){
-            if(allow.get(0).equals("RIGHT")){
-                ssw.setDirection(StickySwitch.Direction.RIGHT);}
-            else if(allow.get(0).equals("LEFT")){
-                ssw.setDirection(StickySwitch.Direction.LEFT);
-            }
-            if(allow.get(1).equals("RIGHT")){
-                ssw2.setDirection(StickySwitch.Direction.RIGHT);}
-            else if(allow.get(1).equals("LEFT")){
-                ssw2.setDirection(StickySwitch.Direction.LEFT);
-            }
-            if(allow.get(2).equals("RIGHT")){
-                ssw3.setDirection(StickySwitch.Direction.RIGHT);}
-            else if(allow.get(2).equals("LEFT")){
-                ssw3.setDirection(StickySwitch.Direction.LEFT);
-            }}
-        createDatabase00();
-        super.onResumeFragments();
     }
 
     public void createDatabase00(){
@@ -547,8 +518,8 @@ public class matches extends AppCompatActivity {
             qcount=c.getInt(0);
             Log.d("countmatch", String.valueOf(qcount));
         }
-        c.close();
         db2.close();
+        c.close();
     }
 
     public void showd(){
@@ -561,4 +532,16 @@ public class matches extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void finish() {
+        db.close();
+        dbc.close();
+        super.finish();
+
+    }
 }
