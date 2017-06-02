@@ -68,7 +68,7 @@ private SwipeDeckAdapter adapter;
     final String firsttime ="firsttime";
     int firstt;
     Button imb,imb2;
-    int x,flag=0,flag2=0;
+    int x,flag=0,flag2=0,flagrun=0;
     RadioButton r4;
     private int[] ITEM_DRAWABLES = { R.drawable.face,
             R.drawable.add, R.drawable.connect,R.drawable.home};
@@ -321,6 +321,7 @@ SwipeDeck cardStack;
             if(count==70&&flag2==1){
                 Intent intent=new Intent(questions.this,thebackservice.class);
                 startService(intent);
+                flagrun=1;
                 h.postDelayed(new Runnable() {
                     public void run() {
                         ex.setVisibility(View.VISIBLE);
@@ -509,8 +510,9 @@ SwipeDeck cardStack;
 
     @Override
     public void finish() {
+        if(flagrun==0){
         Intent i=new Intent(this,thebackservice.class);
-        startService(i);
+        startService(i);}
         c.close();
         db2.close();
         db3.close();

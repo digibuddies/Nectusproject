@@ -4,12 +4,12 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@android:color/transparent</item>
-        <item name="colorPrimary">@color/cardview_dark_background</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/backgraound</item>
         <item name="android:colorForeground">@android:color/holo_red_light</item>
         <item name="android:textColorPrimary">@color/text</item>
-        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/boom5</item>
 
     </style>
 

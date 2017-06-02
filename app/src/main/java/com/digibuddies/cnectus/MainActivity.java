@@ -90,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             }
-        intentb = new Intent(this, thebackservice.class);
-        startService(intentb);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
         if (!welcomeScreenShown) {
@@ -453,6 +451,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public  void dowork(){
+        scheduleAlarm();
         if(flag==0){
         File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
         // Create direcorty if not exists
@@ -477,5 +476,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     }}
+
+    public void scheduleAlarm() {
+        // Construct an intent that will execute the AlarmReceiver
+        Intent intent = new Intent(getApplicationContext(), alarmreceiver.class);
+        // Create a PendingIntent to be triggered when the alarm goes off
+        final PendingIntent pIntent = PendingIntent.getBroadcast(this, alarmreceiver.REQUEST_CODE,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Setup periodic alarm every 5 seconds
+        long firstMillis = System.currentTimeMillis(); // alarm is set right away
+        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        // First parameter is the type: ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC_WAKEUP
+        // Interval can be INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_DAY
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
+                AlarmManager.INTERVAL_HALF_HOUR, pIntent);
+
+    }
 
 }

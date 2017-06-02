@@ -12,12 +12,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Cnectus"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:largeHeap="true"
         tools:replace="android:icon,label">
         <activity
-            android:name="com.digibuddies.cnectus.splashactivity"
+            android:name=".splashactivity"
             android:label="Cnectus"
             android:launchMode="standard"
             android:noHistory="true"
@@ -31,39 +31,65 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.digibuddies.cnectus.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
-            android:name="com.digibuddies.cnectus.profile.profileclass"
+            android:name=".profile.profileclass"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan" />
-
-        <activity android:name="com.digibuddies.cnectus.questions"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.digibuddies.cnectus.matches"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.digibuddies.cnectus.Help"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.digibuddies.cnectus.Feed"
-            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".questions"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".matches"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Help"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Feed"
+            android:configChanges="orientation|screenSize" />
 
         <service
-            android:name="com.digibuddies.cnectus.thebackservice"
+            android:name=".thebackservice"
             android:enabled="true"
             android:exported="true" />
 
         <receiver
-            android:name="com.digibuddies.cnectus.alarmreceiver"
+            android:name=".alarmreceiver"
             android:process=":remote" />
 
-        <activity android:name="com.digibuddies.cnectus.Aboutus"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.digibuddies.cnectus.contact"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.digibuddies.cnectus.connections"
-            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".Aboutus"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".contact"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".connections"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".search"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <service
+            android:name=".notify.FcmInstanceIdService"
+            android:enabled="true"
+            android:priority="10000">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".notify.FcmMessageService"
+            android:enabled="true"
+            android:priority="10000">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

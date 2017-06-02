@@ -159,13 +159,14 @@
             </LinearLayout>
 
             <TextView
-                android:text="Version 1.2.0"
+                android:id="@+id/ver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ver"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="Version 1.5.2"
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
 

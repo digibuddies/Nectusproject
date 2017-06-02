@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "731407358435-kp1pmqkfn5anb8jdqr2usjm0dt1n0ltv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digibuddies.nectus",
+            "certificate_hash": "5521c8313d4de1f414eb5b02d8c9750d4bf2fd05"
+          }
+        },
+        {
           "client_id": "731407358435-0lhfu2m0ebsh6pili4uv890alc8gfl5m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

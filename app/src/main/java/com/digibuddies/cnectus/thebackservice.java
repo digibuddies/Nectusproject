@@ -40,6 +40,7 @@ public class thebackservice extends IntentService {
     final ArrayList<String> result = new ArrayList<>();
     final ArrayList<String> result2 = new ArrayList<>();
     final ArrayList<String> datadb = new ArrayList<>();
+    File storagePath;
     ArrayList<chatmessage> reaunrea = new ArrayList<>();
     String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,mail,uname,u1,u2,u3;
     int aid=0;
@@ -51,7 +52,7 @@ public class thebackservice extends IntentService {
     //notification
     NotificationManager manager;
     Notification myNotication;
-    private SQLiteDatabase db0;
+    private SQLiteDatabase db0,mdb;
     public int cnt=2,cnt2=2;
     private StorageReference mStorageRef;
     //database
@@ -177,7 +178,7 @@ public class thebackservice extends IntentService {
                     String mp = String.format(Locale.US, "%.2f", mMap.get(key));
                     result2.add(mp);
                 }
-
+                matchdb();
                 int pointer = result.size() - 1;
                 p1 = pointer;
                 p2 = pointer - 1;
@@ -312,8 +313,6 @@ public class thebackservice extends IntentService {
         });
 
 
-
-
     }
 
     public LinkedHashMap<String,Float> sortHashMapByValues(
@@ -428,7 +427,7 @@ public class thebackservice extends IntentService {
     }
 
     protected void createDatabase(){
-        File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
+        storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
         // Create direcorty if not exists
         if(!storagePath.exists()) {
             storagePath.mkdirs();
@@ -437,6 +436,7 @@ public class thebackservice extends IntentService {
         db0=openOrCreateDatabase(storagePath+"/"+"QueDB", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS matches(id INTEGER PRIMARY KEY,devid VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20),allow varchar(20) default 'LEFT', uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
         db0.execSQL("CREATE TABLE IF NOT EXISTS ques(ans integer);");
+
         }
 
 public void download(){
@@ -525,6 +525,14 @@ public void download(){
             }
         });
     }
+
+    void matchdb(){
+        mdb=openOrCreateDatabase(storagePath+"/"+"matrec", Context.MODE_PRIVATE, null);
+        mdb.execSQL("CREATE TABLE IF NOT EXISTS matches(usid VARCHAR(20) PRIMARY KEY,mp VARCHAR(20));");
+        int i;
+        for(i=0;i<result.size();i++){
+        mdb.execSQL("INSERT OR REPLACE INTO matches VALUES('"+result.get(i)+"','"+String.valueOf(result2.get(i))+"')");
+    }}
 }
 
 

@@ -45,9 +45,10 @@ public class connections extends AppCompatActivity {
     final String firsttime ="firsttime";
     int firstt;
     Intent intent0;
+    public static ArrayList<String>[] kk2;
     int flag=0;
-    static Typeface custom_font;
-    static String kid,usn;
+    public Typeface custom_font;
+    public String kid,usn;
     private int[] ITEM_DRAWABLES = { R.drawable.face,
             R.drawable.help, R.drawable.add, R.drawable.home };
 
@@ -65,6 +66,10 @@ public class connections extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
         kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        kk2=(ArrayList<String>[]) new ArrayList[20];
+        for (int i =0 ; i< 20 ;i++) {
+            kk2[i] = new ArrayList<>();
+        }
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstt = mPrefs.getInt(firsttime, 0);
         if (firstt==3){
@@ -73,7 +78,7 @@ public class connections extends AppCompatActivity {
             editor.putInt(firsttime,4);
             editor.apply();
         }
-        dnew2=new Dialog(this);
+        dnew2=new Dialog(connections.this);
         dnew2.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dnew2.setContentView(R.layout.dialogque);
         imb2 = (Button)dnew2.findViewById(R.id.close);
@@ -219,7 +224,7 @@ public class connections extends AppCompatActivity {
         ckcon.setTypeface(custom_font);
         detc.setTypeface(custom_font);
 
-        adapter = new Adapter(cdata);
+        adapter = new Adapter(cdata,usn,kid,custom_font);
         rv.setAdapter(adapter);
         if (adapter.getItemCount()>0)
         {

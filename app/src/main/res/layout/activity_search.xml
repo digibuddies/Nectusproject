@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b32"
+    tools:context="com.digibuddies.cnectus.search"
+    tools:layout_editor_absoluteX="8dp"
+    tools:layout_editor_absoluteY="8dp">
+
+    <TextView
+        android:id="@+id/infro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lls"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="monospace"
+        android:text="NOTHING TO SHOW ! \n select an option and click on find!"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textStyle="italic" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lls" />
+
+    <TextView
+        android:id="@+id/shead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:text="Search"
+        android:textColor="@android:color/white"
+        android:textSize="40sp" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="300dp"
+        android:layout_height="3dp"
+        android:layout_below="@+id/shead"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@color/colorAscent" />
+
+    <TextView
+        android:id="@+id/sdet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView16"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Find people with similar interests"
+        android:textColor="@android:color/white"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:id="@+id/lls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView19"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerserc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"
+            android:background="@color/backabt"
+            android:entries="@array/list5"
+            android:gravity="center"
+            android:padding="5dp"
+            android:spinnerMode="dialog"
+            android:textAlignment="center" />
+
+        <ru.dimorinny.floatingtextbutton.FloatingTextButton
+            android:id="@+id/find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView19"
+            android:layout_centerHorizontal="false"
+            app:floating_background_color="@color/black"
+            app:floating_icon="@android:drawable/ic_menu_search"
+            app:floating_title="FIND"
+            app:floating_title_color="@android:color/white" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sdet"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Search for people who want to "
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+</RelativeLayout>

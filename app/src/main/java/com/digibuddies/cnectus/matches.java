@@ -66,8 +66,10 @@ public class matches extends AppCompatActivity {
     final ArrayList<String> allow = new ArrayList<>();
     StickySwitch ssw,ssw2,ssw3;
     int qcount;
+    Button sea;
     SharedPreferences.Editor editor;
     Intent intent0;
+    String currentDateTime;
     SharedPreferences mPrefs;
     final String firsttime ="firsttime";
     int firstt;
@@ -93,7 +95,7 @@ public class matches extends AppCompatActivity {
     private SQLiteDatabase db;
     private Cursor c;
     String id;
-    String currentDateTime;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("contact");
     @Override
@@ -174,7 +176,15 @@ public class matches extends AppCompatActivity {
         tvd=(TextView)dialog.findViewById(R.id.dst);
         tvd2=(TextView)dialog2.findViewById(R.id.dst);
         tvd3=(TextView)dialog3.findViewById(R.id.dst);
-
+        sea=(Button)findViewById(R.id.search);
+        sea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(matches.this,search.class);
+                finish();
+                startActivity(i);
+            }
+        });
         cy=(TextView)dialog.findViewById(R.id.cy);
         cn=(TextView)dialog.findViewById(R.id.cn);
 
@@ -291,11 +301,6 @@ public class matches extends AppCompatActivity {
                     String qer = "UPDATE matches SET allow='RIGHT' WHERE id=1;";
                     db.execSQL(qer);
 
-
-                }
-                else if(ssw.getDirection().name().equals("LEFT")){
-                    myRef.child(devid.get(0)).child(id).child("request").setValue("LEFT");
-                    myRef.child(devid.get(0)).child(id).child("mp").setValue(mp.get(0));
                 }
                 dialog.dismiss();
                 if(ssw.getDirection().name().equals("RIGHT")){
@@ -315,10 +320,6 @@ public class matches extends AppCompatActivity {
                     String qer = "UPDATE matches SET allow='RIGHT' WHERE id=2;";
                     db.execSQL(qer);
                 }
-                else if(ssw2.getDirection().name().equals("LEFT")){
-                    myRef.child(devid.get(1)).child(id).child("request").setValue("LEFT");
-                    myRef.child(devid.get(1)).child(id).child("mp").setValue(mp.get(1));  }
-
                 dialog2.dismiss();
                 if(ssw2.getDirection().name().equals("RIGHT")){
                     Snackbar.make(sv, "Request Sent!",
@@ -338,9 +339,6 @@ public class matches extends AppCompatActivity {
                     db.execSQL(qer);
 
                 }
-                else if(ssw3.getDirection().name().equals("LEFT")){
-                    myRef.child(devid.get(2)).child(id).child("request").setValue("LEFT");
-                    myRef.child(devid.get(2)).child(id).child("mp").setValue(mp.get(2)); }
                 dialog3.dismiss();
                 if(ssw3.getDirection().name().equals("RIGHT")){
                 Snackbar.make(sv, "Request Sent!",
