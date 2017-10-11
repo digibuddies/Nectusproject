@@ -2,6 +2,7 @@ package com.digibuddies.cnectus;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -36,36 +38,49 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.ghyeok.stickyswitch.widget.StickySwitch;
 
+import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
+import static com.digibuddies.cnectus.matches.flag;
+
 public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
 
     List<data> kdata = new ArrayList<data>();
     String mp=" ";
+    Context context;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("contact");
 
     String usn,kid;
     Typeface custom_font;
 
-    public sadapter(List<data> kdata, Typeface custom_font, String kid) {
+    sadapter(List<data> kdata, Typeface custom_font, String kid,Context context) {
         this.kdata = kdata;
         this.custom_font=custom_font;
         this.kid=kid;
+        this.context=context;
     }
     @Override
     public cardadapter onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.scard, parent, false);
-        cardadapter pvh = new cardadapter(v);
-        return pvh;
+        return new cardadapter(v);
     }
 
     @Override
     public void onBindViewHolder(final cardadapter holder, final int position) {
+        String s=" a ";
         final data temp = kdata.get(position);
+        if (temp.getOp01().equals("")){
+            s="";
+        }
+        else
+        {
+            s=s+temp.getOp01();
+        }
         holder.tv1.setText(temp.getUname());
-        holder.tv3.setText(temp.getOp1()+", you can call me "+temp.getUname()+". I was born in "+temp.getOp2()+". Currently I am living in "+temp.getOp3()+" and I love to practice my "+temp.getOp4()+" skills. I would like to "+temp.getOp5()+" someday. My friends say I'm "+temp.getOp6()+". I just "+temp.getOp7()+" "+temp.getOp8()+" I spend most of my day "+temp.getOp9()+". A person with same mind as mine would be "+temp.getOp10()+".");
+        holder.tv3.setText(temp.getOp1()+", you can call me "+temp.getUname()+". I\'m"+s+" born in "+temp.getOp2()+" and currently I live in "+temp.getOp3()+". I love to practice my "+temp.getOp4()+" skills. I would like to "+temp.getOp5()+" someday. My friends say I'm "+temp.getOp6()+". I just love "+temp.getOp7()+" and i hate "+temp.getOp8()+" I spend most of my day "+temp.getOp9()+". A person with same mind as mine would be "+temp.getOp10()+".");
         mp=holder.calcmp(temp.getDevid());
-        if(!mp.equals(" ")){
-        holder.tv4.setText(mp+"% similar");}
+        temp.setMp(mp);
+        if(!temp.getMp().equals(" ")){
+        holder.tv4.setText(temp.getMp()+"% similar");}
         else {
             holder.tv4.setText(" ");}
         holder.kcv.setImageResource(temp.getAid());
@@ -82,14 +97,18 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
             public void onClick(View view) {
                 if(holder.ssw.getDirection().name().equals("RIGHT")){
                     myRef.child(temp.getDevid()).child(kid).child("request").setValue("RIGHT");
-                    myRef.child(temp.getDevid()).child(kid).child("mp").setValue(mp);
-                    temp.setMp(mp);
+                    myRef.child(temp.getDevid()).child(kid).child("mp").setValue(temp.getMp());
                     holder.save(temp);
                 }
 
                 if(holder.ssw.getDirection().name().equals("RIGHT")){
                     Snackbar.make(holder.itemView, "Request Sent!",
                             Snackbar.LENGTH_SHORT).show();
+                    if (context.getClass().toString().equals("class com.digibuddies.cnectus.matches")){
+                    matches.showd();}
+                    else if(context.getClass().toString().equals("class com.digibuddies.cnectus.search")){
+                        search.showd();
+                    }
                 }
                 holder.dialog.dismiss();
 
@@ -110,7 +129,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     }
 
 
-    public class cardadapter extends RecyclerView.ViewHolder {
+    class cardadapter extends RecyclerView.ViewHolder {
 
         TextView tv1,tv3, tv4,csy,csn;
         CircleImageView kcv;
@@ -121,7 +140,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
         StickySwitch ssw;
         String currentDateTime;
 
-        public cardadapter(View itemView) {
+        cardadapter(View itemView) {
             super(itemView);
             tv1 = (TextView) itemView.findViewById(R.id.kuser);
             tv3 = (TextView) itemView.findViewById(R.id.kdetail);
@@ -137,20 +156,18 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
             csy=(TextView)dialog.findViewById(R.id.cy);
             csn=(TextView)dialog.findViewById(R.id.cn);
             currentDateTime = java.text.DateFormat.getDateTimeInstance().format(new Date());
-            File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
-            dbs= SQLiteDatabase.openOrCreateDatabase(storagePath+"/"+"ContDB", null);
-            dbm= SQLiteDatabase.openOrCreateDatabase(storagePath+"/"+"matrec", null);
+            dbs=openOrCreateDatabase(context.getFilesDir().getAbsolutePath()+"ContDB", null);
+            dbm=openOrCreateDatabase(context.getFilesDir().getAbsolutePath()+"matrec", null);
             dbm.execSQL("CREATE TABLE IF NOT EXISTS matches(usid VARCHAR(20) PRIMARY KEY,mp VARCHAR(20));");
-            dbs.execSQL("CREATE TABLE IF NOT EXISTS connect(dvid VARCHAR(20) PRIMARY KEY,time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20),uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
-
+            dbs.execSQL(context.getString(R.string.condb));
         }
 
-        public void save(data k){
+        void save(data k){
 
-            String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+k.getDevid()+"','"+currentDateTime+"','"+k.getMp()+"','"+k.getAid()+"','"+k.getEmail()+"','"+k.getUname()+"','"+k.getOp1()+"','"+k.getOp2()+"','"+k.getOp3()+"','"+k.getOp4()+"','"+k.getOp5()+"','"+k.getOp6()+"','"+k.getOp7()+"','"+k.getOp8()+"','"+k.getOp9()+"','"+k.getOp10()+"','"+k.getOp11()+"','"+k.getOp12()+"');";
+            String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('"+k.getDevid()+"','"+currentDateTime+"','"+k.getMp()+"','"+k.getAid()+"','"+k.getEmail()+"','"+k.getUname()+"','"+k.getOp1()+"','"+k.getOp2()+"','"+k.getOp3()+"','"+k.getOp4()+"','"+k.getOp5()+"','"+k.getOp6()+"','"+k.getOp7()+"','"+k.getOp8()+"','"+k.getOp9()+"','"+k.getOp10()+"','"+k.getOp11()+"','"+k.getOp12()+"','"+k.getOp01()+"');";
             dbs.execSQL(queryx);
         }
-        public String calcmp(String uu){
+        String calcmp(String uu){
             Cursor c;
             String s=" ";
             c=dbm.rawQuery("SELECT mp FROM matches WHERE usid='"+uu+"'",null);
@@ -160,6 +177,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
             c.close();
             return s;
         }
+
 
 
     }

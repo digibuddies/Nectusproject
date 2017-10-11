@@ -29,7 +29,6 @@ public class CustomSlide3 extends SlideFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_custom_slide3, container, false);
         CircleImageView v3=(CircleImageView)view.findViewById(R.id.avatar3);
-
         TextView tx = (TextView) view.findViewById(R.id.editText);
         TextView tx2 = (TextView) view.findViewById(R.id.textView5);
         TextView tx3 = (TextView) view.findViewById(R.id.textView10);
@@ -86,7 +85,7 @@ public class CustomSlide3 extends SlideFragment {
 
     @Override
     public boolean canMoveFurther() {
-        if((!(spin.getSelectedItem().equals("Select")))&&(!(spin2.getSelectedItem().equals("Select")))&&(!(et.getText().equals(""))))
+        if((!(spin.getSelectedItem().toString().equals("Select")))&&(!(spin2.getSelectedItem().toString().equals("Select")))&&(!(et.getText().toString().equals(""))))
         {   profileclass.d.setOp11(spin.getSelectedItem().toString());profileclass.d.setP11(spin.getSelectedItemPosition());
             profileclass.d.setOp12(spin2.getSelectedItem().toString());profileclass.d.setP12(spin2.getSelectedItemPosition());
             profileclass.d.setEmail(et.getText().toString());

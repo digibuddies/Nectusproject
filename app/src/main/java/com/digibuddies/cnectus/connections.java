@@ -12,12 +12,14 @@ import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -33,11 +35,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class connections extends AppCompatActivity {
-    static SQLiteDatabase kdb,kdm;
-    RecyclerView rv;
-    Dialog dnew2;
-    Button imb2;
+    static SQLiteDatabase kdb;
+    SQLiteDatabase dbr,kdm;
+    RecyclerView rv,reqrec;
+    Cursor d,c;
+    reqadapter rqa;
+    data tdata;
+    Dialog dnew2,dreq;
+    Button imb2,clos;
     List<data> cdata = new ArrayList<data>();
+    List<data> kdata = new ArrayList<data>();
     static Adapter adapter;
     TextView ckcon,emp;
     SharedPreferences.Editor editor;
@@ -45,12 +52,12 @@ public class connections extends AppCompatActivity {
     final String firsttime ="firsttime";
     int firstt;
     Intent intent0;
+    Button req;
     public static ArrayList<String>[] kk2;
     int flag=0;
     public Typeface custom_font;
     public String kid,usn;
-    private int[] ITEM_DRAWABLES = { R.drawable.face,
-            R.drawable.help, R.drawable.add, R.drawable.home };
+    private int[] ITEM_DRAWABLES = { R.drawable.help, R.drawable.dice,R.drawable.find, R.drawable.home };
 
 
 
@@ -66,9 +73,9 @@ public class connections extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
         kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-        kk2=(ArrayList<String>[]) new ArrayList[20];
-        for (int i =0 ; i< 20 ;i++) {
-            kk2[i] = new ArrayList<>();
+        kk2=(ArrayList<String>[]) new ArrayList[60];
+        for (int i =0 ; i< 60 ;i++) {
+            kk2[i] = new ArrayList<String>();
         }
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstt = mPrefs.getInt(firsttime, 0);
@@ -78,7 +85,7 @@ public class connections extends AppCompatActivity {
             editor.putInt(firsttime,4);
             editor.apply();
         }
-        dnew2=new Dialog(connections.this);
+        dnew2=new Dialog(this);
         dnew2.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dnew2.setContentView(R.layout.dialogque);
         imb2 = (Button)dnew2.findViewById(R.id.close);
@@ -109,13 +116,14 @@ public class connections extends AppCompatActivity {
 
                 @Override
                 public void run() {
-                    dnew2.show();
+                    if(!connections.this.isFinishing()) {
+                        dnew2.show();
+                    }
                 }
 
-            }, 4000);
+            }, 3000);
 
         }
-        Cursor c;
         rv=(RecyclerView)findViewById(R.id.krv);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -138,25 +146,27 @@ public class connections extends AppCompatActivity {
             menu.addItem(item, "", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(position==0){
-                        intent0=new Intent(connections.this,profileclass.class);
-                        startActivity(intent0);
-                        finish();
-
-
-                    }
-                    if(position==1){
+                  if(position==0){
                         intent0=new Intent(connections.this,questions.class);
                         finish();
                         startActivity(intent0);
 
 
                     }
-                    if(position==2){
+                    if(position==1){
                        intent0=new Intent(connections.this,matches.class);
+                        intent0.putExtra("target","random");
                         finish();
                         startActivity(intent0);
 
+
+
+                    }
+                    if(position==2){
+                        intent0=new Intent(connections.this,search.class);
+                        intent0.putExtra("target","none");
+                        finish();
+                        startActivity(intent0);
 
 
                     }
@@ -173,50 +183,41 @@ public class connections extends AppCompatActivity {
 
 
         }
+        datawork();
+        req=(Button)findViewById(R.id.req);
+        dreq=new Dialog(connections.this);
+        dreq.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dreq.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        dreq.setContentView(R.layout.dreq);
+        clos=(Button)dreq.findViewById(R.id.close);
+        reqrec=(RecyclerView)dreq.findViewById(R.id.recreq);
+        reqrec.setLayoutManager(new LinearLayoutManager(this));
+        reqrec.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        req.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (d.getCount()>0){
+                rqa = new reqadapter(kdata,view.getContext(),usn);
+                reqrec.setAdapter(rqa);
+                dreq.show();}
+                else {
+                    Snackbar.make(view, "No New Requests Available!",
+                            Snackbar.LENGTH_LONG).show();
+                }
+
+            }
+        });
+        clos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(connections.this,connections.class);
+                dreq.hide();
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
-
-        File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
-        // Create direcorty if not exists
-        if(!storagePath.exists()) {
-            storagePath.mkdirs();
-        }
-
-        kdb=openOrCreateDatabase(storagePath+"/"+"ContDB", Context.MODE_PRIVATE, null);
-        String SELECT_SQL ="SELECT aid,time,uname,email,mp,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,dvid FROM connect";
-        kdb.execSQL("CREATE TABLE IF NOT EXISTS connect(dvid VARCHAR(20) PRIMARY KEY,time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
-        c = kdb.rawQuery(SELECT_SQL, null);
-        if(c.getCount()>0){
-            c.moveToLast();
-        do {
-
-            cdata.add(new data(
-                    c.getInt(0),        // id
-                    c.getString(1),     // title
-                    c.getString(2),
-                    c.getString(3),
-                    c.getString(4),
-                    c.getString(5),
-                    c.getString(6),
-                    c.getString(7),
-                    c.getString(8),
-                    c.getString(9),
-                    c.getString(10),
-                    c.getString(11),
-                    c.getString(12),
-                    c.getString(13),
-                    c.getString(14),
-                    c.getString(15)
-            ));
-        } while (c.moveToPrevious());
-        c.close();
-        }
-        kdm = openOrCreateDatabase(storagePath+"/"+"prodb.db", Context.MODE_PRIVATE, null);
-        c = kdm.rawQuery("SELECT uname FROM profile", null);
-        c.moveToFirst();
-        usn=c.getString(0);
-        c.close();
-        kdm.close();
         ckcon=(TextView)findViewById(R.id.kcon);
         emp=(TextView)findViewById(R.id.kemp);
         final TextView detc=(TextView)findViewById(R.id.detc);
@@ -247,5 +248,78 @@ public class connections extends AppCompatActivity {
         Runtime.getRuntime().gc();
     }
 
+    void datawork(){
+        {
+            dbr = openOrCreateDatabase(getFilesDir().getAbsolutePath() + "reqDB", Context.MODE_PRIVATE, null);
+            dbr.execSQL(getString(R.string.reqdb));
+            kdb = openOrCreateDatabase(getFilesDir().getAbsolutePath() + "ContDB", Context.MODE_PRIVATE, null);
+            String SELECT_SQL = "SELECT aid,time,uname,email,mp,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op01,dvid FROM connect";
+            kdb.execSQL(getString(R.string.cdb));
+            c = kdb.rawQuery(SELECT_SQL, null);
+            if (c.getCount() > 0) {
+                c.moveToLast();
+                do {
 
+                    cdata.add(new data(
+                            c.getInt(0),        // id
+                            c.getString(1),     // title
+                            c.getString(2),
+                            c.getString(3),
+                            c.getString(4),
+                            c.getString(5),
+                            c.getString(6),
+                            c.getString(7),
+                            c.getString(8),
+                            c.getString(9),
+                            c.getString(10),
+                            c.getString(11),
+                            c.getString(12),
+                            c.getString(13),
+                            c.getString(14),
+                            c.getString(15),
+                            c.getString(16)
+                    ));
+                } while (c.moveToPrevious());
+                c.close();
+            }
+            kdm = openOrCreateDatabase(getFilesDir().getAbsolutePath() + "prodb.db", Context.MODE_PRIVATE, null);
+            c = kdm.rawQuery("SELECT uname FROM profile", null);
+            c.moveToFirst();
+            usn = c.getString(0);
+            c.close();
+            kdm.close();
+            d = dbr.rawQuery("SELECT uname,aid,mp,devid,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01 FROM matches;", null);
+            d.moveToLast();
+            if (d.getCount() > 0) {
+                do {
+                    tdata = new data();
+                    tdata.setUname(d.getString(0));
+                    tdata.setAid(d.getInt(1));
+                    tdata.setMp(d.getString(2));
+                    tdata.setDevid(d.getString(3));
+                    tdata.setOp1(d.getString(4));
+                    tdata.setOp2(d.getString(5));
+                    tdata.setOp3(d.getString(6));
+                    tdata.setOp4(d.getString(7));
+                    tdata.setOp5(d.getString(8));
+                    tdata.setOp6(d.getString(9));
+                    tdata.setOp7(d.getString(10));
+                    tdata.setOp8(d.getString(11));
+                    tdata.setOp9(d.getString(12));
+                    tdata.setOp10(d.getString(13));
+                    tdata.setOp11(d.getString(14));
+                    tdata.setOp12(d.getString(15));
+                    tdata.setOp01(d.getString(16));
+                    kdata.add(tdata);
+                    Log.d("kdata", String.valueOf(kdata.size()));
+                } while (d.moveToPrevious());
+            }
+        }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }

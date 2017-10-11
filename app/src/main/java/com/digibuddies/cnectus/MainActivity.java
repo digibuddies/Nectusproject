@@ -1,6 +1,7 @@
 package com.digibuddies.cnectus;
 
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Environment;
@@ -38,6 +40,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
@@ -65,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
     private String SELECT_SQL = "SELECT uname,aid FROM profile";
     private ProgressDialog working_dialog;
     ResideMenuItem itemHelp;
+    private Dialog dialog;
     ResideMenuItem itemFeed;
-    Button b;
+    Button b,b1,b2,b3,b4;
     int flag=0;
     ResideMenuItem itemAbout;
     ConnectivityManager cm;
@@ -90,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             }
+        b = (Button) findViewById(R.id.settings_button);
+        usname=(TextView)findViewById(R.id.usname);
+        civ=(CircleImageView)findViewById(R.id.aid);
+
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
         if (!welcomeScreenShown) {
@@ -100,19 +108,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intro);
 
         }
-        b = (Button) findViewById(R.id.settings_button);
-        usname=(TextView)findViewById(R.id.usname);
-        civ=(CircleImageView)findViewById(R.id.aid);
+
+
 
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         if(!(isDeviceOnline())){
             final Snackbar snackbar = Snackbar
                     .make(usname, getString(R.string.ma1), Snackbar.LENGTH_INDEFINITE);
-            snackbar.setAction("CLOSE", new View.OnClickListener() {
+            snackbar.setAction("Restart", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                           snackbar.dismiss();
+                           Intent intent=new Intent(MainActivity.this,splashactivity.class);
+                            finish();
+                            startActivity(intent);
                         }
                     });
             View snackbarView = snackbar.getView();
@@ -153,6 +162,50 @@ public class MainActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+        dialog.setContentView(R.layout.alikemenu);
+        b1=(Button)dialog.findViewById(R.id.b1);
+        b2=(Button)dialog.findViewById(R.id.b2);
+        b3=(Button)dialog.findViewById(R.id.b3);
+        b4=(Button)dialog.findViewById(R.id.b4);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,search.class);
+                startActivity(intent);
+                dialog.cancel();
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,matches.class);
+                intent.putExtra("target","top");
+                startActivity(intent);
+                dialog.cancel();
+            }
+        });
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,matches.class);
+                intent.putExtra("target","worst");
+                startActivity(intent);
+                dialog.cancel();
+            }
+        });
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,matches.class);
+                intent.putExtra("target","random");
+                startActivity(intent);
+                dialog.cancel();
+            }
+        });
+
         final BoomMenuButton bmb = (BoomMenuButton) findViewById(R.id.bmb);
         bmb.setButtonEnum(ButtonEnum.Ham);
         bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_5);
@@ -221,8 +274,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this,"Please create your profile first...", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                        Intent intent = new Intent(MainActivity.this, matches.class);
-                        startActivity(intent);}
+                        dialog.show();}
                     }
                 });
 
@@ -278,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
         itemHome = new ResideMenuItem(this, R.drawable.home, "Home");
         itemHelp = new ResideMenuItem(this, R.drawable.help1, "Help");
         itemFeed = new ResideMenuItem(this, R.drawable.feed, "Feed Back");
-        itemAbout=new ResideMenuItem(this, R.drawable.about, "About Us");
+        itemAbout=new ResideMenuItem(this, R.drawable.about, "About");
         itemShare=new ResideMenuItem(this, R.drawable.share,"Share Cnectus");
 
         itemHome.setOnClickListener(new View.OnClickListener() {
@@ -371,7 +423,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void removeWorkingDialog() {
         if (working_dialog != null) {
-            working_dialog.dismiss();
+            working_dialog.hide();
             working_dialog = null;
         }
     }
@@ -382,66 +434,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        dowork();
         super.onResume();
-        Intent disp=getIntent();
-        tar=disp.getStringExtra("target");
-        if(tar.equals("matches")){
-            Intent i2=new Intent(MainActivity.this,matches.class);
-            startActivity(i2);
-        }
-        else if(tar.equals("contact")){
-            Intent i2=new Intent(MainActivity.this,contact.class);
-            startActivity(i2);
-        }
-        else if(tar.equals("connections")){
-            Intent i2=new Intent(MainActivity.this,connections.class);
-            startActivity(i2);
-        }
-
-
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1);
-
-            }
-        else {
-        dowork();}
-
-
-
-
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
 
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    dowork();
-                     } else {
-                    flag=1;
-                    final Snackbar snackbar = Snackbar
-                            .make(usname, getString(R.string.ma4), Snackbar.LENGTH_INDEFINITE);
-                    View snackbarView = snackbar.getView();
-                    TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    textView.setMaxLines(5);
-                    snackbar.show();
-                       }
-
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }
-    public boolean isDeviceOnline() {
+       public boolean isDeviceOnline() {
         Context context = MainActivity.this;
         // test for connection
         cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -451,16 +448,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     public  void dowork(){
-        scheduleAlarm();
         if(flag==0){
-        File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
-        // Create direcorty if not exists
-        if(!storagePath.exists()) {
-            storagePath.mkdirs();
-        }
 
-        dbm = openOrCreateDatabase(storagePath+"/"+"prodb.db", Context.MODE_PRIVATE, null);
-        dbm.execSQL(getString(R.string.ma5));
+
+        dbm = openOrCreateDatabase(getFilesDir().getAbsolutePath()+"prodb.db", Context.MODE_PRIVATE, null);
+        dbm.execSQL(getString(R.string.prodb));
         c = dbm.rawQuery(SELECT_SQL, null);
         c.moveToFirst();
         if(c.getCount()>0)
@@ -477,20 +469,5 @@ public class MainActivity extends AppCompatActivity {
 
     }}
 
-    public void scheduleAlarm() {
-        // Construct an intent that will execute the AlarmReceiver
-        Intent intent = new Intent(getApplicationContext(), alarmreceiver.class);
-        // Create a PendingIntent to be triggered when the alarm goes off
-        final PendingIntent pIntent = PendingIntent.getBroadcast(this, alarmreceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // Setup periodic alarm every 5 seconds
-        long firstMillis = System.currentTimeMillis(); // alarm is set right away
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        // First parameter is the type: ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC_WAKEUP
-        // Interval can be INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_DAY
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
-                AlarmManager.INTERVAL_HALF_HOUR, pIntent);
-
-    }
 
 }

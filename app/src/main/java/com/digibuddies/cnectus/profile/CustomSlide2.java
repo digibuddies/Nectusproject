@@ -19,7 +19,7 @@ public class CustomSlide2 extends SlideFragment {
     private CheckBox checkBox;
     data d2;
     static public TextView tvun;
-    public Spinner s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+    public Spinner s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class CustomSlide2 extends SlideFragment {
 
         checkBox = (CheckBox) view.findViewById(R.id.checkBox89);
         tvun=(TextView)view.findViewById(R.id.textView111);
+         s0=(Spinner) view.findViewById(R.id.spinner00);
          s1=(Spinner) view.findViewById(R.id.spinner0);
          s2=(Spinner) view.findViewById(R.id.Spinner2);
          s3=(Spinner) view.findViewById(R.id.Spinner3);
@@ -39,9 +40,10 @@ public class CustomSlide2 extends SlideFragment {
          s8=(Spinner) view.findViewById(R.id.spinner72);
          s9=(Spinner) view.findViewById(R.id.spinner8);
          s10=(Spinner) view.findViewById(R.id.spinner10);
-        s1.setBackgroundColor(Color.DKGRAY);s2.setBackgroundColor(Color.DKGRAY);s3.setBackgroundColor(Color.DKGRAY);s4.setBackgroundColor(Color.DKGRAY);s5.setBackgroundColor(Color.DKGRAY);s6.setBackgroundColor(Color.DKGRAY);s7.setBackgroundColor(Color.DKGRAY);s8.setBackgroundColor(Color.DKGRAY);s9.setBackgroundColor(Color.DKGRAY);s10.setBackgroundColor(Color.DKGRAY);
+        s0.setBackgroundColor(Color.DKGRAY); s1.setBackgroundColor(Color.DKGRAY);s2.setBackgroundColor(Color.DKGRAY);s3.setBackgroundColor(Color.DKGRAY);s4.setBackgroundColor(Color.DKGRAY);s5.setBackgroundColor(Color.DKGRAY);s6.setBackgroundColor(Color.DKGRAY);s7.setBackgroundColor(Color.DKGRAY);s8.setBackgroundColor(Color.DKGRAY);s9.setBackgroundColor(Color.DKGRAY);s10.setBackgroundColor(Color.DKGRAY);
         if(profileclass.avid!=0){
             v2.setImageResource(profileclass.avid);
+            s0.setSelection(profileclass.p01);
             s1.setSelection(profileclass.p1);
             s2.setSelection(profileclass.p2);
             s3.setSelection(profileclass.p3);
@@ -72,8 +74,9 @@ public class CustomSlide2 extends SlideFragment {
 
     @Override
     public boolean canMoveFurther() {
-        if (!(s1.getSelectedItem().toString().equals("Select"))&&!(s2.getSelectedItem().toString().equals("Select"))&&!(s3.getSelectedItem().toString().equals("Select"))&&!(s4.getSelectedItem().toString().equals("Select"))&&!(s5.getSelectedItem().toString().equals("Select"))&&!(s6.getSelectedItem().toString().equals("Select"))&&!(s7.getSelectedItem().toString().equals("Select"))&&!(s8.getSelectedItem().toString().equals("Select"))&&!(s9.getSelectedItem().toString().equals("Select"))&&!(s10.getSelectedItem().toString().equals("Select")))
+        if (!(s0.getSelectedItem().toString().equals("Select"))&&!(s1.getSelectedItem().toString().equals("Select"))&&!(s2.getSelectedItem().toString().equals("Select"))&&!(s3.getSelectedItem().toString().equals("Select"))&&!(s4.getSelectedItem().toString().equals("Select"))&&!(s5.getSelectedItem().toString().equals("Select"))&&!(s6.getSelectedItem().toString().equals("Select"))&&!(s7.getSelectedItem().toString().equals("Select"))&&!(s8.getSelectedItem().toString().equals("Select"))&&!(s9.getSelectedItem().toString().equals("Select"))&&!(s10.getSelectedItem().toString().equals("Select")))
         {
+            profileclass.d.setOp01(s0.getSelectedItem().toString());profileclass.d.setP01(s0.getSelectedItemPosition());
             profileclass.d.setOp1(s1.getSelectedItem().toString());profileclass.d.setP1(s1.getSelectedItemPosition());
             profileclass.d.setOp2(s2.getSelectedItem().toString());profileclass.d.setP2(s2.getSelectedItemPosition());
             profileclass.d.setOp3(s3.getSelectedItem().toString());profileclass.d.setP3(s3.getSelectedItemPosition());

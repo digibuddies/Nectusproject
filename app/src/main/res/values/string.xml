@@ -23,30 +23,34 @@
     <string name="final_hint">Taking you to our family...</string>
 
 
-    <string name="about_nectus">Cnectus is an idea to connect people better. It aims to bring together people who share similar personalities through its intensive match algorithm. Our vision is to have a society where it is easier for people to connect to people they share a healthy bond with and thus promoting better friendships and relationships.</string>
+    <string name="about_nectus">Cnectus is an idea to connect like minded people. It aims to bring together people who share similar personalities through its intensive match algorithm. Our vision is to have a society where it is easier for people to connect with people they can share a healthy bond with and thus promoting better friendships and relationships.</string>
 
     <string-array name="list11">
         <item>Select</item>
         <item>You are looking for a friend</item>
-        <item>You are in college</item>
-        <item>You are in school</item>
+        <item>You are an optimistic person</item>
+        <item>You like paranormal activities</item>
         <item>You are interesting</item>
         <item>You can crack good jokes</item>
         <item>You love music</item>
-        <item>You share my interests</item>
-        <item>Our match is more than 90%</item>
-        <item>Our match is more than 80%</item>
+        <item>You love adventure</item>
+        <item>You make things happen</item>
+        <item>You love to workout</item>
+        <item>You are a secret keeper</item>
+        <item>Our match is more than 70%</item>
     </string-array>
     <string-array name="list12">
         <item>Select</item>
         <item>You are not my age</item>
-        <item>You are a negative person</item>
-        <item>You are weird</item>
-        <item>You are a lazy person</item>
-        <item>You dont like dogs</item>
-        <item>You talk too much</item>
+        <item>You are a pessimist</item>
+        <item>You dont like pets</item>
+        <item>You are a couch potato</item>
+        <item>You dont like foodies</item>
+        <item>You gamble to much</item>
+        <item>You overuse slang</item>
+        <item>You are a creep</item>
+        <item>You dont maintain a proper hygine</item>
         <item>Our match is below 30%</item>
-        <item>Our match is below 50%</item>
 
     </string-array>
 
@@ -62,6 +66,8 @@
 
     <string-array name="list2">
         <item>Select</item>
+        <item>1990</item>
+        <item>1991</item>
         <item>1992</item>
         <item>1993</item>
         <item>1994</item>
@@ -79,14 +85,20 @@
         <item>Select</item>
         <item>Dehradun</item>
         <item>New Delhi</item>
-        <item>Roorkee</item>
-        <item>Pune</item>
-        <item>Noida</item>
         <item>Bangalore</item>
+        <item>Uttarakhand</item>
+        <item>Uttar Pradesh</item>
+        <item>Bihar</item>
+        <item>Haryana</item>
         <item>Punjab</item>
-        <item>South India</item>
+        <item>Gujrat</item>
+        <item>Maharashtra</item>
+        <item>J&amp;k</item>
+        <item>Bangalore</item>
+        <item>Kerala</item>
+        <item>Assam</item>
         <item>India</item>
-        <item>some place outside india</item>
+        <item>Outside India</item>
     </string-array>
     <string-array name="list4">
         <item>Select</item>
@@ -106,21 +118,21 @@
     <string-array name="list5">
         <item>Select</item>
         <item>go on a world tour</item>
-        <item>learn new language</item>
         <item>go scuba diving</item>
         <item>do horseback riding</item>
         <item>fall in love</item>
         <item>be a billionaire</item>
         <item>have my own NGO</item>
-        <item>live in Los Angeles</item>
-        <item>drive a lamborghini</item>
+        <item>live in a different country</item>
+        <item>go on a cruise</item>
         <item>see northern lights</item>
         <item>get a pet</item>
         <item>become a celebrity</item>
         <item>have my own business</item>
-
-
-
+        <item>speak in front of 10,000 people</item>
+        <item>go on a blind date!</item>
+        <item>jump out of a plane</item>
+        <item>change the world</item>
     </string-array>
     <string-array name="list6">
         <item>Select</item>
@@ -138,47 +150,76 @@
     </string-array>
     <string-array name="list7">
         <item>Select</item>
-        <item>love</item>
-        <item>hate</item>
-        <item>dont care about</item>
-        <item>fantasise about</item>
+        <item>chocolates</item>
+        <item>south Indian movies</item>
+        <item>my bf/gf</item>
+        <item>Vanilla flavor</item>
+        <item>bubble baths</item>
+        <item>cooking</item>
+        <item>Amusement parks</item>
+        <item>travelling</item>
+        <item>outer space</item>
+        <item>my pet</item>
+        <item>photography</item>
+        <item>taking naps</item>
+        <item>Apple products</item>
+        <item>anime</item>
+        <item>my family</item>
+        <item>fireworks</item>
+        <item>bikes</item>
+        <item>pizza</item>
+        <item>cuddling</item>
+        <item>being admired</item>
+        <item>winters</item>
+        <item>autumn</item>
+        <item>debating</item>
+        <item>smell of rain</item>
+        <item>clash of clans</item>
     </string-array>
 
     <string-array name="list72">
         <item>Select</item>
-        <item>outer space.</item>
-        <item>camping in woods.</item>
-        <item>babies.</item>
-        <item>spiders.</item>
-        <item>large dogs.</item>
-        <item>football.</item>
+        <item>morning alarms.</item>
+        <item>sweaty people.</item>
+        <item>chaos.</item>
+        <item>internet ads.</item>
+        <item>Vanilla flavor.</item>
+        <item>cricket.</item>
         <item>spicy food.</item>
-        <item>chocolates.</item>
-        <item>money.</item>
-        <item>pop music.</item>
+        <item>Insects.</item>
+        <item>mess food.</item>
+        <item>crowded places.</item>
+        <item>being alone.</item>
         <item>EDM.</item>
-        <item>Megan Fox.</item>
         <item>action movies.</item>
         <item>horror movies.</item>
         <item>exams.</item>
-        <item>sunrise.</item>
+        <item>public display of affection.</item>
         <item>monotonous life.</item>
-        <item>fame.</item>
+        <item>cunning people</item>
+
     </string-array>
 
     <string-array name="list8">
         <item>Select</item>
-        <item>playing sports</item>
-        <item>watching TV</item>
-        <item>listening to music</item>
-        <item>cooking yummy food</item>
-        <item>eating yummy food</item>
-        <item>sleeping</item>
-        <item>on video games</item>
-        <item>studying for exams</item>
         <item>with friends</item>
-        <item>playing guitar</item>
         <item>reading books</item>
+        <item>on social media</item>
+        <item>eating</item>
+        <item>sleeping</item>
+        <item>daydreaming</item>
+        <item>playing video games</item>
+        <item>studying</item>
+        <item>on my project</item>
+        <item>playing guitar</item>
+        <item>in leisure activities</item>
+        <item>on Internet</item>
+        <item>watching tv series</item>
+        <item>coding</item>
+        <item>on instagram feeds</item>
+        <item>in gym</item>
+        <item>outdoors</item>
+        <item>finding love of my life</item>
     </string-array>
 
     <string-array name="list9">
@@ -187,12 +228,19 @@
         <item>a miracle.</item>
         <item>an embarrassment.</item>
         <item>short on attendance.</item>
-        <item>the Batman.</item>
+        <item>Batman.</item>
+        <item>Joker.</item>
         <item>a very good friend.</item>
         <item>somone id like to know.</item>
         <item>someone ill run away from.</item>
         <item>the smartest person alive.</item>
-        <item>cute ?</item>
+        <item>cute!</item>
+    </string-array>
+
+    <string-array name="list0">
+        <item>Select</item>
+        <item>girl</item>
+        <item>guy</item>
     </string-array>
 
 

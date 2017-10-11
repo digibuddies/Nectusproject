@@ -54,15 +54,15 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar3"
-            android:src="@mipmap/ic_launcher"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@android:color/white"
-            android:layout_gravity="top|center_horizontal"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="77dp"
             android:layout_below="@+id/checkBox89"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="77dp"
+            android:src="@drawable/nnn"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="2dp" />
 
         <ScrollView
             android:layout_width="match_parent"

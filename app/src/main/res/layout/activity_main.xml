@@ -108,7 +108,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             app:floating_background_color="@android:color/white"
-            app:floating_icon="@drawable/ic_fingerprint_black_24dp"
+            app:floating_icon="@drawable/menu3"
             app:floating_title=" Menu ! "
             app:floating_title_color="@android:color/black" />
     </RelativeLayout>

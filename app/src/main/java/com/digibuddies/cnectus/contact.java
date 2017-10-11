@@ -6,10 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.os.Environment;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -33,10 +34,10 @@ public class contact extends AppCompatActivity {
     String mp;
     TextView tv1,tv2,tv3,ccr;
     CircleImageView av;
-    int x=102;
+    String x;
     StickySwitch ssc;
     String cid;
-    String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,mail,uname,dvid,u2,u3;
+    String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname,dvid,u2,u3;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     int aid;
@@ -44,6 +45,9 @@ public class contact extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent ii=getIntent();
+        x=ii.getStringExtra("id");
+        Log.d("iddd",x);
         setContentView(R.layout.activity_contact);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
             Window w = getWindow();
@@ -63,14 +67,24 @@ public class contact extends AppCompatActivity {
                     String currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
                     myRef.child("contact").child(cid).child(dvid).child("request").setValue("ACCEPTED");
                     myRef.child("contact").child(dvid).child(cid).child("request").setValue("ACCEPTED");
-                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12) VALUES('"+dvid+"','"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"');";
+                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('"+dvid+"','"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"','"+s01+"');";
                     db2.execSQL(queryx);
+                    db.execSQL("DELETE FROM matches WHERE devid='"+dvid+"'");
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            SQLiteDatabase kdm = openOrCreateDatabase(getFilesDir().getAbsolutePath() + "prodb.db", Context.MODE_PRIVATE, null);
+                            c = kdm.rawQuery("SELECT uname FROM profile", null);
+                            c.moveToFirst();
+                            String usn = c.getString(0);
+                            c.close();
+                            kdm.close();
+                            myRef.child("chat").child(dvid).child(cid).push().setValue(new chatmessage(getString(R.string.hi),usn,"UNREAD"));
+                            myRef.child("chat").child(cid).child(dvid).push().setValue(new chatmessage(getString(R.string.hi),usn,"READ"));
+
+                        }
+                    },5000);
                 }
-                else if(ssc.getDirection().name().equals("LEFT")){
-                    myRef.child("contact").child(cid).child(dvid).child("request").setValue("DECLINED");
-                }
-                db.execSQL("DELETE FROM matches WHERE id='"+x+"'");
-                db.execSQL("UPDATE matches set id='"+(x)+"' WHERE id='"+(x+1)+"'");
                 db.close();
                 db2.close();
                 Intent i=new Intent(contact.this,connections.class);
@@ -80,7 +94,10 @@ public class contact extends AppCompatActivity {
         });
         av=(CircleImageView)findViewById(R.id.kav);
         av.setImageResource(aid);
-        tv1.setText(mp+"% similar");
+        if(!mp.equals(" ")){
+            tv1.setText(mp+"% similar");}
+        else {
+            tv1.setText(" ");}
         tv2.setText(uname);
         ccr=(TextView)findViewById(R.id.ccr);
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Roboto-Light.ttf");
@@ -88,22 +105,18 @@ public class contact extends AppCompatActivity {
         ccr.setTypeface(custom_font);
 
 
-        tv3.setText(s1+", you can call me "+uname+". I was born in "+s2+". Currently I am living in "+s3+" and I love to practice my "+s4+" skills. I would like to "+s5+" someday. My friends say I'm "+s6+". I just "+s7+" "+s8+" I spend most of my day "+s9+". A person with same mind as mine would be "+s10+".");
+        tv3.setText(s1+", you can call me "+uname+". I\'m a "+s01+" born in "+s2+" and currently I live in "+s3+". I love to practice my "+s4+" skills. I would like to "+s5+" someday. My friends say I'm "+s6+". I just love "+s7+" and i hate "+s8+" I spend most of my day "+s9+". A person with same mind as mine would be "+s10+".");
 
 
 
     }
 
     protected void createDatabase(){
-        File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
-        // Create direcorty if not exists
-        if(!storagePath.exists()) {
-            storagePath.mkdirs();
-        }
-        db=openOrCreateDatabase(storagePath+"/"+"PerDB", Context.MODE_PRIVATE, null);
-        db2=openOrCreateDatabase(storagePath+"/"+"ContDB", Context.MODE_PRIVATE, null);
-        db2.execSQL("CREATE TABLE IF NOT EXISTS connect(dvid VARCHAR(20) PRIMARY KEY,time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20), uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30));");
-        String SELECT_SQL ="SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,mp,devid FROM matches where id='"+x+"'";
+
+        db=openOrCreateDatabase(getFilesDir().getAbsolutePath()+"reqDB", Context.MODE_PRIVATE, null);
+        db2=openOrCreateDatabase(getFilesDir().getAbsolutePath()+"ContDB", Context.MODE_PRIVATE, null);
+        db2.execSQL(getString(R.string.condb));
+        String SELECT_SQL ="SELECT uname,aid,email,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01,mp,devid FROM matches where devid='"+x+"'";
         c = db.rawQuery(SELECT_SQL, null);
         c.moveToFirst();
         if(c.getCount()>0){
@@ -122,18 +135,16 @@ public class contact extends AppCompatActivity {
             s10=c.getString(12);
             s11=c.getString(13);
             s12=c.getString(14);
-            mp=c.getString(15);
-            dvid=c.getString(16);
-
+            s01=c.getString(15);
+            mp=c.getString(16);
+            dvid=c.getString(17);
         }
         c.close();
     }
     public void onBackPressed() {
-        db.execSQL("DELETE FROM matches WHERE id='"+x+"'");
-        db.execSQL("UPDATE matches set id='"+(x)+"' WHERE id='"+(x+1)+"'");
         db.close();
         db2.close();
-        super.onBackPressed();
+        finish();
 
 
     }

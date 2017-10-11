@@ -9,7 +9,7 @@
         <item name="android:windowBackground">@color/backgraound</item>
         <item name="android:colorForeground">@android:color/holo_red_light</item>
         <item name="android:textColorPrimary">@color/text</item>
-        <item name="android:colorBackground">@color/boom5</item>
+        <item name="android:colorBackground">@color/chat</item>
 
     </style>
 

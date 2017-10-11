@@ -8,18 +8,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,15 +25,16 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bvapp.arcmenulibrary.ArcMenu;
 import com.bvapp.arcmenulibrary.widget.FloatingActionButton;
-import com.digibuddies.cnectus.layouts.SwipeFrameLayout;
-import com.digibuddies.cnectus.profile.profileclass;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import tyrantgit.explosionfield.ExplosionField;
 
@@ -53,7 +51,7 @@ public class questions extends AppCompatActivity {
     private CheckBox dragCheckbox;
     private ExplosionField explosionField;
     static int count=0;
-    int count2=0,count3=0;
+    int count2=0,count3=0,flag3=0;
     AnimationDrawable anim;
 private SwipeDeckAdapter adapter;
     Dialog dnew2;
@@ -70,8 +68,7 @@ private SwipeDeckAdapter adapter;
     Button imb,imb2;
     int x,flag=0,flag2=0,flagrun=0;
     RadioButton r4;
-    private int[] ITEM_DRAWABLES = { R.drawable.face,
-            R.drawable.add, R.drawable.connect,R.drawable.home};
+    private int[] ITEM_DRAWABLES = {R.drawable.dice,R.drawable.find,R.drawable.talk,R.drawable.home};
     TextView h,l,dt,dd,ex;
 SwipeDeck cardStack;
     private Cursor c;
@@ -95,15 +92,7 @@ SwipeDeck cardStack;
         firstt = mPrefs.getInt(firsttime, 0);
         if (firstt==1){
             flag=1;
-            editor = mPrefs.edit();
-            editor.putInt(firsttime, 2);
-            editor.commit();
         }
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        final int height = size.y;
-
         final Dialog dnew=new Dialog(this);
         dnew.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dnew.setContentView(R.layout.dialogque);
@@ -116,8 +105,13 @@ SwipeDeck cardStack;
         });
         if (flag==1){
             dnew.show();
-            dnew.show();
             flag2=1;
+            String tok=mPrefs.getString("cntoken","nnn");
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef2 = database.getReference("tokens");
+            String id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+            myRef2.child(id).child("token").setValue(tok);
+            FirebaseMessaging.getInstance().subscribeToTopic("notification");
         }
 
         dnew2=new Dialog(this);
@@ -130,13 +124,14 @@ SwipeDeck cardStack;
         ImageView dback = (ImageView) dnew2.findViewById(R.id.dback);
         dback.setImageResource(R.drawable.zz);
         dt.setText("Superb!!!");
-        dd.setText("Now Based On the Answers You Just Gave, Let's See Your Top 3 Matches...");
+        dd.setText(getString(R.string.qu));
         imb2.setText("Oky Doky!");
         imb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dnew2.dismiss();
                 Intent intent=new Intent(questions.this,matches.class);
+                intent.putExtra("target","top");
                 finish();
                 startActivity(intent);
 
@@ -187,16 +182,16 @@ SwipeDeck cardStack;
         for (int i = 1; i <= x; i+=5) {
             testData.add(String.valueOf(i));
         }
-        if(testData.size()==0){
-            l.setVisibility(View.VISIBLE);
-        }
-        if(testData.size()>0){
-            h.setText("Select And Swipe!");
-        }
-
         adapter = new SwipeDeckAdapter(testData, this);
         if(cardStack != null){
             cardStack.setAdapter(adapter);
+        }
+        if(adapter.getCount()>0){
+            h.setText("Select And Swipe!");
+            adapter.notifyDataSetChanged();
+        }
+        if(adapter.getCount()==0){
+            l.setVisibility(View.VISIBLE);
         }
         cardStack.setCallback(new SwipeDeck.SwipeDeckCallback() {
             @Override
@@ -235,12 +230,8 @@ SwipeDeck cardStack;
 
 
         ArcMenu menu = (ArcMenu) findViewById(R.id.arcMenu);
-        if(height<900){
-            menu.setVisibility(View.INVISIBLE);
-        }
-        if(height>=900){
-        menu.setMinRadius(20);
         menu.showTooltip(false);
+        menu.setMinRadius(60);
         menu.setAnim(300,300,ArcMenu.ANIM_MIDDLE_TO_RIGHT,ArcMenu.ANIM_MIDDLE_TO_RIGHT,
                 ArcMenu.ANIM_INTERPOLATOR_ACCELERATE_DECLERATE,ArcMenu.ANIM_INTERPOLATOR_ACCELERATE_DECLERATE);
 
@@ -256,26 +247,27 @@ SwipeDeck cardStack;
             menu.addItem(item, "", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(position==0){
-                        intent0=new Intent(questions.this,profileclass.class);
-                        finish();
-                        startActivity(intent0);
 
-
-                    }
-                    if(position==1){
-                        intent0=new Intent(questions.this,matches.class);
-                        finish();
-                        startActivity(intent0);
-
-
-                    }
                     if(position==2){
                         intent0=new Intent(questions.this,connections.class);
                         finish();
                         startActivity(intent0);
                     }
 
+                    if(position==0){
+                        intent0=new Intent(questions.this,matches.class);
+                        intent0.putExtra("target","random");
+                        finish();
+                        startActivity(intent0);
+
+                    }
+                    if(position==1){
+                        intent0=new Intent(questions.this,search.class);
+                        intent0.putExtra("target","search");
+                        finish();
+                        startActivity(intent0);
+
+                    }
                     if(position==3){
                         intent0=new Intent(questions.this,MainActivity.class);
                         intent0.putExtra("target","none");
@@ -288,7 +280,6 @@ SwipeDeck cardStack;
             });}
         }
 
-    }
 
     public class SwipeDeckAdapter extends BaseAdapter {
 
@@ -318,19 +309,26 @@ SwipeDeck cardStack;
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            if(count==70&&flag2==1){
+            if(count==70){
+                int sa = mPrefs.getInt("flag2",5);
+                if (sa==5){
                 Intent intent=new Intent(questions.this,thebackservice.class);
                 startService(intent);
                 flagrun=1;
                 h.postDelayed(new Runnable() {
                     public void run() {
                         ex.setVisibility(View.VISIBLE);
+                        editor = mPrefs.edit();
+                        editor.putInt("flag2",3);
+                        editor.putInt(firsttime, 2);
+                        editor.commit();
                         dnew2.show();
                         NotificationManager notificationManager =
                                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                         notificationManager.cancel(109);
+
                     }
-                }, 4000);
+                }, 2500);}
             }
             Cursor c2 = db2.rawQuery(SELECT_SQL, null);
             c2.moveToFirst();
@@ -348,7 +346,7 @@ SwipeDeck cardStack;
                 public void run() {
                     l.setVisibility(View.VISIBLE);
                 }
-            }, 2000);
+            }, 3000);
             radioGroup = (RadioGroup)v.findViewById(R.id.grp);
             r1=(RadioButton)v.findViewById(R.id.radioButton5);
             r2=(RadioButton)v.findViewById(R.id.radioButton6);
@@ -446,13 +444,8 @@ SwipeDeck cardStack;
         }
     }
     protected void createDatabase(){
-        File storagePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/android/.data_21");
-        // Create direcorty if not exists
-        if(!storagePath.exists()) {
-            storagePath.mkdirs();
-        }
-        db2=openOrCreateDatabase(storagePath+"/"+"counters", Context.MODE_PRIVATE, null);
-        db3=openOrCreateDatabase(storagePath+"/"+"QueDB", Context.MODE_PRIVATE, null);
+        db2=openOrCreateDatabase(getFilesDir().getAbsolutePath()+"counters", Context.MODE_PRIVATE, null);
+        db3=openOrCreateDatabase(getFilesDir().getAbsolutePath()+"QueDB", Context.MODE_PRIVATE, null);
         db2.execSQL("CREATE TABLE IF NOT EXISTS counter1(id integer primary key, count INTEGER);");
         db3.execSQL("CREATE TABLE IF NOT EXISTS ques(ans integer);");
         c = db2.rawQuery(SELECT_SQL, null);
@@ -462,12 +455,14 @@ SwipeDeck cardStack;
         }
     }
 
+
+
     public void dostuff(){
+        File file = null;
         try {
-            String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/android/.data_21";
-            File f = new File(baseDir+"/"+"fiel.txt");
+            file = new File(getFilesDir(), "fiel.txt");
             FileInputStream is;
-            is = new FileInputStream(f);
+            is = new FileInputStream(file);
             BufferedReader reader;
             reader = new BufferedReader(new InputStreamReader(is));
             String line = reader.readLine();

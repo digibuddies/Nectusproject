@@ -70,7 +70,7 @@ import android.widget.TextView;
                             public void run(){
                                 finish();
                             }
-                        }, 2500);}
+                        }, 1500);}
 
                 }
 

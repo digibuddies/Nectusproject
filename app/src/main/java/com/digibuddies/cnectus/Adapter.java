@@ -1,6 +1,7 @@
 package com.digibuddies.cnectus;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,7 +29,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import static com.digibuddies.cnectus.connections.kk2;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
+class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
 
     List<data> kdata = new ArrayList<data>();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -38,7 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
     String usn,kid;
     Typeface custom_font;
 
-    public Adapter(List<data> kdata, String usn, String kid, Typeface custom_font) {
+    Adapter(List<data> kdata, String usn, String kid, Typeface custom_font) {
         this.kdata = kdata;
         this.usn=usn;
         this.kid=kid;
@@ -53,13 +54,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
     }
 
     @Override
-    public void onBindViewHolder(final cardadapter holder, final int position) {
-            Log.d("positionn", String.valueOf(position));
-        final data temp = kdata.get(position);
-        myRefcht.child(kid).child(kdata.get(position).getDevid()).addChildEventListener(new ChildEventListener() {
+    public void onBindViewHolder(final cardadapter holder, int position) {
+            Log.d("positionn", String.valueOf(holder.getAdapterPosition()));
+        final data temp = kdata.get(holder.getAdapterPosition());
+        myRefcht.child(kid).child(temp.getDevid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-               kk2[position].add(dataSnapshot.getKey());
+               kk2[holder.getAdapterPosition()].add(dataSnapshot.getKey());
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -88,7 +89,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
         myRef.child(temp.getDevid()).child(kid).child("request").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot!=null){
+                if(dataSnapshot.getValue()!=null){
                 if (dataSnapshot.getValue().toString().equals("ACCEPTED")){
                     //holder.tv2.setText(temp.getEmail());
                     holder.tv2.setVisibility(View.INVISIBLE);
@@ -111,9 +112,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             }
         });
 
-        holder.tv3.setText(temp.getOp1()+", you can call me "+temp.getUname()+". I was born in "+temp.getOp2()+". Currently I am living in "+temp.getOp3()+" and I love to practice my "+temp.getOp4()+" skills. I would like to "+temp.getOp5()+" someday. My friends say I'm "+temp.getOp6()+". I just "+temp.getOp7()+" "+temp.getOp8()+" I spend most of my day "+temp.getOp9()+". A person with same mind as mine would be "+temp.getOp10()+".");
+        holder.tv3.setText(temp.getOp1()+", you can call me "+temp.getUname()+". I\'m a "+temp.getOp01()+" born in "+temp.getOp2()+" and currently I live in "+temp.getOp3()+". I love to practice my "+temp.getOp4()+" skills. I would like to "+temp.getOp5()+" someday. My friends say I'm "+temp.getOp6()+". I just love "+temp.getOp7()+" and i hate "+temp.getOp8()+" I spend most of my day "+temp.getOp9()+". A person with same mind as mine would be "+temp.getOp10()+".");
 
-        holder.tv4.setText(temp.getMp()+"% similar");
+        if(!temp.getMp().equals(" ")){
+            holder.tv4.setText(temp.getMp()+"% similar");}
+        else {
+            holder.tv4.setText(" ");}
 
         holder.tv5.setText(temp.getTime());
 
@@ -134,6 +138,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             }
         });
 
+        holder.dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                if (thebackservice.rea.contains(temp.getUname())){
+                    int x=thebackservice.rea.indexOf(temp.getUname());
+                    thebackservice.rea.remove(x);
+                    Log.d("rearea", String.valueOf(thebackservice.rea.contains(temp.getUname())));
+                }
+            }
+        });
         holder.cht.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,43 +158,44 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
         holder.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myRefcht.child(temp.getDevid()).child(kid).push().setValue(new chatmessage(holder.input.getText().toString(),usn,"UNREAD"));
                 myRefcht.child(kid).child(temp.getDevid()).push().setValue(new chatmessage(holder.input.getText().toString(),usn,"READ"));
-
+                myRefcht.child(temp.getDevid()).child(kid).push().setValue(new chatmessage(holder.input.getText().toString(),usn,"UNREAD"));
                 holder.input.setText("");
+                Log.d("dvid",temp.getDevid());
+
+
             }
         });
         adapt = new FirebaseListAdapter<chatmessage>((Activity) holder.itemView.getContext(), chatmessage.class,
                 R.layout.message, myRefcht.child(kid).child(temp.getDevid())) {
             @Override
             protected void populateView(View v, chatmessage model, int position2) {
-                Log.d("size kkkkkkk", String.valueOf(kk2[position].size()));
-                myRefcht.child(kid).child(temp.getDevid()).child(kk2[position].get(position2)).child("read").setValue("READ");
+                if (model.getUser()!=null){
+                    myRefcht.child(kid).child(temp.getDevid()).child(kk2[holder.getAdapterPosition()].get(position2)).child("read").setValue("READ");
+                Log.d("size kkkkkkk", String.valueOf(kk2[holder.getAdapterPosition()].size()));
                 // Get references to the views of message.xml
                 TextView messageText = (TextView)v.findViewById(R.id.message_text);
                 TextView messageUser = (TextView)v.findViewById(R.id.message_user);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
-                // Set their text
                 messageText.setText(model.getMessage());
                 // Format the date before showing it
                 messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
                         model.getTime()));
                 messageUser.setText(model.getUser());
-                if(model.getUser().equals(usn))
-                {
-                messageUser.setTextColor(ContextCompat.getColor(holder.itemView.getContext(),R.color.buttoncol));
-            }
-            else messageUser.setTextColor(ContextCompat.getColor(holder.itemView.getContext(),R.color.first_slide_background));
-                if(position2>10) {
-                                        if(kk2[position].size()>0){
-                                            myRefcht.child(kid).child(temp.getDevid()).child(kk2[position].get(0)).removeValue();
-                                            kk2[position].remove(0);
+                    if (model.getUser().equals(usn)) {
+                        messageUser.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.buttoncol));
+                    } else
+                        messageUser.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.first_slide_background));
+                }
+                    if (position2 > 10) {
+                        if (kk2[holder.getAdapterPosition()].size() > 0) {
+                            myRefcht.child(kid).child(temp.getDevid()).child(kk2[holder.getAdapterPosition()].get(0)).removeValue();
+                            kk2[holder.getAdapterPosition()].remove(0);
 
-                                        }
+                        }
 
-                                        }
-
-            }
+                    }
+                }
         };
         holder.listOfMessages.setAdapter(adapt);
 
@@ -198,17 +213,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
     }
 
 
-    public class cardadapter extends RecyclerView.ViewHolder {
+    class cardadapter extends RecyclerView.ViewHolder {
         TextView tv1, tv2, tv3, tv4, tv5;
         CircleImageView kcv;
         Button rm,cht;
-        Dialog dialog;
         FloatingActionButton fab;
         EditText input;
         ListView listOfMessages;
+        Dialog dialog;
 
 
-        public cardadapter(View itemView) {
+        cardadapter(View itemView) {
             super(itemView);
             tv1 = (TextView) itemView.findViewById(R.id.kuser);
             tv2 = (TextView) itemView.findViewById(R.id.kmail);
@@ -222,6 +237,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             dialog=new Dialog(itemView.getContext());
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.chat);
+            dialog.setCanceledOnTouchOutside(true);
             fab =(FloatingActionButton)dialog.findViewById(R.id.fab);
             input = (EditText)dialog.findViewById(R.id.input);
             listOfMessages = (ListView)dialog.findViewById(R.id.list_of_messages);

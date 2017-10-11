@@ -22,7 +22,6 @@ public class Aboutus extends AppCompatActivity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         tv1=(TextView)findViewById(R.id.abt);
         tv2=(TextView)findViewById(R.id.abtnec);
-        tv3=(TextView)findViewById(R.id.made);
         tv4=(TextView)findViewById(R.id.nam1);
         tv5=(TextView)findViewById(R.id.nam2);
         tv6=(TextView)findViewById(R.id.nec);
@@ -31,7 +30,6 @@ public class Aboutus extends AppCompatActivity {
         tv9=(TextView)findViewById(R.id.ver);
         tv1.setTypeface(custom_font);
         tv2.setTypeface(custom_font);
-        tv3.setTypeface(custom_font);
         tv4.setTypeface(custom_font);
         tv5.setTypeface(custom_font);
         tv6.setTypeface(custom_font);

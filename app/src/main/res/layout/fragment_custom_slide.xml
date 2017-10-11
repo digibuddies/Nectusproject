@@ -77,21 +77,21 @@
             android:layout_height="2dp" />
 
         <EditText
+            android:id="@+id/editText2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textNoSuggestions"
-            android:ems="10"
             android:layout_below="@+id/tv"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
-            android:id="@+id/editText2"
-            android:hint="eg: heartslicer, killerpanda"
-            android:textAlignment="center"
+            android:ems="10"
             android:fontFamily="casual"
-            android:textColorHint="@android:color/black"
-            android:textColorHighlight="@android:color/white"
+            android:hint="Be Creative..."
             android:imeOptions="actionNext"
-            android:maxLength="12" />
+            android:inputType="textNoSuggestions"
+            android:maxLength="12"
+            android:textAlignment="center"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/black" />
 
         <TextView
             android:text="Create Username"

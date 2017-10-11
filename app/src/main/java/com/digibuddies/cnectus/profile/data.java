@@ -5,7 +5,7 @@ package com.digibuddies.cnectus.profile;
  */
 
 public class data {
-    int p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13;
+    int p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p01;
     String uname;
 
     int aid;
@@ -26,6 +26,7 @@ public class data {
     String op14;
     String op15;
     String op16;
+    String op01;
 
     public int getAid() {
         return aid;
@@ -155,12 +156,12 @@ public class data {
         this.op13 = op13;
     }
 
-    public String getOp14() {
-        return op14;
+    public String getOp01() {
+        return op01;
     }
 
-    public void setOp14(String op14) {
-        this.op14 = op14;
+    public void setOp01(String op01) {
+        this.op01 = op01;
     }
 
     public String getOp15() {
@@ -275,12 +276,12 @@ public class data {
         this.p9 = p9;
     }
 
-    public int getP13() {
-        return p13;
+    public int getP01() {
+        return p01;
     }
 
-    public void setP13(int p13) {
-        this.p13 = p13;
+    public void setP01(int p01) {
+        this.p01 = p01;
     }
 }
 

@@ -5,8 +5,8 @@ package com.digibuddies.cnectus;
  */
 
 public class data {
-    int p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13;
-    String uname,mp;
+    int p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p01;
+    String uname,mp,allow;
     int aid;
     int id;
     String devid;
@@ -26,7 +26,7 @@ public class data {
     String op13;
     String op14;
     String op15;
-    String op16;
+    String op16,op01="";
     String time;
 
     public int getAid() {
@@ -149,12 +149,12 @@ public class data {
         this.op12 = op12;
     }
 
-    public String getOp13() {
-        return op13;
+    public String getOp01() {
+        return op01;
     }
 
-    public void setOp13(String op13) {
-        this.op13 = op13;
+    public void setOp01(String op01) {
+        this.op01 = op01;
     }
 
     public String getOp14() {
@@ -280,7 +280,7 @@ public class data {
     public data() {
     }
 
-    public data(int aid,String time, String uname, String email, String mp, String op1, String op2, String op3, String op4, String op5, String op6, String op7, String op8, String op9, String op10,String devid) {
+    public data(int aid,String time, String uname, String email, String mp, String op1, String op2, String op3, String op4, String op5, String op6, String op7, String op8, String op9, String op10,String op01,String devid) {
         this.aid = aid;
         this.time=time;
         this.email = email;
@@ -295,6 +295,7 @@ public class data {
         this.op8 = op8;
         this.op9 = op9;
         this.op10 = op10;
+        this.op01 = op01;
         this.uname = uname;
         this.devid=devid;
     }
@@ -337,6 +338,14 @@ public class data {
 
     public void setP13(int p13) {
         this.p13 = p13;
+    }
+
+    public String getAllow() {
+        return allow;
+    }
+
+    public void setAllow(String allow) {
+        this.allow = allow;
     }
 }
 

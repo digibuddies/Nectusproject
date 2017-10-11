@@ -31,7 +31,7 @@
         android:layout_below="@+id/kcon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        app:srcCompat="@color/orange" />
+        app:srcCompat="@color/colorAccent" />
 
     <TextView
         android:text="No Connections To Show!"
@@ -52,18 +52,18 @@
         android:layout_alignParentTop="false"
         android:layout_below="@+id/imageView10"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="See all your connections here"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="17sp" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/krv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/imageView10"
-        android:layout_marginTop="50dp"
-        android:id="@+id/krv" >
+        android:layout_below="@+id/req"
+        android:layout_marginTop="5dp">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -71,15 +71,32 @@
         android:id="@+id/arcMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        arc:menuType="normal"
-        arc:menuChildSize="48dp"
-        arc:menuGravity="Bottom_Right"
-        arc:menuClickAnim="true"
+        app:menuGravity="Bottom_Middle"
+        app:menuImage="@drawable/menu3"
         arc:menuChildAnim="false"
-        arc:menuShadowElevation="true"
+        arc:menuChildSize="48dp"
+        arc:menuClickAnim="true"
         arc:menuNormalColor="@android:color/white"
-        arc:menuImage="@drawable/ic_fingerprint_black_24dp">
+        arc:menuShadowElevation="true"
+        arc:menuType="normal">
 
     </com.bvapp.arcmenulibrary.ArcMenu>
+
+    <Button
+        android:id="@+id/req"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/detc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button"
+        android:fontFamily="serif-monospace"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Requests!"
+        android:textAllCaps="false"
+        android:textColor="@color/global_color_green_primary"
+        android:textStyle="bold"
+        android:typeface="normal" />
 
 </RelativeLayout>
