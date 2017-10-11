@@ -31,7 +31,7 @@ public class contact extends AppCompatActivity {
     SQLiteDatabase db,db2;
     Cursor c;
     FloatingTextButton sv;
-    String mp;
+    String mp="";
     TextView tv1,tv2,tv3,ccr;
     CircleImageView av;
     String x;
