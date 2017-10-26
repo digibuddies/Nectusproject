@@ -14,10 +14,9 @@
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageV"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/imageV"
-        android:layout_marginTop="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="39dp"
         android:gravity="center"
         android:isScrollContainer="false"
         android:orientation="horizontal"
@@ -48,8 +47,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_alignParentStart="false"
                 android:layout_alignParentTop="false"
                 android:layout_centerHorizontal="false"
@@ -69,7 +68,7 @@
                 android:fontFamily="sans-serif-smallcaps"
                 android:text="Cnectus Chat"
                 android:textColor="@android:color/white"
-                android:textSize="22sp"
+                android:textSize="24sp"
                 android:visibility="visible" />
         </LinearLayout>
 
@@ -97,11 +96,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
+                android:animateLayoutChanges="false"
                 android:divider="@color/transparent"
                 android:dividerHeight="10dp"
+                android:isScrollContainer="true"
                 android:stackFromBottom="true"
                 android:textAlignment="center"
-                android:transcriptMode="alwaysScroll" />
+                android:transcriptMode="normal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,31 +136,17 @@
 
                 <ImageButton
                     android:id="@+id/imageButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginLeft="5dp"
                     android:background="@color/transparent"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/send4" />
+                    app:srcCompat="@drawable/send6" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/ll"
-        android:isScrollContainer="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        </LinearLayout>
-    </ScrollView>
 
 </RelativeLayout>

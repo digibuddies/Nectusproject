@@ -1,5 +1,6 @@
 package com.digibuddies.cnectus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -144,6 +146,9 @@ public class Chat extends AppCompatActivity {
                 myRefcht.child(kid).child(temp.getDevid()).push().setValue(new chatmessage(input.getText().toString(),usn,"READ"));
                 myRefcht.child(temp.getDevid()).child(kid).push().setValue(new chatmessage(input.getText().toString(),usn,"UNREAD"));
                 input.setText("");
+                input.clearFocus();
+                InputMethodManager imm = (InputMethodManager)Chat.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
 
             }
         });

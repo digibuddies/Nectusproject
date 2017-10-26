@@ -44,7 +44,7 @@
     <color name="black">#000000</color>
     <color name="bacc">#11000000</color>
     <color name="red">#ef5350</color>
-    <color name="backgraound">#ffffff</color>
+    <color name="backgraound">#000000</color>
     <color name="backabt">#8c000000</color>
     <color name="maintrans">#1e000000</color>
 <color name="light_lime">#827717</color>
@@ -56,5 +56,5 @@
     <color name="boom4">#727272</color>
     <color name="boom1">#d32f2f</color>
     <color name="light_gray">#e0e0e0</color>
-    <color name="purple">#3a0050</color>
+    <color name="purple">#5d0080</color>
 </resources>
