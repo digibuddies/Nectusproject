@@ -1,22 +1,32 @@
 package com.digibuddies.cnectus;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.firebase.ui.database.ChangeEventListener;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -26,8 +36,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
-import static com.digibuddies.cnectus.connections.kk2;
+
+import static com.digibuddies.cnectus.connections.adapter;
 
 class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
 
@@ -37,9 +50,13 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
     DatabaseReference myRefcht = database.getReference("chat");
       private FirebaseListAdapter<chatmessage> adapt;
     String usn,kid;
+    Context context;
+   ChildEventListener listener;
+
     Typeface custom_font;
 
-    Adapter(List<data> kdata, String usn, String kid, Typeface custom_font) {
+    Adapter(Context context,List<data> kdata, String usn, String kid, Typeface custom_font) {
+        this.context=context;
         this.kdata = kdata;
         this.usn=usn;
         this.kid=kid;
@@ -54,34 +71,9 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
     }
 
     @Override
-    public void onBindViewHolder(final cardadapter holder, int position) {
+    public void onBindViewHolder(final cardadapter holder, final int position) {
             Log.d("positionn", String.valueOf(holder.getAdapterPosition()));
         final data temp = kdata.get(holder.getAdapterPosition());
-        myRefcht.child(kid).child(temp.getDevid()).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-               kk2[holder.getAdapterPosition()].add(dataSnapshot.getKey());
-            }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         holder.tv1.setText(temp.getUname());
         holder.tv2.setText("Checking Status...");
         holder.tv2.setVisibility(View.VISIBLE);
@@ -111,9 +103,6 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
 
             }
         });
-
-        holder.tv3.setText(temp.getOp1()+", you can call me "+temp.getUname()+". I\'m a "+temp.getOp01()+" born in "+temp.getOp2()+" and currently I live in "+temp.getOp3()+". I love to practice my "+temp.getOp4()+" skills. I would like to "+temp.getOp5()+" someday. My friends say I'm "+temp.getOp6()+". I just love "+temp.getOp7()+" and i hate "+temp.getOp8()+" I spend most of my day "+temp.getOp9()+". A person with same mind as mine would be "+temp.getOp10()+".");
-
         if(!temp.getMp().equals(" ")){
             holder.tv4.setText(temp.getMp()+"% similar");}
         else {
@@ -138,66 +127,35 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             }
         });
 
-        holder.dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+        holder.sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                if (thebackservice.rea.contains(temp.getUname())){
-                    int x=thebackservice.rea.indexOf(temp.getUname());
-                    thebackservice.rea.remove(x);
-                    Log.d("rearea", String.valueOf(thebackservice.rea.contains(temp.getUname())));
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b==true) {
+                    holder.sw.setText("Less Info");
+                    holder.tv3.setText(temp.getOp1() + ", you can call me " + temp.getUname() + ". I\'m a " + temp.getOp01() + " born in " + temp.getOp2() + " and currently I live in " + temp.getOp3() + ". I love to practice my " + temp.getOp4() + " skills. I would like to " + temp.getOp5() + " someday. My friends say I'm " + temp.getOp6() + ". I just love " + temp.getOp7() + " and i hate " + temp.getOp8() + " I spend most of my day " + temp.getOp9() + ". A person with same mind as mine would be " + temp.getOp10() + ".");
+                    holder.tv3.setVisibility(View.VISIBLE);
+                }
+                else{
+                    holder.tv3.setVisibility(View.GONE);
+                    holder.sw.setText("More Info");
+                    Adapter.this.notifyItemChanged(position);
                 }
             }
         });
+
         holder.cht.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.dialog.show();
-            }
-        });
-
-        holder.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myRefcht.child(kid).child(temp.getDevid()).push().setValue(new chatmessage(holder.input.getText().toString(),usn,"READ"));
-                myRefcht.child(temp.getDevid()).child(kid).push().setValue(new chatmessage(holder.input.getText().toString(),usn,"UNREAD"));
-                holder.input.setText("");
-                Log.d("dvid",temp.getDevid());
+                Intent intent = new Intent(context,Chat.class);
+                intent.putExtra("usn",usn);
+                intent.putExtra("kid",kid);
+                intent.putExtra("temp",temp);
+                intent.putExtra("pos",holder.getAdapterPosition());
+                context.startActivity(intent);
 
 
             }
         });
-        adapt = new FirebaseListAdapter<chatmessage>((Activity) holder.itemView.getContext(), chatmessage.class,
-                R.layout.message, myRefcht.child(kid).child(temp.getDevid())) {
-            @Override
-            protected void populateView(View v, chatmessage model, int position2) {
-                if (model.getUser()!=null){
-                    myRefcht.child(kid).child(temp.getDevid()).child(kk2[holder.getAdapterPosition()].get(position2)).child("read").setValue("READ");
-                Log.d("size kkkkkkk", String.valueOf(kk2[holder.getAdapterPosition()].size()));
-                // Get references to the views of message.xml
-                TextView messageText = (TextView)v.findViewById(R.id.message_text);
-                TextView messageUser = (TextView)v.findViewById(R.id.message_user);
-                TextView messageTime = (TextView)v.findViewById(R.id.message_time);
-                messageText.setText(model.getMessage());
-                // Format the date before showing it
-                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-                        model.getTime()));
-                messageUser.setText(model.getUser());
-                    if (model.getUser().equals(usn)) {
-                        messageUser.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.buttoncol));
-                    } else
-                        messageUser.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.first_slide_background));
-                }
-                    if (position2 > 10) {
-                        if (kk2[holder.getAdapterPosition()].size() > 0) {
-                            myRefcht.child(kid).child(temp.getDevid()).child(kk2[holder.getAdapterPosition()].get(0)).removeValue();
-                            kk2[holder.getAdapterPosition()].remove(0);
-
-                        }
-
-                    }
-                }
-        };
-        holder.listOfMessages.setAdapter(adapt);
 
 
     }
@@ -217,10 +175,7 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
         TextView tv1, tv2, tv3, tv4, tv5;
         CircleImageView kcv;
         Button rm,cht;
-        FloatingActionButton fab;
-        EditText input;
-        ListView listOfMessages;
-        Dialog dialog;
+        Switch sw;
 
 
         cardadapter(View itemView) {
@@ -230,18 +185,11 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             tv3 = (TextView) itemView.findViewById(R.id.kdetail);
             tv4 = (TextView) itemView.findViewById(R.id.kmatch);
             tv5 = (TextView) itemView.findViewById(R.id.kdate);
+            sw = (Switch)itemView.findViewById(R.id.sw);
             kcv=(CircleImageView)itemView.findViewById(R.id.kav);
             rm=(Button)itemView.findViewById(R.id.remove);
             tv3.setTypeface(custom_font);
             cht=(Button)itemView.findViewById(R.id.cht);
-            dialog=new Dialog(itemView.getContext());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.chat);
-            dialog.setCanceledOnTouchOutside(true);
-            fab =(FloatingActionButton)dialog.findViewById(R.id.fab);
-            input = (EditText)dialog.findViewById(R.id.input);
-            listOfMessages = (ListView)dialog.findViewById(R.id.list_of_messages);
-
         }
 
     }

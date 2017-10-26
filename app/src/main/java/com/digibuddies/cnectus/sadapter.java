@@ -155,7 +155,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
             ssw=(StickySwitch)dialog.findViewById(R.id.dss);
             csy=(TextView)dialog.findViewById(R.id.cy);
             csn=(TextView)dialog.findViewById(R.id.cn);
-            currentDateTime = java.text.DateFormat.getDateTimeInstance().format(new Date());
+            currentDateTime = java.text.DateFormat.getDateInstance().format(new Date());
             dbs=openOrCreateDatabase(context.getFilesDir().getAbsolutePath()+"ContDB", null);
             dbm=openOrCreateDatabase(context.getFilesDir().getAbsolutePath()+"matrec", null);
             dbm.execSQL("CREATE TABLE IF NOT EXISTS matches(usid VARCHAR(20) PRIMARY KEY,mp VARCHAR(20));");

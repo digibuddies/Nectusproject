@@ -54,7 +54,7 @@ public class connections extends AppCompatActivity {
     Intent intent0;
     Button req;
     public static ArrayList<String>[] kk2;
-    int flag=0;
+    int flag=0,flag2=0;
     public Typeface custom_font;
     public String kid,usn;
     private int[] ITEM_DRAWABLES = { R.drawable.help, R.drawable.dice,R.drawable.find, R.drawable.home };
@@ -225,8 +225,21 @@ public class connections extends AppCompatActivity {
         ckcon.setTypeface(custom_font);
         detc.setTypeface(custom_font);
 
-        adapter = new Adapter(cdata,usn,kid,custom_font);
+        adapter = new Adapter(connections.this,cdata,usn,kid,custom_font);
         rv.setAdapter(adapter);
+        flag2=1;
+        Intent in = getIntent();
+        if (in.hasExtra("position")) {
+            int pos = 0;
+            String target = in.getStringExtra("position");
+            for (int i = 0; i < cdata.size(); i++) {
+                if (cdata.get(i).getUname().equals(target)) {
+                    pos = i;
+                    break;
+                }
+            }
+            rv.scrollToPosition(pos);
+        }
         if (adapter.getItemCount()>0)
         {
             emp.setVisibility(View.INVISIBLE);
@@ -317,6 +330,10 @@ public class connections extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     protected void onPause() {

@@ -55,4 +55,6 @@
     <color name="boom3">#8046b5</color>
     <color name="boom4">#727272</color>
     <color name="boom1">#d32f2f</color>
+    <color name="light_gray">#e0e0e0</color>
+    <color name="purple">#3a0050</color>
 </resources>

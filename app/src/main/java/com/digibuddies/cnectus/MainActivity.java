@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,search.class);
+                Intent intent=new Intent(MainActivity.this,group.class);
                 startActivity(intent);
                 dialog.cancel();
             }

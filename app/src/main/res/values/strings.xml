@@ -37,4 +37,7 @@
     <string name="reqdb">CREATE TABLE IF NOT EXISTS matches(devid VARCHAR(20) PRIMARY KEY,mp varchar(20), aid INTEGER, email VARCHAR(20),allow varchar(20) default \'LEFT\', uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30),op01 VARCHAR(30));</string>
     <string name="condb">CREATE TABLE IF NOT EXISTS connect(dvid VARCHAR(20) PRIMARY KEY,time VARCHAR(20),mp varchar(20), aid INTEGER, email VARCHAR(20),uname VARCHAR(20), op1 VARCHAR(20),op2 VARCHAR(20),op3 VARCHAR(20),op4 VARCHAR(20),op5 VARCHAR(20),op6 VARCHAR(20),op7 VARCHAR(20),op8 VARCHAR(20),op9 VARCHAR(20),op10 VARCHAR(20),op11 VARCHAR(30),op12 VARCHAR(30),op01 VARCHAR(30));</string>
     <string name="qu">Now Based On the Answers You Just Gave, Let\'s See Your Top 3 Matches…</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

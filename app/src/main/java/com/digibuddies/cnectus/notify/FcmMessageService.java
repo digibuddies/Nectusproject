@@ -65,10 +65,9 @@ public class FcmMessageService extends FirebaseMessagingService {
                ImageRequest imageRequest = new ImageRequest(img_url, new Response.Listener<Bitmap>() {
                    @Override
                    public void onResponse(Bitmap response) {
-
                        builder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(response));
                        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                       if (BuildConfig.VERSION_CODE == finalVer) {
+                       if (BuildConfig.VERSION_CODE == finalVer||finalVer==0) {
                            notificationManager.notify(0, builder.build());
                        }
                    }

@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:arc="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_connections"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="false"
+    android:background="@drawable/backg1"
     android:paddingBottom="0dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.digibuddies.cnectus.connections"
-    android:background="@drawable/backg1">
+    tools:context="com.digibuddies.cnectus.connections">
 
     <TextView
-        android:text="CONNECTIONS"
+        android:id="@+id/kcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/kcon"
+        android:layout_marginTop="39dp"
+        android:text="CONNECTIONS"
         android:textColor="@android:color/white"
-        android:textSize="40sp"
-        android:layout_marginTop="39dp" />
+        android:textSize="40sp" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -34,16 +35,16 @@
         app:srcCompat="@color/colorAccent" />
 
     <TextView
-        android:text="No Connections To Show!"
-        android:layout_height="wrap_content"
         android:id="@+id/kemp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textColor="@android:color/white"
         android:fontFamily="cursive"
-        android:textSize="30sp"
-        android:layout_width="300dp"
-        android:textAlignment="center" />
+        android:text="No Connections To Show!"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/detc"
@@ -63,7 +64,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/req"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:animateLayoutChanges="false">
 
     </android.support.v7.widget.RecyclerView>
 

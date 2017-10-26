@@ -91,15 +91,18 @@ public class thebackservice extends IntentService {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dsp : dataSnapshot.getChildren()){
                     {   for (final DataSnapshot dsp2 : dsp.getChildren()){
-                                if (dsp2.child("read").getValue().equals("UNREAD")){
-                                    Log.d("nottt","nrrd to send");
-                                    String s=dsp2.child("user").getValue().toString();
-                                    if (!(rea.contains(s))){
+                        if(dsp2.child("read").getValue()!=null) {
+                            if (dsp2.child("read").getValue().equals("UNREAD")) {
+                                Log.d("nottt", "nrrd to send");
+                                String s = dsp2.child("user").getValue().toString();
+                                if (!(rea.contains(s))) {
                                     rea.add(s);
-                                        Log.d("nottt",s);
-                                        cnt2++;
-                                    notifyUser3(s);}
+                                    Log.d("nottt", s);
+                                    cnt2++;
+                                    notifyUser3(s);
+                                }
                             }
+                        }
 
 
                          }
@@ -718,6 +721,7 @@ public class thebackservice extends IntentService {
     public void notifyUser3(String s) {
         Intent intent = new Intent(thebackservice.this, connections.class);
         intent.putExtra("target","connections");
+        intent.putExtra("position",s);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(thebackservice.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
