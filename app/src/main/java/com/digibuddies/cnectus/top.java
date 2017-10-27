@@ -36,7 +36,6 @@ import butterknife.OnClick;
 
 
 public class top extends Fragment {
-    SecondFragment secondFragment=new SecondFragment();
     Bundle bundle=new Bundle();
     @IntDef({NONE, MOVE, CUBE, FLIP, PUSHPULL, SIDES, CUBEMOVE, MOVECUBE, PUSHMOVE, MOVEPULL, FLIPMOVE, MOVEFLIP, FLIPCUBE, CUBEFLIP})
     public @interface AnimationStyle {}
@@ -396,7 +395,7 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         // secondFragment.set("Geeks");
                         bundle.putString("key","1");
-                        secondFragment.setArguments(bundle);
+                        group.secondFragment.creatingNewListView("Geeks");
                     }
                 });
 
@@ -437,7 +436,7 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             bundle.putString("key","3");
-            secondFragment.setArguments(bundle);
+            group.secondFragment.creatingNewListView("pros");
 
         }
     });
@@ -457,7 +456,7 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             bundle.putString("key","4");
-            secondFragment.setArguments(bundle);
+            group.secondFragment.creatingNewListView("Daydreamers");
 
         }
     });
@@ -477,7 +476,7 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             bundle.putString("key","5");
-            secondFragment.setArguments(bundle);
+            group.secondFragment.creatingNewListView("Adventurers");
 
         }
     });
@@ -495,7 +494,7 @@ join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             bundle.putString("key","6");
-            secondFragment.setArguments(bundle);
+            group.secondFragment.creatingNewListView("Artists");
 
         }
     });
