@@ -1,6 +1,8 @@
 package com.digibuddies.cnectus;
 
 import android.annotation.SuppressLint;
+import android.databinding.adapters.CardViewBindingAdapter;
+import android.databinding.adapters.SwitchBindingAdapter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
@@ -12,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.labo.kaji.fragmentanimations.CubeAnimation;
@@ -21,14 +26,15 @@ import com.labo.kaji.fragmentanimations.PushPullAnimation;
 import com.labo.kaji.fragmentanimations.SidesAnimation;
 
 import butterknife.Bind;
+import butterknife.BindInt;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * @author kakajika
- * @since 2015/11/27
- */
+
 public class top extends Fragment {
+    Adapter adapter;
+    com.digibuddies.cnectus.Adapter.cardadapter joingroup;
+
 
     @IntDef({NONE, MOVE, CUBE, FLIP, PUSHPULL, SIDES, CUBEMOVE, MOVECUBE, PUSHMOVE, MOVEPULL, FLIPMOVE, MOVEFLIP, FLIPCUBE, CUBEFLIP})
     public @interface AnimationStyle {}
@@ -64,7 +70,15 @@ public class top extends Fragment {
     @Bind(R.id.textAnimationStyle)
     TextView mTextAnimationStyle;
 
-    public static top newInstance(@AnimationDirection int direction) {
+    @Bind(R.id.join)
+    Switch join;
+/*
+ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
+    Switch holder=(Switch)getView().findViewById(R.id.join) ;
+
+        holder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener());
+*/
+        public static top newInstance(@AnimationDirection int direction) {
         top f = new top();
         f.setArguments(new Bundle());
         f.getArguments().putInt("direction", direction);
@@ -87,6 +101,7 @@ public class top extends Fragment {
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         switch (sAnimationStyle) {
+            /*
             case MOVE:
                 switch (getArguments().getInt("direction")) {
                     case UP:
@@ -99,7 +114,7 @@ public class top extends Fragment {
                         return MoveAnimation.create(MoveAnimation.RIGHT, enter, DURATION);
                 }
                 break;
-            case CUBE:
+  */          case CUBE:
                 switch (getArguments().getInt("direction")) {
                     case UP:
                         return CubeAnimation.create(CubeAnimation.UP, enter, DURATION);
@@ -112,7 +127,7 @@ public class top extends Fragment {
                         return CubeAnimation.create(CubeAnimation.LEFT, enter, DURATION);
                 }
                 break;
-            case FLIP:
+    /*        case FLIP:
                 switch (getArguments().getInt("direction")) {
                     case UP:
                         return FlipAnimation.create(FlipAnimation.UP, enter, DURATION);
@@ -124,7 +139,7 @@ public class top extends Fragment {
                         return FlipAnimation.create(FlipAnimation.RIGHT, enter, DURATION);
                 }
                 break;
-            case PUSHPULL:
+      */      case PUSHPULL:
                 switch (getArguments().getInt("direction")) {
                     case UP:
                         return PushPullAnimation.create(PushPullAnimation.UP, enter, DURATION);
@@ -136,7 +151,7 @@ public class top extends Fragment {
                         return PushPullAnimation.create(PushPullAnimation.RIGHT, enter, DURATION);
                 }
                 break;
-            case SIDES:
+        /*    case SIDES:
                 switch (getArguments().getInt("direction")) {
                     case UP:
                         return SidesAnimation.create(SidesAnimation.UP, enter, DURATION);
@@ -275,13 +290,13 @@ public class top extends Fragment {
                         return enter ? FlipAnimation.create(FlipAnimation.RIGHT, enter, DURATION) :
                                 CubeAnimation.create(CubeAnimation.RIGHT, enter, DURATION).fading(1.0f, 0.3f);
                 }
-                break;
+                break;     */
             case NONE:
                 break;
         }
         return null;
     }
-
+/*
     @SuppressWarnings("unused")
     @OnClick(R.id.buttonUp)
     void onButtonUp() {
@@ -299,7 +314,7 @@ public class top extends Fragment {
         ft.replace(R.id.mainl, top.newInstance(DOWN));
         ft.commit();
     }
-
+*/
     @SuppressWarnings("unused")
     @OnClick(R.id.buttonLeft)
     void onButtonLeft() {
@@ -332,6 +347,23 @@ public class top extends Fragment {
         setAnimationStyle(MOVE);
     }
 
+
+    @SuppressWarnings("unused")
+    @OnClick(R.id.buttonLeft)
+    public void switchAnimationStyle2(View view) {
+        @AnimationStyle int[] styles;
+        styles = new int[]{MOVE, CUBE, FLIP, PUSHPULL, SIDES, CUBEMOVE/*, MOVECUBE, PUSHMOVE, MOVEPULL, FLIPMOVE, MOVEFLIP, FLIPCUBE, CUBEFLIP*/};
+        for (int i = 0; i<styles.length-1; ++i) {
+            if (styles[i] == sAnimationStyle2) {
+                setAnimationStyle(styles[i+1]);
+                return;
+            }
+        }
+        setAnimationStyle(MOVE);
+    }
+
+
+
     public void setAnimationStyle(@AnimationStyle int style) {
         if (sAnimationStyle2 != style) {
             sAnimationStyle2 = style;
@@ -348,6 +380,12 @@ public class top extends Fragment {
                 break;
             case MOVE:
                 mTextAnimationStyle.setText("Geeks");
+                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        
+                    }
+                });
                 break;
             case CUBE:
                 mTextAnimationStyle.setText("Cnectus Family");
@@ -362,7 +400,7 @@ public class top extends Fragment {
                 mTextAnimationStyle.setText("Adventurers");
                 break;
             case CUBEMOVE:
-                mTextAnimationStyle.setText("Divya");
+                mTextAnimationStyle.setText("Artists");
                 break;
            /* case MOVECUBE:
                 mTextAnimationStyle.setText("Move/Cube");
