@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.labo.kaji.fragmentanimations.CubeAnimation;
 import com.labo.kaji.fragmentanimations.FlipAnimation;
@@ -32,10 +33,8 @@ import butterknife.OnClick;
 
 
 public class top extends Fragment {
-    Adapter adapter;
-    com.digibuddies.cnectus.Adapter.cardadapter joingroup;
-
-
+    SecondFragment secondFragment=new SecondFragment();
+    Bundle bundle=new Bundle();
     @IntDef({NONE, MOVE, CUBE, FLIP, PUSHPULL, SIDES, CUBEMOVE, MOVECUBE, PUSHMOVE, MOVEPULL, FLIPMOVE, MOVEFLIP, FLIPCUBE, CUBEFLIP})
     public @interface AnimationStyle {}
     public static final int NONE     = 0;
@@ -72,13 +71,8 @@ public class top extends Fragment {
 
     @Bind(R.id.join)
     Switch join;
-/*
-ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
-    Switch holder=(Switch)getView().findViewById(R.id.join) ;
 
-        holder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener());
-*/
-        public static top newInstance(@AnimationDirection int direction) {
+    public static top newInstance(@AnimationDirection int direction) {
         top f = new top();
         f.setArguments(new Bundle());
         f.getArguments().putInt("direction", direction);
@@ -296,25 +290,25 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         }
         return null;
     }
-/*
-    @SuppressWarnings("unused")
-    @OnClick(R.id.buttonUp)
-    void onButtonUp() {
-        getArguments().putInt("direction", UP);
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.mainl, top.newInstance(UP));
-        ft.commit();
-    }
+    /*
+        @SuppressWarnings("unused")
+        @OnClick(R.id.buttonUp)
+        void onButtonUp() {
+            getArguments().putInt("direction", UP);
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.mainl, top.newInstance(UP));
+            ft.commit();
+        }
 
-    @SuppressWarnings("unused")
-    @OnClick(R.id.buttonDown)
-    void onButtonDown() {
-        getArguments().putInt("direction", DOWN);
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.mainl, top.newInstance(DOWN));
-        ft.commit();
-    }
-*/
+        @SuppressWarnings("unused")
+        @OnClick(R.id.buttonDown)
+        void onButtonDown() {
+            getArguments().putInt("direction", DOWN);
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.mainl, top.newInstance(DOWN));
+            ft.commit();
+        }
+    */
     @SuppressWarnings("unused")
     @OnClick(R.id.buttonLeft)
     void onButtonLeft() {
@@ -368,7 +362,6 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         if (sAnimationStyle2 != style) {
             sAnimationStyle2 = style;
             setAnimationStyleText();
-            Snackbar.make(getView(), "Animation Style is Changed", Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -383,24 +376,64 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                 join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        
+                        // secondFragment.set("Geeks");
+                        bundle.putString("key","1");
+                        secondFragment.setArguments(bundle);
                     }
                 });
                 break;
             case CUBE:
                 mTextAnimationStyle.setText("Cnectus Family");
+                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        Toast.makeText(getActivity(),"added",Toast.LENGTH_LONG).show();
+                    }
+                });
                 break;
             case FLIP:
                 mTextAnimationStyle.setText("Pros");
+                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        bundle.putString("key","3");
+                        secondFragment.setArguments(bundle);
+
+                    }
+                });
                 break;
             case PUSHPULL:
                 mTextAnimationStyle.setText("Daydreamers");
+                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        bundle.putString("key","4");
+                        secondFragment.setArguments(bundle);
+
+                    }
+                });
                 break;
             case SIDES:
                 mTextAnimationStyle.setText("Adventurers");
+                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        bundle.putString("key","5");
+                        secondFragment.setArguments(bundle);
+
+                    }
+                });
                 break;
             case CUBEMOVE:
                 mTextAnimationStyle.setText("Artists");
+                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        bundle.putString("key","6");
+                        secondFragment.setArguments(bundle);
+
+                    }
+                });
                 break;
            /* case MOVECUBE:
                 mTextAnimationStyle.setText("Move/Cube");
