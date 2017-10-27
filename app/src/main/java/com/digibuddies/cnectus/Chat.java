@@ -146,9 +146,9 @@ public class Chat extends AppCompatActivity {
                 myRefcht.child(kid).child(temp.getDevid()).push().setValue(new chatmessage(input.getText().toString(),usn,"READ"));
                 myRefcht.child(temp.getDevid()).child(kid).push().setValue(new chatmessage(input.getText().toString(),usn,"UNREAD"));
                 input.setText("");
-                input.clearFocus();
                 InputMethodManager imm = (InputMethodManager)Chat.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                input.clearFocus();
 
             }
         });

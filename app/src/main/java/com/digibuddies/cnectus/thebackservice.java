@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -50,7 +51,7 @@ public class thebackservice extends IntentService {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef2 = database.getReference("Ques");
     DatabaseReference myRef = database.getReference();
-
+    data[] da;
     //notification
     NotificationManager manager;
     Notification myNotication;
@@ -118,6 +119,7 @@ public class thebackservice extends IntentService {
             public void onCancelled(DatabaseError databaseError) {
 
             }});
+        da = new data[20];
         c = db.rawQuery(SELECT_SQL, null);
         c.moveToFirst();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -199,25 +201,25 @@ public class thebackservice extends IntentService {
                     p1[0] = pointer;
                     p1[1] = pointer - 1;
                     p1[2] = pointer - 2;
-                    p1[3] = 2;
-                    p1[4] = 1;
-                    p1[5] = 0;
+                    p1[3] = pointer - 3;
+                    p1[4] = pointer - 4;
+                    p1[5] = pointer - 5;
+                    p1[6] = pointer - 6;
+                    p1[7] = 2;
+                    p1[8] = 1;
+                    p1[9] = 0;
                     for(int j=6;j<11;j++){
                         do {
                             r = random.nextInt(pointer);
                         }while (rand.contains(r));
                         rand.add(r);
                     }
-                    p1[6] = rand.get(0);
-                    p1[7] = rand.get(1);
-                    p1[8] = rand.get(2);
-                    p1[9] = rand.get(3);
-                    p1[10] = rand.get(4);
-                    Log.d("rand", String.valueOf(p1[6]));
-                    Log.d("rand", String.valueOf(p1[7]));
-                    Log.d("rand", String.valueOf(p1[8]));
-                    Log.d("rand", String.valueOf(p1[9]));
-                    x=new String[15];
+                    p1[10] = rand.get(0);
+                    p1[11] = rand.get(1);
+                    p1[12] = rand.get(2);
+                    p1[13] = rand.get(3);
+                    p1[14] = rand.get(4);
+                    x=new String[20];
                     co=0;
                     x[0]=result.get(p1[0]);
                     x[1]=result.get(p1[1]);
@@ -230,13 +232,18 @@ public class thebackservice extends IntentService {
                     x[8]=result.get(p1[8]);
                     x[9]=result.get(p1[9]);
                     x[10]=result.get(p1[10]);
+                    x[11]=result.get(p1[11]);
+                    x[12]=result.get(p1[12]);
+                    x[13]=result.get(p1[13]);
+                    x[14]=result.get(p1[14]);
+
                     rand.clear();
                           myRef.child("Users").child(x[0]).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    data snap = dataSnapshot.getValue(data.class);
-                                    if (snap != null) {
+                                    da[1] = dataSnapshot.getValue(data.class);
+                                    /*if (snap != null) {
                                         String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                         mail = snap.getEmail();
                                         uname = snap.getUname();
@@ -257,9 +264,9 @@ public class thebackservice extends IntentService {
                                         s01 = snap.getOp01();
                                         per = String.valueOf(result2.get(p1[0]));
                                         Log.d("coocc", uname+"--"+String.valueOf(per)+"1");
-                                        String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(1,'" + x[0] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                        String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[0] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
                                         db.execSQL(query1);
-                                    }
+                                    }*/
                                 }
 
 
@@ -272,8 +279,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[1]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[2] = dataSnapshot.getValue(data.class);
+                            /*if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -294,9 +301,9 @@ public class thebackservice extends IntentService {
                                 s01 = snap.getOp01();
                                 per = String.valueOf(result2.get(p1[1]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+"2");
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(2,'" + x[1] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[1] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
                                 db.execSQL(query1);
-                            }
+                            }*/
                         }
 
 
@@ -308,8 +315,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[2]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[3] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -330,9 +337,9 @@ public class thebackservice extends IntentService {
                                 s01 = snap.getOp01();
                                 per = String.valueOf(result2.get(p1[2]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+"3");
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(3,'" + x[2] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[2] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
                                 db.execSQL(query1);
-                            }
+                            }*/
                         }
 
 
@@ -345,8 +352,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[3]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[4] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -368,9 +375,9 @@ public class thebackservice extends IntentService {
 
                                 per = String.valueOf(result2.get(p1[3]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+""+String.valueOf(co));
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(4,'" + x[3] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[3] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
                                 db.execSQL(query1);
-                            }
+                            }*/
                         }
 
 
@@ -383,8 +390,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[4]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[5] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -406,9 +413,9 @@ public class thebackservice extends IntentService {
 
                                 per = String.valueOf(result2.get(p1[4]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+"--"+String.valueOf(co));
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(5,'" + x[4] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[4] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
                                 db.execSQL(query1);
-                            }
+                            }*/
                         }
 
 
@@ -420,8 +427,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[5]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[6] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -443,9 +450,9 @@ public class thebackservice extends IntentService {
 
                                 per = String.valueOf(result2.get(p1[5]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+""+String.valueOf(co));
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(6,'" + x[5] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[5] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
 
-                                db.execSQL(query1); }
+                                db.execSQL(query1); }*/
                         }
 
 
@@ -457,8 +464,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[6]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[7] = dataSnapshot.getValue(data.class);
+                          /*  if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -479,8 +486,8 @@ public class thebackservice extends IntentService {
 
                                 per = String.valueOf(result2.get(p1[6]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+"--"+String.valueOf(co));
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(7,'" + x[6] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
-                                db.execSQL(query1);}
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[6] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                db.execSQL(query1);}*/
                         }
 
 
@@ -492,8 +499,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[7]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[8] = dataSnapshot.getValue(data.class);
+                            /*if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -514,8 +521,8 @@ public class thebackservice extends IntentService {
 
                                 per = String.valueOf(result2.get(p1[7]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+""+String.valueOf(co));
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(8,'" + x[7] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
-                                db.execSQL(query1);}
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[7] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                db.execSQL(query1);}*/
                         }
 
 
@@ -527,8 +534,9 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[8]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            Log.d("x444",String.valueOf(x[8]));
+                            da[9] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -549,8 +557,8 @@ public class thebackservice extends IntentService {
 
                                 per = String.valueOf(result2.get(p1[8]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+"9");
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(9,'" + x[8] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
-                                db.execSQL(query1);}
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[8] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                db.execSQL(query1);}*/
                         }
 
 
@@ -562,8 +570,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[9]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[10] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -584,8 +592,8 @@ public class thebackservice extends IntentService {
 
                                 per = String.valueOf(result2.get(p1[9]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+"10");
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(10,'" + x[9] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
-                                db.execSQL(query1);}
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[9] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                db.execSQL(query1);}*/
                         }
 
 
@@ -597,8 +605,8 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[10]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            data snap = dataSnapshot.getValue(data.class);
-                            if (snap != null) {
+                            da[11] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                 mail = snap.getEmail();
                                 uname = snap.getUname();
@@ -619,9 +627,151 @@ public class thebackservice extends IntentService {
 
                                 per = String.valueOf(result2.get(p1[10]));
                                 Log.d("coocc", uname+"--"+String.valueOf(per)+"11");
-                                String query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES(11,'" + x[10] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[10] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
                                 db.execSQL(query1);
-                                showRecords(); }
+                                showRecords(); }*/
+                        }
+
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    myRef.child("Users").child(x[11]).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            da[12] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
+                                String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
+                                mail = snap.getEmail();
+                                uname = snap.getUname();
+                                aid = snap.getAid();
+                                s1 = snap.getOp1();
+                                s2 = snap.getOp2();
+                                s3 = snap.getOp3();
+                                s4 = snap.getOp4();
+                                s5 = snap.getOp5();
+                                s6 = snap.getOp6();
+                                s7 = snap.getOp7();
+                                s8 = snap.getOp8();
+                                s9 = snap.getOp9();
+                                s10 = snap.getOp10();
+                                s11 = snap.getOp11();
+                                s12 = snap.getOp12();
+                                s01 = snap.getOp01();
+
+                                per = String.valueOf(result2.get(p1[11]));
+                                Log.d("coocc", uname+"--"+String.valueOf(per)+"10");
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[11] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                db.execSQL(query1);}*/
+                        }
+
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    myRef.child("Users").child(x[12]).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            da[13] = dataSnapshot.getValue(data.class);
+                           /* if (snap != null) {
+                                String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
+                                mail = snap.getEmail();
+                                uname = snap.getUname();
+                                aid = snap.getAid();
+                                s1 = snap.getOp1();
+                                s2 = snap.getOp2();
+                                s3 = snap.getOp3();
+                                s4 = snap.getOp4();
+                                s5 = snap.getOp5();
+                                s6 = snap.getOp6();
+                                s7 = snap.getOp7();
+                                s8 = snap.getOp8();
+                                s9 = snap.getOp9();
+                                s10 = snap.getOp10();
+                                s11 = snap.getOp11();
+                                s12 = snap.getOp12();
+                                s01 = snap.getOp01();
+
+                                per = String.valueOf(result2.get(p1[12]));
+                                Log.d("coocc", uname+"--"+String.valueOf(per)+"10");
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[12] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                db.execSQL(query1);}*/
+                        }
+
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    myRef.child("Users").child(x[13]).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            da[14] = dataSnapshot.getValue(data.class);
+                          /*  if (snap != null) {
+                                String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
+                                mail = snap.getEmail();
+                                uname = snap.getUname();
+                                aid = snap.getAid();
+                                s1 = snap.getOp1();
+                                s2 = snap.getOp2();
+                                s3 = snap.getOp3();
+                                s4 = snap.getOp4();
+                                s5 = snap.getOp5();
+                                s6 = snap.getOp6();
+                                s7 = snap.getOp7();
+                                s8 = snap.getOp8();
+                                s9 = snap.getOp9();
+                                s10 = snap.getOp10();
+                                s11 = snap.getOp11();
+                                s12 = snap.getOp12();
+                                s01 = snap.getOp01();
+
+                                per = String.valueOf(result2.get(p1[13]));
+                                Log.d("coocc", uname+"--"+String.valueOf(per)+"10");
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[13] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                db.execSQL(query1);}*/
+                        }
+
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    myRef.child("Users").child(x[14]).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            da[15] = dataSnapshot.getValue(data.class);
+                            showRecords();
+                          /*  if (snap != null) {
+                                String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
+                                mail = snap.getEmail();
+                                uname = snap.getUname();
+                                aid = snap.getAid();
+                                s1 = snap.getOp1();
+                                s2 = snap.getOp2();
+                                s3 = snap.getOp3();
+                                s4 = snap.getOp4();
+                                s5 = snap.getOp5();
+                                s6 = snap.getOp6();
+                                s7 = snap.getOp7();
+                                s8 = snap.getOp8();
+                                s9 = snap.getOp9();
+                                s10 = snap.getOp10();
+                                s11 = snap.getOp11();
+                                s12 = snap.getOp12();
+                                s01 = snap.getOp01();
+
+                                per = String.valueOf(result2.get(p1[14]));
+                                Log.d("coocc", uname+"--"+String.valueOf(per)+"10");
+                                String query1 = "INSERT OR REPLACE INTO matches (devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('" + x[14] + "','" + per + "','" + aid + "','" + mail + "','" + uname + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "','" + s9 + "','" + s10 + "','" + s11 + "','" + s12 + "','" + s01 + "');";
+                                db.execSQL(query1);}*/
                         }
 
 
@@ -634,6 +784,7 @@ public class thebackservice extends IntentService {
                     }
 
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -744,6 +895,16 @@ public class thebackservice extends IntentService {
     }
 
     protected void showRecords() {
+        String query1;
+        for(int i=1;i<=15;i++){
+            if (da[i]==null){
+                Log.d("nullddd",String.valueOf(i));
+            }
+            query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('"+i+"','" + x[i-1] + "','" + String.valueOf(result2.get(p1[i-1])) + "','" + da[i].getAid() + "','" + da[i].getEmail() + "','" + da[i].getUname() + "','" + da[i].getOp1() + "','" + da[i].getOp2() + "','" + da[i].getOp3() + "','" + da[i].getOp4() + "','" + da[i].getOp5() + "','" + da[i].getOp6() + "','" + da[i].getOp7() + "','" + da[i].getOp8() + "','" + da[i].getOp9() + "','" + da[i].getOp10() + "','" + da[i].getOp11() + "','" + da[i].getOp12() + "','" + da[i].getOp01() + "');";
+            db.execSQL(query1);
+        }
+
+
         datadb.clear();
         c.moveToFirst();
         if (c.getCount() > 0) {

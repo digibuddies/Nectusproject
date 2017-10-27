@@ -116,6 +116,7 @@ public class search extends AppCompatActivity {
         sd.setTypeface(custom_font);
         scr = (Spinner) findViewById(R.id.spinnerserc);
         final List<data> kdata = new ArrayList<data>();
+        final List<data> ndata = new ArrayList<data>();
 
         find = (FloatingTextButton) findViewById(R.id.find);
         scr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -187,7 +188,7 @@ public class search extends AppCompatActivity {
 
                     @Override
                     public void run() {
-                        adapter = new sadapter(kdata, custom_font, kid,view.getContext());
+                        adapter = new sadapter(kdata,ndata, custom_font, kid,view.getContext());
                         srv.setAdapter(adapter);
                         if (adapter.getItemCount() > 0) {
                             inf.setVisibility(View.INVISIBLE);

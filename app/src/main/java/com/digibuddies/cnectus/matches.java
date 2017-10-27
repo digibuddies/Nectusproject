@@ -15,6 +15,7 @@ import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,10 +37,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.digibuddies.cnectus.R.attr.layoutManager;
+
 public class matches extends AppCompatActivity {
 
     RecyclerView srv;
-    List<data> mdata;
+    List<data> mdata,ndata;
     data tdata;
     sadapter adapter;
     Button sea;
@@ -57,6 +60,7 @@ public class matches extends AppCompatActivity {
     private Cursor c,b;
     TextView det,dt,dd,ex;
     String id,tar;
+    LinearLayoutManager linearLayoutManager;
     int flagm=0;
     int qcount;
 
@@ -143,8 +147,10 @@ public class matches extends AppCompatActivity {
 
         final TextView front = (TextView) findViewById(R.id.front);
         srv = (RecyclerView) findViewById(R.id.recm);
-        srv.setLayoutManager(new LinearLayoutManager(this));
+        linearLayoutManager = new LinearLayoutManager(this);
+        srv.setLayoutManager(linearLayoutManager);
         srv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        srv.setItemAnimator(new DefaultItemAnimator());
         createDatabase00();
         createDatabase();
         String SELECT_SQL;
@@ -152,7 +158,7 @@ public class matches extends AppCompatActivity {
         c = db.rawQuery(SELECT_SQL, null);
         c.moveToFirst();
         showRecords();
-        adapter = new sadapter(mdata, custom_font, id, this);
+        adapter = new sadapter(mdata,ndata, custom_font, id, this);
         srv.setAdapter(adapter);
         if(qcount>70&&adapter.getItemCount()>0) {
             front.setVisibility(View.INVISIBLE);
@@ -227,12 +233,13 @@ public class matches extends AppCompatActivity {
     protected void showRecords() {
         int i=0;
         mdata = new ArrayList<data>();
+        ndata = new ArrayList<data>();
         if(c.getCount()>0) {
             if(flagm==1){
-                c.moveToPosition(5);
+                c.moveToPosition(9);
             }
             else if(flagm==2){
-                c.moveToPosition(6);
+                c.moveToPosition(10);
             }
             else c.moveToFirst();
             do {
@@ -255,11 +262,16 @@ public class matches extends AppCompatActivity {
                 tdata.setOp01(c.getString(15));
                 tdata.setDevid(c.getString(17));
                 tdata.setAllow(c.getString(18));
-                mdata.add(tdata);
+                if (flagm==0){
+                    if(i<3){
+                        mdata.add(tdata);
+                    }
+                    else ndata.add(tdata);
+                }else mdata.add(tdata);
                 Log.d("cooid",c.getString(19));
                 i++;
 
-            } while ((flagm!=2)?(((flagm==0)?c.moveToNext():c.moveToPrevious())&&i<3):(c.moveToNext()&&i<5));
+            } while ((flagm!=2)?(((flagm==0)?c.moveToNext()&&i<7:c.moveToPrevious()&&i<3)):(c.moveToNext()&&i<5));
             c.close();
         }
 

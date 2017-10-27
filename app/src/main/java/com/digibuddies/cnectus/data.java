@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class data implements Serializable {
     int p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p01;
     String uname,mp,allow;
-    int aid;
+    int aid=0;
     int id;
     String devid;
     String email;

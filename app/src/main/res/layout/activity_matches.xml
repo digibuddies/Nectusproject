@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:menuChildAnim="true"
-        app:menuGravity="Bottom_Middle"
+        app:menuGravity="Bottom_Right"
         app:menuImage="@drawable/menu3"
         arc:menuChildSize="48dp"
         arc:menuClickAnim="true"
@@ -61,7 +61,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="110dp"
-        android:text="Top 3 matches based on your answers"
+        android:text="Top matches based on your answers"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="17sp" />
