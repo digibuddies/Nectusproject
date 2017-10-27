@@ -4,52 +4,52 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+
+        <ImageView
+            android:id="@+id/buttonLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_gravity="left|center"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
+            android:src="@drawable/buttonleft" />
+
+        <ImageView
+            android:id="@+id/buttonRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:layout_gravity="right|center"
+            android:padding="8dp"
+            android:src="@drawable/buttonright" />
+<ImageView
+    android:layout_width="130dp"
+    android:layout_height="500dp"
+    android:layout_gravity="center"
+    android:layout_marginEnd="70dp"
+    android:id="@+id/group_icon"
+    android:src="@drawable/vikram"/>
+
+    <Switch
+        android:id="@+id/join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:text="Join"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/text" />
+
     <TextView
         android:id="@+id/textAnimationStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:background="?attr/selectableItemBackground"
+        android:layout_gravity="center"
+        android:layout_marginStart="80dp"
         android:padding="8dp"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:textColor="@android:color/white" />
-
-    <ImageView
-        android:id="@+id/buttonLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|center"
-        android:background="?attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/backbut" />
-
-    <ImageView
-        android:id="@+id/buttonRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|center"
-        android:background="?attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/backbut" />
-
-    <ImageView
-        android:id="@+id/buttonUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:background="?attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/backbut"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/buttonDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:background="?attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/backbut"
-        android:visibility="gone" />
 
 </FrameLayout>
