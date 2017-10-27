@@ -76,38 +76,29 @@ public String itemG="Geeks";
         });
 
         //getting value of key and adding to list
-        Bundle bundle=getArguments();
+        if(getArguments()!=null) {
+            Bundle bundle = getArguments();
+            newItem = bundle.getString("key");
+            newItem2 = newItem;
+            try {
+                myNum = Integer.parseInt(newItem);
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(getActivity(), nfe.toString(), Toast.LENGTH_LONG).show();
 
-        newItem=bundle.getString("key");
-newItem2=newItem;
-        try {
-            myNum = Integer.parseInt(newItem);
-        } catch(NumberFormatException nfe) {
-Toast.makeText(getActivity(),nfe.toString(),Toast.LENGTH_LONG).show();
+            }
 
+            if (myNum == 1) {
+                creatingNewListView("Geeks");
+            } else if (myNum == 3) {
+                creatingNewListView("pros");
+            } else if (myNum == 4) {
+                creatingNewListView("daydreamers");
+            } else if (myNum == 5) {
+                creatingNewListView("adventurers");
+            } else {
+                creatingNewListView("Artists");
+            }
         }
-
-        if(myNum==1)
-        {
-            creatingNewListView("Geeks");
-        }
-        else  if(myNum==3)
-        {
-            creatingNewListView("pros");
-        }
-        else  if(myNum==4)
-        {
-            creatingNewListView("daydreamers");
-        }
-        else  if(myNum==5)
-        {
-            creatingNewListView("adventurers");
-        }
-        else
-        {
-            creatingNewListView("Artists");
-        }
-
             return view;
 
 

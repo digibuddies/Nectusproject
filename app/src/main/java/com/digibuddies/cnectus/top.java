@@ -5,17 +5,20 @@ import android.databinding.adapters.CardViewBindingAdapter;
 import android.databinding.adapters.SwitchBindingAdapter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +75,20 @@ public class top extends Fragment {
     @Bind(R.id.join)
     Switch join;
 
-    public static top newInstance(@AnimationDirection int direction) {
+    @Bind(R.id.group_icon)
+    ImageView groupic;
+
+    @Bind(R.id.lay)
+    LinearLayout lay;
+
+    @Bind(R.id.colorim)
+    ImageView colorim;
+/*
+ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
+    Switch holder=(Switch)getView().findViewById(R.id.join) ;
+        holder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener());
+*/
+        public static top newInstance(@AnimationDirection int direction) {
         top f = new top();
         f.setArguments(new Bundle());
         f.getArguments().putInt("direction", direction);
@@ -83,7 +99,7 @@ public class top extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_top, container, false);
-        int color = Color.rgb((int) Math.floor(Math.random() * 128) + 64,
+        int color = Color.argb(200,(int) Math.floor(Math.random() * 128) + 64,
                 (int) Math.floor(Math.random() * 128) + 64,
                 (int) Math.floor(Math.random() * 128) + 64);
         view.setBackgroundColor(color);
@@ -372,7 +388,9 @@ public class top extends Fragment {
                 mTextAnimationStyle.setText("None");
                 break;
             case MOVE:
+                lay.setVisibility(View.INVISIBLE);
                 mTextAnimationStyle.setText("Geeks");
+                groupic.setImageResource(R.drawable.geek);
                 join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -381,59 +399,106 @@ public class top extends Fragment {
                         secondFragment.setArguments(bundle);
                     }
                 });
-                break;
-            case CUBE:
-                mTextAnimationStyle.setText("Cnectus Family");
-                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        Toast.makeText(getActivity(),"added",Toast.LENGTH_LONG).show();
-                    }
-                });
-                break;
-            case FLIP:
-                mTextAnimationStyle.setText("Pros");
-                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        bundle.putString("key","3");
-                        secondFragment.setArguments(bundle);
 
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        lay.setVisibility(View.VISIBLE);
                     }
-                });
+                },400);
+                 break;
+            case CUBE:
+                lay.setVisibility(View.INVISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTextAnimationStyle.setText("Cnectus Family");
+                        lay.setVisibility(View.VISIBLE);
+                    }
+                },400);
+    join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            Toast.makeText(getActivity(),"added",Toast.LENGTH_LONG).show();
+        }
+    });
+
+                                break;
+            case FLIP:
+                lay.setVisibility(View.INVISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTextAnimationStyle.setText("Pros");
+                        lay.setVisibility(View.VISIBLE);
+                    }
+                },400);
+    join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            bundle.putString("key","3");
+            secondFragment.setArguments(bundle);
+
+        }
+    });
+
                 break;
             case PUSHPULL:
-                mTextAnimationStyle.setText("Daydreamers");
-                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                lay.setVisibility(View.INVISIBLE);
+                new Handler().postDelayed(new Runnable() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        bundle.putString("key","4");
-                        secondFragment.setArguments(bundle);
-
+                    public void run() {
+                        mTextAnimationStyle.setText("Daydreamers");
+                        groupic.setImageResource(R.drawable.daydream);
+                        lay.setVisibility(View.VISIBLE);
                     }
-                });
+                },400);
+    join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            bundle.putString("key","4");
+            secondFragment.setArguments(bundle);
+
+        }
+    });
+
                 break;
             case SIDES:
-                mTextAnimationStyle.setText("Adventurers");
-                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                lay.setVisibility(View.INVISIBLE);
+                new Handler().postDelayed(new Runnable() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        bundle.putString("key","5");
-                        secondFragment.setArguments(bundle);
-
+                    public void run() {
+                        mTextAnimationStyle.setText("Adventurers");
+                        groupic.setImageResource(R.drawable.adventure);
+                        lay.setVisibility(View.VISIBLE);
                     }
-                });
+                },400);
+ join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            bundle.putString("key","5");
+            secondFragment.setArguments(bundle);
+
+        }
+    });
                 break;
             case CUBEMOVE:
-                mTextAnimationStyle.setText("Artists");
-                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                lay.setVisibility(View.INVISIBLE);
+                new Handler().postDelayed(new Runnable() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        bundle.putString("key","6");
-                        secondFragment.setArguments(bundle);
-
+                    public void run() {
+                        mTextAnimationStyle.setText("Artists");
+                        lay.setVisibility(View.VISIBLE);
                     }
-                });
+                },400);
+join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            bundle.putString("key","6");
+            secondFragment.setArguments(bundle);
+
+        }
+    });
                 break;
            /* case MOVECUBE:
                 mTextAnimationStyle.setText("Move/Cube");

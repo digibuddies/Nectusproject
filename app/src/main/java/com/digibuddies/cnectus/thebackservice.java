@@ -534,7 +534,6 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[8]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Log.d("x444",String.valueOf(x[8]));
                             da[9] = dataSnapshot.getValue(data.class);
                            /* if (snap != null) {
                                 String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
@@ -747,6 +746,7 @@ public class thebackservice extends IntentService {
                     myRef.child("Users").child(x[14]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.d("x444",String.valueOf(x[14]));
                             da[15] = dataSnapshot.getValue(data.class);
                             showRecords();
                           /*  if (snap != null) {
