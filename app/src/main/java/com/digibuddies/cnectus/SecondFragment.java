@@ -22,10 +22,7 @@ public class SecondFragment extends Fragment {
     public ArrayList<String> arrayList;
     public ListView listView;
     public ArrayAdapter<String> listViewAdapter;
-    String newItem="";
-    String newItem2="";
-    int myNum=0;
-    int myNum2=0;
+
 
     /*
 public String itemG="Geeks";
@@ -76,72 +73,24 @@ public String itemG="Geeks";
                 Toast.makeText(getActivity(),"clicked",Toast.LENGTH_LONG).show();
             }
         });
-
-//addition of elements
-            if(getArguments()!=null) {
-                Bundle bundle = getArguments();
-                newItem = bundle.getString("key");
-                try {
-                    myNum = Integer.parseInt(newItem);
-                } catch (NumberFormatException nfe) {
-                    Toast.makeText(getActivity(), nfe.toString(), Toast.LENGTH_LONG).show();
-
-                }
-
-                if (myNum == 1) {
-                    creatingNewListView("Geeks");
-                } else if (myNum == 3) {
-                    creatingNewListView("pros");
-                } else if (myNum == 4) {
-                    creatingNewListView("daydreamers");
-                } else if (myNum == 5) {
-                    creatingNewListView("adventurers");
-                } else {
-                    creatingNewListView("Artists");
-                }
-            }
-
-
-            //deletion of elements
-        if(getArguments()!=null) {
-            Bundle bundle = getArguments();
-            newItem2 = bundle.getString("delete");
-            try {
-                myNum2 = Integer.parseInt(newItem2);
-            } catch (NumberFormatException nfe) {
-                Toast.makeText(getActivity(), nfe.toString(), Toast.LENGTH_LONG).show();
-
-            }
-
-            if (myNum2 == 1) {
-                deleteFromList("Geeks");
-            } else if (myNum2 == 3) {
-                deleteFromList("pros");
-            } else if (myNum2 == 4) {
-                deleteFromList("daydreamers");
-            } else if (myNum2 == 5) {
-                deleteFromList("adventurers");
-            } else {
-                deleteFromList("Artists");
-            }
-        }
-
-
-            return view;
+        return view;
 
 
     }
 
     public void creatingNewListView(String addName) {
-        arrayList.add(addName);
+        if(addName!=null) {
+            arrayList.add(addName);
             listViewAdapter.notifyDataSetChanged();
-
+        }
     }
 
-    public void deleteFromList(String delName)
-    {
-        int pos=arrayList.indexOf(delName);
-        arrayList.remove(pos);
+    public void deleteFromList(String delName) {
+        if (delName != null) {
+            int pos = arrayList.indexOf(delName);
+            arrayList.remove(pos);
+            listViewAdapter.notifyDataSetChanged();
+        }
     }
 
 

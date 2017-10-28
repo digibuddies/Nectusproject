@@ -34,7 +34,6 @@ import butterknife.BindInt;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.digibuddies.cnectus.group.secondFragment;
 
 
 public class top extends Fragment {
@@ -65,6 +64,7 @@ public class top extends Fragment {
     public static final int RIGHT = 4;
 
     private static final long DURATION = 500;
+    public static SecondFragment secondFragment=new SecondFragment();
 
     @AnimationStyle
     private static int sAnimationStyle = PUSHPULL;
@@ -75,6 +75,7 @@ public class top extends Fragment {
 
     @Bind(R.id.join)
     Switch join;
+
 
     @Bind(R.id.group_icon)
     ImageView groupic;
@@ -106,6 +107,7 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         view.setBackgroundColor(color);
         ButterKnife.bind(this, view);
         setAnimationStyleText();
+        join.setText("Join");
         return view;
     }
 
@@ -397,14 +399,14 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         // secondFragment.set("Geeks");
                         if(isChecked){
-                            bundle.putString("key","1");
-                            secondFragment.setArguments(bundle);
+                           secondFragment.creatingNewListView("Geeks");
+                            join.setTextOn("Joined");
+
                         }
                         else
                         {
-                           bundle.putString("delete", "1");
 
-                             secondFragment.setArguments(bundle);
+                             secondFragment.deleteFromList("Geeks");
 
                         } }
                 });
@@ -446,13 +448,15 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
-                bundle.putString("key","3");
-                secondFragment.setArguments(bundle);
+                secondFragment.creatingNewListView("Pros");
+                join.setTextOn("Joined");
+
             }
             else
-            {    bundle.putString("delete", "3");
+            {
 
-                    secondFragment.setArguments(bundle);
+                secondFragment.deleteFromList("Pros");
+
             }
         }
     });
@@ -474,14 +478,14 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
-                bundle.putString("key","4");
-                secondFragment.setArguments(bundle);
+                secondFragment.creatingNewListView("Daydreamers");
+                join.setTextOn("Joined");
+
             }
             else
             {
-                    bundle.putString("delete", "4");
 
-                    secondFragment.setArguments(bundle);
+                secondFragment.deleteFromList("Daydreamers");
 
             }
         }
@@ -503,14 +507,14 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
-                bundle.putString("key","5");
-                secondFragment.setArguments(bundle);
+                secondFragment.creatingNewListView("Adventurers");
+                join.setTextOn("Joined");
+
             }
             else
             {
-                    bundle.putString("delete", "5");
 
-                    secondFragment.setArguments(bundle);
+                secondFragment.deleteFromList("Adventurers");
 
             }
         }
@@ -534,14 +538,14 @@ join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
             if(isChecked){
-                bundle.putString("key","6");
-                secondFragment.setArguments(bundle);
+                secondFragment.creatingNewListView("Artists");
+                join.setTextOn("Joined");
+
             }
             else
             {
-                   bundle.putString("delete", "6");
 
-                    secondFragment.setArguments(bundle);
+                secondFragment.deleteFromList("Artists");
 
             }
         }
