@@ -82,7 +82,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     @Override
     public void onBindViewHolder(final cardadapter holder, final int position) {
 
-        if(position == kdata.size()) {
+        if(position == kdata.size()&&ndata.size()>1) {
             holder.last.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -163,7 +163,8 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     }
     @Override
     public int getItemCount() {
-        return kdata.size()+1;
+        if (ndata.size()>1)return kdata.size()+1;
+        else return kdata.size();
     }
 
     @Override
@@ -172,7 +173,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     }
     @Override
     public int getItemViewType(int position) {
-        return (position == kdata.size()) ? R.layout.button : R.layout.scard;
+        return (position == kdata.size()&&ndata.size()>1) ? R.layout.button : R.layout.scard;
     }
 
     @Override

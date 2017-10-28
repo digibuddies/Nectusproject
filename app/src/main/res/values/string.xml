@@ -98,7 +98,8 @@
         <item>Kerala</item>
         <item>Assam</item>
         <item>India</item>
-        <item>Outside India</item>
+        <item>USA</item>
+        <item>Some other country</item>
     </string-array>
     <string-array name="list4">
         <item>Select</item>

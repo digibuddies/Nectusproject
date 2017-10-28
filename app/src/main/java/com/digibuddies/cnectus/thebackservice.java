@@ -247,7 +247,7 @@ public class thebackservice extends IntentService {
                                         String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname;
                                         mail = snap.getEmail();
                                         uname = snap.getUname();
-                                        u1 = uname;
+
                                         aid = snap.getAid();
                                         s1 = snap.getOp1();
                                         s2 = snap.getOp2();
@@ -899,6 +899,7 @@ public class thebackservice extends IntentService {
         for(int i=1;i<=15;i++){
             if (da[i]==null){
                 Log.d("nullddd",String.valueOf(i));
+                Log.d("nullddd",String.valueOf(x[i-1]));
             }
             query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('"+i+"','" + x[i-1] + "','" + String.valueOf(result2.get(p1[i-1])) + "','" + da[i].getAid() + "','" + da[i].getEmail() + "','" + da[i].getUname() + "','" + da[i].getOp1() + "','" + da[i].getOp2() + "','" + da[i].getOp3() + "','" + da[i].getOp4() + "','" + da[i].getOp5() + "','" + da[i].getOp6() + "','" + da[i].getOp7() + "','" + da[i].getOp8() + "','" + da[i].getOp9() + "','" + da[i].getOp10() + "','" + da[i].getOp11() + "','" + da[i].getOp12() + "','" + da[i].getOp01() + "');";
             db.execSQL(query1);
@@ -917,9 +918,8 @@ public class thebackservice extends IntentService {
         }
 
         if(datadb.size()>0){
-            if (!((u1.equals(datadb.get(0)))&&(u2.equals(datadb.get(1)))&&(u3.equals(datadb.get(2))))) {
+            if (!((da[1].getUname().equals(datadb.get(0)))&&(da[2].getUname().equals(datadb.get(1)))&&(da[3].getUname().equals(datadb.get(2))))) {
                 notifyUser();
-                Log.d("dataaa",u2+" "+datadb.get(1));
                 datadb.clear();
             }
         }

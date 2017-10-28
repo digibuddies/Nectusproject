@@ -73,7 +73,7 @@
         android:id="@+id/arcMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:menuGravity="Bottom_Middle"
+        app:menuGravity="Bottom_Right"
         app:menuImage="@drawable/menu3"
         arc:menuChildAnim="false"
         arc:menuChildSize="48dp"

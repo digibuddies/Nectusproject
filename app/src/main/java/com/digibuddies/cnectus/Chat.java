@@ -143,8 +143,10 @@ public class Chat extends AppCompatActivity {
         im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myRefcht.child(kid).child(temp.getDevid()).push().setValue(new chatmessage(input.getText().toString(),usn,"READ"));
-                myRefcht.child(temp.getDevid()).child(kid).push().setValue(new chatmessage(input.getText().toString(),usn,"UNREAD"));
+                String inp = input.getText().toString();
+                if(!(inp.equals("")||inp.equals(" "))){
+                myRefcht.child(kid).child(temp.getDevid()).push().setValue(new chatmessage(inp,usn,"READ"));
+                myRefcht.child(temp.getDevid()).child(kid).push().setValue(new chatmessage(inp,usn,"UNREAD"));}
                 input.setText("");
                 InputMethodManager imm = (InputMethodManager)Chat.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(input.getWindowToken(), 0);

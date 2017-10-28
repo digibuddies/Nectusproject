@@ -1,5 +1,6 @@
 package com.digibuddies.cnectus;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.digibuddies.cnectus.profile.profileclass;
 
 /**
  * Created by Divya Vashisth on 4/9/2017.
@@ -41,7 +44,7 @@ import android.widget.TextView;
             CirclePageIndicator mIndicator  = (CirclePageIndicator) findViewById(R.id.indicator);
             mIndicator.setViewPager(viewPager);
 
-
+            final int x = getIntent().getIntExtra("pro",0);
 
             viewPager.setPageTransformer(true, new CustomPageTransformer());
 
@@ -69,8 +72,11 @@ import android.widget.TextView;
                             @Override
                             public void run(){
                                 finish();
+                                if(x==1){
+                                    startActivity(new Intent(Help.this,profileclass.class));
+                                }
                             }
-                        }, 1500);}
+                        }, 1200);}
 
                 }
 

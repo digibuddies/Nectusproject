@@ -64,7 +64,6 @@ public class top extends Fragment {
     public static final int RIGHT = 4;
 
     private static final long DURATION = 500;
-    public static SecondFragment secondFragment=new SecondFragment();
 
     @AnimationStyle
     private static int sAnimationStyle = PUSHPULL;
@@ -399,15 +398,16 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         // secondFragment.set("Geeks");
                         if(isChecked){
-                           secondFragment.creatingNewListView("Geeks");
-                            join.setTextOn("Joined");
+
+                            group.secondFragment.creatingNewListView("Geeks");
+                            join.setText("Joined");
 
                         }
                         else
                         {
 
-                             secondFragment.deleteFromList("Geeks");
-
+                            group.secondFragment.deleteFromList("Geeks");
+                            join.setText("Join");
                         } }
                 });
 
@@ -430,7 +430,7 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                 join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    Toast.makeText(getActivity(),"added",Toast.LENGTH_LONG).show();
+
                               }
                 });
                 break;
@@ -448,15 +448,15 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
-                secondFragment.creatingNewListView("Pros");
-                join.setTextOn("Joined");
+                group.secondFragment.creatingNewListView("Pros");
+                join.setText("Joined");
 
             }
             else
             {
 
-                secondFragment.deleteFromList("Pros");
-
+                group.secondFragment.deleteFromList("Pros");
+                join.setText("Join");
             }
         }
     });
@@ -478,15 +478,15 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
-                secondFragment.creatingNewListView("Daydreamers");
-                join.setTextOn("Joined");
+                group.secondFragment.creatingNewListView("Daydreamers");
+                join.setText("Joined");
 
             }
             else
             {
 
-                secondFragment.deleteFromList("Daydreamers");
-
+                group.secondFragment.deleteFromList("Daydreamers");
+                join.setText("Join");
             }
         }
     });
@@ -507,15 +507,15 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
-                secondFragment.creatingNewListView("Adventurers");
-                join.setTextOn("Joined");
+                group.secondFragment.creatingNewListView("Adventurers");
+                join.setText("Joined");
 
             }
             else
             {
 
-                secondFragment.deleteFromList("Adventurers");
-
+                group.secondFragment.deleteFromList("Adventurers");
+                join.setText("Join");
             }
         }
     });
@@ -538,15 +538,15 @@ join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
             if(isChecked){
-                secondFragment.creatingNewListView("Artists");
-                join.setTextOn("Joined");
+                group.secondFragment.creatingNewListView("Artists");
+                join.setText("Joined");
 
             }
             else
             {
 
-                secondFragment.deleteFromList("Artists");
-
+                group.secondFragment.deleteFromList("Artists");
+                join.setText("Join");
             }
         }
     });

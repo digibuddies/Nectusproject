@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean(welcomeScreenShownPref, true);
             editor.apply();
             Intent intro = new Intent(this,Help.class);
+            intro.putExtra("pro",1);
             startActivity(intro);
 
         }
@@ -170,41 +171,6 @@ public class MainActivity extends AppCompatActivity {
         b2=(Button)dialog.findViewById(R.id.b2);
         b3=(Button)dialog.findViewById(R.id.b3);
         b4=(Button)dialog.findViewById(R.id.b4);
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,group.class);
-                startActivity(intent);
-                dialog.cancel();
-            }
-        });
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,matches.class);
-                intent.putExtra("target","top");
-                startActivity(intent);
-                dialog.cancel();
-            }
-        });
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,matches.class);
-                intent.putExtra("target","worst");
-                startActivity(intent);
-                dialog.cancel();
-            }
-        });
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,matches.class);
-                intent.putExtra("target","random");
-                startActivity(intent);
-                dialog.cancel();
-            }
-        });
 
         final BoomMenuButton bmb = (BoomMenuButton) findViewById(R.id.bmb);
         bmb.setButtonEnum(ButtonEnum.Ham);
@@ -274,6 +240,45 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this,"Please create your profile first...", Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            b1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent=new Intent(MainActivity.this,search.class);
+                                    startActivity(intent);
+                                    dialog.cancel();
+                                }
+                            });
+                            b2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent=new Intent(MainActivity.this,matches.class);
+                                    intent.putExtra("target","top");
+                                    startActivity(intent);
+                                    dialog.cancel();
+                                }
+                            });
+                            b3.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent=new Intent(MainActivity.this,matches.class);
+                                    intent.putExtra("target","worst");
+                                    startActivity(intent);
+                                    dialog.cancel();
+                                }
+                            });
+                            b4.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent=new Intent(MainActivity.this,matches.class);
+                                    intent.putExtra("target","random");
+                                    startActivity(intent);
+                                    dialog.cancel();
+                                }
+                            });
+                            b1.setText("Find People");
+                            b2.setText("Top Matches");
+                            b3.setVisibility(View.VISIBLE);
+                            b4.setVisibility(View.VISIBLE);
                         dialog.show();}
                     }
                 });
@@ -302,8 +307,28 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this,"Oops.. You need to create a profile first!", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Intent intent = new Intent(MainActivity.this, connections.class);
-                            startActivity(intent);}
+                            b1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent=new Intent(MainActivity.this,group.class);
+                                    startActivity(intent);
+                                    dialog.cancel();
+                                }
+                            });
+                            b2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(MainActivity.this, connections.class);
+                                    startActivity(intent);
+                                    dialog.cancel();
+                                }
+                            });
+                            b1.setText("Groups");
+                            b2.setText("Contacts");
+                            b3.setVisibility(View.GONE);
+                            b4.setVisibility(View.GONE);
+                            dialog.show();
+                            }
                     }
                 });
         bmb.addBuilder(builder1);
@@ -343,6 +368,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,Help.class);
+                intent.putExtra("pro",0);
                 startActivity(intent);
             }
         });
