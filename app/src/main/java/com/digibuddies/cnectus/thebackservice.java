@@ -852,10 +852,9 @@ public class thebackservice extends IntentService {
         PendingIntent pendingIntent = PendingIntent.getActivity(thebackservice.this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder builder = new Notification.Builder(thebackservice.this);
-
         builder.setAutoCancel(true);
         builder.setTicker("New Request to Connect...");
-        builder.setDefaults(Notification.DEFAULT_VIBRATE);
+        builder.setDefaults(Notification.DEFAULT_ALL);
         builder.setContentTitle("Connect notification!");
         builder.setContentText("You have a new request to connect");
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
@@ -900,9 +899,9 @@ public class thebackservice extends IntentService {
             if (da[i]==null){
                 Log.d("nullddd",String.valueOf(i));
                 Log.d("nullddd",String.valueOf(x[i-1]));
-            }
+            }else {
             query1 = "INSERT OR REPLACE INTO matches (id,devid,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('"+i+"','" + x[i-1] + "','" + String.valueOf(result2.get(p1[i-1])) + "','" + da[i].getAid() + "','" + da[i].getEmail() + "','" + da[i].getUname() + "','" + da[i].getOp1() + "','" + da[i].getOp2() + "','" + da[i].getOp3() + "','" + da[i].getOp4() + "','" + da[i].getOp5() + "','" + da[i].getOp6() + "','" + da[i].getOp7() + "','" + da[i].getOp8() + "','" + da[i].getOp9() + "','" + da[i].getOp10() + "','" + da[i].getOp11() + "','" + da[i].getOp12() + "','" + da[i].getOp01() + "');";
-            db.execSQL(query1);
+            db.execSQL(query1);}
         }
 
 

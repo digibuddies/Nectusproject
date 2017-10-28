@@ -29,6 +29,8 @@ import android.widget.TextView;
 import com.bvapp.arcmenulibrary.ArcMenu;
 import com.bvapp.arcmenulibrary.widget.FloatingActionButton;
 import com.digibuddies.cnectus.profile.profileclass;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -102,12 +104,16 @@ public class connections extends AppCompatActivity {
         imb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("contact");
+                myRef.child("123").child(kid).child("request").setValue("RIGHT");
+                myRef.child("123").child(kid).child("mp").setValue(" ");
+                myRef.child(kid).child("123").child("request").setValue("RIGHT");
+                myRef.child(kid).child("123").child("mp").setValue(" ");
                 dnew2.dismiss();
-                Intent intent=new Intent(connections.this,MainActivity.class);
-                intent.putExtra("target","none");
+                Intent intent = new Intent(connections.this,thebackservice.class);
+                startService(intent);
                 finish();
-                startActivity(intent);
-
 
             }
         });
@@ -121,7 +127,7 @@ public class connections extends AppCompatActivity {
                     }
                 }
 
-            }, 3000);
+            }, 2000);
 
         }
         rv=(RecyclerView)findViewById(R.id.krv);

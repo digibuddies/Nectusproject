@@ -57,7 +57,7 @@ public class SimpleFragment extends DialogFragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
             }
-        }).setCancelable(true).setTitle("Pick image(simple)").create();
+        }).setCancelable(true).setTitle("Pick image").create();
     }
 }
 

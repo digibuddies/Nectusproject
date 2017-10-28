@@ -103,9 +103,6 @@ public class MainActivity extends AppCompatActivity {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
         if (!welcomeScreenShown) {
-            editor = mPrefs.edit();
-            editor.putBoolean(welcomeScreenShownPref, true);
-            editor.apply();
             Intent intro = new Intent(this,Help.class);
             intro.putExtra("pro",1);
             startActivity(intro);
@@ -218,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
         HamButton.Builder builder2 = new HamButton.Builder();
         builder2.normalImageRes(R.drawable.ic_help_white_48dp)
                 .normalText("Questions")
-                .normalColorRes(R.color.boom2)
+                .normalColorRes(R.color.boom1)
                 .subNormalText("Lets understand you better!")
                 .listener(new OnBMClickListener() {
                     @Override
@@ -340,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
         builder1.normalImageRes(R.drawable.ic_help_white_48dp)
                 .normalText("Groups")
                 .normalColorRes(R.color.boom2)
-                .subNormalText("Lets understand you better!")
+                .subNormalText("Interact with like minded people!")
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
@@ -376,11 +373,11 @@ public class MainActivity extends AppCompatActivity {
 
         // create menu items;
         itemHome = new ResideMenuItem(this, R.drawable.home, "Home");
-       itemProfile = new ResideMenuItem(this, R.drawable.ic_face_white_48dp, "Profile");
-        itemHelp = new ResideMenuItem(this, R.drawable.help1, "Help");
+        itemProfile = new ResideMenuItem(this, R.drawable.face, "Profile");
+        itemShare=new ResideMenuItem(this, R.drawable.share,"Share Cnectus");
         itemFeed = new ResideMenuItem(this, R.drawable.feed, "Feed Back");
         itemAbout=new ResideMenuItem(this, R.drawable.about, "About");
-        itemShare=new ResideMenuItem(this, R.drawable.share,"Share Cnectus");
+        itemHelp = new ResideMenuItem(this, R.drawable.help1, "Help");
 
         itemHome.setOnClickListener(new View.OnClickListener() {
             @Override

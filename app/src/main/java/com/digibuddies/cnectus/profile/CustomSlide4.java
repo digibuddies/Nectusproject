@@ -35,6 +35,7 @@ public class CustomSlide4 extends SlideFragment {
     int firstt;
     public LiquidButton liquidButton;
     Intent i;
+    final String welcomeScreenShownPref = "welcomeScreenShown";
     private SQLiteDatabase db;
     Button sv;
     int flag=1;
@@ -53,12 +54,18 @@ public class CustomSlide4 extends SlideFragment {
             editor.commit();
         }
         liquidButton = (LiquidButton)view.findViewById(R.id.button);
-        idd = Settings.Secure.getString(this.getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
+        idd = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
         sv=(Button) view.findViewById(R.id.save);
         sv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 liquidButton.startPour();
+                mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
+                if (!welcomeScreenShown) {
+                    editor = mPrefs.edit();
+                    editor.putBoolean(welcomeScreenShownPref, true);
+                    editor.apply();}
                 sv.setText("Adding You To Family !");
                 myRef.child(idd).setValue(profileclass.d);
                 createDatabase();

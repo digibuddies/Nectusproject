@@ -21,10 +21,11 @@
     </array>
 
     <string-array name="examples">
-        <item>Create A Profile!</item>
+        <item>Hi there!</item>
         <item>Answer Some Questions</item>
-        <item>Find Similar People Like You..</item>
-        <item>More Answers Give More Accurate Results..</item>
+        <item>Connect With Interesting People</item>
+        <item>Explore In Chat Groups</item>
+        <item>Build Your Network</item>
     </string-array>
 
     <string-array name="titles" >

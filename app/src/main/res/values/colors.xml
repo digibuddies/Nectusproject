@@ -11,7 +11,7 @@
     <color name="global_color_green_primary_dark">#388e3c</color>
     <color name="global_color_green_accent">#ffc107</color>
     <color name="global_color_green_control_activated">#fff200</color>
-    <color name="colorAscen">#14000000</color>
+    <color name="colorAscen">#fbf9f9</color>
     <color name="colorAscent">#01c91c</color>
     <color name="colorStatus">#002196f3</color>
     <color name="buttoncol">#00b2d7</color>
