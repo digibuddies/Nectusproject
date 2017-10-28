@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     ResideMenuItem itemHelp;
     private Dialog dialog;
     ResideMenuItem itemFeed;
+    ResideMenuItem itemProfile;
+
     Button b,b1,b2,b3,b4;
     int flag=0;
     ResideMenuItem itemAbout;
@@ -184,9 +186,10 @@ public class MainActivity extends AppCompatActivity {
                 bmb.boom();
             }
         });
-
+/*
         HamButton.Builder builder1 = new HamButton.Builder();
-        builder1.normalImageRes(R.drawable.ic_face_white_48dp)
+
+       builder1.normalImageRes(R.drawable.ic_face_white_48dp)
                 .normalText("Profile")
                 .normalColorRes(R.color.boom1)
                 .subNormalText("Tell the world about yourself!")
@@ -211,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);}
                     }
                 });
-
+*/
         HamButton.Builder builder2 = new HamButton.Builder();
         builder2.normalImageRes(R.drawable.ic_help_white_48dp)
                 .normalText("Questions")
@@ -307,34 +310,54 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this,"Oops.. You need to create a profile first!", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            b1.setOnClickListener(new View.OnClickListener() {
+                           /* b1.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(View view) {
-                                    Intent intent=new Intent(MainActivity.this,group.class);
+                              public void onClick(View view) {
+                                  Intent intent=new Intent(MainActivity.this,group.class);
                                     startActivity(intent);
-                                    dialog.cancel();
+                             dialog.cancel();
                                 }
                             });
                             b2.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    Intent intent = new Intent(MainActivity.this, connections.class);
+                                   */ Intent intent = new Intent(MainActivity.this, connections.class);
                                     startActivity(intent);
-                                    dialog.cancel();
+                                    //dialog.cancel();
                                 }
-                            });
-                            b1.setText("Groups");
+                            }});
+                          /*  b1.setText("Groups");
                             b2.setText("Contacts");
                             b3.setVisibility(View.GONE);
                             b4.setVisibility(View.GONE);
                             dialog.show();
                             }
                     }
+                });*/
+
+
+        HamButton.Builder builder1 = new HamButton.Builder();
+        builder1.normalImageRes(R.drawable.ic_help_white_48dp)
+                .normalText("Groups")
+                .normalColorRes(R.color.boom2)
+                .subNormalText("Lets understand you better!")
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        if(usname.getText().equals(getString(R.string.ma3))){
+                            Toast.makeText(MainActivity.this,getString(R.string.ma2), Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Intent intent = new Intent(MainActivity.this, group.class);
+                            startActivity(intent);}
+                    }
                 });
-        bmb.addBuilder(builder1);
+
+       // bmb.addBuilder(builder1);
         bmb.addBuilder(builder2);
         bmb.addBuilder(builder3);
         bmb.addBuilder(builder5);
+        bmb.addBuilder(builder1);
         bmb.addBuilder(builder4);
         bmb.setButtonRadius(Util.dp2px(35));
         bmb.setNormalColor(Color.WHITE);
@@ -353,6 +376,7 @@ public class MainActivity extends AppCompatActivity {
 
         // create menu items;
         itemHome = new ResideMenuItem(this, R.drawable.home, "Home");
+       itemProfile = new ResideMenuItem(this, R.drawable.ic_face_white_48dp, "Profile");
         itemHelp = new ResideMenuItem(this, R.drawable.help1, "Help");
         itemFeed = new ResideMenuItem(this, R.drawable.feed, "Feed Back");
         itemAbout=new ResideMenuItem(this, R.drawable.about, "About");
@@ -386,6 +410,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        itemProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!(isDeviceOnline())){
+                    Toast.makeText(MainActivity.this,"No Internet Connection Available!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    showWorkingDialog();
+
+                    new Handler().postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            removeWorkingDialog();
+                        }
+
+                    }, 2000);
+                Intent intent=new Intent(MainActivity.this,profileclass.class);
+                startActivity(intent);
+            }
+        }});
         itemShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -411,6 +457,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
+        resideMenu.addMenuItem(itemProfile, ResideMenu.DIRECTION_LEFT);
         resideMenu.addMenuItem(itemHelp, ResideMenu.DIRECTION_LEFT);
         resideMenu.addMenuItem(itemFeed, ResideMenu.DIRECTION_LEFT);
         resideMenu.addMenuItem(itemAbout, ResideMenu.DIRECTION_LEFT);
