@@ -25,6 +25,8 @@ public class SecondFragment extends Fragment {
     String newItem="";
     String newItem2="";
     int myNum=0;
+    int myNum2=0;
+
     /*
 public String itemG="Geeks";
     public String itemAr="Artists";
@@ -75,30 +77,56 @@ public String itemG="Geeks";
             }
         });
 
-        //getting value of key and adding to list
+//addition of elements
+            if(getArguments()!=null) {
+                Bundle bundle = getArguments();
+                newItem = bundle.getString("key");
+                try {
+                    myNum = Integer.parseInt(newItem);
+                } catch (NumberFormatException nfe) {
+                    Toast.makeText(getActivity(), nfe.toString(), Toast.LENGTH_LONG).show();
+
+                }
+
+                if (myNum == 1) {
+                    creatingNewListView("Geeks");
+                } else if (myNum == 3) {
+                    creatingNewListView("pros");
+                } else if (myNum == 4) {
+                    creatingNewListView("daydreamers");
+                } else if (myNum == 5) {
+                    creatingNewListView("adventurers");
+                } else {
+                    creatingNewListView("Artists");
+                }
+            }
+
+
+            //deletion of elements
         if(getArguments()!=null) {
             Bundle bundle = getArguments();
-            newItem = bundle.getString("key");
-            newItem2 = newItem;
+            newItem2 = bundle.getString("delete");
             try {
-                myNum = Integer.parseInt(newItem);
+                myNum2 = Integer.parseInt(newItem2);
             } catch (NumberFormatException nfe) {
                 Toast.makeText(getActivity(), nfe.toString(), Toast.LENGTH_LONG).show();
 
             }
 
-            if (myNum == 1) {
-                creatingNewListView("Geeks");
-            } else if (myNum == 3) {
-                creatingNewListView("pros");
-            } else if (myNum == 4) {
-                creatingNewListView("daydreamers");
-            } else if (myNum == 5) {
-                creatingNewListView("adventurers");
+            if (myNum2 == 1) {
+                deleteFromList("Geeks");
+            } else if (myNum2 == 3) {
+                deleteFromList("pros");
+            } else if (myNum2 == 4) {
+                deleteFromList("daydreamers");
+            } else if (myNum2 == 5) {
+                deleteFromList("adventurers");
             } else {
-                creatingNewListView("Artists");
+                deleteFromList("Artists");
             }
         }
+
+
             return view;
 
 
@@ -108,6 +136,12 @@ public String itemG="Geeks";
         arrayList.add(addName);
             listViewAdapter.notifyDataSetChanged();
 
+    }
+
+    public void deleteFromList(String delName)
+    {
+        int pos=arrayList.indexOf(delName);
+        arrayList.remove(pos);
     }
 
 

@@ -34,6 +34,8 @@ import butterknife.BindInt;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.digibuddies.cnectus.group.secondFragment;
+
 
 public class top extends Fragment {
     Bundle bundle=new Bundle();
@@ -394,9 +396,17 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         // secondFragment.set("Geeks");
-                        bundle.putString("key","1");
-                        group.secondFragment.creatingNewListView("Geeks");
-                    }
+                        if(isChecked){
+                            bundle.putString("key","1");
+                            secondFragment.setArguments(bundle);
+                        }
+                        else
+                        {
+                           bundle.putString("delete", "1");
+
+                             secondFragment.setArguments(bundle);
+
+                        } }
                 });
 
                 new Handler().postDelayed(new Runnable() {
@@ -415,14 +425,14 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                         lay.setVisibility(View.VISIBLE);
                     }
                 },400);
-    join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            Toast.makeText(getActivity(),"added",Toast.LENGTH_LONG).show();
-        }
-    });
+                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Toast.makeText(getActivity(),"added",Toast.LENGTH_LONG).show();
+                              }
+                });
+                break;
 
-                                break;
             case FLIP:
                 lay.setVisibility(View.INVISIBLE);
                 new Handler().postDelayed(new Runnable() {
@@ -435,13 +445,20 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
     join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            bundle.putString("key","3");
-            group.secondFragment.creatingNewListView("pros");
+            if(isChecked){
+                bundle.putString("key","3");
+                secondFragment.setArguments(bundle);
+            }
+            else
+            {    bundle.putString("delete", "3");
 
+                    secondFragment.setArguments(bundle);
+            }
         }
     });
-
                 break;
+
+
             case PUSHPULL:
                 lay.setVisibility(View.INVISIBLE);
                 new Handler().postDelayed(new Runnable() {
@@ -453,15 +470,25 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     }
                 },400);
     join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            bundle.putString("key","4");
-            group.secondFragment.creatingNewListView("Daydreamers");
+            if(isChecked){
+                bundle.putString("key","4");
+                secondFragment.setArguments(bundle);
+            }
+            else
+            {
+                    bundle.putString("delete", "4");
 
+                    secondFragment.setArguments(bundle);
+
+            }
         }
     });
-
                 break;
+
+
             case SIDES:
                 lay.setVisibility(View.INVISIBLE);
                 new Handler().postDelayed(new Runnable() {
@@ -475,13 +502,24 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
  join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            bundle.putString("key","5");
-            group.secondFragment.creatingNewListView("Adventurers");
+            if(isChecked){
+                bundle.putString("key","5");
+                secondFragment.setArguments(bundle);
+            }
+            else
+            {
+                    bundle.putString("delete", "5");
 
+                    secondFragment.setArguments(bundle);
+
+            }
         }
     });
                 break;
+
+
             case CUBEMOVE:
+
                 lay.setVisibility(View.INVISIBLE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -491,11 +529,21 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     }
                 },400);
 join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            bundle.putString("key","6");
-            group.secondFragment.creatingNewListView("Artists");
 
+            if(isChecked){
+                bundle.putString("key","6");
+                secondFragment.setArguments(bundle);
+            }
+            else
+            {
+                   bundle.putString("delete", "6");
+
+                    secondFragment.setArguments(bundle);
+
+            }
         }
     });
                 break;
