@@ -61,7 +61,7 @@ public class SecondFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position,
                                     long id) {
-                Intent intent = new Intent(getActivity(),Chat.class);
+                Intent intent = new Intent(getActivity(),groupchat.class);
                 intent.putExtra("activity","grp");
                 intent.putExtra("gname",arrayList.get(position));
                 intent.putExtra("aid",arrayList2.get(position));

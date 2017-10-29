@@ -70,6 +70,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
         View v;
         if(viewType == R.layout.scard){
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.scard, parent, false);
+            Log.d("iamcalled2","34 ");
         }
 
         else {
@@ -81,8 +82,8 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
 
     @Override
     public void onBindViewHolder(final cardadapter holder, final int position) {
-
-        if(position == kdata.size()&&ndata.size()>1) {
+        Log.d("iamcalled2","t4 ");
+        if(position == kdata.size()&&ndata!=null) {
             holder.last.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -107,6 +108,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
             holder.tv1.setText(temp.getUname());
             holder.tv3.setText(temp.getOp1() + ", you can call me " + temp.getUname() + ". I\'m" + s + " born in " + temp.getOp2() + " and currently I live in " + temp.getOp3() + ". I love to practice my " + temp.getOp4() + " skills. I would like to " + temp.getOp5() + " someday. My friends say I'm " + temp.getOp6() + ". I just love " + temp.getOp7() + " and i hate " + temp.getOp8() + " I spend most of my day " + temp.getOp9() + ". A person with same mind as mine would be " + temp.getOp10() + ".");
             mp = holder.calcmp(temp.getDevid());
+
             temp.setMp(mp);
             if (!temp.getMp().equals(" ")) {
                 holder.tv4.setText(temp.getMp() + "% similar");
@@ -163,17 +165,18 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     }
     @Override
     public int getItemCount() {
-        if (ndata.size()>1)return kdata.size()+1;
+        if (ndata!=null) return kdata.size()+1;
         else return kdata.size();
     }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        Log.d("iamcalled2","213 ");
         super.onAttachedToRecyclerView(recyclerView);
     }
     @Override
     public int getItemViewType(int position) {
-        return (position == kdata.size()&&ndata.size()>1) ? R.layout.button : R.layout.scard;
+        return (position == kdata.size()&&ndata!=null) ? R.layout.button : R.layout.scard;
     }
 
     @Override

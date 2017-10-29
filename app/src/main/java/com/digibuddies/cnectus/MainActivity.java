@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     private Dialog dialog;
     ResideMenuItem itemFeed;
     ResideMenuItem itemProfile;
-
     Button b,b1,b2,b3,b4;
     int flag=0;
     ResideMenuItem itemAbout;

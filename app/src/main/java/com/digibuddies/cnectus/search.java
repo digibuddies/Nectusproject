@@ -42,9 +42,7 @@ public class search extends AppCompatActivity {
     RecyclerView srv;
     Spinner scr;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    ;
     DatabaseReference myRef = database.getReference("Users");
-    ;
     String fill;
     static Dialog dnew2;
     EditText mail;

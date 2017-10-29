@@ -81,8 +81,8 @@ public class reqadapter extends RecyclerView.Adapter<reqadapter.cardadapter> {
                         public void run() {
                             holder.stickySwitch.setVisibility(View.INVISIBLE);
                             holder.acc.setVisibility(View.VISIBLE);
-                            myRef.child("chat").child(temp.getDevid()).child(cid).push().setValue(new chatmessage(context.getString(R.string.hi),usn,"UNREAD"));
-                            myRef.child("chat").child(cid).child(temp.getDevid()).push().setValue(new chatmessage(context.getString(R.string.hi),usn,"READ"));
+                            myRef.child("chat").child(temp.getDevid()).child(cid).push().setValue(new chatmessage(context.getString(R.string.hi),usn,"UNREAD",cid));
+                            myRef.child("chat").child(cid).child(temp.getDevid()).push().setValue(new chatmessage(context.getString(R.string.hi),usn,"READ",cid));
 
                         }
                     },1000);

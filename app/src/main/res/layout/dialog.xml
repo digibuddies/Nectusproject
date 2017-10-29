@@ -6,12 +6,12 @@
     android:background="@android:color/holo_blue_light">
 
     <ImageView
-        android:layout_width="match_parent"
-        app:srcCompat="@drawable/color2"
-        android:layout_alignParentTop="true"
         android:id="@+id/imageView12"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
-        android:layout_height="60dp" />
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/color5" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -151,15 +151,15 @@
     </LinearLayout>
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/und"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:id="@+id/und"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
         android:fontFamily="sans-serif-smallcaps"
-        android:textAllCaps="true" />
+        android:text="CONNECT"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 </RelativeLayout>

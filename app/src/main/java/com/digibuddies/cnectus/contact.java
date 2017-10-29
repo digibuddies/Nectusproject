@@ -79,8 +79,8 @@ public class contact extends AppCompatActivity {
                             String usn = c.getString(0);
                             c.close();
                             kdm.close();
-                            myRef.child("chat").child(dvid).child(cid).push().setValue(new chatmessage(getString(R.string.hi),usn,"UNREAD"));
-                            myRef.child("chat").child(cid).child(dvid).push().setValue(new chatmessage(getString(R.string.hi),usn,"READ"));
+                            myRef.child("chat").child(dvid).child(cid).push().setValue(new chatmessage(getString(R.string.hi),usn,"UNREAD",cid));
+                            myRef.child("chat").child(cid).child(dvid).push().setValue(new chatmessage(getString(R.string.hi),usn,"READ",cid));
 
                         }
                     },5000);

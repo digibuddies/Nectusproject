@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +102,7 @@ public class Chat extends AppCompatActivity {
         }
 
         adapt = new FirebaseListAdapter<chatmessage>(this, chatmessage.class,
-                R.layout.message, myRefcht.child(oid)) {
+                R.layout.message,act.equals("con")? myRefcht.child(kid).child(oid):myRefcht.child(oid)) {
             @Override
             protected void onDataChanged() {
                 notifyDataSetChanged();
@@ -111,14 +112,14 @@ public class Chat extends AppCompatActivity {
             public View getView(int position, View view, ViewGroup viewGroup) {
                 chatmessage model = getItem(position);
                 if(model.getUser()!=null) {
-                    if (!model.getUser().equals(usn)) {
-                        view = LayoutInflater.from(viewGroup.getContext()).inflate(mLayout, viewGroup, false);
+                    if (!(model.getidKey().equals(kid))&&!(model.getUser().equals(usn))) {
+                        view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.message, viewGroup, false);
                     } else {
                         view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.message2, viewGroup, false);
                     }
                 }
                 else {
-                    view = LayoutInflater.from(viewGroup.getContext()).inflate(mLayout, viewGroup, false);
+                    view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.message, viewGroup, false);
                 }
 
                 populateView(view, model, position);
@@ -136,7 +137,8 @@ public class Chat extends AppCompatActivity {
                     messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",model.getTime()));
                     messageUser.setText(model.getUser());
                     messageText.setText(model.getMessage());
-                    if (!(model.getUser().equals(usn))) {
+                    Log.d("usnmod", String.valueOf(!(model.getUser().equals(usn))));
+                    if (!(model.getidKey().equals(kid))&&!(model.getUser().equals(usn))) {
                         messageUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.light_cyan));
                         linearLayout.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.shape1));
 
@@ -177,10 +179,10 @@ public class Chat extends AppCompatActivity {
                 String inp = input.getText().toString();
                 if(!(inp.equals("")||inp.equals(" "))){
                     if (act.equals("con")){
-                myRefcht.child(kid).child(oid).push().setValue(new chatmessage(inp,usn,"READ"));
-                myRefcht.child(oid).child(kid).push().setValue(new chatmessage(inp,usn,"UNREAD"));}
+                myRefcht.child(kid).child(oid).push().setValue(new chatmessage(inp,usn,"READ",kid));
+                myRefcht.child(oid).child(kid).push().setValue(new chatmessage(inp,usn,"UNREAD",kid));}
                 else
-                        myRefcht.child(oid).push().setValue(new chatmessage(inp,usn,"READ"));
+                        myRefcht.child(oid).push().setValue(new chatmessage(inp,usn,"READ",kid));
                 }
                 input.setText("");
                 InputMethodManager imm = (InputMethodManager)Chat.this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -189,15 +191,11 @@ public class Chat extends AppCompatActivity {
 
             }
         });
-
-
-        listener = myRefcht.child(oid).addChildEventListener(new ChildEventListener() {
+        listener = (act.equals("con")?(myRefcht.child(kid).child(oid)):(myRefcht.child(oid))).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 kk2[pos].add(dataSnapshot.getKey());
-                if (act.equals("con")){
                 myRefcht.child(kid).child(oid).child(dataSnapshot.getKey()).child("read").setValue("READ");}
-            }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
@@ -218,8 +216,6 @@ public class Chat extends AppCompatActivity {
 
             }
         });
-
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -245,7 +241,9 @@ public class Chat extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        myRefcht.child(kid).child(oid).removeEventListener(listener);
+        if(act.equals("con")){
+        myRefcht.child(kid).child(oid).removeEventListener(listener);}
+        else myRefcht.child(kid).child(oid).removeEventListener(listener);
         super.onPause();
         if (anim != null && anim.isRunning())
             anim.stop();

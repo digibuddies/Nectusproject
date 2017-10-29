@@ -10,7 +10,7 @@ public class chatmessage {
 
     String message;
     long time;
-    String key;
+    String idKey;
     String user;
     String read;
 
@@ -20,11 +20,12 @@ public class chatmessage {
         time= new Date().getTime();
     }
 
-    public chatmessage(String message, String user, String read) {
+    public chatmessage(String message, String user, String read,String idKey) {
         this.message = message;
         this.user = user;
         time= new Date().getTime();
         this.read = read;
+        this.idKey=idKey;
     }
 
     public String getMessage() {
@@ -50,12 +51,8 @@ public class chatmessage {
     public chatmessage() {
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
+    public String getidKey() {
+        return idKey;
     }
 
     public String getRead() {
