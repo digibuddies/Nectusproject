@@ -82,9 +82,9 @@ public class SecondFragment extends Fragment {
             listViewAdapter.notifyDataSetChanged();
         }
         else {
+            db.execSQL("INSERT INTO groups VALUES('Cnectus Family','"+R.drawable.family+"')");
             arrayList.add("cnectus family");
             arrayList2.add(R.drawable.family);
-            db.execSQL("INSERT INTO groups VALUES('Cnectus Family','"+R.drawable.family+"')");
             Log.d("araaaa", String.valueOf(arrayList));
             listViewAdapter.notifyDataSetChanged();
             }
@@ -116,6 +116,7 @@ public class SecondFragment extends Fragment {
                 arrayList2.add(0,aid);
             }
             arrayList.add(0,addName);
+            Log.d("adaaar",addName);
             db.execSQL("INSERT INTO groups VALUES('"+addName+"','"+aid+"');");
             listViewAdapter.notifyDataSetChanged();
             listView.startAnimation(animation);

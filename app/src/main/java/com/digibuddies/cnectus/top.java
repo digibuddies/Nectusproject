@@ -408,7 +408,7 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         // secondFragment.set("Geeks");
                         if(isChecked){
-                            if(!group.secondFragment.arrayList.contains("geek")){
+                            if(!(group.secondFragment.arrayList.contains("Geeks"))){
                             group.secondFragment.creatingNewListView("Geeks");
                             join.setText("Joined");
 
@@ -432,27 +432,8 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                         groupic.setImageResource(R.drawable.family);
                         join.setVisibility(View.INVISIBLE);
                         lay.setVisibility(View.VISIBLE);
-
                     }
                 },400);
-
-                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                        if(isChecked){
-                            if(!group.secondFragment.arrayList.contains("Cnectus Family")){
-                            group.secondFragment.creatingNewListView("Cnectus Family");
-                            join.setText("Joined");
-
-                        }}
-                        else {
-
-                            group.secondFragment.deleteFromList("Cnectus Family");
-                            join.setText("Join");
-
-                    } }
-                });
                 break;
 
             case FLIP:

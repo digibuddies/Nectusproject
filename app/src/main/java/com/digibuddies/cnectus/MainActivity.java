@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
         HamButton.Builder builder2 = new HamButton.Builder();
         builder2.normalImageRes(R.drawable.ic_help_white_48dp)
                 .normalText("Questions")
-                .normalColorRes(R.color.boom1)
+                .normalColorRes(R.color.boom2)
                 .subNormalText("Lets understand you better!")
                 .listener(new OnBMClickListener() {
                     @Override
@@ -337,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
         HamButton.Builder builder1 = new HamButton.Builder();
         builder1.normalImageRes(R.drawable.ic_help_white_48dp)
                 .normalText("Groups")
-                .normalColorRes(R.color.boom2)
+                .normalColorRes(R.color.boom1)
                 .subNormalText("Interact with like minded people!")
                 .listener(new OnBMClickListener() {
                     @Override
