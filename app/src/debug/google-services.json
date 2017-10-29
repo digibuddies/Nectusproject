@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "731407358435",
+    "firebase_url": "https://nectus-2f257.firebaseio.com",
+    "project_id": "nectus-2f257",
+    "storage_bucket": "nectus-2f257.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731407358435:android:77270bd9308ef72d",
+        "android_client_info": {
+          "package_name": "com.digibuddies.nectus.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731407358435-kp1pmqkfn5anb8jdqr2usjm0dt1n0ltv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digibuddies.nectus.debug",
+            "certificate_hash": "5521c8313d4de1f414eb5b02d8c9750d4bf2fd05"
+          }
+        },
+        {
+          "client_id": "731407358435-0lhfu2m0ebsh6pili4uv890alc8gfl5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digibuddies.nectus.debug",
+            "certificate_hash": "bf7b0ddbfa88fc9558635e415ceebcd49f56e3a8"
+          }
+        },
+        {
+          "client_id": "731407358435-s7ako2n5n8umd5lqov4j1dec0ken4a6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7yfqkxHmQX-gu73GiJE5HdXWpjQLT2hE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731407358435-s7ako2n5n8umd5lqov4j1dec0ken4a6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
