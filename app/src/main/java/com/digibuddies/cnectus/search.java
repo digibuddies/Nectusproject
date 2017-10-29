@@ -67,7 +67,7 @@ public class search extends AppCompatActivity {
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
-        kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        kid = MainActivity.id;
 
         srv = (RecyclerView) findViewById(R.id.rvs);
         mail=(EditText)findViewById(R.id.email);

@@ -109,7 +109,7 @@ SwipeDeck cardStack;
             String tok=mPrefs.getString("cntoken","nnn");
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef2 = database.getReference("tokens");
-            String id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+            String id = MainActivity.id;
             myRef2.child(id).child("token").setValue(tok);
             FirebaseMessaging.getInstance().subscribeToTopic("notification");
         }

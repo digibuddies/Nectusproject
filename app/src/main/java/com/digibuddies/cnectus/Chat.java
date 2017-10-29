@@ -28,9 +28,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.ArrayList;
 
-import static com.digibuddies.cnectus.connections.kk2;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Chat extends AppCompatActivity {
     ListView listOfMessages;
@@ -40,10 +40,13 @@ public class Chat extends AppCompatActivity {
     DatabaseReference myRefcht = database.getReference("chat");
     Intent intent;
     String kid,usn="";
+    public ArrayList<String>[] kk2;
     CircleImageView civ;
     ImageButton im,back;
     data temp;
     TextView head;
+    String oname,oid,act;
+    int oaid;
     AnimationDrawable anim;
     RelativeLayout rel;
     FloatingActionButton fab;
@@ -70,19 +73,35 @@ public class Chat extends AppCompatActivity {
         intent = getIntent();
         im = (ImageButton) findViewById(R.id.imageButton);
         back = (ImageButton) findViewById(R.id.back);
-        usn = intent.getStringExtra("usn");
-        kid = intent.getStringExtra("kid");
-        temp = (data) intent.getSerializableExtra("temp");
-        pos = intent.getIntExtra("position",0);
+        usn = MainActivity.uname;
+        kid = MainActivity.id;
+        act = intent.getStringExtra("activity");
+
+        if (act.equals("con")){
+            temp = (data) intent.getSerializableExtra("temp");
+            pos = intent.getIntExtra("position",0);
+            oaid = temp.getAid();
+            oid = temp.getDevid();
+            oname = temp.getUname();
+        }
+        else if (act.equals("grp")){
+           oname=oid=intent.getStringExtra("gname");
+            oaid = intent.getIntExtra("aid",0);
+        }
 
         anim = (AnimationDrawable) rel.getBackground();
         anim.setEnterFadeDuration(6000);
         anim.setExitFadeDuration(2000);
-        head.setText(temp.getUname());
-        civ.setImageResource(temp.getAid());
+        head.setText(oname);
+        civ.setImageResource(oaid);
+
+        kk2=(ArrayList<String>[]) new ArrayList[60];
+        for (int i =0 ; i< 60 ;i++) {
+            kk2[i] = new ArrayList<String>();
+        }
 
         adapt = new FirebaseListAdapter<chatmessage>(this, chatmessage.class,
-                R.layout.message, myRefcht.child(kid).child(temp.getDevid())) {
+                R.layout.message, myRefcht.child(oid)) {
             @Override
             protected void onDataChanged() {
                 notifyDataSetChanged();
@@ -118,22 +137,34 @@ public class Chat extends AppCompatActivity {
                     messageUser.setText(model.getUser());
                     messageText.setText(model.getMessage());
                     if (!(model.getUser().equals(usn))) {
-                        messageUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.buttoncol));
+                        messageUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.light_cyan));
                         linearLayout.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.shape1));
 
                     } else {
-                        messageUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.first_slide_background));
+                        messageUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.black));
                         linearLayout.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.shape2));
 
                     }
+                    if (act.equals("grp")){
+                        messageUser.setVisibility(View.VISIBLE);
+                    }
                 }
-
+                if (act.equals("con")){
                 if (position2 > 10) {
                     if (kk2[pos].size() > 0) {
-                        myRefcht.child(kid).child(temp.getDevid()).child(kk2[pos].get(0)).removeValue();
+                        myRefcht.child(kid).child(oid).child(kk2[pos].get(0)).removeValue();
                         kk2[pos].remove(0);
 
+                    }
+                    }
+                }
+                else if (act.equals("grp")){
+                    if (position2 > 50) {
+                        if (kk2[pos].size() > 0) {
+                            myRefcht.child(oid).child(kk2[pos].get(0)).removeValue();
+                            kk2[pos].remove(0);
 
+                        }
                     }
                 }
             }
@@ -145,8 +176,12 @@ public class Chat extends AppCompatActivity {
             public void onClick(View view) {
                 String inp = input.getText().toString();
                 if(!(inp.equals("")||inp.equals(" "))){
-                myRefcht.child(kid).child(temp.getDevid()).push().setValue(new chatmessage(inp,usn,"READ"));
-                myRefcht.child(temp.getDevid()).child(kid).push().setValue(new chatmessage(inp,usn,"UNREAD"));}
+                    if (act.equals("con")){
+                myRefcht.child(kid).child(oid).push().setValue(new chatmessage(inp,usn,"READ"));
+                myRefcht.child(oid).child(kid).push().setValue(new chatmessage(inp,usn,"UNREAD"));}
+                else
+                        myRefcht.child(oid).push().setValue(new chatmessage(inp,usn,"READ"));
+                }
                 input.setText("");
                 InputMethodManager imm = (InputMethodManager)Chat.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
@@ -156,11 +191,12 @@ public class Chat extends AppCompatActivity {
         });
 
 
-        listener = myRefcht.child(kid).child(temp.getDevid()).addChildEventListener(new ChildEventListener() {
+        listener = myRefcht.child(oid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 kk2[pos].add(dataSnapshot.getKey());
-                myRefcht.child(kid).child(temp.getDevid()).child(dataSnapshot.getKey()).child("read").setValue("READ");
+                if (act.equals("con")){
+                myRefcht.child(kid).child(oid).child(dataSnapshot.getKey()).child("read").setValue("READ");}
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -209,7 +245,7 @@ public class Chat extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        myRefcht.child(kid).child(temp.getDevid()).removeEventListener(listener);
+        myRefcht.child(kid).child(oid).removeEventListener(listener);
         super.onPause();
         if (anim != null && anim.isRunning())
             anim.stop();

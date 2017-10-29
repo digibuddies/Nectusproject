@@ -55,7 +55,6 @@ public class connections extends AppCompatActivity {
     int firstt;
     Intent intent0;
     Button req;
-    public static ArrayList<String>[] kk2;
     int flag=0,flag2=0;
     public Typeface custom_font;
     public String kid,usn;
@@ -74,11 +73,8 @@ public class connections extends AppCompatActivity {
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
-        kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-        kk2=(ArrayList<String>[]) new ArrayList[60];
-        for (int i =0 ; i< 60 ;i++) {
-            kk2[i] = new ArrayList<String>();
-        }
+        kid = MainActivity.id;
+
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstt = mPrefs.getInt(firsttime, 0);
         if (firstt==3){
@@ -301,12 +297,7 @@ public class connections extends AppCompatActivity {
                 } while (c.moveToPrevious());
                 c.close();
             }
-            kdm = openOrCreateDatabase(getFilesDir().getAbsolutePath() + "prodb.db", Context.MODE_PRIVATE, null);
-            c = kdm.rawQuery("SELECT uname FROM profile", null);
-            c.moveToFirst();
-            usn = c.getString(0);
-            c.close();
-            kdm.close();
+            usn = MainActivity.uname;
             d = dbr.rawQuery("SELECT uname,aid,mp,devid,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01 FROM matches;", null);
             d.moveToLast();
             if (d.getCount() > 0) {

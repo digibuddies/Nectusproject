@@ -38,7 +38,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import io.ghyeok.stickyswitch.widget.StickySwitch;
 
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
-import static com.digibuddies.cnectus.connections.kk2;
 
 public class reqadapter extends RecyclerView.Adapter<reqadapter.cardadapter> {
 
@@ -63,7 +62,7 @@ public class reqadapter extends RecyclerView.Adapter<reqadapter.cardadapter> {
     @Override
     public void onBindViewHolder(final cardadapter holder, final int position) {
         final data temp = kdata.get(position);
-        cid = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        cid = MainActivity.id;
         holder.us.setText(temp.getUname());
         holder.av.setImageResource(temp.getAid());
         holder.mat.setText(temp.getMp()+"%");

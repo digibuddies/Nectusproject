@@ -54,9 +54,11 @@
                 android:layout_centerHorizontal="false"
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@+id/head"
+                android:cropToPadding="false"
                 android:src="@drawable/nnn"
                 android:visibility="visible"
                 app:civ_border_color="@android:color/white"
+                app:civ_border_overlay="false"
                 app:civ_border_width="2dp" />
 
             <TextView
@@ -70,6 +72,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
                 android:visibility="visible" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -85,67 +88,59 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <LinearLayout
+            android:id="@+id/ll2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <ListView
-                android:id="@+id/list_of_messages"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:animateLayoutChanges="false"
-                android:divider="@color/transparent"
-                android:dividerHeight="10dp"
-                android:isScrollContainer="true"
-                android:stackFromBottom="true"
-                android:textAlignment="center"
-                android:transcriptMode="normal" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentStart="false"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:minHeight="103dp"
-                android:orientation="horizontal">
+                android:background="@drawable/shape3"
+                android:textColorHint="@android:color/holo_blue_light">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/input"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="false"
-                    android:layout_alignParentStart="false"
-                    android:layout_weight="10"
-                    android:background="@drawable/shape3"
-                    android:textColorHint="@android:color/holo_blue_light">
+                    android:layout_weight="1"
+                    android:hint="Enter Text..."
+                    android:inputType="textMultiLine"
+                    android:maxLines="8"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </android.support.design.widget.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/input"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:elevation="0dp"
-                        android:hint="Enter Text..."
-                        android:inputType="textMultiLine"
-                        android:paddingLeft="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-                </android.support.design.widget.TextInputLayout>
-
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@color/transparent"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/send6" />
-
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/transparent"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/send6" />
 
         </LinearLayout>
+
+        <ListView
+            android:id="@+id/list_of_messages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll2"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:divider="@color/transparent"
+            android:dividerHeight="10dp"
+            android:isScrollContainer="true"
+            android:stackFromBottom="true"
+            android:textAlignment="center"
+            android:transcriptMode="normal" />
 
     </RelativeLayout>
 

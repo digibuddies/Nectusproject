@@ -87,7 +87,7 @@ public class matches extends AppCompatActivity {
         ImageView dback = (ImageView) dnew2.findViewById(R.id.dback);
         dback.setImageResource(R.drawable.zzz);
         ex.setVisibility(View.VISIBLE);
-        id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        id = MainActivity.id;
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstt = mPrefs.getInt(firsttime, 0);
 

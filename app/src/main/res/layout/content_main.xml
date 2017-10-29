@@ -8,24 +8,60 @@
     tools:context=".group"
     tools:showIn="@layout/activity_group">
 
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/imageView18"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Expand Your Network"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="17sp" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="300dp"
+        android:layout_height="3dp"
+        android:layout_below="@+id/textView20"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@android:color/holo_blue_light" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:text="GROUPS"
+        android:textColor="@android:color/white"
+        android:textSize="40sp" />
+
     <FrameLayout
         android:id="@+id/mainl"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/textView18"
         android:layout_centerInParent="false"
-        android:background="@drawable/family" />
+        android:layout_marginTop="10dp" />
 
     <FrameLayout
         android:id="@+id/secondfrag"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_centerInParent="false"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
 
+        android:layout_alignParentStart="false"
         android:layout_below="@+id/mainl"
-        android:layout_alignParentStart="true"
+        android:layout_centerInParent="false"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true" />
+        android:animateLayoutChanges="false"
+        android:background="@color/backabt" />
 </RelativeLayout>

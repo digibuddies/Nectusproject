@@ -147,8 +147,7 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,Chat.class);
-                intent.putExtra("usn",usn);
-                intent.putExtra("kid",kid);
+                intent.putExtra("activity","con");
                 intent.putExtra("temp",temp);
                 intent.putExtra("pos",holder.getAdapterPosition());
                 context.startActivity(intent);

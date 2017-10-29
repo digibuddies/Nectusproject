@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,8 +83,6 @@ public class top extends Fragment {
     @Bind(R.id.lay)
     LinearLayout lay;
 
-    @Bind(R.id.colorim)
-    ImageView colorim;
 /*
 ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
     Switch holder=(Switch)getView().findViewById(R.id.join) ;
@@ -100,10 +99,10 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_top, container, false);
-        int color = Color.argb(200,(int) Math.floor(Math.random() * 128) + 64,
+        int color = Color.argb(220,(int) Math.floor(Math.random() * 128) + 64,
                 (int) Math.floor(Math.random() * 128) + 64,
                 (int) Math.floor(Math.random() * 128) + 64);
-        view.setBackgroundColor(color);
+        view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.redt));
         ButterKnife.bind(this, view);
         setAnimationStyleText();
         join.setText("Join");
@@ -133,10 +132,10 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     case DOWN:
                         return CubeAnimation.create(CubeAnimation.DOWN, enter, DURATION);
                     case LEFT:
-                        return CubeAnimation.create(CubeAnimation.RIGHT, enter, DURATION);
+                        return CubeAnimation.create(CubeAnimation.LEFT, enter, DURATION);
 
                     case RIGHT:
-                        return CubeAnimation.create(CubeAnimation.LEFT, enter, DURATION);
+                        return CubeAnimation.create(CubeAnimation.RIGHT, enter, DURATION);
                 }
                 break;
     /*        case FLIP:
@@ -365,13 +364,13 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
     public void switchAnimationStyle2(View view) {
         @AnimationStyle int[] styles;
         styles = new int[]{MOVE, CUBE, FLIP, PUSHPULL, SIDES, CUBEMOVE/*, MOVECUBE, PUSHMOVE, MOVEPULL, FLIPMOVE, MOVEFLIP, FLIPCUBE, CUBEFLIP*/};
-        for (int i = 0; i<styles.length-1; ++i) {
+        for (int i = styles.length-1; i>0; --i) {
             if (styles[i] == sAnimationStyle2) {
-                setAnimationStyle(styles[i+1]);
+                setAnimationStyle(styles[i-1]);
                 return;
             }
         }
-        setAnimationStyle(MOVE);
+        setAnimationStyle(CUBEMOVE);
     }
 
 
@@ -391,32 +390,38 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                 break;
             case MOVE:
                 lay.setVisibility(View.INVISIBLE);
-                mTextAnimationStyle.setText("Geeks");
-                groupic.setImageResource(R.drawable.geek);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTextAnimationStyle.setText("Geeks");
+                        groupic.setImageResource(R.drawable.geek);
+                        if (!(group.secondFragment.arrayList==null)){
+                            if (group.secondFragment.arrayList.contains("Geeks")){
+                                join.setChecked(true);
+                                join.setText("Joined");
+                            }}
+                        lay.setVisibility(View.VISIBLE);
+                    }
+                },400);
                 join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         // secondFragment.set("Geeks");
                         if(isChecked){
-
+                            if(!group.secondFragment.arrayList.contains("geek")){
                             group.secondFragment.creatingNewListView("Geeks");
                             join.setText("Joined");
 
-                        }
-                        else
-                        {
+                        }}
+                        else {
 
                             group.secondFragment.deleteFromList("Geeks");
                             join.setText("Join");
+
                         } }
                 });
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        lay.setVisibility(View.VISIBLE);
-                    }
-                },400);
+
                  break;
             case CUBE:
                 lay.setVisibility(View.INVISIBLE);
@@ -424,14 +429,29 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     @Override
                     public void run() {
                         mTextAnimationStyle.setText("Cnectus Family");
+                        groupic.setImageResource(R.drawable.family);
+                        join.setVisibility(View.INVISIBLE);
                         lay.setVisibility(View.VISIBLE);
+
                     }
                 },400);
+
                 join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                              }
+                        if(isChecked){
+                            if(!group.secondFragment.arrayList.contains("Cnectus Family")){
+                            group.secondFragment.creatingNewListView("Cnectus Family");
+                            join.setText("Joined");
+
+                        }}
+                        else {
+
+                            group.secondFragment.deleteFromList("Cnectus Family");
+                            join.setText("Join");
+
+                    } }
                 });
                 break;
 
@@ -440,22 +460,28 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mTextAnimationStyle.setText("Pros");
+                        mTextAnimationStyle.setText("Wizards");
+                        groupic.setImageResource(R.drawable.wizard);
                         lay.setVisibility(View.VISIBLE);
+                        if (!(group.secondFragment.arrayList==null)){
+                        if (group.secondFragment.arrayList.contains("Wizards")){
+                            join.setChecked(true);
+                            join.setText("Joined");}
+                        }
                     }
                 },400);
     join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
-                group.secondFragment.creatingNewListView("Pros");
+                if(!group.secondFragment.arrayList.contains("Wizards")){
+                    group.secondFragment.creatingNewListView("Wizards");
                 join.setText("Joined");
 
-            }
+            }}
             else
             {
-
-                group.secondFragment.deleteFromList("Pros");
+                group.secondFragment.deleteFromList("Wizards");
                 join.setText("Join");
             }
         }
@@ -468,9 +494,14 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mTextAnimationStyle.setText("Daydreamers");
-                        groupic.setImageResource(R.drawable.daydream);
+                        mTextAnimationStyle.setText("Dreamers");
+                        groupic.setImageResource(R.drawable.dreamers);
                         lay.setVisibility(View.VISIBLE);
+                        if (!(group.secondFragment.arrayList==null)){
+                        if (group.secondFragment.arrayList.contains("Dreamers")){
+                            join.setChecked(true);
+                            join.setText("Joined");}
+                        }
                     }
                 },400);
     join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -478,14 +509,15 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if(isChecked){
-                group.secondFragment.creatingNewListView("Daydreamers");
+                if(!group.secondFragment.arrayList.contains("Dreamers")){
+                group.secondFragment.creatingNewListView("Dreamers");
                 join.setText("Joined");
 
-            }
+            }}
             else
             {
 
-                group.secondFragment.deleteFromList("Daydreamers");
+                group.secondFragment.deleteFromList("Dreamers");
                 join.setText("Join");
             }
         }
@@ -501,16 +533,22 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                         mTextAnimationStyle.setText("Adventurers");
                         groupic.setImageResource(R.drawable.adventure);
                         lay.setVisibility(View.VISIBLE);
+                        if (!(group.secondFragment.arrayList==null)){
+                        if (group.secondFragment.arrayList.contains("Adventurers")){
+                            join.setChecked(true);
+                            join.setText("Joined");}
+                        }
                     }
                 },400);
  join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if(isChecked){
-                group.secondFragment.creatingNewListView("Adventurers");
+              if(isChecked){
+                  if(!group.secondFragment.arrayList.contains("Adventurers")){
+                      group.secondFragment.creatingNewListView("Adventurers");
                 join.setText("Joined");
 
-            }
+            }}
             else
             {
 
@@ -529,22 +567,27 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     @Override
                     public void run() {
                         mTextAnimationStyle.setText("Artists");
+                        groupic.setImageResource(R.drawable.art);
                         lay.setVisibility(View.VISIBLE);
+                        if (!(group.secondFragment.arrayList==null)){
+                        if (group.secondFragment.arrayList.contains("Artists")){
+                            join.setChecked(true);
+                            join.setText("Joined");}
+                        }
                     }
                 },400);
-join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
             if(isChecked){
+                if(!group.secondFragment.arrayList.contains("Artists")){
                 group.secondFragment.creatingNewListView("Artists");
                 join.setText("Joined");
 
-            }
+            }}
             else
             {
-
                 group.secondFragment.deleteFromList("Artists");
                 join.setText("Join");
             }

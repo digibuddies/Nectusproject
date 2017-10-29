@@ -44,8 +44,9 @@
     <color name="black">#000000</color>
     <color name="bacc">#11000000</color>
     <color name="red">#ef5350</color>
+    <color name="redt">#96ef5350</color>
     <color name="backgraound">#000000</color>
-    <color name="backabt">#8c000000</color>
+    <color name="backabt">#80090909</color>
     <color name="maintrans">#1e000000</color>
 <color name="light_lime">#827717</color>
     <color name="dark_blue">#173582</color>

@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -79,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences mPrefs;
     final String welcomeScreenShownPref = "welcomeScreenShown";
     String username = "usname";
-    public String uname="";
+    public static String uname="";
     TextView usname;
-    String tar;
+    static String id;
     Intent intentb;
     CircleImageView civ;
     Intent bck;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
+        id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
