@@ -67,7 +67,7 @@ import com.digibuddies.cnectus.profile.profileclass;
 
                 public void onPageSelected(int position) {
                     Handler handler=new Handler();
-                    if(position==5){
+                    if(position==6){
                         handler.postDelayed(new Runnable(){
                             @Override
                             public void run(){

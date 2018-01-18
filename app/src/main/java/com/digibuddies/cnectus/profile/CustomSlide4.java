@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+
+import com.digibuddies.cnectus.MainActivity;
 import com.digibuddies.cnectus.R;
 import com.digibuddies.cnectus.questions;
 import com.google.firebase.database.DatabaseReference;
@@ -69,6 +71,10 @@ public class CustomSlide4 extends SlideFragment {
                 sv.setText("Adding You To Family !");
                 myRef.child(idd).setValue(profileclass.d);
                 createDatabase();
+                editor = mPrefs.edit();
+                editor.putString("username",profileclass.d.getUname());
+                editor.putInt("aid",profileclass.d.getAid());
+                editor.apply();
                 String query = "INSERT OR REPLACE INTO profile (id,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p01) VALUES(1,'"+profileclass.d.getAid()+"','"+profileclass.d.getEmail()+"','"+profileclass.d.getUname()+"','"+profileclass.d.getOp1()+"','"+profileclass.d.getOp2()+"','"+profileclass.d.getOp3()+"','"+profileclass.d.getOp4()+"','"+profileclass.d.getOp5()+"','"+profileclass.d.getOp6()+"','"+profileclass.d.getOp7()+"','"+profileclass.d.getOp8()+"','"+profileclass.d.getOp9()+"','"+profileclass.d.getOp10()+"','"+profileclass.d.getOp11()+"','"+profileclass.d.getOp12()+"','"+profileclass.d.getOp01()+"','"+profileclass.d.getP1()+"','"+profileclass.d.getP2()+"','"+profileclass.d.getP3()+"','"+profileclass.d.getP4()+"','"+profileclass.d.getP5()+"','"+profileclass.d.getP6()+"','"+profileclass.d.getP7()+"','"+profileclass.d.getP8()+"','"+profileclass.d.getP9()+"','"+profileclass.d.getP10()+"','"+profileclass.d.getP11()+"','"+profileclass.d.getP12()+"','"+profileclass.d.getP01()+"');";
             db.execSQL(query);
 

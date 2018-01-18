@@ -2,8 +2,11 @@ package com.digibuddies.cnectus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -40,7 +44,7 @@ public class Chat extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRefcht = database.getReference("chat");
     Intent intent;
-    String kid,usn="";
+    String kid="",usn="";
     public ArrayList<String>[] kk2;
     CircleImageView civ;
     ImageButton im,back;
@@ -51,6 +55,7 @@ public class Chat extends AppCompatActivity {
     AnimationDrawable anim;
     RelativeLayout rel;
     FloatingActionButton fab;
+    ProgressBar progressBar;
     EditText input;
     int pos;
     @Override
@@ -68,14 +73,18 @@ public class Chat extends AppCompatActivity {
         head = (TextView)findViewById(R.id.head);
         civ = (CircleImageView)findViewById(R.id.avatar);
         listOfMessages = (ListView)findViewById(R.id.list_of_messages);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.GONE);
         fab =(FloatingActionButton)findViewById(R.id.fab);
         rel = (RelativeLayout)findViewById(R.id.rel);
-        input = (EditText)findViewById(R.id.input);
         intent = getIntent();
+        input = (EditText)findViewById(R.id.input);
+
         im = (ImageButton) findViewById(R.id.imageButton);
         back = (ImageButton) findViewById(R.id.back);
-        usn = MainActivity.uname;
-        kid = MainActivity.id;
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        usn = mPrefs.getString("username", "");
+        kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         act = intent.getStringExtra("activity");
 
         if (act.equals("con")){

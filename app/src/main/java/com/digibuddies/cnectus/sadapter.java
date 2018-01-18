@@ -37,7 +37,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.ghyeok.stickyswitch.widget.StickySwitch;
 
@@ -50,27 +53,31 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     List<data> ndata = new ArrayList<data>();
     String mp=" ";
     Context context;
-    int allow = 0;
+    int pro = 0;
     private int lastPosition = -1;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("contact");
 
     String usn,kid;
     Typeface custom_font;
-
-    sadapter(List<data> kdata,List<data> ndata, Typeface custom_font, String kid,Context context) {
+    sadapter(List<data> kdata,List<data> ndata, Typeface custom_font, String kid,Context context,int pro) {
         this.kdata = kdata;
         this.ndata=ndata;
         this.custom_font=custom_font;
         this.kid=kid;
         this.context=context;
+        this.pro=pro;
     }
     @Override
     public cardadapter onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         if(viewType == R.layout.scard){
+            if (pro==0){
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.scard, parent, false);
-            Log.d("iamcalled2","34 ");
+        }
+        else {
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.procard, parent, false);
+            }
         }
 
         else {
@@ -83,7 +90,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     @Override
     public void onBindViewHolder(final cardadapter holder, final int position) {
         Log.d("iamcalled2","t4 ");
-        if(position == kdata.size()&&ndata!=null) {
+        if(position == kdata.size()&&ndata.size()>0) {
             holder.last.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -106,7 +113,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
                 s = s + temp.getOp01();
             }
             holder.tv1.setText(temp.getUname());
-            holder.tv3.setText(temp.getOp1() + ", you can call me " + temp.getUname() + ". I\'m" + s + " born in " + temp.getOp2() + " and currently I live in " + temp.getOp3() + ". I love to practice my " + temp.getOp4() + " skills. I would like to " + temp.getOp5() + " someday. My friends say I'm " + temp.getOp6() + ". I just love " + temp.getOp7() + " and i hate " + temp.getOp8() + " I spend most of my day " + temp.getOp9() + ". A person with same mind as mine would be " + temp.getOp10() + ".");
+            holder.tv3.setText(temp.getOp1() + ", you can call me " + temp.getUname() + ". I\'m" + s + " born in " + temp.getOp2() + " and currently I live in " + temp.getOp3() + ". I love to practice my " + temp.getOp4() + " skills. I would like to " + temp.getOp5() + " someday. My friends say I'm " + temp.getOp6() + ". I just love " + temp.getOp7() + " and i hate " + temp.getOp8() + " I spend most of my day " + temp.getOp9() + ". A person with same mind as mine would be " + temp.getOp10());
             mp = holder.calcmp(temp.getDevid());
 
             temp.setMp(mp);
@@ -127,9 +134,11 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
             holder.back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Map<String, String> data= new HashMap<String, String>();
+                    data.put("mp",temp.getMp());
+                    data.put("request","RIGHT");
                     if (holder.ssw.getDirection().name().equals("RIGHT")) {
-                        myRef.child(temp.getDevid()).child(kid).child("request").setValue("RIGHT");
-                        myRef.child(temp.getDevid()).child(kid).child("mp").setValue(temp.getMp());
+                        myRef.child(temp.getDevid()).child(kid).setValue(data);
                         holder.save(temp);
                     }
 
@@ -165,7 +174,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     }
     @Override
     public int getItemCount() {
-        if (ndata!=null) return kdata.size()+1;
+        if (ndata.size()>0) return kdata.size()+1;
         else return kdata.size();
     }
 
@@ -176,7 +185,7 @@ public class sadapter extends RecyclerView.Adapter<sadapter.cardadapter> {
     }
     @Override
     public int getItemViewType(int position) {
-        return (position == kdata.size()&&ndata!=null) ? R.layout.button : R.layout.scard;
+        return (position == kdata.size()&&ndata.size()>0) ? R.layout.button : R.layout.scard;
     }
 
     @Override

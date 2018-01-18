@@ -3,10 +3,14 @@ package com.digibuddies.cnectus;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -46,12 +51,14 @@ public class groupchat extends AppCompatActivity {
     FirebaseListAdapter<chatmessage> adapt;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRefcht = database.getReference("chat");
+    DatabaseReference myRefreport = database.getReference("groups");
     Intent intent;
     String kid,usn="";
     public ArrayList<String>[] kk2;
     CircleImageView civ;
     ImageButton im,back;
-    TextView head;
+    TextView head,block;
+    ProgressBar progressBar;
     String oname,oid;
     sadapter sadapter;
     Dialog dialog2,dialog;
@@ -76,16 +83,20 @@ public class groupchat extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
         head = (TextView)findViewById(R.id.head);
+        block = (TextView)findViewById(R.id.blocked);
         civ = (CircleImageView)findViewById(R.id.avatar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
         listOfMessages = (ListView)findViewById(R.id.list_of_messages);
+        listOfMessages.setEmptyView(progressBar);
         fab =(FloatingActionButton)findViewById(R.id.fab);
         rel = (RelativeLayout)findViewById(R.id.rel);
         input = (EditText)findViewById(R.id.input);
         intent = getIntent();
         im = (ImageButton) findViewById(R.id.imageButton);
         back = (ImageButton) findViewById(R.id.back);
-        usn = MainActivity.uname;
-        kid = MainActivity.id;
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        usn = mPrefs.getString("username", "");
+        kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
             oname=oid=intent.getStringExtra("gname");
             oaid = intent.getIntExtra("aid",0);
 
@@ -125,7 +136,7 @@ public class groupchat extends AppCompatActivity {
                 return view;
             }
             @Override
-            protected void populateView(View v, final chatmessage model, int position2) {
+            protected void populateView(final View v, final chatmessage model, int position2) {
                 View view=v;
                 if (model.getUser() != null) {
 
@@ -134,6 +145,7 @@ public class groupchat extends AppCompatActivity {
                     TextView messageUser = (TextView) view.findViewById(R.id.message_user);
                     TextView messageTime = (TextView) view.findViewById(R.id.message_time);
                      kdata= new ArrayList<data>();
+                     ndata= new ArrayList<data>();
                     snap = new data();
                     dialog = new Dialog(groupchat.this);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -157,6 +169,33 @@ public class groupchat extends AppCompatActivity {
                         }
                     });
                     b3.setText("Report User");
+                    b3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            final Dialog dialog3 = new Dialog(groupchat.this);
+                            dialog3.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog3.setContentView(R.layout.report);
+                            Button b = (Button)dialog3.findViewById(R.id.send);
+                            final EditText et = (EditText)dialog3.findViewById(R.id.reportet);
+                            b.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if (!(et.getText().toString().equals(""))) {
+                                        myRefreport.child("reports").child(oid).child(model.getidKey()).child(kid).setValue(et.getText().toString());
+                                        dialog3.dismiss();
+                                        Snackbar snackbar = Snackbar.make(listOfMessages,"Reported!",Snackbar.LENGTH_SHORT);
+                                        snackbar.show();
+
+                                    }else {
+                                        Snackbar snackbar = Snackbar.make(view,"Please enter some text too",Snackbar.LENGTH_SHORT);
+                                        snackbar.show();
+                                    }
+                                }
+                            });
+                            dialog3.show();
+                            dialog.dismiss();
+                        }
+                    });
                     messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",model.getTime()));
                     messageUser.setText(model.getUser());
                     messageText.setText(model.getMessage());
@@ -175,7 +214,7 @@ public class groupchat extends AppCompatActivity {
                                     kdata.add(snap);
                                     RecyclerView recyclerView = (RecyclerView)dialog2.findViewById(R.id.grprec);
                                     Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
-                                    sadapter =new sadapter(kdata,ndata, custom_font, kid,groupchat.this);
+                                    sadapter =new sadapter(kdata,ndata, custom_font, kid,groupchat.this,1);
                                     recyclerView.setAdapter(sadapter);
                                     recyclerView.setLayoutManager(new LinearLayoutManager(groupchat.this));
                                 }
@@ -209,7 +248,25 @@ public class groupchat extends AppCompatActivity {
                     }
                 }
         };
-        listOfMessages.setAdapter(adapt);
+        myRefreport.child("status").child(kid).child(oid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue()!=null){
+                if (dataSnapshot.getValue().toString().equalsIgnoreCase("Blocked")){
+                    listOfMessages.setVisibility(View.INVISIBLE);
+                    block.setVisibility(View.VISIBLE);
+                }
+                else {listOfMessages.setAdapter(adapt);
+                    myRefreport.child("readstatus").child(oid).child(kid).setValue("read");
+                }
+            }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         im.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +276,21 @@ public class groupchat extends AppCompatActivity {
                         myRefcht.child(oid).push().setValue(new chatmessage(inp,usn,"READ",kid));
                 }
                 input.setText("");
+                myRefreport.child("readstatus").child(oid).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                            if(!(ds.getKey().equals(kid))){
+                                myRefreport.child("readstatus").child(oid).child(ds.getKey()).setValue("unread");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 InputMethodManager imm = (InputMethodManager)groupchat.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
                 input.clearFocus();

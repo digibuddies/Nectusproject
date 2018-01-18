@@ -430,10 +430,30 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
                     public void run() {
                         mTextAnimationStyle.setText("Cnectus Family");
                         groupic.setImageResource(R.drawable.family);
-                        join.setVisibility(View.INVISIBLE);
                         lay.setVisibility(View.VISIBLE);
+                        if (!(group.secondFragment.arrayList==null)){
+                            if (group.secondFragment.arrayList.contains("Cnectus Family")){
+                                join.setChecked(true);
+                                join.setText("Joined");}
+                        }
                     }
                 },400);
+                join.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked){
+                            if(!group.secondFragment.arrayList.contains("Cnectus Family")){
+                                group.secondFragment.creatingNewListView("Cnectus Family");
+                                join.setText("Joined");
+
+                            }}
+                        else
+                        {
+                            group.secondFragment.deleteFromList("Cnectus Family");
+                            join.setText("Join");
+                        }
+                    }
+                });
                 break;
 
             case FLIP:
@@ -575,27 +595,7 @@ ImageView group=(ImageView)getView().findViewById(R.id.group_icon);
         }
     });
                 break;
-           /* case MOVECUBE:
-                mTextAnimationStyle.setText("Move/Cube");
-                break;
-            case PUSHMOVE:
-                mTextAnimationStyle.setText("Push/Move");
-                break;
-            case MOVEPULL:
-                mTextAnimationStyle.setText("Move/Pull");
-                break;
-            case FLIPMOVE:
-                mTextAnimationStyle.setText("Flip/Move");
-                break;
-            case MOVEFLIP:
-                mTextAnimationStyle.setText("Move/Flip");
-                break;
-            case FLIPCUBE:
-                mTextAnimationStyle.setText("Flip/Cube");
-                break;
-            case CUBEFLIP:
-                mTextAnimationStyle.setText("Cube/Flip");
-                break; */
+
         }
     }
 

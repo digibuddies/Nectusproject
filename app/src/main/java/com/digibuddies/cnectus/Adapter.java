@@ -13,8 +13,10 @@ import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -71,7 +73,8 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
     }
 
     @Override
-    public void onBindViewHolder(final cardadapter holder, final int position) {
+    public void onBindViewHolder( final cardadapter holder,int position) {
+
             Log.d("positionn", String.valueOf(holder.getAdapterPosition()));
         final data temp = kdata.get(holder.getAdapterPosition());
         holder.tv1.setText(temp.getUname());
@@ -82,8 +85,7 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue()!=null){
-                if (dataSnapshot.getValue().toString().equals("ACCEPTED")){
-                    //holder.tv2.setText(temp.getEmail());
+                if (temp.getDevid().equals("123")?dataSnapshot.getValue().toString().equalsIgnoreCase("ACCEPTED2"):dataSnapshot.getValue().toString().equals("ACCEPTED")){
                     holder.tv2.setVisibility(View.INVISIBLE);
                     holder.cht.setVisibility(View.VISIBLE);
                 }
@@ -127,18 +129,23 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
             }
         });
 
+        if (temp.getUname().equals("CNECTUS BOT")){
+            holder.rm.setVisibility(View.GONE);
+        }
+
+        holder.tv3.setText(temp.getOp1() + ", you can call me " + temp.getUname() + ". I\'m a " + temp.getOp01() + " born in " + temp.getOp2() + " and currently I live in " + temp.getOp3() + ". I love to practice my " + temp.getOp4() + " skills. I would like to " + temp.getOp5() + " someday. My friends say I'm " + temp.getOp6() + ". I just love " + temp.getOp7() + " and i hate " + temp.getOp8() + " I spend most of my day " + temp.getOp9() + ". A person with same mind as mine would be " + temp.getOp10());
+
         holder.sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b==true) {
                     holder.sw.setText("Less Info");
-                    holder.tv3.setText(temp.getOp1() + ", you can call me " + temp.getUname() + ". I\'m a " + temp.getOp01() + " born in " + temp.getOp2() + " and currently I live in " + temp.getOp3() + ". I love to practice my " + temp.getOp4() + " skills. I would like to " + temp.getOp5() + " someday. My friends say I'm " + temp.getOp6() + ". I just love " + temp.getOp7() + " and i hate " + temp.getOp8() + " I spend most of my day " + temp.getOp9() + ". A person with same mind as mine would be " + temp.getOp10() + ".");
                     holder.tv3.setVisibility(View.VISIBLE);
                 }
                 else{
                     holder.tv3.setVisibility(View.GONE);
                     holder.sw.setText("More Info");
-                    Adapter.this.notifyItemChanged(position);
+                    Adapter.this.notifyItemChanged(holder.getAdapterPosition());
                 }
             }
         });
@@ -155,7 +162,6 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
 
             }
         });
-
 
     }
 
@@ -192,4 +198,6 @@ class Adapter extends RecyclerView.Adapter<Adapter.cardadapter> {
         }
 
     }
+
+
 }

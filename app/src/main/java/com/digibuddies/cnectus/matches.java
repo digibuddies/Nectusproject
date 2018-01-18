@@ -35,7 +35,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.digibuddies.cnectus.R.attr.layoutManager;
 
@@ -55,7 +57,7 @@ public class matches extends AppCompatActivity {
     private static Dialog dnew2;
     Button imb2;
     static int flag=0;
-    private int[] ITEM_DRAWABLES = { R.drawable.help, R.drawable.talk,R.drawable.dice,R.drawable.find, R.drawable.home };
+    private int[] ITEM_DRAWABLES = { R.drawable.help, R.drawable.talk,R.drawable.dice,R.drawable.group, R.drawable.home };
     private SQLiteDatabase db;
     private Cursor c,b;
     TextView det,dt,dd,ex;
@@ -87,7 +89,7 @@ public class matches extends AppCompatActivity {
         ImageView dback = (ImageView) dnew2.findViewById(R.id.dback);
         dback.setImageResource(R.drawable.zzz);
         ex.setVisibility(View.VISIBLE);
-        id = MainActivity.id;
+        id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstt = mPrefs.getInt(firsttime, 0);
 
@@ -119,6 +121,12 @@ public class matches extends AppCompatActivity {
                 }
             });
             dnew2.show();
+            startService(new Intent(matches.this,notifyservice.class));
+            Map<String, String> data= new HashMap<String, String>();
+            data.put("mp"," ");
+            data.put("request","RIGHT");
+            myRef.child("123").child(id).setValue(data);
+            myRef.child(id).child("123").setValue(data);
             editor = mPrefs.edit();
             editor.putInt(firsttime, 3);
             editor.apply();
@@ -158,7 +166,7 @@ public class matches extends AppCompatActivity {
         c = db.rawQuery(SELECT_SQL, null);
         c.moveToFirst();
         showRecords();
-        adapter = new sadapter(mdata,ndata, custom_font, id, this);
+        adapter = new sadapter(mdata,ndata, custom_font, id, this,0);
         srv.setAdapter(adapter);
         if(qcount>70&&adapter.getItemCount()>0) {
             front.setVisibility(View.INVISIBLE);
@@ -209,7 +217,7 @@ public class matches extends AppCompatActivity {
 
                     }
                     if (position == 3) {
-                        intent0 = new Intent(matches.this, search.class);
+                        intent0 = new Intent(matches.this, group.class);
                         intent0.putExtra("target", "none");
                         finish();
                         startActivity(intent0);

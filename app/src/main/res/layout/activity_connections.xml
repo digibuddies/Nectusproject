@@ -63,7 +63,7 @@
         android:id="@+id/krv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/req"
+        android:layout_below="@+id/reqlay"
         android:layout_marginTop="5dp"
         android:animateLayoutChanges="false">
 
@@ -73,7 +73,7 @@
         android:id="@+id/arcMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:menuGravity="Bottom_Right"
+        app:menuGravity="Bottom_Middle"
         app:menuImage="@drawable/menu3"
         arc:menuChildAnim="false"
         arc:menuChildSize="48dp"
@@ -84,21 +84,42 @@
 
     </com.bvapp.arcmenulibrary.ArcMenu>
 
-    <Button
-        android:id="@+id/req"
+    <RelativeLayout
+        android:id="@+id/reqlay"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/detc"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/button"
-        android:fontFamily="serif-monospace"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="Requests!"
-        android:textAllCaps="false"
-        android:textColor="@color/global_color_green_primary"
-        android:textStyle="bold"
-        android:typeface="normal" />
+        android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <Button
+            android:id="@+id/req"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shap"
+            android:fontFamily="serif-monospace"
+            android:padding="10dp"
+            android:text="Requests!"
+            android:textAllCaps="false"
+            android:textColor="@color/global_color_green_primary"
+            android:textStyle="bold"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/newreq"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignEnd="@+id/req"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/badge_circle"
+            android:text="0"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </RelativeLayout>

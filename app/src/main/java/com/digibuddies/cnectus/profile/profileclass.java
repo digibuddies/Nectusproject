@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.View;
 
+import com.digibuddies.cnectus.MainActivity;
 import com.digibuddies.cnectus.R;
 
 import java.io.File;
@@ -95,7 +96,6 @@ public class profileclass extends MaterialIntroActivity {
     }
     @Override
     public void onFinish() {
-
         super.onFinish();
 
     }

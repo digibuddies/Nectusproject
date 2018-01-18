@@ -10,6 +10,33 @@
     android:focusableInTouchMode="true"
     tools:context="com.digibuddies.cnectus.connections">
 
+    <TextView
+        android:id="@+id/blocked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text='Oops.\n Your access is blocked to this group.\n Contact "Cnectus Bot" for more info!'
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/blocked"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:indeterminate="true"
+        android:soundEffectsEnabled="false" />
+
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"

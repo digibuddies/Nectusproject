@@ -68,7 +68,7 @@ private SwipeDeckAdapter adapter;
     Button imb,imb2;
     int x,flag=0,flag2=0,flagrun=0;
     RadioButton r4;
-    private int[] ITEM_DRAWABLES = {R.drawable.dice,R.drawable.find,R.drawable.talk,R.drawable.home};
+    private int[] ITEM_DRAWABLES = {R.drawable.dice,R.drawable.group,R.drawable.talk,R.drawable.home};
     TextView h,l,dt,dd,ex;
 SwipeDeck cardStack;
     private Cursor c;
@@ -109,7 +109,7 @@ SwipeDeck cardStack;
             String tok=mPrefs.getString("cntoken","nnn");
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef2 = database.getReference("tokens");
-            String id = MainActivity.id;
+            String id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
             myRef2.child(id).child("token").setValue(tok);
             FirebaseMessaging.getInstance().subscribeToTopic("notification");
         }
@@ -187,7 +187,7 @@ SwipeDeck cardStack;
             cardStack.setAdapter(adapter);
         }
         if(adapter.getCount()>0){
-            h.setText("Select And Swipe!");
+            h.setText("Swipe to skip!");
             adapter.notifyDataSetChanged();
         }
         if(adapter.getCount()==0){
@@ -196,7 +196,6 @@ SwipeDeck cardStack;
         cardStack.setCallback(new SwipeDeck.SwipeDeckCallback() {
             @Override
             public void cardSwipedLeft(long stableId) {
-                setfalse();
                 Log.i("MainActivity", "card was swiped left, position in adapter: " + stableId);
                 if(stableId==(x/5)-1||stableId==(x/5)-2||stableId==(x/5)-3){
                     count = count + 5;
@@ -204,7 +203,10 @@ SwipeDeck cardStack;
                     String query2 = "INSERT OR REPLACE INTO counter1 (id, count) VALUES(1,'" + count + "');";
                     db2.execSQL(query2);
                 }
-
+                if (flag3==0){
+                    db3.execSQL("INSERT INTO ques VALUES(0);");
+                }
+                else flag3=0;
 
 
 
@@ -212,7 +214,6 @@ SwipeDeck cardStack;
 
             @Override
             public void cardSwipedRight(long stableId) {
-                setfalse();
                 Log.i("MainActivity", "card was swiped right, position in adapter: " + stableId);
                 if(stableId==(x/5)-1||stableId==(x/5)-2||stableId==(x/5)-3){
                     count = count + 5;
@@ -220,6 +221,10 @@ SwipeDeck cardStack;
                     String query2 = "INSERT OR REPLACE INTO counter1 (id, count) VALUES(1,'" + count + "');";
                     db2.execSQL(query2);
                 }
+                if (flag3==0){
+                    db3.execSQL("INSERT INTO ques VALUES(0);");
+                }
+                else flag3=0;
             }
 
             @Override
@@ -262,7 +267,7 @@ SwipeDeck cardStack;
 
                     }
                     if(position==1){
-                        intent0=new Intent(questions.this,search.class);
+                        intent0=new Intent(questions.this,group.class);
                         intent0.putExtra("target","search");
                         finish();
                         startActivity(intent0);
@@ -360,13 +365,11 @@ SwipeDeck cardStack;
             r1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    flag3=1;
                     explosionField.explode(v2);
                     explosionField.explode(v3);
                     explosionField.explode(v4);
-                    v2.setClickable(false);
-                    v3.setClickable(false);
-                    v4.setClickable(false);
-                    dragCheckbox.setChecked(true);
+                    cardStack.swipeTopCardRight(1500);
                     db3.execSQL("INSERT INTO ques VALUES(1);");
 
                 }
@@ -374,13 +377,11 @@ SwipeDeck cardStack;
             r2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    flag3=1;
                     explosionField.explode(v1);
                     explosionField.explode(v3);
                     explosionField.explode(v4);
-                    v1.setClickable(false);
-                    v3.setClickable(false);
-                    v4.setClickable(false);
-                    dragCheckbox.setChecked(true);
+                    cardStack.swipeTopCardLeft(1000);
                     db3.execSQL("INSERT INTO ques VALUES(2);");
 
                 }
@@ -388,13 +389,12 @@ SwipeDeck cardStack;
             r3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    flag3=1;
                     explosionField.explode(v1);
                     explosionField.explode(v2);
                     explosionField.explode(v4);
                     dragCheckbox.setChecked(true);
-                    v1.setClickable(false);
-                    v2.setClickable(false);
-                    v4.setClickable(false);
+                    cardStack.swipeTopCardRight(1500);
                     db3.execSQL("INSERT INTO ques VALUES(3);");
 
                 }
@@ -402,19 +402,15 @@ SwipeDeck cardStack;
             r4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    flag3=1;
                     explosionField.explode(v1);
                     explosionField.explode(v2);
                     explosionField.explode(v3);
-                    v1.setClickable(false);
-                    v2.setClickable(false);
-                    v3.setClickable(false);
-                    dragCheckbox.setChecked(true);
+                    cardStack.swipeTopCardLeft(1000);
                     db3.execSQL("INSERT INTO ques VALUES(4);");
 
                 }
             });
-
-            setfalse();
             textView.setText(list.get(count));
             r1.setText(" "+list.get(count+1));
             r2.setText(" "+list.get(count+2));

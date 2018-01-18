@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="landing_bg">
-        <item>@color/orange</item>
+        <item>@color/first_slide_background</item>
         <item>@color/light_purple</item>
         <item>@color/light_teal</item>
+        <item>@color/orange</item>
+        <item>@color/light_teal</item>
         <item>@color/red</item>
-        <item>@color/light_green</item>
         <item>@color/light_cyan</item>
-
     </array>
 
     <array name="icons">
@@ -16,8 +16,8 @@
         <item>@drawable/a002</item>
         <item>@drawable/a001</item>
         <item>@drawable/a13</item>
+        <item>@drawable/a26</item>
         <item>@drawable/a22</item>
-
     </array>
 
     <string-array name="examples">
@@ -29,25 +29,23 @@
     </string-array>
 
     <string-array name="titles" >
-
         <item>@string/avatar</item>
         <item>@string/profile</item>
         <item>@string/questions</item>
         <item>@string/matches</item>
         <item>@string/connections</item>
+        <item>@string/group</item>
         <item>@string/finals</item>
-
     </string-array>
 
     <string-array name="hints" >
-
         <item>@string/avatar_hint</item>
         <item>@string/profile_hint</item>
         <item>@string/questions_hint</item>
         <item>@string/matches_hint</item>
         <item>@string/connections_hint</item>
+        <item>@string/group_hint</item>
         <item>@string/final_hint</item>
-
     </string-array>
 
 </resources>

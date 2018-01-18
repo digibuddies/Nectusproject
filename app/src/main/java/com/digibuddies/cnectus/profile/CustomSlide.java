@@ -25,6 +25,7 @@ public class CustomSlide extends SlideFragment {
     public CircleImageView av;
     SQLiteDatabase db;
     int flag=0;
+    String error=" ";
     EditText ett;
     private static final String PICKER_TAG = "PICKER_TAG";
 
@@ -57,8 +58,6 @@ public class CustomSlide extends SlideFragment {
         ett.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(flag==1){
-                    checkBox.setChecked(true);}
                     InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(ett.getWindowToken(), 0);
 
@@ -95,12 +94,21 @@ public class CustomSlide extends SlideFragment {
 
     @Override
     public boolean canMoveFurther() {
-        if(flag==1&&(!(ett.getText().toString().equals(""))))
-        {   profileclass.d.setUname(ett.getText().toString());
-            CustomSlide2.tvun.setText(ett.getText().toString());
+        if (ett.getText().toString().equalsIgnoreCase("CNECTUS BOT")){
+            error="Please select a different username";
+            checkBox.setChecked(false);
+        }
+        else if(flag==1&&(!(ett.getText().toString().equals(""))))
+        {  String st = ett.getText().toString();
+            if (st.contains("'")){
+                st = st.replaceAll("'","''");
+        }
+            profileclass.d.setUname(st);
+            CustomSlide2.tvun.setText(st);
             checkBox.setChecked(true);
 
         }
+        else checkBox.setChecked(false);
         return checkBox.isChecked();
     }
 
@@ -108,6 +116,8 @@ public class CustomSlide extends SlideFragment {
 
     @Override
     public String cantMoveFurtherErrorMessage() {
-        return getString(R.string.error_message2);
+        if (error.equals(" ")){
+        return getString(R.string.error_message2);}
+        else return error;
     }
 }

@@ -43,21 +43,6 @@
             android:textSize="22sp"
             android:textStyle="bold|italic" />
 
-        <TextView
-            android:id="@+id/kmail"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_below="@+id/kuser"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:fontFamily="sans-serif"
-            android:text="email"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:textStyle="normal|italic" />
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/kav"
             android:layout_width="96dp"
@@ -73,7 +58,7 @@
             android:id="@+id/kdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cht"
+            android:layout_below="@+id/kuser"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -97,11 +82,13 @@
             android:id="@+id/kdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/remove"
-            android:layout_below="@+id/imageView8"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/imageView"
             android:layout_gravity="bottom|right"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="serif"
+            android:gravity="center_vertical"
             android:text="Date"
             android:textColor="@android:color/black"
             android:textSize="14sp"
@@ -139,14 +126,15 @@
         <Button
             android:id="@+id/cht"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@+id/imageView8"
             android:layout_alignParentBottom="false"
             android:layout_alignParentStart="false"
             android:layout_alignParentTop="false"
-            android:layout_below="@+id/kuser"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/imageView8"
+            android:layout_centerHorizontal="false"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
             android:background="@color/global_color_green_primary"
             android:text="Chat!"
             android:visibility="invisible" />
@@ -155,11 +143,24 @@
             android:id="@+id/sw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/kdate"
+            android:layout_alignBottom="@+id/cht"
             android:layout_alignStart="@+id/kdetail"
+            android:gravity="center_vertical"
             android:padding="2dp"
             android:text="More Info "
             android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/kmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/cht"
+            android:layout_alignTop="@+id/sw"
+            android:layout_centerHorizontal="false"
+            android:layout_marginStart="2dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/purple" />
 
     </RelativeLayout>
 

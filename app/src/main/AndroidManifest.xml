@@ -96,8 +96,13 @@
             android:name=".groupchat"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".group" />
 
-        <activity android:name=".group"></activity>
+        <service
+            android:name="com.digibuddies.cnectus.notifyservice"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":ServiceProcess" />
     </application>
 
 </manifest>

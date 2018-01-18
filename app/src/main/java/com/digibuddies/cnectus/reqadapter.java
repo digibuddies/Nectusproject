@@ -62,17 +62,20 @@ public class reqadapter extends RecyclerView.Adapter<reqadapter.cardadapter> {
     @Override
     public void onBindViewHolder(final cardadapter holder, final int position) {
         final data temp = kdata.get(position);
-        cid = MainActivity.id;
+        cid = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         holder.us.setText(temp.getUname());
         holder.av.setImageResource(temp.getAid());
+        if (temp.getMp().equals(" ")){
+            holder.mat.setText("");
+        }else
         holder.mat.setText(temp.getMp()+"%");
         holder.stickySwitch.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
             @Override
             public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String s) {
                 if(direction.toString().equals("RIGHT")){
-                    String currentDateTime = java.text.DateFormat.getDateTimeInstance().format(new Date());
+                    String currentDateTime = java.text.DateFormat.getDateInstance().format(new Date());
                     myRef.child("contact").child(cid).child(temp.getDevid()).child("request").setValue("ACCEPTED");
-                    myRef.child("contact").child(temp.getDevid()).child(cid).child("request").setValue("ACCEPTED");
+                    myRef.child("contact").child(temp.getDevid()).child(cid).child("request").setValue(temp.getDevid().equals("123")?"ACCEPTED2":"ACCEPTED");
                     String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('"+temp.getDevid()+"','"+currentDateTime+"','"+temp.getMp()+"','"+temp.getAid()+"','"+temp.getUname()+"','"+temp.getOp1()+"','"+temp.getOp2()+"','"+temp.getOp3()+"','"+temp.getOp4()+"','"+temp.getOp5()+"','"+temp.getOp6()+"','"+temp.getOp7()+"','"+temp.getOp8()+"','"+temp.getOp9()+"','"+temp.getOp10()+"','"+temp.getOp11()+"','"+temp.getOp12()+"','"+temp.getOp01()+"');";
                     holder.db2.execSQL(queryx);
                     holder.dbr.execSQL("DELETE FROM matches WHERE devid='"+temp.getDevid()+"'");

@@ -4,10 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:arc="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/back2"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
     <include layout="@layout/content_main" />
+
+
+    <com.bvapp.arcmenulibrary.ArcMenu
+        android:id="@+id/arcMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menuChildAnim="false"
+        app:menuGravity="Bottom_Right"
+        app:menuImage="@drawable/menu3"
+        arc:menuChildSize="48dp"
+        arc:menuClickAnim="true"
+        arc:menuNormalColor="@android:color/white"
+        arc:menuShadowElevation="true"
+        arc:menuType="normal">
+
+    </com.bvapp.arcmenulibrary.ArcMenu>
 
 </android.support.design.widget.CoordinatorLayout>

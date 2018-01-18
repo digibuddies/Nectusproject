@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bvapp.arcmenulibrary.ArcMenu;
 import com.bvapp.arcmenulibrary.widget.FloatingActionButton;
@@ -38,7 +39,7 @@ import java.util.List;
 
 public class connections extends AppCompatActivity {
     static SQLiteDatabase kdb;
-    SQLiteDatabase dbr,kdm;
+    SQLiteDatabase dbr;
     RecyclerView rv,reqrec;
     Cursor d,c;
     reqadapter rqa;
@@ -49,6 +50,7 @@ public class connections extends AppCompatActivity {
     List<data> kdata = new ArrayList<data>();
     static Adapter adapter;
     TextView ckcon,emp;
+    Button newreq;
     SharedPreferences.Editor editor;
     SharedPreferences mPrefs;
     final String firsttime ="firsttime";
@@ -58,7 +60,7 @@ public class connections extends AppCompatActivity {
     int flag=0,flag2=0;
     public Typeface custom_font;
     public String kid,usn;
-    private int[] ITEM_DRAWABLES = { R.drawable.help, R.drawable.dice,R.drawable.find, R.drawable.home };
+    private int[] ITEM_DRAWABLES = { R.drawable.help, R.drawable.dice,R.drawable.group, R.drawable.home };
 
 
 
@@ -73,7 +75,7 @@ public class connections extends AppCompatActivity {
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
-        kid = MainActivity.id;
+        kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstt = mPrefs.getInt(firsttime, 0);
@@ -100,16 +102,8 @@ public class connections extends AppCompatActivity {
         imb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("contact");
-                myRef.child("123").child(kid).child("request").setValue("RIGHT");
-                myRef.child("123").child(kid).child("mp").setValue(" ");
-                myRef.child(kid).child("123").child("request").setValue("RIGHT");
-                myRef.child(kid).child("123").child("mp").setValue(" ");
-                dnew2.dismiss();
-                Intent intent = new Intent(connections.this,thebackservice.class);
-                startService(intent);
                 finish();
+               startActivity(new Intent(connections.this,group.class));
 
             }
         });
@@ -123,7 +117,7 @@ public class connections extends AppCompatActivity {
                     }
                 }
 
-            }, 2000);
+            }, 2500);
 
         }
         rv=(RecyclerView)findViewById(R.id.krv);
@@ -165,7 +159,7 @@ public class connections extends AppCompatActivity {
 
                     }
                     if(position==2){
-                        intent0=new Intent(connections.this,search.class);
+                        intent0=new Intent(connections.this,group.class);
                         intent0.putExtra("target","none");
                         finish();
                         startActivity(intent0);
@@ -194,6 +188,17 @@ public class connections extends AppCompatActivity {
         clos=(Button)dreq.findViewById(R.id.close);
         reqrec=(RecyclerView)dreq.findViewById(R.id.recreq);
         reqrec.setLayoutManager(new LinearLayoutManager(this));
+        newreq=(Button)findViewById(R.id.newreq);
+        newreq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                req.performClick();
+            }
+        });
+        if (kdata.size()>0){
+            newreq.setText(String.valueOf(kdata.size()));
+            newreq.setVisibility(View.VISIBLE);
+        }
         reqrec.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         req.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,7 +211,6 @@ public class connections extends AppCompatActivity {
                     Snackbar.make(view, "No New Requests Available!",
                             Snackbar.LENGTH_LONG).show();
                 }
-
             }
         });
         clos.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +222,6 @@ public class connections extends AppCompatActivity {
                 finish();
             }
         });
-
 
         ckcon=(TextView)findViewById(R.id.kcon);
         emp=(TextView)findViewById(R.id.kemp);
@@ -297,7 +300,8 @@ public class connections extends AppCompatActivity {
                 } while (c.moveToPrevious());
                 c.close();
             }
-            usn = MainActivity.uname;
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            usn = mPrefs.getString("username", "");
             d = dbr.rawQuery("SELECT uname,aid,mp,devid,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01 FROM matches;", null);
             d.moveToLast();
             if (d.getCount() > 0) {

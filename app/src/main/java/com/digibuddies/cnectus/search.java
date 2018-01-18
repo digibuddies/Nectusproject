@@ -45,7 +45,7 @@ public class search extends AppCompatActivity {
     DatabaseReference myRef = database.getReference("Users");
     String fill;
     static Dialog dnew2;
-    EditText mail;
+    EditText uname;
     Intent intent0;
     TextView inf, sh, sd, txt;
     Typeface custom_font;
@@ -65,10 +65,10 @@ public class search extends AppCompatActivity {
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             decorView.setSystemUiVisibility(uiOptions);
         }
-        kid = MainActivity.id;
+        kid = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
         srv = (RecyclerView) findViewById(R.id.rvs);
-        mail=(EditText)findViewById(R.id.email);
+        uname=(EditText)findViewById(R.id.uname);
         srv.setLayoutManager(new LinearLayoutManager(this));
         srv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         inf = (TextView) findViewById(R.id.infro);
@@ -120,8 +120,8 @@ public class search extends AppCompatActivity {
         scr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mail.setText("");
-                mail.clearFocus();
+                uname.setText("");
+                uname.clearFocus();
 
             }
 
@@ -136,7 +136,7 @@ public class search extends AppCompatActivity {
             public void onClick(final View view) {
                 kdata.clear();
                 dialogref.show();
-                if(mail.length()<=0) {
+                if(uname.length()<=0) {
                     fill = scr.getSelectedItem().toString();
                     myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -159,12 +159,12 @@ public class search extends AppCompatActivity {
                     });
                 }
                 else{
-                    final String ml=mail.getText().toString();
+                    final String ml=uname.getText().toString();
                     myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                                if (dsp.child("email").getValue().toString().equals(ml)) {
+                                if (dsp.child("uname").getValue().toString().equalsIgnoreCase(ml)) {
 
                                     snap = dsp.getValue(data.class);
                                     snap.setDevid(dsp.getKey());
@@ -186,7 +186,7 @@ public class search extends AppCompatActivity {
 
                     @Override
                     public void run() {
-                        adapter = new sadapter(kdata,ndata, custom_font, kid,view.getContext());
+                        adapter = new sadapter(kdata,ndata, custom_font, kid,view.getContext(),0);
                         srv.setAdapter(adapter);
                         if (adapter.getItemCount() > 0) {
                             inf.setVisibility(View.INVISIBLE);

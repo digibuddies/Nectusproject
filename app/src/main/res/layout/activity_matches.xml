@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:menuChildAnim="true"
-        app:menuGravity="Bottom_Right"
+        app:menuGravity="Bottom_Middle"
         app:menuImage="@drawable/menu3"
         arc:menuChildSize="48dp"
         arc:menuClickAnim="true"

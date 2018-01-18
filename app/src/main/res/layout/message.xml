@@ -2,12 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rel"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:focusable="false">
 
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
         <LinearLayout
@@ -15,6 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -36,10 +43,14 @@
                 android:id="@+id/message_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
                 android:layout_weight="1"
+                android:autoLink="web"
+                android:focusable="true"
+                android:linksClickable="true"
+                android:longClickable="true"
                 android:maxWidth="200dp"
                 android:textColor="@android:color/white"
+                android:textIsSelectable="true"
                 android:textSize="18sp" />
 
             <TextView

@@ -12,6 +12,7 @@
     <string name="questions">QUESTIONS</string>
     <string name="matches">MATCHES</string>
     <string name="connections">CONNECTIONS</string>
+    <string name="group">Groups</string>
     <string name="finals">LET\'S GET STARTED!</string>
 
 
@@ -20,6 +21,7 @@
     <string name="questions_hint">Next! Answer some interesting questions to determine your personality type.</string>
     <string name="matches_hint">Finally! Connect to people who\'ve got the most similar personality as yours.</string>
     <string name="connections_hint">Stay in touch with the people you\'ve connected to in the past.</string>
+    <string name="group_hint">Group chat with people having same interests</string>
     <string name="final_hint">Taking you to our family...</string>
 
 
@@ -58,7 +60,7 @@
         <item>Select</item>
         <item>Hi</item>
         <item>Hello</item>
-        <item>Howdy</item>
+        <item>Hey</item>
         <item>Hola</item>
         <item>Sup</item>
         <item>Ciao</item>
@@ -79,27 +81,28 @@
         <item>2000</item>
         <item>2001</item>
         <item>2002</item>
+        <item>2003</item>
+        <item>2004</item>
+        <item>2005</item>
     </string-array>
 
     <string-array name="list3">
         <item>Select</item>
-        <item>Dehradun</item>
-        <item>New Delhi</item>
-        <item>Bangalore</item>
-        <item>Uttarakhand</item>
-        <item>Uttar Pradesh</item>
-        <item>Bihar</item>
-        <item>Haryana</item>
-        <item>Punjab</item>
-        <item>Gujrat</item>
-        <item>Maharashtra</item>
-        <item>J&amp;k</item>
-        <item>Bangalore</item>
-        <item>Kerala</item>
-        <item>Assam</item>
         <item>India</item>
         <item>USA</item>
-        <item>Some other country</item>
+        <item>Canada</item>
+        <item>Australia</item>
+        <item>China</item>
+        <item>Brazil</item>
+        <item>England</item>
+        <item>Europe</item>
+        <item>Africa</item>
+        <item>Asia</item>
+        <item>Mars</item>
+        <item>Moon</item>
+        <item>Jungle</item>
+        <item>my secrect Kingdom</item>
+        <item>Some other cool place</item>
     </string-array>
     <string-array name="list4">
         <item>Select</item>
@@ -195,7 +198,6 @@
         <item>action movies.</item>
         <item>horror movies.</item>
         <item>exams.</item>
-        <item>public display of affection.</item>
         <item>monotonous life.</item>
         <item>cunning people</item>
 

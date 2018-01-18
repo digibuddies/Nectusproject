@@ -8,28 +8,28 @@ import java.io.Serializable;
 
 public class data implements Serializable {
     int p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p01;
-    String uname,mp,allow;
+    String uname="",mp="",allow="";
     int aid=0;
-    int id;
-    String devid;
-    String email;
-    String op1;
-    String op2;
-    String op3;
-    String op4;
-    String op5;
-    String op6;
-    String op7;
-    String op8;
-    String op9;
-    String op10;
-    String op11;
-    String op12;
+    int id=0;
+    String devid="";
+    String email="";
+    String op1="";
+    String op2="";
+    String op3="";
+    String op4="";
+    String op5="";
+    String op6="";
+    String op7="";
+    String op8="";
+    String op9="";
+    String op10="";
+    String op11="";
+    String op12="";
     String op13;
-    String op14;
-    String op15;
+    String op14="";
+    String op15="";
     String op16,op01="";
-    String time;
+    String time="";
 
     public int getAid() {
         return aid;

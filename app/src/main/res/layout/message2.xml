@@ -39,10 +39,14 @@
                 android:id="@+id/message_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
                 android:layout_weight="1"
+                android:autoLink="web"
+                android:focusable="true"
+                android:linksClickable="true"
+                android:longClickable="true"
                 android:maxWidth="200dp"
                 android:textColor="@android:color/white"
+                android:textIsSelectable="true"
                 android:textSize="18sp" />
 
             <TextView

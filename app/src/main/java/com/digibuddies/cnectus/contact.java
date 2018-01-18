@@ -36,11 +36,11 @@ public class contact extends AppCompatActivity {
     CircleImageView av;
     String x;
     StickySwitch ssc;
-    String cid;
-    String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname,dvid,u2,u3;
+    String cid="";
+    String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s01,mail,uname,dvid="",u2,u3;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    int aid;
+    int aid=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,36 +60,11 @@ public class contact extends AppCompatActivity {
         tv3=(TextView)findViewById(R.id.kdetail);
         sv=(FloatingTextButton) findViewById(R.id.save);
         ssc=(StickySwitch)findViewById(R.id.ssc);
+        ssc.setDirection(StickySwitch.Direction.RIGHT);
         sv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ssc.getDirection().name().equals("RIGHT")){
-                    String currentDateTime = DateFormat.getDateInstance().format(new Date());
-                    myRef.child("contact").child(cid).child(dvid).child("request").setValue("ACCEPTED");
-                    myRef.child("contact").child(dvid).child(cid).child("request").setValue("ACCEPTED");
-                    String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('"+dvid+"','"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"','"+s01+"');";
-                    db2.execSQL(queryx);
-                    db.execSQL("DELETE FROM matches WHERE devid='"+dvid+"'");
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            SQLiteDatabase kdm = openOrCreateDatabase(getFilesDir().getAbsolutePath() + "prodb.db", Context.MODE_PRIVATE, null);
-                            c = kdm.rawQuery("SELECT uname FROM profile", null);
-                            c.moveToFirst();
-                            String usn = c.getString(0);
-                            c.close();
-                            kdm.close();
-                            myRef.child("chat").child(dvid).child(cid).push().setValue(new chatmessage(getString(R.string.hi),usn,"UNREAD",cid));
-                            myRef.child("chat").child(cid).child(dvid).push().setValue(new chatmessage(getString(R.string.hi),usn,"READ",cid));
-
-                        }
-                    },5000);
-                }
-                db.close();
-                db2.close();
-                Intent i=new Intent(contact.this,connections.class);
-                startActivity(i);
-                finish();
+                click();
             }
         });
         av=(CircleImageView)findViewById(R.id.kav);
@@ -142,11 +117,45 @@ public class contact extends AppCompatActivity {
         c.close();
     }
     public void onBackPressed() {
+        if (dvid.equals("123")){
+            click();
+        }
         db.close();
         db2.close();
         finish();
 
 
+    }
+
+
+    public void click(){
+        if (ssc.getDirection().name().equals("RIGHT")){
+            String currentDateTime = DateFormat.getDateInstance().format(new Date());
+            myRef.child("contact").child(cid).child(dvid).child("request").setValue("ACCEPTED");
+            myRef.child("contact").child(dvid).child(cid).child("request").setValue(dvid.equals("123")?"ACCEPTED2":"ACCEPTED");
+            String queryx = "INSERT OR REPLACE INTO connect (dvid,time,mp,aid,email,uname,op1,op2,op3,op4,op5,op6,op7,op8,op9,op10,op11,op12,op01) VALUES('"+dvid+"','"+currentDateTime+"','"+mp+"','"+aid+"','"+mail+"','"+uname+"','"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"','"+s9+"','"+s10+"','"+s11+"','"+s12+"','"+s01+"');";
+            db2.execSQL(queryx);
+            db.execSQL("DELETE FROM matches WHERE devid='"+dvid+"'");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    SQLiteDatabase kdm = openOrCreateDatabase(getFilesDir().getAbsolutePath() + "prodb.db", Context.MODE_PRIVATE, null);
+                    c = kdm.rawQuery("SELECT uname FROM profile", null);
+                    c.moveToFirst();
+                    String usn = c.getString(0);
+                    c.close();
+                    kdm.close();
+                    myRef.child("chat").child(dvid).child(cid).push().setValue(new chatmessage(getString(R.string.hi),usn,"UNREAD",cid));
+                    myRef.child("chat").child(cid).child(dvid).push().setValue(new chatmessage(getString(R.string.hi),usn,"READ",cid));
+
+                }
+            },5000);
+        }
+        db.close();
+        db2.close();
+        Intent i=new Intent(contact.this,connections.class);
+        startActivity(i);
+        finish();
     }
 
 }

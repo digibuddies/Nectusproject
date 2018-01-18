@@ -84,7 +84,7 @@
             android:fontFamily="cursive"
             android:textAlignment="center"
             android:textColor="@color/backboom"
-            android:textSize="24sp" />
+            android:textSize="24sp" />z
 
         <com.bvapp.arcmenulibrary.ArcMenu
             android:id="@+id/arcMenu"
